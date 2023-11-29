@@ -1,0 +1,15 @@
+.rowItem:hover {
+    background-color: #232933 !important;
+    cursor: pointer;
+}
+
+.rowItemLight:hover {
+    background-color: #34344b !important;
+    cursor: pointer;
+}
+
+
+
+.noborder {
+    border: 0px !important;
+}

@@ -1,0 +1,36 @@
+.mdxeditor blockquote,
+.mdxeditor dl,
+.mdxeditor dd,
+.mdxeditor h1,
+.mdxeditor h2,
+.mdxeditor h3,
+.mdxeditor h4,
+.mdxeditor h5,
+.mdxeditor h6,
+.mdxeditor hr,
+.mdxeditor figure,
+.mdxeditor p,
+.mdxeditor pre {
+    margin: revert !important;
+    font-size: revert !important;
+    font-weight: revert !important;
+}
+
+.mdxeditor blockquote {
+    font-weight: 500 !important;
+    font-style: italic !important;
+    border-left-width: .25rem !important;
+    border-left-color: var(--tw-prose-quote-borders) !important;
+    quotes: "\201C" "\201D" "\2018" "\2019" !important;
+    margin-top: 1.6em !important;
+    margin-bottom: 1.6em !important;
+    padding-left: 1em !important;
+}
+
+.mdxeditor menu,
+.mdxeditor ol,
+.mdxeditor ul {
+    list-style: revert !important;
+    margin: revert !important;
+    padding: revert !important;
+}

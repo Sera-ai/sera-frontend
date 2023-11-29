@@ -1,0 +1,49 @@
+{
+  "name": "mosaic-react",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@heroicons/react": "^1.0.6",
+    "@mdxeditor/editor": "^1.6.0",
+    "@monaco-editor/react": "^4.6.0",
+    "@nivo/bar": "^0.84.0",
+    "@nivo/core": "^0.84.0",
+    "@nivo/network": "^0.84.0",
+    "@tailwindcss/forms": "^0.5.3",
+    "chart.js": "^4.3.0",
+    "chartjs-adapter-moment": "^1.0.1",
+    "d3": "^7.8.5",
+    "d3-sankey": "^0.12.3",
+    "font-awesome": "^4.7.0",
+    "graphology": "^0.25.4",
+    "graphology-layout": "^0.6.1",
+    "graphology-layout-forceatlas2": "^0.10.1",
+    "material-icons": "^1.13.12",
+    "moment": "^2.29.4",
+    "react": "^18.2.0",
+    "react-chrono": "^2.3.1",
+    "react-dom": "^18.2.0",
+    "react-flatpickr": "^3.10.13",
+    "react-google-charts": "^4.0.1",
+    "react-graph-vis": "^1.0.7",
+    "react-router-dom": "^6.11.2",
+    "react-starfield": "^1.0.3",
+    "react-transition-group": "^4.4.5",
+    "remark": "^15.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "sigma": "^3.0.0-alpha3",
+    "use-react-router-breadcrumbs": "^4.0.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.1.0",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.3.2",
+    "vite": "^4.3.9"
+  }
+}

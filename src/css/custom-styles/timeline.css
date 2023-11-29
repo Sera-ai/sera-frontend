@@ -1,0 +1,22 @@
+.timeline-vertical-circle {
+    background-color: #1a1c20;
+    border-radius: 500px;
+    border-top-width: 5px;
+    border-bottom-width: 5px;
+    border-color: #1a1c20;
+}
+
+span[class*="TriangleIconWrapper"] {
+    display: none !important;
+}
+
+div[class*="TimelineTitleWrapper"]{
+    justify-content: flex-start !important;
+    order: 3 !important;
+}
+
+.flagged {
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: tomato;
+}

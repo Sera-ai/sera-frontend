@@ -1,0 +1,41 @@
+.mainDark {
+    background-color: #242431 !important;
+}
+
+.secondaryDark {
+    background-color: #1A1C20 !important;
+}
+
+.sidebarList li {
+    margin: 14px;
+    border-radius: 5px;
+}
+
+.sidebarList .secondaryDarkPadded {
+    background-color: #1A1C20 !important;
+}
+
+.sidebarItem {
+    aspect-ratio: 1 !important;
+}
+
+.sidebarLogo {
+    aspect-ratio: 1 !important;
+    margin-top: 8px;
+    padding-top: 0px;
+    border-radius: 3px !important;
+    border-bottom-width: 8px;
+    border-bottom-color: #1A1C20;
+}
+
+.sidebarEndItem {
+}
+
+.sidebar {
+    width: 4em !important;
+    margin: 4px !important;
+}
+
+.transBG {
+    background-color: transparent !important;
+}
