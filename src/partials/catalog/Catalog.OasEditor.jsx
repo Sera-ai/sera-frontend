@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useState, useEffect } from "react";
 import Editor, { useMonaco, loader } from "@monaco-editor/react";
 
-const OasEditor = forwardRef(({ oas, setOas, setIsError }, ref) => {
+const OasEditor = forwardRef(({ oas, setOas, setIsError, darker = false }, ref) => {
     const monaco = useMonaco();
 
     const [state, setState] = React.useState(JSON.stringify(oas));
@@ -79,7 +79,7 @@ const OasEditor = forwardRef(({ oas, setOas, setIsError }, ref) => {
                         inherit: true,   // can also be false to completely replace the base
                         rules: [],       // custom rules
                         colors: {
-                            'editor.background': '#1A1C20', // your desired background color
+                            'editor.background': darker ? "#17181a" : '#1e222b', // your desired background color
                             // you can add other color overrides here if needed
                         },
                     });

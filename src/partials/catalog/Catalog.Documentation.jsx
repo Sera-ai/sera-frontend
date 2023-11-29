@@ -36,18 +36,18 @@ function ApiDetails({ oas, setOas }) {
   };
 
   return (
-    <div className="col-span-full mainDark shadow-lg rounded-lg border border-slate-200 dark:border-slate-700 h-full">
+    <div className="col-span-full h-full mainDark p-8">
       <Header paths={paths} method={method} setEditDocs={setEditDocs} editDocs={editDocs} manageOAS={manageOAS} setManageOAS={setManageOAS} isError={isError} oas={oas} updateMarkdown={updateMarkdown} updateChildState={updateChildState} />
       <div>
         {/* Table */}
-        <div className="overflow-x-auto secondaryDark rounded-xl m-2 p-2 flex flex-col">
-          <div className="overflow-x-auto flex flex-column w-full">
+        <div className="overflow-x-auto flex flex-col">
+          <div className="overflow-x-auto flex flex-column w-full pt-8">
             {/* Action Div */}
             {manageOAS ? <OasSide oas={oas} /> : null}
 
             {/* Data Div */}
-            <div className="flex w-full h-full p-2">
-              {manageOAS ? <OasEditor ref={oasEditorRef} oas={oas} setOas={setOas} setIsError={setIsError} /> : <MDEditor ref={MDEditorRef} edit={editDocs} oas={oas} setOas={setOas} />}
+            <div className="flex w-full h-full">
+              {manageOAS ? <OasEditor ref={oasEditorRef} oas={oas} setOas={setOas} setIsError={setIsError} darker/> : <MDEditor ref={MDEditorRef} edit={editDocs} oas={oas} setOas={setOas} />}
             </div>
           </div>
         </div>
@@ -58,19 +58,6 @@ function ApiDetails({ oas, setOas }) {
 
 export default ApiDetails;
 
-
-function MDESide() {
-  return (
-    <div className="mainDark rounded-lg m-2 p-4 docsActionContainer">
-
-      <div>
-        <h2 className="font-semibold text-sm text-slate-800 dark:text-slate-100">Table of Contents</h2>
-        <h2 className="font-regular text-xs text-slate-800 dark:text-slate-100">These correlate to your paths and endpoints</h2>
-      </div>
-
-    </div>
-  )
-}
 
 function OasSide({ oas }) {
   const paths = oas.paths;
@@ -116,10 +103,7 @@ function OasSide({ oas }) {
   };
 
   return (
-    <div className="mainDark rounded-lg m-2 p-4 space-y-4 detailsActionContainer">
-      <div>
-        <h2 className="font-semibold text-sm text-slate-800 dark:text-slate-100">{"api.example.com"}</h2>
-      </div>
+    <div className="mainDark rounded-lg pr-4 space-y-4 detailsActionContainer2">
       <OASEndpoints />
     </div>
   );
@@ -127,7 +111,7 @@ function OasSide({ oas }) {
 
 function Header({ paths, method, setEditDocs, editDocs, manageOAS, setManageOAS, oas, isError, updateChildState, updateMarkdown }) {
   return (
-    <header className="px-4 pt-4">
+    <header className="">
       <div className="flex justify-between items-center">
         <div className="">
           <div className="flex flex-column space-x-4 mb-1">

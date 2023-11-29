@@ -69,10 +69,10 @@ const Table = ({ filter, columns, data }) => {
     const allItemsSelected = Object.keys(selectedItems).length === data.length;
 
     return (
-        <table className={"issuesTable"}>
+        <table className={"issuesTable  mt-4"}>
             <thead>
                 <tr>
-                    <th style={{ paddingRight: 10 }}>
+                    <th className='pl-8'>
                         <input
                             type="checkbox"
                             ref={selectAllRef}
@@ -87,7 +87,7 @@ const Table = ({ filter, columns, data }) => {
             <tbody>
                 {filteredData.map((item, index) => (
                     <tr key={index}>
-                        <td>
+                        <td className='pl-8'>
                             <input
                                 type="checkbox"
                                 checked={!!selectedItems[index]}

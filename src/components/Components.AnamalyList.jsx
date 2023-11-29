@@ -12,11 +12,11 @@ function AnamalyList({ bare = false, full = false }) {
     || (channel.details.desc.toLowerCase().includes(filter.toLowerCase()))
   );
   return (
-    <div className={`col-span-full ${bare ? "secondaryDark" : "mainDark shadow-lg rounded-sm border border-slate-200 dark:border-slate-700"} `}>
-      <header className={`px-5 ${!bare && "py-4 border-b border-slate-100 dark:border-slate-700"} `}>
+    <div className={`col-span-full ${bare ? "mainDark" : "mainDark shadow-lg rounded-sm border border-slate-200 dark:border-slate-700"} mt-6`}>
+      <header className={` ${!bare && "py-4 border-b border-slate-100 dark:border-slate-700"} `}>
         <div className="flex justify-between items-center">
           <div>
-            <h2 className={`font-semibold text-slate-800 dark:text-slate-100 ${bare && "text-sm"}`}>Recent Anamalies</h2>
+            <h2 className={`font-semibold text-slate-800 dark:text-slate-100 ${bare && "text-sm"}`}>Endpoint Anamalies</h2>
             <h2
               style={bare ? { color: "rgba(255, 255, 255, 0.6)" } : {}}
               className={`font-light text-slate-800 dark:text-slate-100 ${bare ? "text-xs" : "text-sm"}`}
@@ -25,9 +25,9 @@ function AnamalyList({ bare = false, full = false }) {
 
         </div>
       </header>
-      <div className="px-3 mt-1">
+      <div className=" mt-1">
         {/* Table */}
-        <div className={`overflow-x-auto ${full ? "max-h-[40vh]" : "max-h-[300px]"} overflow-y-auto`}>
+        <div className={`overflow-x-auto ${full ? "max-h-[40vh]" : "max-h-[500px]"} overflow-y-auto`}>
           <table className="table-auto w-full dark:text-slate-300">
             {/* Table header */}
             <thead className={`text-xs uppercase text-slate-400 dark:text-slate-500 ${bare ? "mainDark" : "secondaryDark"} dark:bg-opacity-50 rounded-sm sticky top-0`}>

@@ -18,6 +18,7 @@
 @import 'custom-styles/catalog.css';
 @import 'custom-styles/details.css';
 @import 'custom-styles/mdxeditor.css';
-@import 'custom-styles/timeline.css';
+@import 'custom-styles/issues.timeline.css';
 @import 'custom-styles/issues.table.css';
 @import 'custom-styles/ecosystem.info.css';
+@import 'custom-styles/global.custom.css';

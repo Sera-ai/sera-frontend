@@ -1,0 +1,20 @@
+.maincontent {
+    margin-top: 8px;
+    border-top-left-radius: 16px;
+}
+
+.triDark {
+    background-color: #262c39;
+}
+
+.mainDark {
+    background-color: #17181a !important;
+}
+
+.secondaryDark {
+    background-color: #1e222b!important;
+}
+
+.border-main {
+    border-color: #1e222b !important;;
+}

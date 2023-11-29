@@ -1,44 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import HeaderTabs from '../../../components/Components.Header.Tabs';
+import CatalogFullList from '../../../components/Components.CatalogFullList';
+import CatalogSidebar from '../../../partials/catalog/Catalog.Sidebar';
+import Header from '../../../components/Components.Header.Title';
+import { AppContext } from '../../../provider/Provider.State';
 
-import Analytics from '../../../partials/catalog/Catalog.Analytics';
-import Documentation from '../../../partials/catalog/Catalog.Documentation';
-
-function Entry({ oas, setOas }) {
-
+function CatalogEntry({ oas }) {
     const [selectedTab, setSelectedTab] = useState(0); // default selected tab
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
+
+    const [filter, setFilter] = useState('');
+    const [columns, setColumns] = useState([]);
+    const { issueInventory } = useContext(AppContext);
+
+    const existingColumns = issueInventory.length > 0 ? Object.keys(issueInventory[0]) : []
 
     return (
-        <div className="">
-            <HeaderTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-            {selectedTab === 1 ? (<Documentation oas={oas} setOas={setOas} />) : (<Analytics oas={oas} setOas={setOas} />)}
+        <div className='w-full h-full'>
+            <HeaderTabs tabs={["Catalog"]} selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+
+            <div className='flex w-full h-full'>
+                <div className="col-span-full border-slate-200 dark:border-slate-700 w-full h-full" >
+                    <Header
+                        title={"Endpoint Inventory"}
+                        subtitle={"Below is an inventory list of all managed endpoints"}
+                        filter={filter}
+                        setFilter={setFilter}
+                        setColumns={setColumns}
+                        existingColumns={existingColumns}
+                        columns={columns}
+                    >
+                        <CatalogFullList filter={filter} setFilter={setFilter} columns={columns} data={issueInventory} />
+                    </Header>
+                </div >
+                <CatalogSidebar oas={oas} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+
+            </div>
         </div>
     );
 }
 
-export default Entry;
-
-const HeaderTabs = ({ selectedTab, setSelectedTab }) => {
-
-    return (
-        <div className="text-white flex full-w ml-3 text-sm">
-            {/* Tab: All Coins */}
-            <div
-                className={`cursor-pointer py-1 ${selectedTab === 'Analytics' ? 'border-b-2 border-blue-300 dark:text-slate-100' : 'dark:text-slate-500'}`}
-                style={{ borderColor: "#2b84ec" }}
-                onClick={() => setSelectedTab(0)}
-            >
-                <span>Analytics</span>
-            </div>
-
-            {/* Tab: Portfolio */}
-            <div
-                className={`cursor-pointer py-1 ml-4 ${selectedTab === 'Documentation' ? 'border-b-2 border-blue-300 dark:text-slate-100' : 'dark:text-slate-500'}`}
-                style={{ borderColor: "#2b84ec" }}
-                onClick={() => setSelectedTab(1)}
-            >
-                <span>Documentation</span>
-            </div>
-        </div>
-    );
-};
+export default CatalogEntry;

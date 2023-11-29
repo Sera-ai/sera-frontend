@@ -1,3 +1,8 @@
 .header {
     margin: 4px;
 }
+
+.tabHeader {
+    border-bottom-width: 1px;
+    border-bottom-color: #3f4d6b;
+}

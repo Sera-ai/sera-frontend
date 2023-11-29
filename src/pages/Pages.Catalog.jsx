@@ -5,8 +5,9 @@ import Sidebar from '../partials/Partial.Sidebar';
 import Catbar from '../partials/catalog/Catalog.Sidebar';
 import Header from '../partials/Partial.Header';
 
-import Home from './subpages/catalog/Sub.Catalog.Home';
 import Entry from './subpages/catalog/Sub.Catalog.Entry';
+import EndpointEntry from './subpages/catalog/Sub.Catalog.Endpoint.Entry';
+
 import { AppContext } from '../provider/Provider.State';
 
 function Catalog() {
@@ -19,29 +20,22 @@ function Catalog() {
   return (
     <div className="flex h-screen overflow-hidden">
 
-      {/* Sidebar */}
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <Catbar oas={oas} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-      {/* Content area */}
-      <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden w-full items-center">
+      <div className="maincontent relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden w-full secondaryDark">
 
-        {/*  Site header */}
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} title={"Catalog"} />
 
-        <main className="w-full" style={{ maxWidth: '1220px' }}>
-          <div className="py-8 w-full">
+        <main className="flex-grow overflow-auto">
 
+          <div className="pt-4 flex w-full h-full">
             <Routes>
-              <Route index element={<Home />} />
-              <Route path=":host/*" element={<Entry oas={oas} setOas={setOas} />} />
-              {/* You can add more subroutes here if needed */}
+              <Route index element={<Entry oas={oas} />} />
+              <Route path=":host/*" element={<EndpointEntry oas={oas} setOas={setOas} />} />
             </Routes>
             <Outlet />
           </div>
         </main>
-
-
 
       </div>
     </div>

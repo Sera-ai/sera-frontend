@@ -80,7 +80,7 @@ function Ecosystem() {
                     starCount={3000}
                     starColor={[255, 255, 255]}
                     speedFactor={0.01}
-                    backgroundColor="#1A1C20"
+                    backgroundColor="#1e222b"
                 />
             );
         }

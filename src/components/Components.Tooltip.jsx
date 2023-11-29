@@ -40,11 +40,11 @@ function Tooltip({
   const colorClasses = (bg) => {
     switch (bg) {
       case 'light':
-        return 'bg-white text-slate-600 border-slate-200';
+        return ' text-slate-600 border-slate-200';
       case 'dark':
         return 'bg-slate-700 text-slate-100 border-slate-600';
       default:
-        return 'text-slate-600 bg-white secondaryDark dark:text-slate-100 border-slate-200 dark:border-slate-600';
+        return 'text-slate-600  secondaryDark dark:text-slate-100 border-slate-200 dark:border-slate-600';
     }
   };    
 

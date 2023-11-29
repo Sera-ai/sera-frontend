@@ -42,23 +42,23 @@ function CatalogDetailsData({ endpoint }) {
     }
 
     return (
-        <div className="p-2  w-full">
+        <div className="p-2 h-full w-full">
             <div className="flex flex-column space-x-3 items-center">
-                <h2 style={{ color: "#ffffff99" }} className="text-sm text-slate-800 dark:text-slate-100">Last call <span style={{ color: "#23A858" }}>39 seconds ago</span></h2>
-                <div style={{ width: '0.5px', height: '14px', transformOrigin: '0 0', border: '0.5px white solid' }}></div>
-                <h2 style={{ color: "#2B84EC" }} className="text-sm text-slate-800 dark:text-slate-100 underline cursor-pointer">Retrieve Endpoint Report</h2>
+                <h2 style={{ color: "#ffffff99" }} className="text-xs text-slate-800 dark:text-slate-100">Last call <span style={{ color: "#23A858" }}>39 seconds ago</span></h2>
+                <div style={{ width: '0.5px', height: '14px', transformOrigin: '0 0', border: '0.01em #ffffff40 solid' }}></div>
+                <h2 style={{ color: "#2B84EC" }} className="text-xs text-slate-800 dark:text-slate-100 underline cursor-pointer">Retrieve Endpoint Report</h2>
             </div>
             <div className="flex flex-column space-x-10 w-full">
                 <BarGraph bare={true} />
             </div>
-            <div className="flex flex-column space-x-10 w-full py-6 px-5">
+            <div className="flex flex-column space-x-10 w-full py-6">
                 <div className=" w-full">
                     <h2 className="font-semibold text-sm text-slate-800 dark:text-slate-100">Endpoint Details</h2>
                     <h2 style={{ color: "#ffffff99" }} className="text-xs text-slate-800 dark:text-slate-100">Endpoint specific details</h2>
 
                     <table className="table-auto w-full dark:text-slate-300">
                         {/* Table header */}
-                        <thead className="text-xs uppercase text-slate-400 dark:text-slate-500 bg-slate-50 secondaryDark dark:bg-opacity-50 rounded-sm sticky top-0">
+                        <thead className="text-xs uppercase text-slate-400 dark:text-slate-500 bg-slate-50 mainDark dark:bg-opacity-50 rounded-sm sticky top-0">
                             <tr>
                                 <th className="p-2">
                                     <div className="font-semibold text-center"></div>
@@ -73,7 +73,7 @@ function CatalogDetailsData({ endpoint }) {
                             {Object.keys(endpointDetails[endpoint]["details"]).map((obj, index) => (
                                 <React.Fragment key={index}>
                                     {/* Rows related to each endpoint under the host */}
-                                    <tr className="secondaryDark rowItem noborder">
+                                    <tr className="mainDark rowItem noborder">
                                         <td className="pr-3">
                                             <div className="flex flex-col">
                                                 <div style={{ color: "#ffffff99" }} className="text-slate-800 text-xs dark:text-slate-100">{obj}</div>
@@ -99,7 +99,7 @@ function CatalogDetailsData({ endpoint }) {
 
                     <table className="table-fixed w-full dark:text-slate-300">
                         {/* Table header */}
-                        <thead className="text-xs uppercase text-slate-400 dark:text-slate-500 bg-slate-50 secondaryDark dark:bg-opacity-50 rounded-sm sticky top-0">
+                        <thead className="text-xs uppercase text-slate-400 dark:text-slate-500 bg-slate-50 mainDark dark:bg-opacity-50 rounded-sm sticky top-0">
                             <tr>
                                 <th className="p-2 w-1/3"> {/* Adjust the width as needed */}
                                     <div className="font-semibold text-center"></div>
@@ -112,7 +112,7 @@ function CatalogDetailsData({ endpoint }) {
                         {/* Table body */}
                         <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
                             {Object.keys(endpointDetails[endpoint]["statistics"]).map((obj, index) => (
-                                <tr key={index} className="secondaryDark rowItem noborder">
+                                <tr key={index} className="mainDark rowItem noborder">
                                     <td className="pr-3">
                                         <div className="flex flex-col">
                                             <div style={{ color: "#ffffff99" }} className="text-slate-800 text-xs dark:text-slate-100">{obj}</div>

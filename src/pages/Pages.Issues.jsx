@@ -22,10 +22,10 @@ function Issues() {
   return (
     <div className="flex h-screen overflow-hidden">
       {!isPopup && <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />}
-      <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden w-full items-center">
+      <div className="maincontent relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden w-full secondaryDark">
         {!isPopup && <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} title={"Issues"} />}
-        <main className="w-full" style={{ maxWidth: '1220px' }}>
-          <div className="py-8 w-full">
+        <main className="w-full">
+          <div className="pt-4 w-full">
             <Routes>
               <Route index element={<IssuesEntry />} />
               <Route path="viewer/:issueId" element={<Viewer />} />

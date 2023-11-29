@@ -38,7 +38,7 @@ function PluginComponent({ endpoint }) {
                     className={`flex items-center py-2 px-3 ${index === 0 ? "border-t border-l border-r rounded-t-lg" : index === (availablePlugins[endpoint].length - 1) ? "rounded-b-lg border-b border-l border-r" : "border"} border-slate-200 dark:border-slate-700 cursor-pointer`}
                     onClick={() => toggleOption(option.name)}
                 >
-                    <div style={{ backgroundColor: option.enabled ? "#2B84EC" : "#1A1C20", height: 30, width: 30 }} className={` flex justify-center items-center rounded-md mr-4`}>{option.enabled ? enabled : disabled}</div>
+                    <div style={{ backgroundColor: option.enabled ? "#2B84EC" : "#1e222b", height: 30, width: 30 }} className={` flex justify-center items-center rounded-md mr-4`}>{option.enabled ? enabled : disabled}</div>
                     <div className="flex-1">
                         <p className="font-medium text-xs">{option.name}</p>
                         <p className="text-gray-300  text-xs">{option.enabled ? "Enabled" : "Disabled"}</p>

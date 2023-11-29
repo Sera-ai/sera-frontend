@@ -49,7 +49,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
             to="/"
             className={`block text-slate-200 truncate transition duration-150  hover:text-white`}
           >
-            <img src={'/src/assets/logo.png'} alt="Logo" width="32" height="32" />
+            <img src={'/src/assets/logo.png'} alt="Logo" width="24" height="24" />
           </NavLink>
         </li>
 

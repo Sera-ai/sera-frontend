@@ -11,13 +11,13 @@ function Header({ sidebarOpen, setSidebarOpen, title }) {
   const [searchModalOpen, setSearchModalOpen] = useState(false);
 
   return (
-    <header className="z-30 header pt-3 w-full" style={{ maxWidth: '1220px' }}>
+    <header className="z-30 header pt-3 w-full px-8">
       <div className="flex items-center justify-between" >
         {/* Header: Left side */}
         <div className="flex">
           <div className="space-y-3">
             <Breadcrumbs />
-            <h3 style={{ color: "#fff" }} className="text-3xl">{title}</h3>
+            <h3 style={{ color: "#fff", fontWeight: 100 }} className="text-3xl">{title}</h3>
             {title == "Ecosystem" && <span style={{ color: "#ffffff80" }} className="text-sm">Welcome to the observatory</span>}
           </div>
 

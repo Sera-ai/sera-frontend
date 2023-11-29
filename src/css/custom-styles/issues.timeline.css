@@ -1,0 +1,82 @@
+.timeline-main-wrapper {
+    padding: 0 !important
+}
+
+span[class*="TriangleIconWrapper"] {
+    display: none !important;
+}
+
+div[class*="TimelineTitleWrapper"] {
+    justify-content: flex-start !important;
+    order: 3 !important;
+}
+
+div[data-testid*="vertical-item-row"] {
+    margin: 0 !important;
+    padding: 0 !important;
+    justify-content: flex-start;
+    width: unset
+}
+
+div[data-testid*="tree-main"] div[data-testid*="vertical-item-row"]:first-child {
+    padding-top: 10px !important;
+}
+
+
+div[data-testid*="tree-leaf"] {
+    width: unset;
+    align-items: unset
+}
+
+div[data-testid*="tree-leaf-click"] {
+    padding-top: 6.5px;
+}
+
+div[data-testid*="tree-main"] {
+    padding: 0 !important;
+}
+
+div[data-testid*="tree-leaf"]::before {
+    width: 0.02px;
+    height: unset;
+}
+
+div[data-testid*="tree-leaf"]::after {
+    width: 0.02em;
+    height: -webkit-fill-available;
+    background-color: #435fc150;
+    left: unset;
+}
+
+.right div[mode*="VERTICAL"] {
+    width: unset;
+    height: min-content;
+}
+
+.flagged {
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: tomato;
+}
+
+.rc-card-text {
+    margin: 0 !important;
+    padding: 0 !important;
+    align-items: flex-start !important;
+    overflow-y: unset !important;
+    overflow-x: unset !important;
+}
+
+.rc-title {
+    font-weight: 100 !important;
+    padding-left: 10px !important;
+    font-size: 12px !important;
+}
+
+.detailsActionContainer {
+    padding: 0;
+    margin-top: 24px;
+    margin-bottom: 40px;
+    position: relative;
+    left: -150px;
+}

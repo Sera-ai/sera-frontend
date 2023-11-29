@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Details from '../../../partials/issues/Issues.Details';
-import VerticalTimeline from '../../../partials/issues/Issues.Timeline';
+import VerticalTimeline from './Sub.Issues.Report.Details';
 
 function Home() {
 

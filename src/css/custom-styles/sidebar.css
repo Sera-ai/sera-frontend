@@ -1,10 +1,3 @@
-.mainDark {
-    background-color: #242431 !important;
-}
-
-.secondaryDark {
-    background-color: #1A1C20 !important;
-}
 
 .sidebarList li {
     margin: 14px;
@@ -12,7 +5,7 @@
 }
 
 .sidebarList .secondaryDarkPadded {
-    background-color: #1A1C20 !important;
+    background-color: #1e222b !important;
 }
 
 .sidebarItem {
@@ -21,11 +14,10 @@
 
 .sidebarLogo {
     aspect-ratio: 1 !important;
-    margin-top: 8px;
+    margin: 12px;
     padding-top: 0px;
-    border-radius: 3px !important;
-    border-bottom-width: 8px;
-    border-bottom-color: #1A1C20;
+    border-radius: 8px !important;
+    background-color: #cadaf9;
 }
 
 .sidebarEndItem {

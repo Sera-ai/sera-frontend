@@ -28,12 +28,15 @@ function App() {
 
   return (
     <AppStateProvider>
-      <Routes>
-        <Route exact path="/" element={<Dashboard />} />
-        <Route path="/issues/*" element={<Issues />} />
-        <Route path="/catalog/*" element={<Catalog />} />
-        <Route path="/ecosystem/*" element={<Ecosystem />} />
-      </Routes>
+      <div className="mainDark">
+        <Routes>
+          <Route exact path="/" element={<Dashboard />} />
+          <Route path="/issues/*" element={<Issues />} />
+          <Route path="/catalog/*" element={<Catalog />} />
+          <Route path="/ecosystem/*" element={<Ecosystem />} />
+        </Routes>
+      </div>
+
     </AppStateProvider>
   );
 }

@@ -13,7 +13,12 @@
 
 .catbar {
     width: 18em !important;
-    margin: 4px !important;
+    margin-top: 4px !important;
+}
+
+.catSplit {
+    border-left-width: 1px;
+    border-left-color: #272B34;
 }
 
 #catbar {

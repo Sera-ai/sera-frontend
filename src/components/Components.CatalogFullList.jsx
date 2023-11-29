@@ -39,36 +39,13 @@ function CatalogFullList() {
 
 
   return (
-    <div className="col-span-full mainDark shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
-      <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-        <div className="flex justify-between items-center">
-          <div>
-            <h2 className="font-semibold text-slate-800 dark:text-slate-100">Catalog</h2>
-            <h2 className="font-light text-slate-800 dark:text-slate-100 text-sm">Overview of key information about the active endpoints in your catalogue.</h2>
-          </div>
-
-          <div className="space-x-2.5 flex justify-center">
-            <form className="border-b border-slate-200 dark:border-slate-700">
-              <div className="relative">
-                <input
-                  className="w-full text-sm px-1 dark:text-slate-300 mainDark border-0 focus:ring-transparent placeholder-slate-400 dark:placeholder-slate-500 appearance-none"
-                  type="search"
-                  placeholder="Filter Catalog Items"
-                  value={filter}
-                  onChange={(e) => setFilter(e.target.value)}
-                />
-              </div>
-            </form>
-            <FilterButton align />
-          </div>
-        </div>
-      </header>
-      <div>
+    <div className="col-span-full h-full w-full">
+      <div className='h-full w-full mainDark'>
         {/* Table */}
         <div className="overflow-x-auto">
           <table className="table-auto w-full dark:text-slate-300">
             {/* Table header */}
-            <thead className="text-xs uppercase text-slate-400 dark:text-slate-500 bg-slate-50 secondaryDark dark:bg-opacity-50 rounded-sm sticky top-0">
+            <thead className="text-xs uppercase text-slate-400 dark:text-slate-500 bg-slate-50 mainDark dark:bg-opacity-50 rounded-sm sticky top-0">
               <tr>
                 <th className="p-2">
                 </th>
@@ -94,7 +71,7 @@ function CatalogFullList() {
               {Object.entries(groupByHost).map(([host, hostData]) => (
                 <React.Fragment key={host}>
                   {/* Header Row with the "+" sign */}
-                  <tr className="rowItemLight">
+                  <tr className="rowItemLight" style={{ backgroundColor: "#ffffff05" }}>
                     <td onClick={() => toggleGroup(host)} className="p-2 text-center cursor-pointer">
                       {expandedRows[host] ? "-" : "+"}
                     </td>
@@ -124,7 +101,7 @@ function CatalogFullList() {
                     hostData.map((channel, index) => (
                       <React.Fragment key={index}>
                         {/* Rows related to each endpoint under the host */}
-                        <tr className="secondaryDark rowItem">
+                        <tr className="mainDark rowItem">
                           <td> </td>
                           <td className="p-2">
                             <div className="flex flex-col">

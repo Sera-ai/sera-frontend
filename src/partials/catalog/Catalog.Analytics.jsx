@@ -24,11 +24,11 @@ function ApiDetails() {
   }
 
   return (
-    <div className="col-span-full mainDark shadow-lg rounded-lg border border-slate-200 dark:border-slate-700">
+    <div className="col-span-full mainDark px-8 py-4 h-full overflow-y-scroll">
       <Header paths={paths} method={method} />
       <div>
         {/* Table */}
-        <div className="overflow-x-auto secondaryDark rounded-xl m-2 p-2 flex flex-col">
+        <div className="overflow-x-auto flex flex-col">
           <div className="overflow-x-auto flex flex-column w-full">
             {/* Data Div */}
             <div className="flex w-full h-full">
@@ -52,7 +52,7 @@ export default ApiDetails;
 
 function EndpointSettings({ endpoint }) {
   return (
-    <div className="mainDark rounded-lg m-2 p-4 detailsActionContainer">
+    <div className="secondaryDark rounded-lg ml-2 mt-2 p-4 detailsActionContainer2">
 
       <div>
         <h2 className="font-semibold text-sm text-slate-800 dark:text-slate-100">Proxy Settings</h2>
@@ -73,7 +73,7 @@ function EndpointSettings({ endpoint }) {
 
 function Header({ paths, method }) {
   return (
-    <header className="px-4 pt-4">
+    <header className="py-4">
       <div className="flex justify-between items-center">
         <div className="">
           <div className="flex flex-column space-x-4 mb-1">

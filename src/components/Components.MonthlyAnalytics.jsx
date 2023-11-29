@@ -9,7 +9,7 @@ function BarGraph({ bare = false }) {
   const { monthlyAnalytics } = useContext(AppContext)
 
   return (
-    <div className={`flex flex-col w-full h-full col-span-full bg-white ${bare ? "secondaryDark mt-4" : "mainDark shadow-lg rounded-sm border border-slate-200 dark:border-slate-700"} `}>
+    <div className={`flex flex-col w-full h-full col-span-full  ${bare ? "mainDark mt-4" : "mainDark shadow-lg rounded-sm border border-slate-200 dark:border-slate-700"} `}>
       <header className={`px-5 py-4 border-b border-slate-100 dark:border-slate-700 ${bare && "hidden"}`}>
         <div>
           <h2 className="font-semibold text-slate-800 dark:text-slate-100">Monthly Analytics</h2>
