@@ -12,8 +12,8 @@ function Inventory() {
     const existingColumns = issueInventory.length > 0 ? Object.keys(issueInventory[0]) : []
 
     return (
-        <div className="w-full" >
-            <div className="col-span-full border-slate-200 dark:border-slate-700" >
+        <div className="flex-grow overflow-y-hidden" >
+            <div className="col-span-full border-slate-200 dark:border-slate-700 w-full h-full" >
                 <Header
                     title={"Issue Inventory"}
                     subtitle={"Below is an inventory list of any issues that have not been resolved"}

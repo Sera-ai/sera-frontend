@@ -22,6 +22,8 @@ export const AppStateProvider = ({ children }) => {
     const [endpointDetails, setEndpointDetails] = usePersistedState("endpointDetails", {});
     const [dummyOas, setDummyOas] = usePersistedState("dummyOas", {});
     const [incidentDetails, setIncidentDetails] = usePersistedState("incidentDetails", {});
+    const [console, setConsole] = usePersistedState("console", false);
+    const [apiInventory, setApiInventory] = usePersistedState("apiInventory", [])
 
     const [error, setError] = useState(null);
 
@@ -61,6 +63,9 @@ export const AppStateProvider = ({ children }) => {
                 const fetchedIncidentDetails = await DataProvider.incidentDetails();
                 setIncidentDetails(fetchedIncidentDetails);
 
+                const fetchedApiInventory = await DataProvider.apiInventory();
+                setApiInventory(fetchedApiInventory);
+
                 setError(null);
 
             } catch (error) {
@@ -83,8 +88,11 @@ export const AppStateProvider = ({ children }) => {
                 endpointProxy,
                 endpointDetails,
                 incidentDetails,
+                apiInventory,
                 dummyOas,
-                error
+                error,
+                console,
+                setConsole
             }}>
             {children}
         </AppContext.Provider>

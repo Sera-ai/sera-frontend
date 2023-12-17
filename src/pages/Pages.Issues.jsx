@@ -20,12 +20,12 @@ function Issues() {
   }, []);
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-full overflow-hidden">
       {!isPopup && <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />}
-      <div className="maincontent relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden w-full secondaryDark">
+      <div className="maincontent relative flex flex-col flex-1 overflow-x-hidden w-full secondaryDark h-full">
         {!isPopup && <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} title={"Issues"} />}
-        <main className="w-full">
-          <div className="pt-4 w-full">
+        <main className="flex-grow overflow-y-hidden">
+          <div className="h-full pt-4 w-full">
             <Routes>
               <Route index element={<IssuesEntry />} />
               <Route path="viewer/:issueId" element={<Viewer />} />

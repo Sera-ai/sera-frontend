@@ -69,36 +69,38 @@ const Table = ({ filter, columns, data }) => {
     const allItemsSelected = Object.keys(selectedItems).length === data.length;
 
     return (
-        <table className={"issuesTable  mt-4"}>
-            <thead>
-                <tr>
-                    <th className='pl-8'>
-                        <input
-                            type="checkbox"
-                            ref={selectAllRef}
-                            onChange={handleSelectAll}
-                            checked={allItemsSelected}
-                        />
-                    </th>
-                    {getHeaders()}
-                    {/* ... all other headers */}
-                </tr>
-            </thead>
-            <tbody>
-                {filteredData.map((item, index) => (
-                    <tr key={index}>
-                        <td className='pl-8'>
+        <div className="overflow-auto h-full pt-4">
+            <table className={"issuesTable w-full"}>
+                <thead>
+                    <tr>
+                        <th className='pl-8'>
                             <input
                                 type="checkbox"
-                                checked={!!selectedItems[index]}
-                                onChange={() => handleSelectItem(index)}
+                                ref={selectAllRef}
+                                onChange={handleSelectAll}
+                                checked={allItemsSelected}
                             />
-                        </td>
-                        {getRows(item)}
+                        </th>
+                        {getHeaders()}
+                        {/* ... all other headers */}
                     </tr>
-                ))}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {filteredData.map((item, index) => (
+                        <tr key={index}>
+                            <td className='pl-8'>
+                                <input
+                                    type="checkbox"
+                                    checked={!!selectedItems[index]}
+                                    onChange={() => handleSelectItem(index)}
+                                />
+                            </td>
+                            {getRows(item)}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
 };
 

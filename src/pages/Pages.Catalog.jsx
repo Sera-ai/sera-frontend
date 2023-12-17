@@ -18,7 +18,7 @@ function Catalog() {
   const [oas, setOas] = useState(dummyOas);
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-full overflow-hidden">
 
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 

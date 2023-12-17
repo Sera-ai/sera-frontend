@@ -1,0 +1,89 @@
+.editor-button-enabled {
+    background-color: #2b84ec;
+    text-align: center;
+    text-wrap: nowrap;
+    align-items: center;
+}
+
+.editor-button-disabled {
+    background-color: #ffffff00;
+    border-width: 2px;
+    border-color: #fff;
+    text-align: center;
+    text-wrap: nowrap;
+}
+
+.input-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container:focus-within label {
+    transform: translate(0, 8px) scale(0.8);
+    color: #2b84ec;
+}
+
+.input-container .filled {
+    transform: translate(0, 8px) scale(0.8);
+}
+
+.input-container label {
+    position: absolute;
+    pointer-events: none;
+    transform: translate(0, 18px) scale(1);
+    transform-origin: top left;
+    transition: 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    color: #6f81a5;
+    font-size: 14px;
+    line-height: 1;
+    left: 10px;
+}
+
+.input-container .inputBox {
+    background-color: transparent;
+    padding: 24px 16px 6px 10px;
+    font-size: 14px;
+    line-height: 1;
+    outline: none;
+    box-shadow: none;
+    transition: 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+}
+
+.input-container .inputBox:focus {
+    border-color: #2b84ec !important;
+}
+
+.nestedContainer {
+    border-radius: 5px;
+}
+
+.nestedEven {
+    background-color: #1e222b;
+}
+
+.nestedOdd {
+    background-color: #17181a;
+}
+
+.inputEnabled {
+    border-width: 1px;
+    border-color: #282f3f;
+    border-radius: 4px;
+}
+
+.inputDisabled {
+    border: none !important
+}
+
+.bottomLink {
+    padding-bottom: 2px;
+    margin-right: 10px;
+    color: #2b84ec;
+}
+
+.topLink {
+    margin-top: 25px;
+    margin-right: 10px;
+    color: #2b84ec;
+}

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import DropdownFilter from './Components.DropdownFilter';
 
-function Header({ title = null, subtitle = null, filter = null, setFilter = null, setColumns = null, existingColumns = null, columns = null, subBar = false, children }) {
+function Header({ title = null, subtitle = null, filter = null, setFilter = null, setColumns = null, existingColumns = [], columns = [], subBar = false, children }) {
     return (
-        <div className="col-span-full border-slate-200 dark:border-slate-700 h-full w-full" >
+        <div className="col-span-full border-slate-200 dark:border-slate-700 h-full w-full flex flex-col flex-1 overflow-x-hidden" >
 
             {title && (<header className="px-8 py-4 shadow-xl">
                 <div className="flex justify-between items-center">
@@ -31,7 +31,7 @@ function Header({ title = null, subtitle = null, filter = null, setFilter = null
                 </div>
             </header >)
             }
-            <div className={`flex flex-col h-full ${subBar ? "" : "mainDark"} border-l border-main`}>
+            <div className={`flex flex-col flex-grow overflow-hidden border-l border-main w-full ${subBar ? "" : "mainDark"}`}>
                 {children}
             </div>
         </div>

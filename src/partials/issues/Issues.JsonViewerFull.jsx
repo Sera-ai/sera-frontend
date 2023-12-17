@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useState, useEffect } from "react";
 import Editor, { useMonaco, loader } from "@monaco-editor/react";
 
-const JsonViewerFull = ({ oas }) => {
+const JsonViewerFull = ({ oas, main = false }) => {
     const monaco = useMonaco();
 
     const [state, setState] = React.useState(JSON.stringify(oas));
@@ -18,6 +18,9 @@ const JsonViewerFull = ({ oas }) => {
                 // Check if there's any marker with severity of Error
             };
 
+            const json = JSON.stringify(oas, null, 2); // Format the JSON string with indentation
+            editor.setValue(json);
+
             // Check for errors initially
             checkErrors();
 
@@ -33,7 +36,7 @@ const JsonViewerFull = ({ oas }) => {
                 monaco.editor.onDidChangeMarkers(() => { });
             };
         }
-    }, [monaco, editor]);
+    }, [monaco, editor, oas]);
 
 
 
@@ -59,7 +62,7 @@ const JsonViewerFull = ({ oas }) => {
                         inherit: true,   // can also be false to completely replace the base
                         rules: [],       // custom rules
                         colors: {
-                            'editor.background': '#1e222b', // your desired background color
+                            'editor.background': main ? '#17181a' : '#1e222b', // your desired background color
                             // you can add other color overrides here if needed
                         },
                     });

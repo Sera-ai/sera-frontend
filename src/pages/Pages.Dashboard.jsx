@@ -14,7 +14,7 @@ function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-full">
 
       {/* Sidebar */}
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
@@ -62,7 +62,7 @@ function Dashboard() {
               <AnamalyList bare={false} />
 
               {/* Card (Recent Activity) */}
-              <CatalogFullList />
+              <CatalogFullList filter={""} />
 
             </div>
 

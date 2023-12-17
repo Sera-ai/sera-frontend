@@ -1,8 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { Chrono } from 'react-chrono';
-import JsonViewer from '../../../partials/issues/Issues.JsonViewer';
-import JsonDiff from '../../../partials/issues/Issues.JsonDiff';
-import { AppContext } from '../../../provider/Provider.State';
 import VerticalTimeline from '../../../components/Components.VerticalTimeline';
 
 const ReportDetails = ({ incidentId = "test" }) => {

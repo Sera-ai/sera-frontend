@@ -184,7 +184,7 @@ function Ecosystem() {
 
     return (
         <div className="flex h-screen overflow-hidden">
-            <div style={{ zIndex: 2 }}>
+            <div style={{ zIndex: 2 }} className='h-full'>
                 <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} transparent />
             </div>
             <div className="relative flex flex-col flex-1 w-full items-center">

@@ -54,3 +54,8 @@ export async function incidentDetails() {
     const incidentDetails = await getDataTemplate('incidentDetails')
     return incidentDetails
 }
+
+export async function apiInventory() {
+    const apiInventory = await getDataTemplate('apiInventory')
+    return apiInventory
+}

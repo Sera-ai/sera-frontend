@@ -1007,6 +1007,16 @@ const jsonFile = {
         { endpoint: { host: "api.webtool.org", endpoint: "/api/YYY" }, health: 0.78, requests: 8000, status: "active", tags: ["Test", "Test1"] },
         { endpoint: { host: "api.application.io", endpoint: "/api/createPost" }, health: 0.92, requests: 10500, status: "inactive", tags: ["ABCD", "Test1", "Test1", "Test1"] }
     ],
+    apiInventory: [
+        { host: "api.example.com", documentation: 0.90, requests: 11111, endpoints: 13 },
+        { host: "api.example.com", documentation: 0.90, requests: 11111, endpoints: 13 },
+        { host: "api.example.com", documentation: 0.90, requests: 11111, endpoints: 13 },
+        { host: "api.example.com", documentation: 0.90, requests: 11111, endpoints: 13 },
+        { host: "api.example.com", documentation: 0.90, requests: 11111, endpoints: 13 },
+        { host: "api.example.com", documentation: 0.90, requests: 11111, endpoints: 13 },
+        { host: "api.example.com", documentation: 0.90, requests: 11111, endpoints: 13 },
+        { host: "api.example.com", documentation: 0.90, requests: 11111, endpoints: 13 }
+    ],
     availablePlugins: {
         "/catalog/api.sample.com/pets/__post": [
             { name: 'SERA Cipher Suite', enabled: true },

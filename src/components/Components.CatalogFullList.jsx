@@ -1,31 +1,29 @@
 import React, { useState, useContext } from 'react';
-import FilterButton from './Components.DropdownFilter';
 import { AppContext } from '../provider/Provider.State';
 
 
-function CatalogFullList() {
-  const [filter, setFilter] = useState('');
+function CatalogFullList({ filter }) {
 
   const { catalogInventory } = useContext(AppContext);
 
-  const filteredData = catalogInventory.filter(channel => {
-    return channel.endpoint.endpoint.toLowerCase().includes(filter.toLowerCase())
-      || channel.endpoint.host.toLowerCase().includes(filter.toLowerCase())
-      || channel.tags.some(tag => tag.toLowerCase().includes(filter.toLowerCase())); // Updated this part for tags
+  const filteredData = catalogInventory.filter(inventory => {
+    return inventory.endpoint.endpoint.toLowerCase().includes(filter.toLowerCase())
+      || inventory.endpoint.host.toLowerCase().includes(filter.toLowerCase())
+      || inventory.tags.some(tag => tag.toLowerCase().includes(filter.toLowerCase())); // Updated this part for tags
   });
 
-  const allExpanded = filteredData.reduce((acc, channel) => {
-    acc[channel.endpoint.host] = true;
+  const allExpanded = filteredData.reduce((acc, inventory) => {
+    acc[inventory.endpoint.host] = true;
     return acc;
   }, {});
 
   const [expandedRows, setExpandedRows] = useState(allExpanded); // e.g., { 0: true, 1: false } means row 0 is expanded, row 1 is collapsed
 
-  const groupByHost = filteredData.reduce((acc, channel) => {
-    if (!acc[channel.endpoint.host]) {
-      acc[channel.endpoint.host] = [];
+  const groupByHost = filteredData.reduce((acc, inventory) => {
+    if (!acc[inventory.endpoint.host]) {
+      acc[inventory.endpoint.host] = [];
     }
-    acc[channel.endpoint.host].push(channel);
+    acc[inventory.endpoint.host].push(inventory);
     return acc;
   }, {});
 
@@ -49,21 +47,11 @@ function CatalogFullList() {
               <tr>
                 <th className="p-2">
                 </th>
-                <th className="p-2">
-                  <div className="font-semibold text-left">Endpoint</div>
-                </th>
-                <th className="p-2">
-                  <div className="font-semibold text-center">Health</div>
-                </th>
-                <th className="p-2">
-                  <div className="font-semibold text-center">Requests</div>
-                </th>
-                <th className="p-2">
-                  <div className="font-semibold text-center">Status</div>
-                </th>
-                <th className="p-2">
-                  <div className="font-semibold text-center">Tags</div>
-                </th>
+                {Object.keys(catalogInventory[0]).map((key, index) => {
+                  return (<th className="p-2">
+                    <div className={`font-semibold text-${index == 0 ? "left" : "center"}`}>{key}</div>
+                  </th>)
+                })}
               </tr>
             </thead>
             {/* Table body */}
@@ -77,7 +65,7 @@ function CatalogFullList() {
                     </td>
                     <td className="p-2">
                       <div className="flex flex-col">
-                        <div className="text-slate-800 dark:text-slate-100">{host}</div>
+                        <a href={`/catalog/${host}/`} className="text-slate-800 dark:text-slate-100">{host}</a>
                       </div>
                     </td>
                     <td className="p-2">
@@ -98,43 +86,43 @@ function CatalogFullList() {
                   </tr>
                   {/* Conditionally render all entries for the host when expanded */}
                   {expandedRows[host] &&
-                    hostData.map((channel, index) => (
+                    hostData.map((inventory, index) => (
                       <React.Fragment key={index}>
                         {/* Rows related to each endpoint under the host */}
                         <tr className="mainDark rowItem">
                           <td> </td>
                           <td className="p-2">
                             <div className="flex flex-col">
-                              <div className="text-slate-800 text-xs dark:text-slate-100 pl-5">{channel.endpoint.endpoint}</div>
+                              <a href={`/catalog/${host}${inventory.endpoint.endpoint}`} className="text-slate-800 text-xs dark:text-slate-100 pl-5">{inventory.endpoint.endpoint}</a>
                             </div>
                           </td>
                           <td className="p-2">
                             <div className="flex flex-row items-center space-x-2.5">
                               {/* Health Bar */}
                               <div className="w-full h-2 bg-slate-100 dark:bg-slate-700 rounded">
-                                <div className="h-full bg-blue-500 rounded" style={{ width: `${channel.health * 100}%` }}></div>
+                                <div className="h-full bg-blue-500 rounded" style={{ width: `${inventory.health * 100}%` }}></div>
                               </div>
                               {/* Percentage */}
-                              <div className="text-center text-xs">{Math.round(channel.health * 100)}%</div>
+                              <div className="text-center text-xs">{Math.round(inventory.health * 100)}%</div>
                             </div>
                           </td>
                           <td className="p-2">
-                            <div className="text-center">{channel.requests.toLocaleString()}</div>
+                            <div className="text-center">{inventory.requests.toLocaleString()}</div>
                           </td>
                           <td className="p-2">
                             <div className="flex justify-center">
                               <span
                                 className={`inline-flex items-center px-1 py-0.5 text-xs text-white rounded`}
-                                style={channel.status === 'active' ? { backgroundColor: '#23A85830', color: "#23A858" } : { backgroundColor: '#EC2B2B30', color: "#EC2B2B" }}
+                                style={inventory.status === 'active' ? { backgroundColor: '#23A85830', color: "#23A858" } : { backgroundColor: '#EC2B2B30', color: "#EC2B2B" }}
                               >
-                                {channel.status}
+                                {inventory.status}
                               </span>
                             </div>
                           </td>
 
                           <td className="p-2">
                             <div className="flex flex-wrap gap-2">
-                              {channel.tags.map((tag, index) => (
+                              {inventory.tags.map((tag, index) => (
                                 <span
                                   key={index}
                                   className="inline-flex items-center px-1 py-0.5 text-xs text-white rounded"

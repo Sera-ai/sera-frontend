@@ -35,12 +35,12 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
 
 
   return (
-    <div>
+    <div className='h-full'>
       {/* Sidebar */}
       <div
         id="sidebar"
         ref={sidebar}
-        className={`flex sidebar flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 shrink-0 mainDark transition-all duration-200 ease-in-out -translate-x-64 ${transparent && "transBG"}`}
+        className={` ${transparent ? "transBG " : "mainDark "} flex sidebar flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-full overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 shrink-0  transition-all duration-200 ease-in-out -translate-x-64`}
       >
         {/* Sidebar header */}
         <li className={`sidebarLogo rounded-sm last:mb-0 flex items-center justify-center`}>
@@ -85,6 +85,18 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
                   </svg>
                 </NavLink>
               </li>
+              <li className={`sidebarItem rounded-sm mb-0.5 last:mb-0 flex items-center justify-center ${(pathname.includes('editor')) && 'secondaryDarkPadded'}`}>
+                <NavLink
+                  end
+                  to="/editor"
+                  className={`block text-slate-200 truncate transition duration-150 ${(pathname.includes('editor')) ? 'hover:text-slate-200' : 'hover:text-white'
+                    }`}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 20 20" fill="none">
+                    <path d="M13 11H15M9 8H15M11 5H15M1 3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1H17C17.5304 1 18.0391 1.21071 18.4142 1.58579C18.7893 1.96086 19 2.46957 19 3V17C19 17.5304 18.7893 18.0391 18.4142 18.4142C18.0391 18.7893 17.5304 19 17 19H3C2.46957 19 1.96086 18.7893 1.58579 18.4142C1.21071 18.0391 1 17.5304 1 17V3Z" stroke={(pathname.includes('editor')) ? '#2B84EC' : '#FFFFFF50'} strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </NavLink>
+              </li>
               <li className={`sidebarItem sidebarEndItem rounded-sm mb-0.5 last:mb-0 flex items-center justify-center ${(pathname.includes('catalog')) && 'secondaryDarkPadded'}`}>
                 <NavLink
                   end
@@ -105,8 +117,8 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
                     }`}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 20 20" fill="none">
-                    <path d="M10 19.0122V19.0222M1 7.01223V7.02223M19 7.01223V7.02223M6 18.1122C4.63534 17.447 3.46122 16.447 2.58704 15.2056C1.71281 13.9642 1.16686 12.5218 1 11.0122M14 18.1122C15.3647 17.447 16.5387 16.447 17.413 15.2056C18.2872 13.9642 18.8331 12.5218 19 11.0122M4.2 3.01223C5.80809 1.69658 7.82204 0.977539 9.9 0.977539C11.978 0.977539 13.9919 1.69658 15.6 3.01223M7 10.0122C7 10.8083 7.31607 11.5713 7.87868 12.1339C8.44129 12.6966 9.20435 13.0122 10 13.0122C10.7956 13.0122 11.5587 12.6966 12.1213 12.1339C12.6839 11.5713 13 10.8083 13 10.0122C13 9.21698 12.6839 8.45391 12.1213 7.89131C11.5587 7.3287 10.7956 7.01223 10 7.01223C9.20435 7.01223 8.44129 7.3287 7.87868 7.89131C7.31607 8.45391 7 9.21698 7 10.0122Z" 
-                    stroke={(pathname.includes('ecosystem')) ? '#2B84EC' : '#FFFFFF50'} strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M10 19.0122V19.0222M1 7.01223V7.02223M19 7.01223V7.02223M6 18.1122C4.63534 17.447 3.46122 16.447 2.58704 15.2056C1.71281 13.9642 1.16686 12.5218 1 11.0122M14 18.1122C15.3647 17.447 16.5387 16.447 17.413 15.2056C18.2872 13.9642 18.8331 12.5218 19 11.0122M4.2 3.01223C5.80809 1.69658 7.82204 0.977539 9.9 0.977539C11.978 0.977539 13.9919 1.69658 15.6 3.01223M7 10.0122C7 10.8083 7.31607 11.5713 7.87868 12.1339C8.44129 12.6966 9.20435 13.0122 10 13.0122C10.7956 13.0122 11.5587 12.6966 12.1213 12.1339C12.6839 11.5713 13 10.8083 13 10.0122C13 9.21698 12.6839 8.45391 12.1213 7.89131C11.5587 7.3287 10.7956 7.01223 10 7.01223C9.20435 7.01223 8.44129 7.3287 7.87868 7.89131C7.31607 8.45391 7 9.21698 7 10.0122Z"
+                      stroke={(pathname.includes('ecosystem')) ? '#2B84EC' : '#FFFFFF50'} strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </NavLink>
               </li>
@@ -136,18 +148,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
                   </svg>
                 </NavLink>
               </li>
-              <li className={`sidebarItem rounded-sm mb-0.5 last:mb-0 flex items-center justify-center ${(pathname.includes('honeycomb')) && 'secondaryDarkPadded'}`}>
-                <NavLink
-                  end
-                  to="/"
-                  className={`block text-slate-200 truncate transition duration-150 ${(pathname.includes('honeycomb')) ? 'hover:text-slate-200' : 'hover:text-white'
-                    }`}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 20 20" fill="none">
-                    <path d="M13 11H15M9 8H15M11 5H15M1 3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1H17C17.5304 1 18.0391 1.21071 18.4142 1.58579C18.7893 1.96086 19 2.46957 19 3V17C19 17.5304 18.7893 18.0391 18.4142 18.4142C18.0391 18.7893 17.5304 19 17 19H3C2.46957 19 1.96086 18.7893 1.58579 18.4142C1.21071 18.0391 1 17.5304 1 17V3Z" stroke="white" strokeOpacity="0.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </NavLink>
-              </li>
+
             </ul>
           </div>
         </div>

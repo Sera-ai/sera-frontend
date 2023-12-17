@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import AnamalyList from '../../../components/Components.AnamalyList';
-import PercentageChart from '../../../components/Components.AnamalyBreakdown';
-import AnamalyActions from '../../../components/Components.AnamalyActions';
 import ReportDetails from './Sub.Issues.Report.Details';
 import Header from '../../../components/Components.Header.Title';
 

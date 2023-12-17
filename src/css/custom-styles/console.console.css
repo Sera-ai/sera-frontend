@@ -1,0 +1,45 @@
+input[data-focus-visible-added] {
+    outline: none !important;
+    --tw-ring-inset: 0 !important;
+    --tw-ring-offset-width: 0 !important;
+    --tw-ring-offset-color: #fff !important;
+    --tw-ring-color: transparent !important;
+    --tw-ring-offset-shadow: 0 0 #0000 !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+input[data-focus-visible-added]:focus {
+    outline: none !important;
+    --tw-ring-inset: 0 !important;
+    --tw-ring-offset-width: 0 !important;
+    --tw-ring-offset-color: #fff !important;
+    --tw-ring-color: transparent !important;
+    --tw-ring-offset-shadow: 0 0 #0000 !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Add this custom CSS in your global stylesheet */
+.console-scroll::-webkit-scrollbar {
+    display: none;
+    /* For Chrome, Safari, and Opera */
+}
+
+.console-scroll {
+    -ms-overflow-style: none;
+    /* For Internet Explorer and Edge */
+    scrollbar-width: none;
+    /* For Firefox */
+}
+
+span[name*="react-console-emulator__promptLabel"] {
+    padding-top: 0px !important;
+    color: #4b9eff !important
+}
+
+input[name*="react-console-emulator__input"] {
+    color: #4b9eff !important
+}
