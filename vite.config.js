@@ -30,6 +30,6 @@ export default defineConfig({
     }
   },
   server: {
-    port: 12010
+    port: process.env.FE_CATALOG_PORT
   }
 })

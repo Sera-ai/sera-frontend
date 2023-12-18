@@ -245,7 +245,7 @@ const eventPlugin = (item) => {
         <BodyTemplate tags={[item.tag]} flag={item.flag}>
 
             {<p>
-                <span>Builder (<a href={"http://localhost:12010/api.sample.com/items/post"} style={{ color: "#1466cf" }}>e0033a961</a>) triggered</span>
+                <span>Builder (<a href={`http://localhost:${process.env.FE_CATALOG_PORT}/api.sample.com/items/post`} style={{ color: "#1466cf" }}>e0033a961</a>) triggered</span>
                 <span style={{ color: "#fff", backgroundColor: "#ffffff30" }} className="inline-flex items-center px-1.5 mr-2 py-0.5 mx-1 text-xs text-white rounded">
                     {"Plugin"}
                 </span>
