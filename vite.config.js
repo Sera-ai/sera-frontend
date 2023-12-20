@@ -5,9 +5,8 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   define: {
-    'process.env': process.env
-  },
-  define: {
+    '__FE_CATALOG_PORT__':JSON.stringify(process.env.FE_CATALOG_PORT),
+    '__BE_ROUTER_PORT__': JSON.stringify(process.env.BE_ROUTER_PORT),
     "global": {}
   },
   css: {
