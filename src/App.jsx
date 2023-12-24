@@ -17,6 +17,8 @@ import Issues from './pages/Pages.Issues';
 import Ecosystem from './pages/Pages.Ecosystem';
 import Console from './pages/subpages/console/sub.console';
 import Editor from './pages/Pages.Editor';
+import Builder from '@builder/App';
+
 
 function App() {
   const { console } = useContext(AppContext)
@@ -36,6 +38,7 @@ function App() {
           <Route path="/catalog/*" element={<Catalog />} />
           <Route path="/editor/*" element={<Editor />} />
           <Route path="/ecosystem/*" element={<Ecosystem />} />
+          <Route path="/builder/*" element={<Builder />} />
         </Routes>
       </div>
       {console && (
