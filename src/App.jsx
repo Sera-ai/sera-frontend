@@ -19,7 +19,6 @@ import Console from './pages/subpages/console/sub.console';
 import Editor from './pages/Pages.Editor';
 
 function App() {
-
   const { console } = useContext(AppContext)
 
   useEffect(() => {
