@@ -5,6 +5,7 @@ import Sidebar from '../partials/Partial.Sidebar';
 import Header from '../partials/Partial.Header';
 
 import EditorEntry from './subpages/editor/Sub.Editor.Entry';
+import EditorViewer from './subpages/editor/Sub.Editor.Viewer';
 
 
 
@@ -26,6 +27,8 @@ function Editor() {
                     <div className="h-full pt-4 w-full">
                         <Routes>
                             <Route index element={<EditorEntry />} />
+                            <Route path=":host/*" element={<EditorViewer oas={{}} setOas={()=>{}} />} />
+
                             {/* You can add more subroutes here if needed */}
                         </Routes>
                         <Outlet />

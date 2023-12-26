@@ -8,7 +8,7 @@ import HeaderTabs from '../../../components/Components.Header.Tabs';
 import CatalogSidebar from '../../../partials/catalog/Catalog.Sidebar';
 import { useNavigate } from 'react-router-dom';
 import EditorUpload from '../../../partials/editor/Editor.Upload';
-import EditorViewer from '../../../partials/editor/Editor.OasViewer';
+import EditorOasViewer from '../../../partials/editor/Editor.OasViewer';
 import EditorHeader from '../../../partials/editor/Editor.Header';
 import EditorServer from '../../../partials/editor/Editor.Server';
 
@@ -37,7 +37,7 @@ function ImportData() {
                                 {getSelectedTab()}
                             </div>
                             <div className='w-1/2 h-full'>
-                                <EditorViewer oas={oas} />
+                                <EditorOasViewer oas={oas} />
                             </div>
                         </div>
                     </Header>

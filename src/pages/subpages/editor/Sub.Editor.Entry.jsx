@@ -4,9 +4,8 @@ import HostFullList from '../../../components/Components.HostsFullList';
 import HeaderWrapper from '../../../components/Components.HeaderWrapper';
 import ImportData from './Sub.Editor.Import';
 import { AppContext } from '../../../provider/Provider.State';
-import EditorViewer from '../../../partials/editor/Editor.OasViewer';
 
-function EditorEntry() {
+function            EditorEntry() {
     const [selectedTab, setSelectedTab] = useState(0); // default selected tab
     const [filter, setFilter] = useState('');
     const [columns, setColumns] = useState([]);
