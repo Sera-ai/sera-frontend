@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../provider/Provider.State";
 
-function CatalogFullList({ filter }) {
-  const { catalogInventory } = useContext(AppContext);
+function InventoryFullList({ filter }) {
+  const { inventoryInventory } = useContext(AppContext);
 
-  const filteredData = catalogInventory.filter((inventory) => {
+  const filteredData = inventoryInventory.filter((inventory) => {
     return (
       inventory.endpoint.endpoint
         .toLowerCase()
@@ -48,8 +48,8 @@ function CatalogFullList({ filter }) {
             <thead className="text-xs uppercase text-slate-400 dark:text-slate-500 bg-slate-50 mainDark dark:bg-opacity-50 rounded-sm sticky top-0">
               <tr>
                 <th className="p-2"></th>
-                {catalogInventory.length > 0 &&
-                  Object.keys(catalogInventory[0]).map((key, index) => {
+                {inventoryInventory.length > 0 &&
+                  Object.keys(inventoryInventory[0]).map((key, index) => {
                     return (
                       <th className="p-2">
                         <div
@@ -82,7 +82,7 @@ function CatalogFullList({ filter }) {
                     <td className="p-2">
                       <div className="flex flex-col">
                         <a
-                          href={`/catalog/${host}/`}
+                          href={`inventory/${host}/`}
                           className="text-slate-800 dark:text-slate-100"
                         >
                           {host}
@@ -122,7 +122,7 @@ function CatalogFullList({ filter }) {
                           <td className="p-2">
                             <div className="flex flex-col">
                               <a
-                                href={`/catalog/${host}${inventory.endpoint.endpoint}`}
+                                href={`inventory/${host}${inventory.endpoint.endpoint}`}
                                 className="text-slate-800 text-xs dark:text-slate-100 pl-5"
                               >
                                 {inventory.endpoint.endpoint}
@@ -201,4 +201,4 @@ function CatalogFullList({ filter }) {
   );
 }
 
-export default CatalogFullList;
+export default InventoryFullList;

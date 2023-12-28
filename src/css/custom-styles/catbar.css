@@ -12,8 +12,11 @@
 }
 
 .catbar {
-    width: 18em !important;
     margin-top: 4px !important;
+}
+
+.set-width {
+    width: 18em !important;
 }
 
 .catSplit {

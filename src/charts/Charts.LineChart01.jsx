@@ -14,8 +14,8 @@ Chart.register(LineController, LineElement, Filler, PointElement, LinearScale, T
 
 function LineChart01({
   data,
-  width,
-  height
+  width = "100%",
+  height = "100%"
 }) {
 
   const [chart, setChart] = useState(null)

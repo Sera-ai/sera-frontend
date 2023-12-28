@@ -1,16 +1,30 @@
-import React, { useState } from 'react';
-import Inventory from './Sub.Issues.Inventory';
-import Report from './Sub.Issues.Report';
-import HeaderTabs from '../../../components/Components.Header.Tabs';
+import React, { useState } from "react";
+import Inventory from "./Sub.Issues.Inventory";
+import Report from "./Sub.Issues.Report";
+import BodyContent from "../../../components/page/Components.Page.BodyContent";
 
 function IssuesEntry() {
-    const [selectedTab, setSelectedTab] = useState(0); // default selected tab
-    return (
-        <div className={"maincontent relative flex flex-col flex-1 overflow-x-hidden w-full secondaryDark h-full"}>
-            <HeaderTabs tabs={["Inventory", "Report"]} selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-            {selectedTab === 1 ? (<Report />) : (<Inventory />)}
-        </div>
-    );
+  const [selectedTab, setSelectedTab] = useState(0); // default selected tab
+  const [tabs, setTabs] = useState(["Inventory", "Report"]);
+
+  const SelectedPage = () => {
+    switch (selectedTab) {
+      case 0:
+        return <Inventory />;
+      case 1:
+        return <Report />;
+    }
+  };
+
+  return (
+    <BodyContent
+      selectedTab={selectedTab}
+      setSelectedTab={setSelectedTab}
+      tabs={tabs}
+    >
+      <SelectedPage />
+    </BodyContent>
+  );
 }
 
 export default IssuesEntry;

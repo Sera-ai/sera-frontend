@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 
-import Analytics from '../../../partials/catalog/Catalog.Analytics';
-import Documentation from '../../../partials/catalog/Catalog.Documentation';
+import Analytics from '../../../partials/inventory/Inventory.Analytics';
+import Documentation from '../../../partials/inventory/Inventory.Documentation';
 import Header from '../../../components/Components.Header.Title';
 import { AppContext } from '../../../provider/Provider.State';
 import HeaderTabs from '../../../components/Components.Header.Tabs';
-import CatalogSidebar from '../../../partials/catalog/Catalog.Sidebar';
+import InventorySidebar from '../../../partials/inventory/Inventory.Sidebar';
 import { useNavigate } from 'react-router-dom';
 import EditorUpload from '../../../partials/editor/Editor.Upload';
 import EditorOasViewer from '../../../partials/editor/Editor.OasViewer';

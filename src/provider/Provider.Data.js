@@ -20,9 +20,9 @@ export async function issueInventory() {
     return issueInventory
 }
 
-export async function catalogInventory() {
-    const catalogInventory = await getDataTemplate('catalogInventory')
-    return catalogInventory
+export async function inventoryInventory() {
+    const inventoryInventory = await getDataTemplate('inventoryInventory')
+    return inventoryInventory
 }
 
 export async function availablePlugins() {

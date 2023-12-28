@@ -12,27 +12,27 @@ function AnamalyList({ bare = false, full = false }) {
     || (channel.details.desc.toLowerCase().includes(filter.toLowerCase()))
   );
   return (
-    <div className={`col-span-full ${bare ? "mainDark" : "mainDark shadow-lg rounded-sm border border-slate-200 dark:border-slate-700"} mt-6`}>
-      <header className={` ${!bare && "py-4 border-b border-slate-100 dark:border-slate-700"} `}>
+    <div className={`col-span-2 row-span-2 md:col-span-2 sm:col-span-3 xs:col-span-3 ${bare ? "mainDark mt-6" : "dash-card"}`}>
+      <header className={` ${!bare && "p-4 px-6"} `}>
         <div className="flex justify-between items-center">
           <div>
             <h2 className={`font-semibold text-slate-800 dark:text-slate-100 ${bare && "text-sm"}`}>Endpoint Anamalies</h2>
             <h2
               style={bare ? { color: "rgba(255, 255, 255, 0.6)" } : {}}
               className={`font-light text-slate-800 dark:text-slate-100 ${bare ? "text-xs" : "text-sm"}`}
-            >Overview of key information about the active endpoints in your catalogue.</h2>
+            >Overview of key information about the active endpoints in your inventoryue.</h2>
           </div>
 
         </div>
       </header>
-      <div className=" mt-1">
+      <div className=" mt-1 h-full">
         {/* Table */}
-        <div className={`overflow-x-auto ${full ? "max-h-[40vh]" : "max-h-[500px]"} overflow-y-auto`}>
+        <div className={`overflow-x-auto ${full ? "max-h-[40vh]" : "max-h-[600px]"} overflow-y-scroll`}>
           <table className="table-auto w-full dark:text-slate-300">
             {/* Table header */}
-            <thead className={`text-xs uppercase text-slate-400 dark:text-slate-500 ${bare ? "mainDark" : "secondaryDark"} dark:bg-opacity-50 rounded-sm sticky top-0`}>
+            <thead className={`text-xs uppercase text-slate-400 dark:text-slate-500 ${bare ? "mainDark" : "quadDark"} dark:bg-opacity-50 rounded-sm sticky top-0`}>
               <tr>
-                <th className="px-2">
+                <th className="px-2 pl-6">
                   <div className="font-semibold text-left">Anamoly</div>
                 </th>
                 <th className="px-2">
@@ -47,7 +47,7 @@ function AnamalyList({ bare = false, full = false }) {
                         Search
                       </label>
                       <input
-                        className={`w-full dark:text-slate-300 font-light ${bare ? "mainDark" : "secondaryDark"} text-sm border-0 focus:ring-transparent placeholder-slate-400 dark:placeholder-slate-500 appearance-none py-2 pl-10 pr-4`}
+                        className={`w-full dark:text-slate-300 font-light ${bare ? "mainDark" : "quadDark"} text-sm border-0 focus:ring-transparent placeholder-slate-400 dark:placeholder-slate-500 appearance-none py-2 pl-10 pr-4`}
                         type="search"
                         placeholder="Filter Recent Anomalies"
                         value={filter}
@@ -72,7 +72,7 @@ function AnamalyList({ bare = false, full = false }) {
             <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
               {filteredData.map((channel, index) => (
                 <tr key={index}>
-                  <td className="p-2 flex items-center space-x-3">
+                  <td className="p-2 pl-6 flex items-center space-x-3">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                       <path d="M9.16663 12.5H10.8333V14.1666H9.16663V12.5ZM9.16663 5.83329H10.8333V10.8333H9.16663V5.83329ZM9.99996 1.66663C5.39163 1.66663 1.66663 5.41663 1.66663 9.99996C1.66663 12.2101 2.5446 14.3297 4.1074 15.8925C4.88122 16.6663 5.79988 17.2802 6.81093 17.699C7.82198 18.1177 8.90561 18.3333 9.99996 18.3333C12.2101 18.3333 14.3297 17.4553 15.8925 15.8925C17.4553 14.3297 18.3333 12.2101 18.3333 9.99996C18.3333 8.90561 18.1177 7.82198 17.699 6.81093C17.2802 5.79988 16.6663 4.88122 15.8925 4.1074C15.1187 3.33358 14.2 2.71975 13.189 2.30096C12.1779 1.88217 11.0943 1.66663 9.99996 1.66663ZM9.99996 16.6666C8.23185 16.6666 6.53616 15.9642 5.28591 14.714C4.03567 13.4638 3.33329 11.7681 3.33329 9.99996C3.33329 8.23185 4.03567 6.53616 5.28591 5.28591C6.53616 4.03567 8.23185 3.33329 9.99996 3.33329C11.7681 3.33329 13.4638 4.03567 14.714 5.28591C15.9642 6.53616 16.6666 8.23185 16.6666 9.99996C16.6666 11.7681 15.9642 13.4638 14.714 14.714C13.4638 15.9642 11.7681 16.6666 9.99996 16.6666Z" fill="#ECB62B" />
                     </svg>

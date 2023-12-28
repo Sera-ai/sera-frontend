@@ -28,7 +28,7 @@ const VerticalTimeline = ({ incidentId = "test" }) => {
             theme={{
                 primary: "#ffffff",
                 secondary: "#ffffff00",
-                cardBgColor: "#17181a00",
+                cardBgColor: "#191A2100",
                 cardForeColor: "violet",
                 titleColor: "#ffffff70",
                 titleColorActive: "#ffffff",
@@ -147,16 +147,16 @@ const eventData = (item) => {
             {<p>
                 <span>Client Request details</span>
                 <span style={{ color: "#fff", backgroundColor: "#ffffff50" }} className="inline-flex items-center px-1.5 mx-2 py-0.5 text-xs text-white rounded">
-                    <a href='/catalog/api.sample.com/pets/__post'>{"GET"}</a>
+                    <a href='inventory/api.sample.com/pets/__post'>{"GET"}</a>
                 </span>
                 <span className={"font-light"}>
-                    <a href='/catalog/api.sample.com/' style={{ color: "#398af1" }}>{"api.sample.com"}</a>
+                    <a href='inventory/api.sample.com/' style={{ color: "#398af1" }}>{"api.sample.com"}</a>
                 </span>
                 <span style={{ color: "#fff" }} className={"mx-2"}>
                     /
                 </span>
                 <span className={"font-light"}>
-                    <a href='/catalog/api.sample.com/pets/' style={{ color: "#398af1" }}>{"pets"}</a>
+                    <a href='inventory/api.sample.com/pets/' style={{ color: "#398af1" }}>{"pets"}</a>
                 </span>
             </p>}
             {<div>

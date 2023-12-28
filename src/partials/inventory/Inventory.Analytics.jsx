@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CatalogDetailsData from '../../pages/subpages/catalog/Sub.Catalog.DetailsData';
+import InventoryDetailsData from '../../pages/subpages/inventory/Sub.Inventory.DetailsData';
 import AnamalyList from '../../components/Components.AnamalyList';
 import ProxySettings from '../../components/Components.ProxySettings';
 import PluginComponent from '../../components/Components.PluginComponent';
@@ -16,7 +16,7 @@ function ApiDetails() {
   const paths = decodeURIComponent(pathname).split("/")
   const endpoint = decodeURIComponent(pathname)
   paths.shift() //remove blank
-  paths.shift() //remove catalog
+  paths.shift() //remove inventory
   let method = null
 
   if (matchMethod.includes(paths[paths.length - 1])) {
@@ -32,11 +32,10 @@ function ApiDetails() {
           <div className="overflow-x-auto flex flex-column w-full">
             {/* Data Div */}
             <div className="flex w-full h-full">
-              <CatalogDetailsData endpoint={endpoint} />
+              <InventoryDetailsData endpoint={endpoint} />
             </div>
 
             {/* Action Div */}
-            <EndpointSettings endpoint={endpoint} />
           </div>
           <div className="p-2">
             <AnamalyList bare={true} />
@@ -88,7 +87,7 @@ function Header({ paths, method }) {
             </span>)}
             {paths.map((path, index) => {
               // Create the path for the Link up to the current breadcrumb
-              let toPath = `/catalog/${paths.slice(0, index + 1).join('/')}`;
+              let toPath = `inventory/${paths.slice(0, index + 1).join('/')}`;
               if (index == 0) toPath = toPath + "/"
               return (
                 <React.Fragment key={index}>
@@ -106,7 +105,7 @@ function Header({ paths, method }) {
             })}
           </div>
           <div className="overflow-x-auto secondaryDark rounded-md mt-2 py-1 px-2 flex flex-col">
-            <h2 className="font-light text-slate-800 dark:text-slate-100 text-xs">Overview of key information about the active endpoints in your catalogue.</h2>
+            <h2 className="font-light text-slate-800 dark:text-slate-100 text-xs">Overview of key information about the active endpoints in your inventoryue.</h2>
           </div>
         </div>
         <div className="space-x-2.5 flex justify-center">

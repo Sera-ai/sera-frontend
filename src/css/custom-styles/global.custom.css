@@ -1,19 +1,38 @@
-.maincontent {
-    border-top-left-radius: 16px;
-}
-
 .triDark {
     background-color: #262c39;
 }
 
+.quadDark {
+    background-color: #141414;
+}
+
 .mainDark {
-    background-color: #17181a !important;
+    background-color: #191A21 !important;
 }
 
 .secondaryDark {
-    background-color: #1e222b!important;
+    background-color: #23232E!important;
 }
 
-.border-main {
-    border-color: #1e222b !important;;
+#sidebar {
+    border-radius: 3px;
+}
+
+#header {
+    border-radius: 3px;
+}
+
+#mainContent {
+    border-radius: 3px;
+}
+
+#searchBar {
+    border-width: 1px;
+    border-color: #334155;
+}
+
+.dash-card {
+    background-color: #23232E !important;
+    filter: drop-shadow(0px 4px 5px #00000030);
+    border-radius: 3px;
 }

@@ -3,7 +3,7 @@ import BarGraph from '../../../components/Components.MonthlyAnalytics';
 import { AppContext } from '../../../provider/Provider.State';
 
 
-function CatalogDetailsData({ endpoint }) {
+function InventoryDetailsData({ endpoint }) {
     const { endpointDetails } = useContext(AppContext)
 
     if (!endpointDetails[endpoint]) {
@@ -135,5 +135,5 @@ function CatalogDetailsData({ endpoint }) {
     );
 }
 
-export default CatalogDetailsData;
+export default InventoryDetailsData;
 

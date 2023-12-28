@@ -112,7 +112,7 @@ function markDownBuilder({ oas, location }) {
   const { pathname } = location;
   const paths = pathname.split("/")
   paths.shift() //remove blank
-  paths.shift() //remove catalog
+  paths.shift() //remove inventory
   paths.shift() //remove host
   let method = null
 
@@ -152,7 +152,7 @@ function updateOas(md, location, oas, setOas) {
   const { pathname } = location;
   const paths = pathname.split("/")
   paths.shift() //remove blank
-  paths.shift() //remove catalog
+  paths.shift() //remove inventory
   paths.shift() //remove host
   let method = null
 

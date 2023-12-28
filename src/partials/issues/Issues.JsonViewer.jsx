@@ -59,7 +59,7 @@ const JsonViewer = ({ oas }) => {
                         inherit: true,   // can also be false to completely replace the base
                         rules: [],       // custom rules
                         colors: {
-                            'editor.background': '#1e222b', // your desired background color
+                            'editor.background': '#23232E', // your desired background color
                             // you can add other color overrides here if needed
                         },
                     });

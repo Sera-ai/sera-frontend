@@ -13,7 +13,7 @@ function BarGraph({ bare = false }) {
       <header className={`px-5 py-4 border-b border-slate-100 dark:border-slate-700 ${bare && "hidden"}`}>
         <div>
           <h2 className="font-semibold text-slate-800 dark:text-slate-100">Monthly Analytics</h2>
-          <h2 className="font-light text-slate-800 dark:text-slate-100 text-sm">Overview of key information about the active endpoints in your catalogue.</h2>
+          <h2 className="font-light text-slate-800 dark:text-slate-100 text-sm">Overview of key information about the active endpoints in your inventoryue.</h2>
         </div>
       </header>
       {/* Chart built with Chart.js 3 */}

@@ -79,7 +79,7 @@ const OasEditor = forwardRef(({ oas, setOas, setIsError, darker = false }, ref) 
                         inherit: true,   // can also be false to completely replace the base
                         rules: [],       // custom rules
                         colors: {
-                            'editor.background': darker ? "#17181a" : '#1e222b', // your desired background color
+                            'editor.background': darker ? "#191A21" : '#23232E', // your desired background color
                             // you can add other color overrides here if needed
                         },
                     });

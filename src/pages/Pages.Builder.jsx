@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
 
 import EditorEntry from "./subpages/editor/Sub.Editor.Entry";
-import EditorViewer from "./subpages/editor/Sub.Editor.Viewer";
-import MainContent from "../components/page/Components.Page.MainContent";
 
-function Editor() {
+import BuilderMap from "@builder/App";
+import MainContent from "../components/page/Components.Page.MainContent";
+import InventorySidebar from "../partials/inventory/Inventory.Sidebar";
+
+function Builder() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
-  const [title, setTitle] = useState("Inventory");
+  const [title, setTitle] = useState("Builder");
 
   useEffect(() => {
     setIsPopup(window.opener != null);
@@ -25,7 +27,7 @@ function Editor() {
         <Route index element={<EditorEntry />} />
         <Route
           path=":host/*"
-          element={<EditorViewer oas={{}} setOas={() => {}} />}
+          element={<BuilderMap InventorySidebar={InventorySidebar} />}
         />
 
         {/* You can add more subroutes here if needed */}
@@ -35,4 +37,4 @@ function Editor() {
   );
 }
 
-export default Editor;
+export default Builder;

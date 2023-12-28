@@ -998,7 +998,7 @@ const jsonFile = {
             endpointUniqueClients: 55
         }
     ],
-    catalogInventory: [
+    inventoryInventory: [
         { endpoint: { host: "api.example.com", endpoint: "/api/getStatus" }, health: 0.90, requests: 11111, status: "active", tags: ["Test", "Test1"] },
         { endpoint: { host: "api.example.com", endpoint: "/api/getStatus1" }, health: 0.90, requests: 11111, status: "active", tags: ["Test", "Test1"] },
         { endpoint: { host: "api.example.com", endpoint: "/api/getStatus222" }, health: 0.90, requests: 11111, status: "active", tags: ["Test", "Test1"] },
@@ -1018,7 +1018,7 @@ const jsonFile = {
         { host: "api.example.com", documentation: 0.90, requests: 11111, endpoints: 13 }
     ],
     availablePlugins: {
-        "/catalog/api.sample.com/pets/__post": [
+        "inventory/api.sample.com/pets/__post": [
             { name: 'SERA Cipher Suite', enabled: true },
             { name: 'Sera Auth Suite', enabled: true },
             { name: 'Snowflake Analytics', enabled: true },
@@ -1071,14 +1071,14 @@ const jsonFile = {
         ],
     },
     endpointProxy: {
-        "/catalog/api.sample.com/pets/__post": {
+        "inventory/api.sample.com/pets/__post": {
             seraUrl: "rj403m.sera.io",
             obfuscateUrl: null,
             dnsUrl: null
         }
     },
     endpointDetails: {
-        "/catalog/api.sample.com/pets/__post": {
+        "inventory/api.sample.com/pets/__post": {
             "details": {
                 "Status": "Active",
                 "Endpoint Type": "REST API",

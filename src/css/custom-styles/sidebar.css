@@ -5,7 +5,7 @@
 }
 
 .sidebarList .secondaryDarkPadded {
-    background-color: #1e222b !important;
+    background-color: #191A21 !important;
 }
 
 .sidebarItem {
@@ -17,7 +17,7 @@
     margin: 12px;
     padding-top: 0px;
     border-radius: 8px !important;
-    background-color: #cadaf9;
+    background-color: #262c39
 }
 
 .sidebarEndItem {

@@ -1,8 +1,13 @@
-.header {
-    margin: 4px;
+.tabHeader {
+  border-bottom-width: 4px;
+  border-bottom-color: #191a21;
 }
 
-.tabHeader {
-    border-bottom-width: 1px;
-    border-bottom-color: #3f4d6b;
+.tabHeaderSelect {
+  border-bottom-width: 2px;
+  border-bottom-color: #008cff;
+}
+
+.tabHeaderNoSelect > span {
+  color: #94a3b8;
 }

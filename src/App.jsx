@@ -12,12 +12,12 @@ import { AppContext } from './provider/Provider.State';
 
 // Import pages
 import Dashboard from './pages/Pages.Dashboard';
-import Catalog from './pages/Pages.Catalog';
+import Inventory from './pages/Pages.Inventory';
 import Issues from './pages/Pages.Issues';
 import Ecosystem from './pages/Pages.Ecosystem';
 import Console from './pages/subpages/console/sub.console';
 import Editor from './pages/Pages.Editor';
-import Builder from '@builder/App';
+import Builder from './pages/Pages.Builder';
 
 
 function App() {
@@ -30,12 +30,12 @@ function App() {
   }, [location.pathname]); // triggered on route change
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen p-1 mainDark">
       <div className="flex-grow overflow-y-auto">
         <Routes>
           <Route exact path="/" element={<Dashboard />} />
           <Route path="/issues/*" element={<Issues />} />
-          <Route path="/catalog/*" element={<Catalog />} />
+          <Route path="inventory/*" element={<Inventory />} />
           <Route path="/editor/*" element={<Editor />} />
           <Route path="/ecosystem/*" element={<Ecosystem />} />
           <Route path="/builder/*" element={<Builder />} />

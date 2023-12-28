@@ -1,0 +1,5 @@
+.apexcharts-legend-series {
+  display: flex !important;
+  flex-direction: column-reverse !important;
+  margin: 2px 1px !important
+}

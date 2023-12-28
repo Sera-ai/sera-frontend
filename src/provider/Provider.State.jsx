@@ -15,7 +15,7 @@ export const AppStateProvider = ({ children }) => {
     const [issueInventory, setIssueInventory] = usePersistedState("issueInventory", [])
     const [anamalyListData, setAnamalyListData] = usePersistedState("anamalyListData", []);
     const [issueActions, setIssueActions] = usePersistedState("issueActions", []);
-    const [catalogInventory, setCatalogInventory] = usePersistedState("catalogInventory", []);
+    const [inventoryInventory, setInventoryInventory] = usePersistedState("inventoryInventory", []);
     const [availablePlugins, setAvailablePlugins] = usePersistedState("availablePlugins", {});
     const [monthlyAnalytics, setMonthlyAnalytics] = usePersistedState("monthlyAnalytics", {});
     const [endpointProxy, setEndpointProxy] = usePersistedState("endpointProxy", {});
@@ -42,8 +42,8 @@ export const AppStateProvider = ({ children }) => {
                 const fetchedIssueActions = await DataProvider.issueActions();
                 setIssueActions(fetchedIssueActions);
 
-                const fetchedCatalogInventory = await DataProvider.catalogInventory();
-                setCatalogInventory(fetchedCatalogInventory);
+                const fetchedInventoryInventory = await DataProvider.inventoryInventory();
+                setInventoryInventory(fetchedInventoryInventory);
 
                 const fetchedAvailablePlugins = await DataProvider.availablePlugins();
                 setAvailablePlugins(fetchedAvailablePlugins);
@@ -78,7 +78,7 @@ export const AppStateProvider = ({ children }) => {
     return (
         <AppContext.Provider
             value={{
-                catalogInventory,
+                inventoryInventory,
                 issueListChart,
                 issueInventory,
                 anamalyListData,

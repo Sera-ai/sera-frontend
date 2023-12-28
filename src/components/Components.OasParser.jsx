@@ -108,7 +108,7 @@ function Method({ path, type, host, onSelectMethod, isSelectedMethod, filter }) 
 
   return (
     <li>
-      <Link to={`/catalog/${methodId}`} onClick={handleClick}>
+      <Link to={`inventory/${methodId}`} onClick={handleClick}>
         <div className={`title ${colorClass} ${selectedClass}`} id={methodId}>
           <div className="fill"></div>
           <span className={"endpoint-title"}>{type.toUpperCase()}</span>

@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import MDEditor from "./Catalog.MDEditor"
-import OasEditor from "./Catalog.OasEditor"
+import MDEditor from "./Inventory.MDEditor"
+import OasEditor from "./Inventory.OasEditor"
 
 
 function ApiDetails({ oas, setOas }) {
@@ -17,7 +17,7 @@ function ApiDetails({ oas, setOas }) {
   const { pathname } = location;
   const paths = decodeURIComponent(pathname).split("/")
   paths.shift() //remove blank
-  paths.shift() //remove catalog
+  paths.shift() //remove inventory
   let method = null
 
   if (matchMethod.includes(paths[paths.length - 1])) {
@@ -118,7 +118,7 @@ function Header({ paths, method, setEditDocs, editDocs, manageOAS, setManageOAS,
             <span className={`inline-flex items-center px-1.5 py-0.5 text-xs text-white rounded PUT-color PUT-bg-color`}>Doc</span>
             {paths.map((path, index) => {
               // Create the path for the Link up to the current breadcrumb
-              let toPath = `/catalog/${paths.slice(0, index + 1).join('/')}`;
+              let toPath = `inventory/${paths.slice(0, index + 1).join('/')}`;
               if (index == 0) toPath = toPath + "/"
               return (
                 <React.Fragment key={index}>
