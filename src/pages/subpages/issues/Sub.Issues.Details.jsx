@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Details from '../../../partials/issues/Issues.Details';
 import VerticalTimeline from './Sub.Issues.Report.Details';
 
-function Home() {
+function IssueReportDetails() {
 
     return (
 
@@ -17,7 +17,7 @@ function Home() {
                         <div className="mainDark rounded-lg m-2 p-4 space-y-4 detailsActionContainer">
                             <Details />
                         </div>
-                        <div className="overflow-x-auto flex flex-column w-full my-10 pr-10">
+                        <div className="overflow-x-auto flex  w-full my-10 pr-10">
                             <VerticalTimeline />
                         </div>
                         {/*<div className="mainDark rounded-lg m-2 p-4 space-y-4 detailsActionContainer">
@@ -32,7 +32,7 @@ function Home() {
     );
 }
 
-export default Home;
+export default IssueReportDetails;
 
 
 
@@ -43,7 +43,7 @@ function Header({ }) {
         <header className="px-4 pt-4">
             <div className="flex justify-between items-center">
                 <div className="">
-                    <div className="flex flex-column space-x-4 mb-1">
+                    <div className="flex  space-x-4 mb-1">
                         <span className={`inline-flex items-center px-1.5 py-0.5 text-xs text-white rounded DELETE-color DELETE-bg-color`}>Issue</span>
                         <span className={"ml-2 dark:text-slate-100"}>SAPI-0010</span>
                         <span className={"ml-2"}>api.platform.io/api/fetchData</span>

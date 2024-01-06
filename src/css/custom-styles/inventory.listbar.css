@@ -1,0 +1,9 @@
+.listItemLink:hover {
+  background-color: #ffffff10;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.listItemLink {
+  color: #94a3b8;
+}

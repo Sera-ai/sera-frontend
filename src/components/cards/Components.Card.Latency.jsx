@@ -4,7 +4,7 @@ import { hexToRGB, tailwindConfig } from "../../utils/Utils";
 import DropdownHelp from "../Components.DropdownHelp";
 import BarChart02 from "../../charts/Charts.BarChart02";
 
-const CardRequest = () => {
+const CardLatency = () => {
   const chartData = {
     labels: [
       "12:00",
@@ -52,7 +52,7 @@ const CardRequest = () => {
           <span className="text-sm">{average.toFixed(2)}%</span>
         </div>
       </div>
-      <hr className="w-full h-px bg-slate-200 secondaryDark border-none" />
+      <hr className="w-full h-px bg-slate-200 triDark border-none" />
       <div className="flex pt-2">
         <BarChart02 data={chartData} height={100} />
       </div>
@@ -60,4 +60,4 @@ const CardRequest = () => {
   );
 };
 
-export default CardRequest;
+export default CardLatency;

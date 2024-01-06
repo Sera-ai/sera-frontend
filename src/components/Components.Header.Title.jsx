@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import DropdownFilter from "./Components.DropdownFilter";
+import { ExpandButton } from "./standard/Standard.Expand";
 
 function Header({
   title = null,
@@ -11,16 +12,17 @@ function Header({
   columns = [],
   subBar = false,
   children,
+  tier = 2,
 }) {
   return (
     <div className="col-span-full border-slate-200 dark:border-slate-700 h-full w-full flex flex-col flex-1 overflow-hidden">
       {title && (
-        <header className="px-8 py-4 shadow-xl">
-          <div className="flex justify-between items-center">
-            <div className="mb-1">
-              <div className={" dark:text-slate-100 text-sm"}>{title}</div>
-              <div className={"text-xs"}>{subtitle}</div>
-            </div>
+        <header className="px-4 flex justify-between items-center shadow-xl min-h-[56px]">
+          <div className="">
+            <div className={" dark:text-slate-100 text-sm"}>{title}</div>
+            <div className={"text-xs"}>{subtitle}</div>
+          </div>
+          <div className="flex flex-row space-x-4">
             {setFilter && (
               <div className="space-x-2.5 flex justify-center">
                 <form className="border-b border-slate-200 dark:border-slate-700">
@@ -42,6 +44,7 @@ function Header({
                 />
               </div>
             )}
+            <ExpandButton tier={tier} />
           </div>
         </header>
       )}

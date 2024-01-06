@@ -26,7 +26,7 @@ Chart.register(
   Tooltip
 );
 
-function LineChart02({ data, width, height }) {
+function LineChart02({ data, width = "100%", height }) {
   const [chart, setChart] = useState(null);
   const canvas = useRef(null);
   const { currentTheme } = useThemeProvider();
@@ -53,16 +53,17 @@ function LineChart02({ data, width, height }) {
   };
 
   useEffect(() => {
-    const ctx = canvas.current.getContext('2d');
+    const ctx = canvas.current.getContext("2d");
     const chartArea = {
       bottom: height,
-      top: 0
+      width: "100%",
+      top: 0,
     };
     const gradient = createGradient(ctx, chartArea);
 
     const gradientData = {
       ...data,
-      datasets: data.datasets.map(dataset => ({
+      datasets: data.datasets.map((dataset) => ({
         ...dataset,
         borderColor: gradient,
       })),
@@ -110,7 +111,7 @@ function LineChart02({ data, width, height }) {
               autoSkipPadding: 25,
               maxRotation: 0,
               color: darkMode ? textColor.dark : textColor.light,
-              padding: 10
+              padding: 10,
             },
           },
         },
@@ -171,9 +172,7 @@ function LineChart02({ data, width, height }) {
   return (
     <React.Fragment>
       {/* Chart built with Chart.js 3 */}
-      <div className="grow">
         <canvas ref={canvas} width={width} height={height}></canvas>
-      </div>
     </React.Fragment>
   );
 }

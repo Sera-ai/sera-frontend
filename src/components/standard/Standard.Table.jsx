@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const Table = ({ filter, columns, data, linkClasses,selectedItems, setSelectedItems, selectAllRef }) => {
 
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (selectAllRef.current) {
@@ -60,7 +62,7 @@ const Table = ({ filter, columns, data, linkClasses,selectedItems, setSelectedIt
         return Object.keys(item).map((key) => {
             const cellContent = item[key].toString();
             const highlightedContent = highlightMatch(cellContent);
-            return <td className={`${isLinkClass(key)}`} style={{ display: columns.includes(key) ? "none" : "" }} dangerouslySetInnerHTML={{ __html: highlightedContent }}></td>;
+            return <td className={`${isLinkClass(key)}`} onClick={()=>navigate(cellContent)} style={{ display: columns.includes(key) ? "none" : "" }} dangerouslySetInnerHTML={{ __html: highlightedContent }}></td>;
         });
     };
 

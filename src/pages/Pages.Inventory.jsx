@@ -27,7 +27,7 @@ function Inventory() {
         <Route index element={<Entry oas={oas} />} />
         <Route
           path=":host/*"
-          element={<EndpointEntry oas={oas} setOas={setOas} />}
+          element={<Entry oas={oas} />}
         />
       </Routes>
       <Outlet />

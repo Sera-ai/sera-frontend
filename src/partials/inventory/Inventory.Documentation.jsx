@@ -41,7 +41,7 @@ function ApiDetails({ oas, setOas }) {
       <div>
         {/* Table */}
         <div className="overflow-x-auto flex flex-col">
-          <div className="overflow-x-auto flex flex-column w-full pt-8">
+          <div className="overflow-x-auto flex  w-full pt-8">
             {/* Action Div */}
             {manageOAS ? <OasSide oas={oas} /> : null}
 
@@ -114,7 +114,7 @@ function Header({ paths, method, setEditDocs, editDocs, manageOAS, setManageOAS,
     <header className="">
       <div className="flex justify-between items-center">
         <div className="">
-          <div className="flex flex-column space-x-4 mb-1">
+          <div className="flex  space-x-4 mb-1">
             <span className={`inline-flex items-center px-1.5 py-0.5 text-xs text-white rounded PUT-color PUT-bg-color`}>Doc</span>
             {paths.map((path, index) => {
               // Create the path for the Link up to the current breadcrumb

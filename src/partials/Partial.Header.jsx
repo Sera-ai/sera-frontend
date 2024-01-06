@@ -14,7 +14,7 @@ function Header({ sidebarOpen, setSidebarOpen, transparent, title }) {
   return (
     <header
       id="header"
-      className={`z-30 header w-full px-8 flex items-center justify-between py-2 ${
+      className={`z-30 header w-full px-4 flex items-center justify-between py-2 ${
         !transparent && "secondaryDark"
       }`}
     >

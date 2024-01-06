@@ -289,7 +289,7 @@ function Ecosystem() {
               className="w-full mainDark"
             >
               <div style={{ borderRadius: 8 }} className="h-full secondaryDark">
-                <div className="flex flex-column space-x-10 w-full h-full ">
+                <div className="flex  space-x-10 w-full h-full ">
                   <div
                     style={{
                       borderRightWidth: 1,
@@ -382,7 +382,7 @@ function Ecosystem() {
                         ))}
                     </ul>
                   </div>
-                  <div className="flex flex-column space-x-10 w-full h-full py-14 px-5">
+                  <div className="flex  space-x-10 w-full h-full py-14 px-5">
                     <div className=" w-full">
                       <h2 className="font-semibold text-sm text-slate-800 dark:text-slate-100">
                         Endpoint Details

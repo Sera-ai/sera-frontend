@@ -92,7 +92,7 @@ class RoundedBarElement extends BarElement {
 // Register the custom bar element
 Chart.register(RoundedBarElement);
 
-function BarChart02({ data, width = "100%", height }) {
+function BarChartStacked({ data, width = "100%", height }) {
   const [chart, setChart] = useState(null);
   const canvas = useRef(null);
   const { currentTheme } = useThemeProvider();
@@ -111,16 +111,7 @@ function BarChart02({ data, width = "100%", height }) {
     // eslint-disable-next-line no-unused-vars
     const newChart = new Chart(ctx, {
       type: "bar",
-      data: {
-        datasets: [
-          {
-            ...data.datasets[0], // Spread the existing dataset properties
-            type: RoundedBarElement.id, // Use 'type' to specify the custom bar element for this dataset
-            borderRadius: 5, // Set the desired bottom radius here
-          },
-        ],
-        labels: data.labels, // Assuming your data object has labels
-      },
+      data: data,
       options: {
         elements: {
           bar: {
@@ -134,7 +125,7 @@ function BarChart02({ data, width = "100%", height }) {
           },
         },
         scales: {
-          y: { display: false },
+          y: { display: true, stacked: true },
           x: {
             stacked: true,
             type: "time",
@@ -210,4 +201,4 @@ function BarChart02({ data, width = "100%", height }) {
   return <canvas ref={canvas} width={width} height={height}></canvas>;
 }
 
-export default BarChart02;
+export default BarChartStacked;

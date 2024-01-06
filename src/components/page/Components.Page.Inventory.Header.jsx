@@ -1,30 +1,6 @@
-import React, { useState } from "react";
-import InventoryDetailsData from "../../pages/subpages/inventory/Sub.Inventory.DetailsData";
-import AnamalyList from "../../components/Components.AnamalyList";
-import ProxySettings from "../../components/Components.ProxySettings";
-import PluginComponent from "../../components/Components.PluginComponent";
-import { Link, useLocation } from "react-router-dom";
-
-function ApiDetails({ endpoint }) {
-  
-
-  return (
-    <div className="col-span-full mainDark p-2 h-full overflow-y-auto w-full px-4">
-      <Header paths={[]} method={"GET"} />
-      {/* Table */}
-      <div className="overflow-x-auto flex flex-col w-full flex-grow">
-        <InventoryDetailsData endpoint={endpoint} />
-      </div>
-    </div>
-  );
-}
-
-export default ApiDetails;
-
-
-function Header({ paths, method }) {
-  return (
-    <header className="flex justify-between items-center">
+export default function InventoryHeader({ paths, method }) {
+    return (
+      <header className="flex justify-between items-center">
         <div className="">
           <div className="flex  space-x-4 mb-1">
             {method ? (
@@ -47,15 +23,11 @@ function Header({ paths, method }) {
               return (
                 <React.Fragment key={index}>
                   <h2
-                    style={
-                      index === paths.length - 1 ? { color: "#2B84EC" } : {}
-                    }
+                    style={index === paths.length - 1 ? { color: "#2B84EC" } : {}}
                     className={`font-regular text-slate-800 text-md dark:text-slate-${
                       index === 0 ? "100" : "400"
                     } ${
-                      index !== paths.length - 1
-                        ? "underline cursor-pointer"
-                        : ""
+                      index !== paths.length - 1 ? "underline cursor-pointer" : ""
                     }`}
                   >
                     <Link to={toPath}>{path}</Link>
@@ -99,9 +71,12 @@ function Header({ paths, method }) {
                 strokeLinejoin="round"
               />
             </svg>
-            <span className="hidden xs:block ml-2 font-light text-sm">Build Endpoint</span>
+            <span className="hidden xs:block ml-2 font-light text-sm">
+              Build Endpoint
+            </span>
           </button>
         </div>
-    </header>
-  );
-}
+      </header>
+    );
+  }
+  

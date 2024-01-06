@@ -51,7 +51,7 @@ const Details = ({ incidentId = "test" }) => {
     }
 
     return (
-        <div className="flex flex-column space-x-10 w-full p-2">
+        <div className="flex  space-x-10 w-full p-2">
             <div className=" w-full">
                 <h2 className="font-semibold text-sm text-slate-800 dark:text-slate-100">Incident Details</h2>
 

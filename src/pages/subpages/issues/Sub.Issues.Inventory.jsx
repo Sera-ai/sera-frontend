@@ -25,7 +25,7 @@ function Inventory() {
     "issueId",
   ];
 
-  console.log(issueInventory)
+  console.log(issueInventory);
 
   return (
     <Header
@@ -38,6 +38,7 @@ function Inventory() {
       setColumns={setColumns}
       existingColumns={existingColumns}
       columns={columns}
+      tier={2}
     >
       <Table
         filter={filter}

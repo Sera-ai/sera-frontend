@@ -7,10 +7,10 @@ import AnamalyList from "../components/Components.AnamalyList";
 import InventoryFullList from "../components/Components.InventoryFullList";
 import Banner from "../partials/Partial.Banner";
 import MainContent from "../components/page/Components.Page.MainContent";
-import CardHeader from "../components/cards/Components.Card.Uptime";
-import CardRequest from "../components/cards/Components.Card.Request";
+import CardUptime from "../components/cards/Components.Card.Uptime";
+import CardLatency from "../components/cards/Components.Card.Latency";
 import GitHubContributionsGraph from "../components/cards/Components.Card.Contributions";
-import MapChart from "../components/cards/Components.Card.Map";
+import CardTraffic from "../components/cards/Components.Card.Traffic";
 
 function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -24,10 +24,10 @@ function Dashboard() {
     >
       <div className="py-4 px-7 w-full h-full overflow-y-auto">
         <div className="grid grid-cols-3 gap-7">
-          <CardHeader />
-          <MapChart />
+          <CardUptime />
+          <CardTraffic />
           <AnamalyList bare={false} />
-          <CardRequest />
+          <CardLatency />
           <GitHubContributionsGraph />
           {/* <BarGraph bare={false} />
           <InventoryFullList filter={""} /> */}

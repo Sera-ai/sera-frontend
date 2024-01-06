@@ -4,7 +4,7 @@ import LineChart02 from "../../charts/Charts.LineChart02";
 import { hexToRGB, tailwindConfig } from "../../utils/Utils";
 import DropdownHelp from "../Components.DropdownHelp";
 
-const CardHeader = () => {
+const CardTraffic = () => {
   const chartData = {
     labels: [
       "12-01-2020",
@@ -78,4 +78,4 @@ const CardHeader = () => {
   );
 };
 
-export default CardHeader;
+export default CardTraffic;

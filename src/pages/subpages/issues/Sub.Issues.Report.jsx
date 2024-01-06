@@ -4,12 +4,7 @@ import Header from "../../../components/Components.Header.Title";
 
 function Report() {
   return (
-    <Header
-      title={"Issue Reports"}
-      subtitle={
-        "Below is an inventory list of any issues that have not been resolved"
-      }
-    >
+    <Header title={"Issue Reports"}>
       <ReportDetails />
     </Header>
   );
