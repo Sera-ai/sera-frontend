@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 
 import './css/style.css';
-import './charts/Charts.ChartjsConfig';
+import './components/charts/Charts.ChartjsConfig';
 import { AppContext } from './provider/Provider.State';
 
 

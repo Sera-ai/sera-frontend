@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 
-import FilterButton from "../components/Components.DropdownFilter";
-import Datepicker from "../components/Components.Datepicker";
-import BarGraph from "../components/Components.MonthlyAnalytics";
-import AnamalyList from "../components/Components.AnamalyList";
-import InventoryFullList from "../components/Components.InventoryFullList";
-import Banner from "../partials/Partial.Banner";
+import AnamalyList from "../components/custom/Custom.AnamalyList";
+import Banner from "./global/Global.Banner";
 import MainContent from "../components/page/Components.Page.MainContent";
 import CardUptime from "../components/cards/Components.Card.Uptime";
 import CardLatency from "../components/cards/Components.Card.Latency";

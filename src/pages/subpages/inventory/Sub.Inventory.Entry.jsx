@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from "../../../provider/Provider.State";
 import BodyContent from "../../../components/page/Components.Page.BodyContent";
-import { ListSidebar } from "../../../components/standard/Standard.ListSidebar";
+import { ListSidebar } from "../../../components/custom/Custom.ListSidebar";
 import { ContentBar } from "../../../components/standard/Standard.ContentBar";
-import ApiDetails from "../../../partials/inventory/Inventory.Analytics";
+import ApiDetails from "./partials/Partials.Inventory.Analytics";
 import { useLocation, useNavigate } from "react-router-dom";
-import InventoryOverview from "../../../partials/inventory/Inventory.Overview";
-import EndpointOverview from "../../../partials/inventory/Inventory.Endpoint.Overview";
+import InventoryOverview from "./partials/Partials.Inventory.Overview";
+import EndpointOverview from "./partials/Partials.Inventory.Endpoint.Overview";
 
 function InventoryEntry({ oas, tier = 1 }) {
   const { inventoryInventory, nestedVisible } = useContext(AppContext);

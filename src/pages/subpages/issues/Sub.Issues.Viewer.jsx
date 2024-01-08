@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import JsonViewerFull from '../../../partials/issues/Issues.JsonViewerFull';
+import JsonViewerFull from './partials/Partials.Issues.JsonViewerFull';
 import { AppContext } from '../../../provider/Provider.State';
 
 function Viewer() {

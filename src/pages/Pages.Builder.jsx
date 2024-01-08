@@ -5,7 +5,7 @@ import EditorEntry from "./subpages/editor/Sub.Editor.Entry";
 
 import BuilderMap from "@builder/App";
 import MainContent from "../components/page/Components.Page.MainContent";
-import InventorySidebar from "../partials/inventory/Inventory.Sidebar";
+import InventorySidebar from "./subpages/inventory/partials/Partials.Inventory.Sidebar";
 
 function Builder() {
   const [sidebarOpen, setSidebarOpen] = useState(false);

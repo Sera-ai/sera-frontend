@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import Sidebar from "../../partials/Partial.Sidebar";
-import Header from "../../partials/Partial.Header";
+import Sidebar from "../../pages/global/Global.Sidebar";
+import Header from "../../pages/global/Global.Header";
 import { AppContext } from "../../provider/Provider.State";
 
 function MainContent({

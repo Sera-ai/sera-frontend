@@ -1,16 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
 
-import Analytics from '../../../partials/inventory/Inventory.Analytics';
-import Documentation from '../../../partials/inventory/Inventory.Documentation';
-import Header from '../../../components/Components.Header.Title';
+import Header from '../../../components/custom/Custom.Header.Title';
 import { AppContext } from '../../../provider/Provider.State';
-import HeaderTabs from '../../../components/Components.Header.Tabs';
-import InventorySidebar from '../../../partials/inventory/Inventory.Sidebar';
-import { useNavigate } from 'react-router-dom';
-import EditorUpload from '../../../partials/editor/Editor.Upload';
-import EditorOasViewer from '../../../partials/editor/Editor.OasViewer';
-import EditorHeader from '../../../partials/editor/Editor.Header';
-import EditorServer from '../../../partials/editor/Editor.Server';
+import HeaderTabs from '../../../components/custom/Custom.Header.Tabs';
+import EditorUpload from '../../../pages/subpages/editor/partials/Partials.Editor.Upload';
+import EditorOasViewer from '../../../pages/subpages/editor/partials/Partials.Editor.OasViewer';
+import EditorHeader from '../../../pages/subpages/editor/partials/Partials.Editor.Header';
+import EditorServer from '../../../pages/subpages/editor/partials/Partials.Editor.Server';
 
 
 function ImportData() {

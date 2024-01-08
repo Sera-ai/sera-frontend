@@ -1,8 +1,7 @@
 import { NavLink } from "react-router-dom";
 import React from "react";
 import { hexToRGB, tailwindConfig } from "../../utils/Utils";
-import DropdownHelp from "../Components.DropdownHelp";
-import BarChart02 from "../../charts/Charts.BarChart02";
+import BarChart02 from "../charts/Charts.BarChart02";
 
 const CardLatency = () => {
   const chartData = {

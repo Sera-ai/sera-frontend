@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import VerticalTimeline from "../../../components/Components.VerticalTimeline";
+import VerticalTimeline from "../../../components/custom/Custom.VerticalTimeline";
 
 const ReportDetails = ({ incidentId = "test" }) => {
   return (

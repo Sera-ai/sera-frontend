@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Router>
       <ThemeProvider>
         <AppStateProvider>
-          <App />
+          {/* <App /> */}
         </AppStateProvider>
       </ThemeProvider>
     </Router>

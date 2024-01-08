@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import BarGraph from "../../../components/Components.MonthlyAnalytics";
+import BarGraph from "../../../components/custom/Custom.MonthlyAnalytics";
 import { AppContext } from "../../../provider/Provider.State";
 import CardUptime from "../../../components/cards/Components.Card.Uptime";
 import CardTraffic from "../../../components/cards/Components.Card.Traffic";

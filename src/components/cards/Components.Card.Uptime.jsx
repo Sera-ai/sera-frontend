@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import React from "react";
-import LineChart02 from "../../charts/Charts.LineChart02";
+import LineChart02 from "../charts/Charts.LineChart02";
 import { hexToRGB, tailwindConfig } from "../../utils/Utils";
 import DropdownHelp from "../Components.DropdownHelp";
 

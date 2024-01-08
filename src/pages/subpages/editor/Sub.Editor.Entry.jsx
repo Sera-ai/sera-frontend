@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
-import HeaderTabs from "../../../components/Components.Header.Tabs";
-import HostFullList from "../../../components/Components.HostsFullList";
-import HeaderWrapper from "../../../components/Components.HeaderWrapper";
+import HostFullList from "../../../components/custom/Custom.HostsFullList";
+import HeaderWrapper from "../../../components/custom/Custom.HeaderWrapper";
 import ImportData from "./Sub.Editor.Import";
 import { AppContext } from "../../../provider/Provider.State";
 import BodyContent from "../../../components/page/Components.Page.BodyContent";

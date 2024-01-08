@@ -1,9 +1,7 @@
 import { NavLink } from "react-router-dom";
 import React from "react";
 import { hexToRGB, tailwindConfig } from "../../utils/Utils";
-import DropdownHelp from "../Components.DropdownHelp";
-import BarChart02 from "../../charts/Charts.BarChart02";
-import BarChartStacked from "../../charts/Charts.BarChartStacked";
+import BarChartStacked from "../charts/Charts.BarChartStacked";
 
 const CardStacked = () => {
   const chartData = {

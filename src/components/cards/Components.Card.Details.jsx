@@ -1,8 +1,5 @@
 import { NavLink } from "react-router-dom";
 import React, { useContext } from "react";
-import { hexToRGB, tailwindConfig } from "../../utils/Utils";
-import DropdownHelp from "../Components.DropdownHelp";
-import BarChart02 from "../../charts/Charts.BarChart02";
 import { AppContext } from "../../provider/Provider.State";
 
 const CardDetails = ({ endpoint = "inventory/api.sample.com/pets/__post" }) => {

@@ -1,11 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
 
-import Sidebar from "../partials/Partial.Sidebar";
-import Header from "../partials/Partial.Header";
 
 import Entry from "./subpages/inventory/Sub.Inventory.Entry";
-import EndpointEntry from "./subpages/inventory/Sub.Inventory.Endpoint.Entry";
 
 import { AppContext } from "../provider/Provider.State";
 import MainContent from "../components/page/Components.Page.MainContent";

@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef, useContext, memo } from "react";
 import ReactDOM from "react-dom";
 import Graph from "react-graph-vis";
 
-import Sidebar from "../partials/Partial.Sidebar";
-import Header from "../partials/Partial.Header";
+import Sidebar from "./global/Global.Sidebar";
+import Header from "./global/Global.Header";
 import Starfield from "react-starfield";
 
 import FilterButton from "../components/Components.DropdownFilter";

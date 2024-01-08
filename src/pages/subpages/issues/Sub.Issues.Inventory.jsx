@@ -1,7 +1,7 @@
 import React, { useState, useRef, useContext } from "react";
-import IssuesTable from "../../../partials/issues/Issues.Table";
+
 import { AppContext } from "../../../provider/Provider.State";
-import Header from "../../../components/Components.Header.Title";
+import Header from "../../../components/custom/Custom.Header.Title";
 import Table from "../../../components/standard/Standard.Table";
 
 function Inventory() {

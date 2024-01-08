@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import HeaderTabs from "../Components.Header.Tabs";
+import HeaderTabs from "../custom/Custom.Header.Tabs";
 import { AppContext } from "../../provider/Provider.State";
 
 function BodyContent({

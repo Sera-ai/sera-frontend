@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
-import HostFullList from "../../../components/Components.HostsFullList";
+import HostFullList from "../../../components/custom/Custom.HostsFullList";
 import ImportData from "./Sub.Editor.Import";
 import { AppContext } from "../../../provider/Provider.State";
-import EditorOasTreeView from "../../../partials/editor/Editor.OasTreeView";
+import EditorOasTreeView from "./partials/Partials.Editor.OasTreeView";
 import BodyContent from "../../../components/page/Components.Page.BodyContent";
-import Header from "../../../components/Components.Header.Title";
+import Header from "../../../components/custom/Custom.Header.Title";
 
 function EditorViewer() {
   const [selectedTab, setSelectedTab] = useState(2); // default selected tab
