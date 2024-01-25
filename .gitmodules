@@ -1,3 +1,4 @@
 [submodule "src/builder"]
 	path = src/builder
 	url = https://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@github.com/Sera-ai/fe_Builder.git
+	branch = main
