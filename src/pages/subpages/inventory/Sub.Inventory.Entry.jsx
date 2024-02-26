@@ -22,14 +22,16 @@ function InventoryEntry({ oas, tier = 1 }) {
     const { pathname } = location;
     const paths = pathname
       .split("/")
-      .map((segment) => decodeURIComponent(segment));
-    paths.shift(); //remove blank
+      .filter(segment => segment.trim() !== ""); // Add this line
+
+
     paths.shift(); //remove inventory
 
     if (paths.length > 0) {
       setSelectedHost(paths[0]);
       if (paths.length > 1) {
         paths.shift();
+        console.log("hmm", paths.join("/"))
         setSelectedEndpoint(paths.join("/"));
       } else {
         setSelectedEndpoint("");
@@ -37,20 +39,22 @@ function InventoryEntry({ oas, tier = 1 }) {
     } else {
       setSelectedHost("");
     }
-  }, [location, navigate]);
+  }, [location]);
 
   useEffect(() => {
     if (selectedHost || selectedEndpoint) {
-      const newUrl = `/inventory/${encodeURIComponent(selectedHost)}/${
-        selectedEndpoint !== "" ? `${encodeURIComponent(selectedEndpoint)}` : ""
-      }`;
+      console.log(selectedEndpoint)
+      const newUrl = (`/inventory/${(selectedHost)}/${selectedEndpoint}`)
+
+      console.log(newUrl)
+
       navigate(newUrl, { replace: true });
     }
   }, [selectedEndpoint]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     setSelectedEndpoint("");
-  }, [selectedHost]);
+  }, [selectedHost]);*/
 
   return (
     <BodyContent
