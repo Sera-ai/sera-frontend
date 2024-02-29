@@ -132,7 +132,7 @@ export const AppStateProvider = ({ children }) => {
 function usePersistedState(key, defaultValue) {
   const [state, setState] = useState(() => {
     const persistedValue = localStorage.getItem(key);
-    return persistedValue !== null ? JSON.parse(persistedValue) : defaultValue;
+    return persistedValue != null && persistedValue != undefined && persistedValue != "undefined" ? JSON.parse(persistedValue) : defaultValue;
   });
 
   useEffect(() => {

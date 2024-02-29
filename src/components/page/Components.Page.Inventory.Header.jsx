@@ -48,7 +48,7 @@ export default function InventoryHeader({ paths, method }) {
             </h2>
           </div>
         </div>
-        <div className="space-x-2.5 flex justify-center">
+        <div className="gap-2 flex justify-center">
           <button className="btn btn-edit text-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"

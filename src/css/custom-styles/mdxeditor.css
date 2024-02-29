@@ -11,26 +11,84 @@
 .mdxeditor figure,
 .mdxeditor p,
 .mdxeditor pre {
-    margin: revert !important;
-    font-size: revert !important;
-    font-weight: revert !important;
+  margin: revert !important;
+  font-size: revert !important;
+  font-weight: revert !important;
 }
 
 .mdxeditor blockquote {
-    font-weight: 500 !important;
-    font-style: italic !important;
-    border-left-width: .25rem !important;
-    border-left-color: var(--tw-prose-quote-borders) !important;
-    quotes: "\201C" "\201D" "\2018" "\2019" !important;
-    margin-top: 1.6em !important;
-    margin-bottom: 1.6em !important;
-    padding-left: 1em !important;
+  font-weight: 500 !important;
+  font-style: italic !important;
+  border-left-width: 0.25rem !important;
+  border-left-color: var(--tw-prose-quote-borders) !important;
+  quotes: "\201C""\201D""\2018""\2019" !important;
+  margin-top: 1.6em !important;
+  margin-bottom: 1.6em !important;
+  padding-left: 1em !important;
 }
 
 .mdxeditor menu,
 .mdxeditor ol,
 .mdxeditor ul {
-    list-style: revert !important;
-    margin: revert !important;
-    padding: revert !important;
+  list-style: revert !important;
+  margin: revert !important;
+  padding: revert !important;
+}
+
+.hideToolbar [role="toolbar"] {
+  display: none !important;
+}
+
+[role="toolbar"]{
+  background-color: #23232E !important;
+  border-radius: 3px !important;
+}
+
+.inventoryBadge {
+  border-left-width: 3px;
+  border-left-color: #737373;
+  background-color: #23232e;
+  font-size: 14px;
+}
+.docHeading {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+
+.docHeading2 {
+  font-size: 20px;
+  font-weight: 600;
+  padding-bottom: 10px;
+  border-bottom-width: 1px;
+  border-bottom-color: #73737350;
+}
+
+.codetext {
+  font-family: monospace, monospace;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.headerButton {
+  height: 36px;
+  width: 36px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.paramTable h2 {
+  font-weight: bold;
 }

@@ -90,7 +90,7 @@ function InventoryFullList({ filter }) {
                       </div>
                     </td>
                     <td className="p-2">
-                      <div className="flex flex-row items-center space-x-2.5">
+                      <div className="flex flex-row items-center gap-2">
                         {/* Health Bar */}
                         <div className="w-full h-2 bg-slate-100 dark:bg-slate-700 rounded">
                           <div
@@ -130,7 +130,7 @@ function InventoryFullList({ filter }) {
                             </div>
                           </td>
                           <td className="p-2">
-                            <div className="flex flex-row items-center space-x-2.5">
+                            <div className="flex flex-row items-center gap-2">
                               {/* Health Bar */}
                               <div className="w-full h-2 bg-slate-100 dark:bg-slate-700 rounded">
                                 <div

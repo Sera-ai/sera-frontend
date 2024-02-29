@@ -1,3 +1,4 @@
+import databaseQuery from './Provider.Database'
 import getDataTemplate from './Provider.Demodata'
 
 export async function issueActions() {
@@ -46,7 +47,8 @@ export async function endpointDetails() {
 }
 
 export async function dummyOas() {
-    const dummyOas = await getDataTemplate('dummyOas')
+    const dummyOas = await databaseQuery('exampleOas')
+    console.log(dummyOas)
     return dummyOas
 }
 

@@ -48,7 +48,7 @@ function Header({}) {
             </h2>
           </div>
         </div>
-        <div className="space-x-2.5 flex justify-center">
+        <div className="gap-2 flex justify-center">
           <button
             onClick={() => {}}
             className={

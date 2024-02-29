@@ -12,19 +12,20 @@ function Header({
   columns = [],
   subBar = false,
   children,
+  buttons = null,
   tier = 2,
 }) {
   return (
     <div className="col-span-full border-slate-200 dark:border-slate-700 h-full w-full flex flex-col flex-1 overflow-hidden">
       {title && (
-        <header className="px-4 flex justify-between items-center shadow-xl min-h-[56px]">
+        <header className="px-4 flex justify-between items-center shadow-xl min-h-[56px] secondaryDark">
           <div className="">
             <div className={" dark:text-slate-100 text-sm"}>{title}</div>
             <div className={"text-xs"}>{subtitle}</div>
           </div>
           <div className="flex flex-row space-x-4">
             {setFilter && (
-              <div className="space-x-2.5 flex justify-center">
+              <div className="gap-2 flex justify-center">
                 <form className="border-b border-slate-200 dark:border-slate-700">
                   <div className="relative">
                     <input
@@ -44,6 +45,7 @@ function Header({
                 />
               </div>
             )}
+            {buttons}
             <ExpandButton tier={tier} />
           </div>
         </header>

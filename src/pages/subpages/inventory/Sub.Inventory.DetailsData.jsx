@@ -8,7 +8,7 @@ import CardStacked from "../../../components/cards/Components.Card.Stacked";
 import CardDetails from "../../../components/cards/Components.Card.Details";
 import InventoryHeader from "../../../components/page/Components.Page.Inventory.Header";
 
-function InventoryDetailsData({ endpoint }) {
+function InventoryDetailsData({ endpoint, overview = false }) {
   const { endpointDetails } = useContext(AppContext);
 
   if (!endpointDetails[endpoint]) {
@@ -63,7 +63,7 @@ function InventoryDetailsData({ endpoint }) {
 
   return (
     <div className="flex flex-col">
-      <InventoryHeader paths={[]} method={"GET"} />
+      {!overview && <InventoryHeader paths={[]} method={"GET"} />}
 
       <div className="grid grid-cols-3 gap-7 w-full py-2">
         {/* <BarGraph bare={true} /> */}

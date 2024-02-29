@@ -29,9 +29,16 @@ export function ContentBar({
   });
 
   const GetList = () => {
+    console.log(dummyOas);
+
+    const setEndpoint = (ep) => {
+      console.log("set selected endpoint", ep);
+      setSelectedEndpoint(ep);
+    };
+
     return Object.entries(dummyOas.paths).map(([path, methods]) => {
-      console.log(path)
       const isOpen = openPaths[path];
+
       return (
         <div key={path}>
           <div
@@ -62,13 +69,26 @@ export function ContentBar({
                 <div
                   key={path + "/__" + method}
                   className={`flex flex-row justify-between items-center py-1.5 px-4 pl-8 listItemLink ${
-                    ("/"+selectedEndpoint) == path + "/__" + method && "mainDark"
+                    "/" +
+                      selectedEndpoint
+                        .replace("%7B", "{")
+                        .replace("%7D", "}") ==
+                      path + "/__" + method && "mainDark"
                   }`}
-                  onClick={() => setSelectedEndpoint((path).substring(1) + "/__" + method)}
+                  onClick={() =>
+                    setEndpoint(
+                      (
+                        path.replace("{", "%7B").replace("}", "%7D") +
+                        "/__" +
+                        method
+                      ).substring(1)
+                    )
+                  }
                 >
                   <span
                     className={`text-xs ${
-                      ("/"+selectedEndpoint) == path + "/__" + method && "blue-color"
+                      "/" + selectedEndpoint == path + "/__" + method &&
+                      "blue-color"
                     }`}
                   >
                     {path}
