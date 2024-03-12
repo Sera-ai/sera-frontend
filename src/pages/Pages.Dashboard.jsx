@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AppContext } from "../provider/Provider.State";
 
 import AnamalyList from "../components/custom/Custom.AnamalyList";
 import Banner from "./global/Global.Banner";
@@ -9,6 +10,8 @@ import GitHubContributionsGraph from "../components/cards/Components.Card.Contri
 import CardTraffic from "../components/cards/Components.Card.Traffic";
 
 function Dashboard() {
+  const { uptimeDetails, anamalyListData } = useContext(AppContext);
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [title, setTitle] = useState("Dashboard");
   return (
@@ -20,9 +23,9 @@ function Dashboard() {
     >
       <div className="py-4 px-7 w-full h-full overflow-y-auto">
         <div className="grid grid-cols-3 gap-7">
-          <CardUptime />
+          <CardUptime data={uptimeDetails[0]} />
           <CardTraffic />
-          <AnamalyList bare={false} />
+          <AnamalyList bare={false} anamalyListData={anamalyListData[0]} />
           <CardLatency />
           <GitHubContributionsGraph />
           {/* <BarGraph bare={false} />

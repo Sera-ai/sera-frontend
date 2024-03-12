@@ -1,10 +1,5 @@
-import React, {
-  forwardRef,
-  useImperativeHandle,
-  useState,
-  useEffect,
-} from "react";
-import Editor, { useMonaco, loader } from "@monaco-editor/react";
+import React, { useState, useEffect } from "react";
+import Editor, { useMonaco } from "@monaco-editor/react";
 
 const JsonViewerFull = ({
   oas,
@@ -13,70 +8,47 @@ const JsonViewerFull = ({
   updateField = () => {},
 }) => {
   const monaco = useMonaco();
-
-  const [state, setState] = React.useState(oas);
   const [editor, setEditor] = useState(null);
-  const [readOnlyLines, setReadOnlyLines] = useState(lines); // Example: Make line 1 read-only. Adjust this as needed.
+  const [readOnlyLines, setReadOnlyLines] = useState(lines);
+  const externalDataRef = React.useRef(oas);
+
+  useEffect(() => {
+    externalDataRef.current = oas; // Update the ref to the new external data
+    if (editor) {
+      // Check if the current editor content is different from the new external data to avoid unnecessary updates
+      const currentContent = editor.getValue();
+      if (currentContent !== oas) {
+        const position = editor.getPosition(); // Save the current cursor position
+        editor.setValue(oas); // Update the editor's content
+        editor.setPosition(position); // Restore the cursor position
+      }
+    }
+  }, [oas, editor]);
 
   useEffect(() => {
     if (monaco && editor) {
-      const model = editor.getModel();
-      const checkErrors = () => {
-        // Get all the markers (errors, warnings, etc.) for the current model
-        const markers = monaco.editor.getModelMarkers({ resource: model.uri });
-        // Check if there's any marker with severity of Error
-      };
-
-      const js = oas; // Format the JSON string with indentation
-      editor.setValue(js);
-
-      // Check for errors initially
-      checkErrors();
-
-      // Listen for marker changes
-      monaco.editor.onDidChangeMarkers((uris) => {
-        if (uris.some((uri) => uri.toString() === model.uri.toString())) {
-          checkErrors();
-        }
-      });
-
-
       const handleModelContentChange = (event) => {
-        let shouldUpdateField = true;
-        event.changes.forEach((change) => {
-          const { range } = change;
-          readOnlyLines.forEach((line) => {
-            if (range.startLineNumber <= line && range.endLineNumber >= line) {
-              editor.getModel().undo();
-              shouldUpdateField = false; // Do not update field if change is reverted
-            }
-          });
-        });
-
-        // Call updateField with the new value if changes are not reverted
-        if (shouldUpdateField) {
-          const newValue = editor.getValue();
-          updateField(newValue);
+        // Since we're directly manipulating the editor instance, we rely on its internal state and events
+        const newValue = editor.getValue();
+        if (newValue !== externalDataRef.current) {
+          updateField(newValue); // Call updateField only if the change is user-initiated
         }
       };
 
       editor.onDidChangeModelContent(handleModelContentChange);
 
-
       return () => {
-        // Dispose listener when the component unmounts or when the editor/model changes
-        monaco.editor.onDidChangeMarkers(() => {});
-
+        editor.onDidChangeModelContent(() => {});
       };
     }
-  }, [monaco, editor, oas]);
+  }, [monaco, editor, updateField]);
+
 
   return (
-    <div className={"w-full max-w-full overflow-hidden"}>
-      {/* {state} */}
+    <div className={"w-full max-w-full overflow-hidden"} >
       <Editor
         defaultLanguage="javascript"
-        defaultValue={state}
+        defaultValue={oas}
         options={{
           cursorStyle: "line",
           formatOnPaste: false,

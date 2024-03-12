@@ -9,7 +9,7 @@ import { AppContext } from "../../provider/Provider.State";
 
 function Header({ sidebarOpen, setSidebarOpen, transparent, title }) {
   const [searchModalOpen, setSearchModalOpen] = useState(false);
-  const { console, setConsole } = useContext(AppContext);
+  const { console } = useContext(AppContext);
 
   return (
     <header
@@ -24,52 +24,51 @@ function Header({ sidebarOpen, setSidebarOpen, transparent, title }) {
       </div>
 
       <div className="flex items-center">
-          <button
-            id="searchBar"
-            className={`px-6 py-1 flex items-center space-x-3 justify-center bg-slate-100 hover:bg-slate-200 secondaryDark dark:hover:bg-slate-600/80 rounded-md ml-3 ${
-              searchModalOpen && "bg-slate-200"
-            }`}
-            onClick={(e) => {
-              e.stopPropagation();
-              setSearchModalOpen(true);
-            }}
-            aria-controls="search-modal"
+        <button
+          id="searchBar"
+          className={`px-6 py-1 flex items-center space-x-3 justify-center bg-slate-100 hover:bg-slate-200 secondaryDark dark:hover:bg-slate-600/80 rounded-md ml-3 ${
+            searchModalOpen && "bg-slate-200"
+          }`}
+          onClick={(e) => {
+            e.stopPropagation();
+            setSearchModalOpen(true);
+          }}
+          aria-controls="search-modal"
+        >
+          <svg
+            className="w-4 h-4"
+            viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <svg
-              className="w-4 h-4"
-              viewBox="0 0 16 16"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                className="fill-current text-slate-500 dark:text-slate-400"
-                d="M7 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zM7 2C4.243 2 2 4.243 2 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z"
-              />
-              <path
-                className="fill-current text-slate-400 dark:text-slate-500"
-                d="M15.707 14.293L13.314 11.9a8.019 8.019 0 01-1.414 1.414l2.393 2.393a.997.997 0 001.414 0 .999.999 0 000-1.414z"
-              />
-            </svg>
-            <span className="text-xs">Search Sera Workspace</span>
-          </button>
-          <SearchModal
-            id="search-modal"
-            searchId="search"
-            modalOpen={searchModalOpen}
-            setModalOpen={setSearchModalOpen}
-          />
-        </div>
+            <path
+              className="fill-current text-slate-500 dark:text-slate-400"
+              d="M7 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zM7 2C4.243 2 2 4.243 2 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z"
+            />
+            <path
+              className="fill-current text-slate-400 dark:text-slate-500"
+              d="M15.707 14.293L13.314 11.9a8.019 8.019 0 01-1.414 1.414l2.393 2.393a.997.997 0 001.414 0 .999.999 0 000-1.414z"
+            />
+          </svg>
+          <span className="text-xs">Search Sera Workspace</span>
+        </button>
+        <SearchModal
+          id="search-modal"
+          searchId="search"
+          modalOpen={searchModalOpen}
+          setModalOpen={setSearchModalOpen}
+        />
+      </div>
 
       {/* Header: Right side */}
       <div className="flex items-center space-x-3">
-        
         <hr className="w-px h-6 bg-slate-200 secondaryDark border-none" />
         <div
           style={{
             borderRadius: 50,
-            backgroundColor: console ? "#191A21" : "#23232E",
+            backgroundColor: console[0] ? "#191A21" : "#23232E",
             padding: 10,
           }}
-          onClick={() => setConsole(!console)}
+          onClick={() => console[1](!console[0])}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -16,13 +16,19 @@ function EditorViewer() {
     "https://api.example.com",
   ]);
 
-  const { dummyOas } = useContext(AppContext);
-  const [oas, setOas] = useState(dummyOas);
+  const { dummyOas, apiInventory } = useContext(AppContext);
+  const [oas, setOas] = useState(dummyOas[0]);
 
   const SelectedPage = () => {
     switch (selectedTab) {
       case 0:
-        return <HostFullList setFilter={setFilter} filter={filter} />;
+        return (
+          <HostFullList
+            setFilter={setFilter}
+            filter={filter}
+            apiInventory={apiInventory[0]}
+          />
+        );
       case 1:
         return <ImportData />;
       case 2:

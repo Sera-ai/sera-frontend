@@ -9,9 +9,9 @@ import CardDetails from "../../../components/cards/Components.Card.Details";
 import InventoryHeader from "../../../components/page/Components.Page.Inventory.Header";
 
 function InventoryDetailsData({ endpoint, overview = false }) {
-  const { endpointDetails } = useContext(AppContext);
+  const { endpointDetails, uptimeDetails } = useContext(AppContext);
 
-  if (!endpointDetails[endpoint]) {
+  if (!endpointDetails[0][endpoint]) {
     return;
   }
 
@@ -67,13 +67,13 @@ function InventoryDetailsData({ endpoint, overview = false }) {
 
       <div className="grid grid-cols-3 gap-7 w-full py-2">
         {/* <BarGraph bare={true} /> */}
-        <CardUptime />
-        <CardDetails />
+        <CardUptime data={uptimeDetails[0]} />
+        <CardDetails endpointDetails={endpointDetails[0]} />
 
-        <CardUptime />
+        <CardUptime data={uptimeDetails[0]} />
         <CardStacked />
 
-        <CardUptime />
+        <CardUptime data={uptimeDetails[0]} />
         <CardTraffic />
         {/* <BarGraph bare={false} />
           <InventoryFullList filter={""} /> */}

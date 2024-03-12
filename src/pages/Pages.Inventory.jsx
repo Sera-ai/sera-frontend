@@ -10,7 +10,7 @@ function Inventory() {
   const { dummyOas } = useContext(AppContext);
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [oas, setOas] = useState(dummyOas);
+  const [oas, setOas] = useState(dummyOas[0]);
 
   return (
     <MainContent

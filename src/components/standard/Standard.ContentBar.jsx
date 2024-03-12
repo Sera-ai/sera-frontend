@@ -11,7 +11,7 @@ export function ContentBar({
   const { endpointDetails, dummyOas } = useContext(AppContext);
   const [openPaths, setOpenPaths] = useState({}); // State to track open paths
 
-  if (!endpointDetails[endpoint]) {
+  if (!endpointDetails[0][endpoint]) {
     return <div>No endpoint details available.</div>;
   }
 
@@ -36,7 +36,7 @@ export function ContentBar({
       setSelectedEndpoint(ep);
     };
 
-    return Object.entries(dummyOas.paths).map(([path, methods]) => {
+    return Object.entries(dummyOas[0].paths).map(([path, methods]) => {
       const isOpen = openPaths[path];
 
       return (

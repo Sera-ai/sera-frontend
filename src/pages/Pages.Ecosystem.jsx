@@ -196,7 +196,7 @@ function Ecosystem() {
 
   const { endpointDetails } = useContext(AppContext);
 
-  if (!endpointDetails[endpoint]) {
+  if (!endpointDetails[0][endpoint]) {
     return;
   }
 
@@ -409,7 +409,7 @@ function Ecosystem() {
                         {/* Table body */}
                         <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
                           {Object.keys(
-                            endpointDetails[endpoint]["details"]
+                            endpointDetails[0][endpoint]["details"]
                           ).map((obj, index) => (
                             <React.Fragment key={index}>
                               {/* Rows related to each endpoint under the host */}
@@ -429,12 +429,12 @@ function Ecosystem() {
                                   <div className="flex flex-wrap gap-2">
                                     <div className="text-slate-800 text-xs dark:text-slate-100 flex flex-wrap">
                                       {tableData(
-                                        endpointDetails[endpoint]["details"][
+                                        endpointDetails[0][endpoint]["details"][
                                           obj
                                         ],
                                         index,
                                         Object.keys(
-                                          endpointDetails[endpoint]["details"]
+                                          endpointDetails[0][endpoint]["details"]
                                         ).length
                                       )}
                                     </div>
@@ -476,7 +476,7 @@ function Ecosystem() {
                         {/* Table body */}
                         <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
                           {Object.keys(
-                            endpointDetails[endpoint]["statistics"]
+                            endpointDetails[0][endpoint]["statistics"]
                           ).map((obj, index) => (
                             <tr
                               key={index}
@@ -496,7 +496,7 @@ function Ecosystem() {
                                 <div className="flex flex-wrap gap-2">
                                   <div className="text-slate-800 text-xs dark:text-slate-100 flex flex-wrap">
                                     {
-                                      endpointDetails[endpoint]["statistics"][
+                                      endpointDetails[0][endpoint]["statistics"][
                                         obj
                                       ]
                                     }

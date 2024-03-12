@@ -46,7 +46,7 @@ const Details = ({ incidentId = "test" }) => {
         }
     }
 
-    if (!incidentDetails[incidentId]) {
+    if (!incidentDetails[0][incidentId]) {
         return
     }
 
@@ -69,7 +69,7 @@ const Details = ({ incidentId = "test" }) => {
                     </thead>
                     {/* Table body */}
                     <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
-                        {Object.keys(incidentDetails[incidentId]["details"]).map((obj, index) => (
+                        {Object.keys(incidentDetails[0][incidentId]["details"]).map((obj, index) => (
                             <React.Fragment key={index}>
                                 {/* Rows related to each endpoint under the host */}
                                 <tr className="rowItem noborder">
@@ -82,7 +82,7 @@ const Details = ({ incidentId = "test" }) => {
 
                                     <td className="p-1">
                                         <div className="flex flex-wrap gap-2">
-                                            <div className="text-slate-800 text-xs dark:text-slate-100 flex flex-wrap">{tableData(incidentDetails[incidentId]["details"][obj], index, Object.keys(incidentDetails[incidentId]["details"]).length)}</div>
+                                            <div className="text-slate-800 text-xs dark:text-slate-100 flex flex-wrap">{tableData(incidentDetails[0][incidentId]["details"][obj], index, Object.keys(incidentDetails[0][incidentId]["details"]).length)}</div>
                                         </div>
                                     </td>
                                 </tr>
@@ -109,7 +109,7 @@ const Details = ({ incidentId = "test" }) => {
                     </thead>
                     {/* Table body */}
                     <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
-                        {Object.keys(incidentDetails[incidentId]["statistics"]).map((obj, index) => (
+                        {Object.keys(incidentDetails[0][incidentId]["statistics"]).map((obj, index) => (
                             <tr key={index} className=" rowItem noborder">
                                 <td className="pr-3">
                                     <div className="flex flex-col">
@@ -118,7 +118,7 @@ const Details = ({ incidentId = "test" }) => {
                                 </td>
                                 <td className="p-1">
                                     <div className="flex flex-wrap gap-2">
-                                        <div className="text-slate-800 text-xs dark:text-slate-100 flex flex-wrap">{incidentDetails[incidentId]["statistics"][obj]}</div>
+                                        <div className="text-slate-800 text-xs dark:text-slate-100 flex flex-wrap">{incidentDetails[0][incidentId]["statistics"][obj]}</div>
                                     </div>
                                 </td>
                             </tr>

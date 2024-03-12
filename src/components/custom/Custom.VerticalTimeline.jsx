@@ -1,13 +1,10 @@
-import React, { useState, useContext, Link } from "react";
+import React, { useState } from "react";
 import { Chrono } from "react-chrono";
 import JsonViewer from "../../pages/subpages/issues/partials/Partials.Issues.JsonViewer";
 import JsonDiff from "../../pages/subpages/issues/partials/Partials.Issues.JsonDiff";
-import { AppContext } from "../../provider/Provider.State";
 import { BetterExternalLinkIcon } from "../standard/Standard.Icons";
 
-const VerticalTimeline = ({ incidentId = "test" }) => {
-  const { incidentDetails } = useContext(AppContext);
-
+const VerticalTimeline = ({ incidentId = "test", incidentDetails }) => {
   if (!incidentDetails[incidentId]?.eventLog) {
     return;
   }

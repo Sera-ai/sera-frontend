@@ -1,22 +1,26 @@
 import React, { useState, useContext } from "react";
 import VerticalTimeline from "../../../components/custom/Custom.VerticalTimeline";
+import { incidentDetails } from "../../../provider/Provider.Data";
+import { AppContext } from "../../../provider/Provider.State";
 
 const ReportDetails = ({ incidentId = "test" }) => {
+  const { incidentDetails } = useContext(AppContext);
+
   return (
     <div className="flex flex-col flex-grow overflow-x-auto">
-      <EventItem />
-      <EventItem />
-      <EventItem />
-      <EventItem />
-      <EventItem />
-      <EventItem />
+      <EventItem incidentDetails={incidentDetails[0]} incidentId={incidentId} />
+      <EventItem incidentDetails={incidentDetails[0]} incidentId={incidentId} />
+      <EventItem incidentDetails={incidentDetails[0]} incidentId={incidentId} />
+      <EventItem incidentDetails={incidentDetails[0]} incidentId={incidentId} />
+      <EventItem incidentDetails={incidentDetails[0]} incidentId={incidentId} />
+      <EventItem incidentDetails={incidentDetails[0]} incidentId={incidentId} />
     </div>
   );
 };
 
 export default ReportDetails;
 
-const EventItem = () => {
+const EventItem = ({ incidentDetails, incidentId }) => {
   const [open, setOpen] = useState(true);
   const method = "POST";
   return (
@@ -46,7 +50,7 @@ const EventItem = () => {
             />
           </svg>
           <span>
-            ISU014 -{" "}
+            {incidentId} -{" "}
             <span
               className={`inline-flex items-center px-1.5 py-0.5 text-xs text-white rounded ${method}-color ${method}-bg-color`}
             >
@@ -58,7 +62,7 @@ const EventItem = () => {
       </div>
       {open && (
         <div className="pl-8">
-          <VerticalTimeline />
+          <VerticalTimeline incidentDetails={incidentDetails} />
         </div>
       )}
     </div>

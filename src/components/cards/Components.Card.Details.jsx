@@ -1,10 +1,9 @@
-import { NavLink } from "react-router-dom";
-import React, { useContext } from "react";
-import { AppContext } from "../../provider/Provider.State";
+import React from "react";
 
-const CardDetails = ({ endpoint = "inventory/api.sample.com/pets/__post" }) => {
-  const { endpointDetails } = useContext(AppContext);
-
+const CardDetails = ({
+  endpoint = "inventory/api.sample.com/pets/__post",
+  endpointDetails,
+}) => {
   if (!endpointDetails[endpoint]) {
     return;
   }

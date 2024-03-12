@@ -1,9 +1,6 @@
-import React, { useState, useContext } from "react";
-import { AppContext } from "../../provider/Provider.State";
+import React, { useState } from "react";
 
-function InventoryFullList({ filter }) {
-  const { inventoryInventory } = useContext(AppContext);
-
+function InventoryFullList({ filter, inventoryInventory }) {
   const filteredData = inventoryInventory.filter((inventory) => {
     return (
       inventory.endpoint.endpoint

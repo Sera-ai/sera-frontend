@@ -67,7 +67,7 @@ function InventoryEntry({ oas, setOas, tier = 1 }) {
       <div className={"flex flex-row mainDark gap-1 h-full"}>
         {nestedVisible <= tier && (
           <ListSidebar
-            inventory={inventoryInventory}
+            inventory={inventoryInventory[0]}
             selectedHost={selectedHost}
             setSelectedHost={setSelectedHost}
           />

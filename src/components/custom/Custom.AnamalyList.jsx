@@ -1,10 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
-import { AppContext } from "../../provider/Provider.State";
+import React, { useState } from "react";
 import { FilterIcon, WarningIcon } from "../standard/Standard.Icons";
 
-function AnamalyList({ bare = false, full = false }) {
+function AnamalyList({ bare = false, full = false, anamalyListData }) {
   const [filter, setFilter] = useState("");
-  const { anamalyListData } = useContext(AppContext);
 
   const filteredData = anamalyListData.filter(
     (channel) =>

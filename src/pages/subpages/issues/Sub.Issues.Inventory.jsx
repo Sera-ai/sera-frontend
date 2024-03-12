@@ -10,7 +10,7 @@ function Inventory() {
   const { issueInventory } = useContext(AppContext);
 
   const existingColumns =
-    issueInventory.length > 0 ? Object.keys(issueInventory[0]) : [];
+    issueInventory[0].length > 0 ? Object.keys(issueInventory[0][0]) : [];
 
   const [selectedItems, setSelectedItems] = useState({});
   const selectAllRef = useRef(null);
@@ -24,8 +24,6 @@ function Inventory() {
     "builderId",
     "issueId",
   ];
-
-  console.log(issueInventory);
 
   return (
     <Header
@@ -44,7 +42,7 @@ function Inventory() {
         filter={filter}
         setFilter={setFilter}
         columns={columns}
-        data={issueInventory}
+        data={issueInventory[0]}
         linkClasses={linkClasses}
         selectedItems={selectedItems}
         setSelectedItems={setSelectedItems}

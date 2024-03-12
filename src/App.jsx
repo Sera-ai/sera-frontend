@@ -41,7 +41,7 @@ function App() {
           <Route path="/builder/*" element={<Builder />} />
         </Routes>
       </div>
-      {console && (
+      {console[0] && (
         <div className="overflow-y-scroll console-scroll" style={{ minHeight: 250 }}>
           <Console />
         </div>

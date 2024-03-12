@@ -10,6 +10,7 @@ function EditorEntry() {
   const [filter, setFilter] = useState("");
   const [columns, setColumns] = useState([]);
   const [tabs, setTabs] = useState(["Manage", "Import"]);
+  const {apiInventory} = useContext(AppContext)
 
   const SelectedPage = () => {
     switch (selectedTab) {
@@ -21,7 +22,7 @@ function EditorEntry() {
             setColumns={setColumns}
             columns={columns}
           >
-            <HostFullList setFilter={setFilter} filter={filter} />
+            <HostFullList setFilter={setFilter} filter={filter} apiInventory={apiInventory[0]} />
           </HeaderWrapper>
         );
       case 1:

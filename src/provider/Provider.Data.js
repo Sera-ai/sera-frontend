@@ -61,3 +61,8 @@ export async function apiInventory() {
     const apiInventory = await getDataTemplate('apiInventory')
     return apiInventory
 }
+
+export async function uptimeDetails() {
+    const uptimeDemoData = await getDataTemplate('uptimeDemoData')
+    return uptimeDemoData
+}

@@ -10,7 +10,7 @@ function Viewer() {
 
     <div className="flex w-full h-screen h-full">
       {/* Cards */}
-      <JsonViewerFull oas={dummyOas} />
+      <JsonViewerFull oas={dummyOas[0]} />
     </div>
 
   );
