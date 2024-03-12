@@ -25,7 +25,7 @@ export default defineConfig({
       },
       {
         find: "@builder",
-        replacement: path.resolve(__dirname, "./src/builder/src"),
+        replacement: path.resolve(__dirname, "./src/fe_Builder/src"),
       },
     ],
   },
