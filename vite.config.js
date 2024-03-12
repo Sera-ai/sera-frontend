@@ -26,10 +26,13 @@ export default defineConfig({
       {
         find: "@builder",
         replacement: path.resolve(__dirname, "./src/fe_Builder/src"),
+<<<<<<< HEAD
       },
       {
         find: "@sea",
         replacement: path.resolve(__dirname, "./src/fe_Sea/app"),
+=======
+>>>>>>> c355e4449bed78b3d2dee4e443ede8969e2dfc9b
       },
     ],
   },
