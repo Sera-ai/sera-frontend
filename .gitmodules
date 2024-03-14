@@ -1,4 +1,7 @@
 [submodule "src/builder"]
-	path = src/builder
+	path = addons/fe_Builder
 	url = https://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@github.com/Sera-ai/fe_Builder.git
 	branch = main
+[submodule "src/Sea"]
+	path = addons/fe_Sea
+	url = https://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@github.com/Sera-ai/fe_Sea.git

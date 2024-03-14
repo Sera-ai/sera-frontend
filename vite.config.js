@@ -25,7 +25,11 @@ export default defineConfig({
       },
       {
         find: "@builder",
-        replacement: path.resolve(__dirname, "./src/builder/src"),
+        replacement: path.resolve(__dirname, "./addons/fe_Builder/src"),
+      },
+      {
+        find: "@sea",
+        replacement: path.resolve(__dirname, "./addons/fe_Sea/src"),
       },
     ],
   },
