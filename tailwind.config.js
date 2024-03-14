@@ -1,4 +1,5 @@
 const plugin = require("tailwindcss/plugin");
+const { sizes } = require('./addons/fe_Sea/src/constants/sizes.constant');
 
 module.exports = {
   content: [
@@ -25,6 +26,12 @@ module.exports = {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
       },
+      padding: {
+        nodePadding: sizes.nodePadding,
+      },
+      height: {
+        nodeContentHeight: sizes.nodeContentHeight,
+      },
       fontSize: {
         xs: ["0.75rem", { lineHeight: "1.5" }],
         sm: ["0.875rem", { lineHeight: "1.5715" }],
@@ -50,10 +57,22 @@ module.exports = {
         60: "15rem",
         72: "18rem",
         80: "20rem",
+        arrayNodeSize: sizes.arrayNodeSize,
+        nodeMinWidth: sizes.nodeMinWidth,
+        nodeDetailPanelWidth: sizes.nodeDetailPanelWidth,
       },
       maxWidth: {
         "8xl": "88rem",
         "9xl": "96rem",
+        arrayNodeSize: sizes.arrayNodeSize,
+        nodeMaxWidth: sizes.nodeMaxWidth,
+        nodeDetailPanelWidth: sizes.nodeDetailPanelWidth,
+      },
+      minHeight: {
+        arrayNodeSize: sizes.arrayNodeSize,
+      },
+      maxHeight: {
+        arrayNodeSize: sizes.arrayNodeSize,
       },
       zIndex: {
         60: "60",
