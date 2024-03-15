@@ -6,6 +6,7 @@ const HeaderTabs = ({
   selectedTab,
   setSelectedTab,
   subBar = false,
+  buttons = null,
   tier,
 }) => {
   return (
@@ -21,7 +22,8 @@ const HeaderTabs = ({
           <span>{tab}</span>
         </div>
       ))}
-      <div className="flex flex-grow justify-end items-center pr-4">
+      <div className="flex flex-grow justify-end items-center pr-4 gap-2">
+        {buttons}
         <ExpandButton tier={tier} />
       </div>
     </div>

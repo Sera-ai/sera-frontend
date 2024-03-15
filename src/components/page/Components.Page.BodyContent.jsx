@@ -8,6 +8,7 @@ function BodyContent({
   tabs,
   children,
   mainDark = false,
+  buttons = null,
   tier = 1,
 }) {
   const { nestedVisible } = useContext(AppContext);
@@ -23,6 +24,7 @@ function BodyContent({
           selectedTab={selectedTab}
           setSelectedTab={setSelectedTab}
           tier={tier}
+          buttons={buttons}
         />
       )}
       <div

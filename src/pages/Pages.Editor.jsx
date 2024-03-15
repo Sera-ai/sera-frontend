@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
 
 import EditorEntry from "./subpages/editor/Sub.Editor.Entry";
-import EditorViewer from "./subpages/editor/Sub.Editor.Viewer";
 import MainContent from "../components/page/Components.Page.MainContent";
-import SeaMap from "@sea/App";
+import EditorVisual from "./subpages/editor/Sub.Editor.Visual";
+import { AppContext } from "../provider/Provider.State";
 
 function Editor() {
+  const { dummyOas } = useContext(AppContext);
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
-  const [title, setTitle] = useState("Inventory");
+  const [title, setTitle] = useState("Editor");
+
+  const [oas, setOas] = useState(dummyOas[0]);
 
   useEffect(() => {
     setIsPopup(window.opener != null);
@@ -26,7 +30,7 @@ function Editor() {
         <Route index element={<EditorEntry />} />
         <Route
           path=":host/*"
-          element={<SeaMap oas={{}} setOas={() => {}} />}
+          element={<EditorVisual oas={oas} setOas={setOas} />}
         />
 
         {/* You can add more subroutes here if needed */}
