@@ -145,14 +145,14 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
             </li>
             <li
               className={`sidebarItem rounded-sm mb-0.5 last:mb-0 flex items-center justify-center ${
-                pathname.includes("issues") && "secondaryDarkPadded"
+                pathname.includes("events") && "secondaryDarkPadded"
               }`}
             >
               <NavLink
                 end
-                to="/issues"
+                to="/events"
                 className={`block text-slate-200 truncate transition duration-150 ${
-                  pathname.includes("issues")
+                  pathname.includes("events")
                     ? "hover:text-slate-200"
                     : "hover:text-white"
                 }`}
@@ -175,7 +175,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
                   <path
                     d="M2 12L10 9L18 12"
                     stroke={
-                      pathname.includes("issues") ? "#2B84EC" : "#FFFFFF50"
+                      pathname.includes("events") ? "#2B84EC" : "#FFFFFF50"
                     }
                     strokeLinecap="round"
                     strokeLinejoin="round"

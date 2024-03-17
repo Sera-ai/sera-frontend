@@ -7,10 +7,10 @@ import Table from "../../../components/standard/Standard.Table";
 function Inventory() {
   const [filter, setFilter] = useState("");
   const [columns, setColumns] = useState([]);
-  const { issueInventory } = useContext(AppContext);
+  const { eventInventory } = useContext(AppContext);
 
   const existingColumns =
-    issueInventory[0].length > 0 ? Object.keys(issueInventory[0][0]) : [];
+    eventInventory[0].length > 0 ? Object.keys(eventInventory[0][0]) : [];
 
   const [selectedItems, setSelectedItems] = useState({});
   const selectAllRef = useRef(null);
@@ -22,14 +22,14 @@ function Inventory() {
     "seraHost",
     "seraEndpoint",
     "builderId",
-    "issueId",
+    "eventId",
   ];
 
   return (
     <Header
-      title={"Issue Inventory"}
+      title={"Event Inventory"}
       subtitle={
-        "Below is an inventory list of any issues that have not been resolved"
+        "Below is an inventory list of any events that have not been resolved"
       }
       filter={filter}
       setFilter={setFilter}
@@ -42,7 +42,7 @@ function Inventory() {
         filter={filter}
         setFilter={setFilter}
         columns={columns}
-        data={issueInventory[0]}
+        data={eventInventory[0]}
         linkClasses={linkClasses}
         selectedItems={selectedItems}
         setSelectedItems={setSelectedItems}

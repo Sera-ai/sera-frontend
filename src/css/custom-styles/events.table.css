@@ -1,4 +1,4 @@
-.issuesTable th {
+.eventsTable th {
     font-size: 12px;
     text-align: left;
     font-weight: 600;
@@ -9,7 +9,7 @@
 
 }
 
-.issuesTable td {
+.eventsTable td {
     font-size: 12px;
     text-align: left;
     font-weight: 200;
@@ -18,22 +18,22 @@
     white-space: nowrap;
 }
 
-.issuesTable thead>tr {
+.eventsTable thead>tr {
     border-bottom-width: 1px;
     border-bottom-color: #2B84EC;
 }
 
-.issuesTable tr {
+.eventsTable tr {
     border-bottom-width: 1px;
     border-bottom-color: #ffffff30;
 }
 
-.issuesTable td {
+.eventsTable td {
     padding-top: 2px;
     padding-bottom: 2px;
 }
 
-.issuesTable input[type*="checkbox"] {
+.eventsTable input[type*="checkbox"] {
     border-radius: 3px;
     transition: background-color 0.3s;
     border: 1px solid #ffffff50;
@@ -45,25 +45,25 @@
 
 }
 
-.issuesTable input[type*="checkbox"]:checked {
+.eventsTable input[type*="checkbox"]:checked {
     background-color: #007bff;
     /* Blue background for checked state */
     border-color: #007bff;
     /* Blue border to match the background */
 }
 
-.issuesTable input[type*="checkbox"]:focus {
+.eventsTable input[type*="checkbox"]:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
     /* Optional: add a focus ring */
 }
 
-.issuesTable .linkeable {
+.eventsTable .linkeable {
     color: #4b9eff;
     cursor: pointer;
 }
 
-.issuesTable .highlight {
+.eventsTable .highlight {
     background-color: #55483e;
     border-radius: 3px;
 }

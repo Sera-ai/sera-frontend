@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Inventory from "./Sub.Issues.Inventory";
-import Report from "./Sub.Issues.Report";
+import Inventory from "./Sub.Events.Inventory";
+import Report from "./Sub.Events.Report";
 import BodyContent from "../../../components/page/Components.Page.BodyContent";
 
-function IssuesEntry() {
+function EventsEntry() {
   const [selectedTab, setSelectedTab] = useState(0); // default selected tab
-  const [tabs, setTabs] = useState(["Inventory", "Report"]);
+  const [tabs, setTabs] = useState(["Events", "Report"]);
 
   const SelectedPage = () => {
     switch (selectedTab) {
@@ -27,4 +27,4 @@ function IssuesEntry() {
   );
 }
 
-export default IssuesEntry;
+export default EventsEntry;

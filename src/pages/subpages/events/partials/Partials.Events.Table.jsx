@@ -5,7 +5,7 @@ import React, { useState, useEffect, useRef } from 'react';
 const Table = ({ filter, columns, data }) => {
     const [selectedItems, setSelectedItems] = useState({});
     const selectAllRef = useRef(null);
-    const linkClasses = ['host', 'endpoint', 'userIp', 'seraHost', 'seraEndpoint', 'builderId', 'issueId']
+    const linkClasses = ['host', 'endpoint', 'userIp', 'seraHost', 'seraEndpoint', 'builderId', 'eventId']
 
     useEffect(() => {
         if (selectAllRef.current) {
@@ -70,7 +70,7 @@ const Table = ({ filter, columns, data }) => {
 
     return (
         <div className="overflow-auto h-full pt-4">
-            <table className={"issuesTable w-full"}>
+            <table className={"eventsTable w-full"}>
                 <thead>
                     <tr>
                         <th className='pl-8'>

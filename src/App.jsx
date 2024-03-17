@@ -8,7 +8,7 @@ import { AppContext } from "./provider/Provider.State";
 // Import pages
 import Dashboard from "./pages/Pages.Dashboard";
 import Inventory from "./pages/Pages.Inventory";
-import Issues from "./pages/Pages.Issues";
+import Events from "./pages/Pages.Events";
 import Ecosystem from "./pages/Pages.Ecosystem";
 import Console from "./pages/subpages/console/sub.console";
 import Editor from "./pages/Pages.Editor";
@@ -29,7 +29,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Inventory />} />
           <Route path="inventory/*" element={<Inventory />} />
-          <Route path="/issues/*" element={<Issues />} />
+          <Route path="/events/*" element={<Events />} />
           <Route path="/editor/*" element={<Editor />} />
           <Route path="/ecosystem/*" element={<Ecosystem />} />
           <Route path="/builder/*" element={<Builder />} />

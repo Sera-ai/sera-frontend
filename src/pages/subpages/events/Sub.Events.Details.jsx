@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Details from "./partials/Partials.Issues.Details";
-import VerticalTimeline from "./Sub.Issues.Report.Details";
+import Details from "./partials/Partials.Events.Details";
+import VerticalTimeline from "./Sub.Events.Report.Details";
 
-function IssueReportDetails() {
+function EventReportDetails() {
   return (
     <div className=" w-full" style={{ minHeight: "500px" }}>
       <div className="col-span-full mainDark shadow-lg rounded-lg border border-slate-200 dark:border-slate-700">
@@ -26,7 +26,7 @@ function IssueReportDetails() {
   );
 }
 
-export default IssueReportDetails;
+export default EventReportDetails;
 
 function Header({}) {
   return (
@@ -37,7 +37,7 @@ function Header({}) {
             <span
               className={`inline-flex items-center px-1.5 py-0.5 text-xs text-white rounded DELETE-color DELETE-bg-color`}
             >
-              Issue
+              Event
             </span>
             <span className={"ml-2 dark:text-slate-100"}>SAPI-0010</span>
             <span className={"ml-2"}>api.platform.io/api/fetchData</span>
@@ -72,7 +72,7 @@ function Header({}) {
                 strokeLinejoin="round"
               />
             </svg>
-            <span className="hidden xs:block ml-2">Resolve Issue</span>
+            <span className="hidden xs:block ml-2">Resolve Event</span>
           </button>
         </div>
       </div>

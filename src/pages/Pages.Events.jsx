@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
 
-import IssueReportDetails from "./subpages/issues/Sub.Issues.Details";
-import Viewer from "./subpages/issues/Sub.Issues.Viewer";
-import IssuesEntry from "./subpages/issues/Sub.Issues.Entry";
+import EventReportDetails from "./subpages/events/Sub.Events.Details";
+import Viewer from "./subpages/events/Sub.Events.Viewer";
+import EventsEntry from "./subpages/events/Sub.Events.Entry";
 import MainContent from "../components/page/Components.Page.MainContent";
 
-function Issues() {
+function Events() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
-  const [title, setTitle] = useState("Issues");
+  const [title, setTitle] = useState("Events");
 
   useEffect(() => {
     setIsPopup(window.opener != null);
@@ -23,13 +23,13 @@ function Issues() {
       title={title}
     >
       <Routes>
-        <Route index element={<IssuesEntry />} />
-        <Route path="viewer/:issueId" element={<Viewer />} />
-        <Route path=":issueId/*" element={<IssueReportDetails />} />
+        <Route index element={<EventsEntry />} />
+        <Route path="viewer/:eventId" element={<Viewer />} />
+        <Route path=":eventId/*" element={<EventReportDetails />} />
       </Routes>
       <Outlet />
     </MainContent>
   );
 }
 
-export default Issues;
+export default Events;

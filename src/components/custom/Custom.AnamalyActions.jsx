@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function AnamalyActions({ issueActions }) {
+function AnamalyActions({ eventActions }) {
   const getIcon = (type) => {
     switch (type) {
       case "Detected":
@@ -36,11 +36,11 @@ function AnamalyActions({ issueActions }) {
     }
   };
 
-  issueActions.map((issue) => {
+  eventActions.map((event) => {
     return (
       <li className="flex px-2">
         <div className="w-9 h-9 rounded-full shrink-0 bg-rose-500 my-2 mr-3">
-          {getIcon(issue.type)}
+          {getIcon(event.type)}
         </div>
         <div className="grow flex items-center border-b border-slate-100 dark:border-slate-700 text-sm py-2">
           <div className="grow flex justify-between">
@@ -49,16 +49,16 @@ function AnamalyActions({ issueActions }) {
                 className="font-medium text-slate-800 hover:text-slate-900 dark:text-slate-100 dark:hover:text-white"
                 href="#0"
               >
-                {issue.type}
+                {event.type}
               </a>{" "}
-              <Link className={"underline"} to={issue.issueId}>
-                {issue.issueId}
+              <Link className={"underline"} to={event.eventId}>
+                {event.eventId}
               </Link>{" "}
-              - {issue.desc} {issue.issueSlug}
+              - {event.desc} {event.eventSlug}
             </div>
             <div className="shrink-0 self-start ml-2">
               <span className="font-medium text-slate-800 dark:text-slate-100">
-                {issue.ts}
+                {event.ts}
               </span>
             </div>
           </div>
@@ -79,11 +79,11 @@ function AnamalyActions({ issueActions }) {
         {/* "Today" group */}
         <div>
           <ul className="my-1">
-            {issueActions.map((issue) => {
+            {eventActions.map((event) => {
               return (
                 <li className="flex px-2">
                   <div className="w-9 h-9 rounded-full shrink-0 bg-rose-500 my-2 mr-3">
-                    {getIcon(issue.type)}
+                    {getIcon(event.type)}
                   </div>
                   <div className="grow flex items-center border-b border-slate-100 dark:border-slate-700 text-sm py-2">
                     <div className="grow flex justify-between">
@@ -92,16 +92,16 @@ function AnamalyActions({ issueActions }) {
                           className="font-medium text-slate-800 hover:text-slate-900 dark:text-slate-100 dark:hover:text-white"
                           href="#0"
                         >
-                          {issue.type}
+                          {event.type}
                         </a>{" "}
-                        <Link className={"underline"} to={issue.issueId}>
-                          {issue.issueId}
+                        <Link className={"underline"} to={event.eventId}>
+                          {event.eventId}
                         </Link>{" "}
-                        - {issue.desc} {issue.slug}
+                        - {event.desc} {event.slug}
                       </div>
                       <div className="shrink-0 self-start ml-2">
                         <span className="font-medium text-slate-800 dark:text-slate-100">
-                          {issue.ts}
+                          {event.ts}
                         </span>
                       </div>
                     </div>

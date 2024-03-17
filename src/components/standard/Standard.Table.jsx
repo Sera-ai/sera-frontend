@@ -70,7 +70,7 @@ const Table = ({ filter, columns, data, linkClasses,selectedItems, setSelectedIt
 
     return (
         <div className="overflow-auto h-full pt-4">
-            <table className={"issuesTable w-full"}>
+            <table className={"eventsTable w-full"}>
                 <thead>
                     <tr>
                         <th className='pl-8'>

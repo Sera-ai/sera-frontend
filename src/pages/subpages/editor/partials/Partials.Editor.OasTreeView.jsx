@@ -96,7 +96,7 @@ const EditorOasTreeView = ({ oas, filter }) => {
 
   return (
     <div className="overflow-auto h-full pt-4">
-      <table className={"issuesTable w-full"}>
+      <table className={"eventsTable w-full"}>
         {/* Table header */}
         <thead>
           <tr>

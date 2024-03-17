@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Chrono } from "react-chrono";
-import JsonViewer from "../../pages/subpages/issues/partials/Partials.Issues.JsonViewer";
-import JsonDiff from "../../pages/subpages/issues/partials/Partials.Issues.JsonDiff";
+import JsonViewer from "../../pages/subpages/events/partials/Partials.Events.JsonViewer";
+import JsonDiff from "../../pages/subpages/events/partials/Partials.Events.JsonDiff";
 import { BetterExternalLinkIcon } from "../standard/Standard.Icons";
 
 const VerticalTimeline = ({ incidentId = "test", incidentDetails }) => {
@@ -314,7 +314,7 @@ const eventPlugin = (item) => {
           <div className="flex  w-full p-2">
             <p className={"text-sm text-slate-100"}>
               Header Check is a robust and efficient plugin designed to
-              streamline the process of diagnosing and identifying issues within
+              streamline the process of diagnosing and identifying events within
               the headers of API responses. This tool is indispensable for
               developers and QA engineers who regularly interact with APIs and
               need to ensure the integrity and correctness of response headers.
@@ -447,7 +447,7 @@ const GetArrayItems = (items) => {
 
 const openPopup = () => {
   const popupWindow = window.open(
-    "/issues/viewer/test",
+    "/events/viewer/test",
     "Popup",
     "width=600,height=400,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=no"
   );

@@ -7,10 +7,10 @@ export const AppContext = createContext();
 // Provider Component
 export const AppStateProvider = ({ children }) => {
   const stateKeysDefaults = {
-    issueListChart: {},
-    issueInventory: [],
+    eventListChart: {},
+    eventInventory: [],
     anamalyListData: [],
-    issueActions: [],
+    eventActions: [],
     inventoryInventory: [],
     availablePlugins: {},
     monthlyAnalytics: {},

@@ -1,14 +1,14 @@
 import databaseQuery from './Provider.Database'
 import getDataTemplate from './Provider.Demodata'
 
-export async function issueActions() {
-    const issueActions = await getDataTemplate('issueActions')
-    return issueActions
+export async function eventActions() {
+    const eventActions = await getDataTemplate('eventActions')
+    return eventActions
 }
 
-export async function issueListChart() {
-    const issueListChart = await getDataTemplate('issueListChart')
-    return issueListChart
+export async function eventListChart() {
+    const eventListChart = await getDataTemplate('eventListChart')
+    return eventListChart
 }
 
 export async function anamalyListData() {
@@ -16,9 +16,9 @@ export async function anamalyListData() {
     return anamalyListData
 }
 
-export async function issueInventory() {
-    const issueInventory = await getDataTemplate('issueInventory')
-    return issueInventory
+export async function eventInventory() {
+    const eventInventory = await getDataTemplate('eventInventory')
+    return eventInventory
 }
 
 export async function inventoryInventory() {

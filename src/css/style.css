@@ -18,8 +18,8 @@
 @import "custom-styles/catalog.css";
 @import "custom-styles/details.css";
 @import "custom-styles/mdxeditor.css";
-@import "custom-styles/issues.timeline.css";
-@import "custom-styles/issues.table.css";
+@import "custom-styles/events.timeline.css";
+@import "custom-styles/events.table.css";
 @import "custom-styles/ecosystem.info.css";
 @import "custom-styles/global.custom.css";
 @import "custom-styles/console.console.css";
