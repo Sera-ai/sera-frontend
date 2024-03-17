@@ -65,7 +65,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
         {/* Pages group */}
         <div>
           <ul className="sidebarList">
-            {/* Inbox */}
+            {/* Inbox 
             <li
               className={`sidebarItem rounded-sm mb-0.5 last:mb-0 flex items-center justify-center ${
                 (pathname === "/" || pathname.includes("dashboard")) &&
@@ -110,17 +110,17 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
                   />
                 </svg>
               </NavLink>
-            </li>
+            </li>*/}
             <li
               className={`sidebarItem sidebarEndItem rounded-sm mb-0.5 last:mb-0 flex items-center justify-center ${
-                pathname.includes("inventory") && "secondaryDarkPadded"
+                (pathname === "/" ||pathname.includes("inventory")) && "secondaryDarkPadded"
               }`}
             >
               <NavLink
                 end
                 to="/inventory"
                 className={`block text-slate-200 truncate transition duration-150 ${
-                  pathname.includes("inventory")
+                  (pathname === "/" ||pathname.includes("inventory"))
                     ? "hover:text-slate-200"
                     : "hover:text-white"
                 }`}
@@ -135,7 +135,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
                   <path
                     d="M5 10L1 8V3L5 1L9 3M5 10L9 8M5 10V15L9 17L13 15V10M9 8V3M9 8L13 10M9 3L13 1L17 3V8L13 10"
                     stroke={
-                      pathname.includes("inventory") ? "#2B84EC" : "#FFFFFF50"
+                      (pathname === "/" ||pathname.includes("inventory")) ? "#2B84EC" : "#FFFFFF50"
                     }
                     strokeLinecap="round"
                     strokeLinejoin="round"

@@ -87,8 +87,6 @@ function Header({ sidebarOpen, setSidebarOpen, transparent, title }) {
         <Help align="right" />
 
         {/*  Divider */}
-        <hr className="w-px h-6 bg-slate-200 secondaryDark border-none" />
-        <UserMenu align="right" />
       </div>
     </header>
   );
