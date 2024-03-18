@@ -80,7 +80,7 @@ function useMultiplePersistedStates(keysDefaults) {
 function usePersistedState(key, defaultValue) {
   const [state, setState] = useState(() => {
     const persistedValue = localStorage.getItem(key);
-    return persistedValue ? JSON.parse(persistedValue) : defaultValue;
+    return (persistedValue && persistedValue != "undefined") ? JSON.parse(persistedValue) : defaultValue;
   });
 
   useEffect(() => {

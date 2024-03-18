@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import Editor, { useMonaco } from "@monaco-editor/react";
 
 const JsonViewerFull = ({
-  oas,
+  oas = "",
   lines = [1],
   main = false,
   updateField = () => {},
+  editable = true,
+  height = 270,
 }) => {
   const monaco = useMonaco();
   const [editor, setEditor] = useState(null);
@@ -43,9 +45,8 @@ const JsonViewerFull = ({
     }
   }, [monaco, editor, updateField]);
 
-
   return (
-    <div className={"w-full max-w-full overflow-hidden"} >
+    <div style={{ height, maxHeight: 500 }}>
       <Editor
         defaultLanguage="javascript"
         defaultValue={oas}
@@ -72,6 +73,10 @@ const JsonViewerFull = ({
           monaco.editor.setTheme("custom-dark");
           setTimeout(function () {
             editor.getAction("editor.action.formatDocument").run();
+            !editable &&
+              setTimeout(function () {
+                editor.updateOptions({ readOnly: true });
+              }, 300);
           }, 300);
         }}
       />
