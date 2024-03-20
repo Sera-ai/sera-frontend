@@ -49,8 +49,8 @@ export default defineConfig({
     include: [
       // Add specific dependencies from your addons here
       // For example, if "@builder/utils" and "@sea/core" are dependencies within your projects, you'd list them like so:
-      '@builder/App',
-      '@sea/App',
+      // '@builder/App',
+      // '@sea/App',
       // You might need to add actual package names as used within those projects
     ]
   }
