@@ -434,7 +434,9 @@ function Ecosystem() {
                                         ],
                                         index,
                                         Object.keys(
-                                          endpointDetails[0][endpoint]["details"]
+                                          endpointDetails[0][endpoint][
+                                            "details"
+                                          ]
                                         ).length
                                       )}
                                     </div>
@@ -496,9 +498,9 @@ function Ecosystem() {
                                 <div className="flex flex-wrap gap-2">
                                   <div className="text-slate-800 text-xs dark:text-slate-100 flex flex-wrap">
                                     {
-                                      endpointDetails[0][endpoint]["statistics"][
-                                        obj
-                                      ]
+                                      endpointDetails[0][endpoint][
+                                        "statistics"
+                                      ][obj]
                                     }
                                   </div>
                                 </div>
@@ -522,7 +524,7 @@ function Ecosystem() {
             right: 0,
             bottom: 0,
             left: 0,
-            zIndex: -2,
+            zIndex: 0,
           }}
         >
           {starfieldRef.current}

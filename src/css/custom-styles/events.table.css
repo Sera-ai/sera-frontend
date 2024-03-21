@@ -28,12 +28,21 @@
     border-bottom-color: #ffffff30;
 }
 
-.eventsTable td {
+.regularPad td {
     padding-top: 2px;
     padding-bottom: 2px;
 }
 
-.eventsTable input[type*="checkbox"] {
+.largerPad td {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+.eventsTable .checkbox {
+    background-color: #121212;
+}
+
+.eventsTable .checkbox input[type*="checkbox"] {
     border-radius: 3px;
     transition: background-color 0.3s;
     border: 1px solid #ffffff50;
@@ -45,14 +54,14 @@
 
 }
 
-.eventsTable input[type*="checkbox"]:checked {
+.eventsTable .checkbox input[type*="checkbox"]:checked {
     background-color: #007bff;
     /* Blue background for checked state */
     border-color: #007bff;
     /* Blue border to match the background */
 }
 
-.eventsTable input[type*="checkbox"]:focus {
+.eventsTable .checkbox input[type*="checkbox"]:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
     /* Optional: add a focus ring */

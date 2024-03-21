@@ -534,7 +534,7 @@ const jsonFile = {
   ],
   eventInventory: [
     {
-      eventId: "ISSUE-123",
+      eventId: "EVT-123",
       host: "api.service.company.com",
       endpoint: "/v1/data",
       eventType: "Latency",
@@ -555,7 +555,7 @@ const jsonFile = {
       endpointUniqueClients: 75,
     },
     {
-      eventId: "ISSUE-456",
+      eventId: "EVT-456",
       host: "auth.service.company.com",
       endpoint: "/v1/authenticate",
       eventType: "Error Rate",
@@ -576,7 +576,7 @@ const jsonFile = {
       endpointUniqueClients: 50,
     },
     {
-      eventId: "ISSUE-789",
+      eventId: "EVT-789",
       host: "user.management.company.com",
       endpoint: "/v2/users",
       eventType: "Downtime",
@@ -597,7 +597,7 @@ const jsonFile = {
       endpointUniqueClients: 40,
     },
     {
-      eventId: "ISSUE-1011",
+      eventId: "EVT-1011",
       host: "data.processing.company.com",
       endpoint: "/v3/process",
       eventType: "Overload",
@@ -618,7 +618,7 @@ const jsonFile = {
       endpointUniqueClients: 60,
     },
     {
-      eventId: "ISSUE-1314",
+      eventId: "EVT-1314",
       host: "notification.service.company.com",
       endpoint: "/v1/alert",
       eventType: "Response Delay",
@@ -639,7 +639,7 @@ const jsonFile = {
       endpointUniqueClients: 55,
     },
     {
-      eventId: "ISSUE-1516",
+      eventId: "EVT-1516",
       host: "payment.gateway.company.com",
       endpoint: "/v1/transactions",
       eventType: "Security Breach",
@@ -660,7 +660,7 @@ const jsonFile = {
       endpointUniqueClients: 25,
     },
     {
-      eventId: "ISSUE-1718",
+      eventId: "EVT-1718",
       host: "cloud.storage.company.com",
       endpoint: "/v4/files",
       eventType: "Capacity Limit",
@@ -681,7 +681,7 @@ const jsonFile = {
       endpointUniqueClients: 70,
     },
     {
-      eventId: "ISSUE-1920",
+      eventId: "EVT-1920",
       host: "file.upload.company.com",
       endpoint: "/v2/upload",
       eventType: "Timeout",
@@ -702,7 +702,7 @@ const jsonFile = {
       endpointUniqueClients: 35,
     },
     {
-      eventId: "ISSUE-2122",
+      eventId: "EVT-2122",
       host: "streaming.media.company.com",
       endpoint: "/v3/stream",
       eventType: "High Latency",
@@ -723,7 +723,7 @@ const jsonFile = {
       endpointUniqueClients: 80,
     },
     {
-      eventId: "ISSUE-2324",
+      eventId: "EVT-2324",
       host: "reporting.service.company.com",
       endpoint: "/v1/reports",
       eventType: "Data Inconsistency",
@@ -744,7 +744,7 @@ const jsonFile = {
       endpointUniqueClients: 45,
     },
     {
-      eventId: "ISSUE-2526",
+      eventId: "EVT-2526",
       host: "inventory.management.company.com",
       endpoint: "/v2/items",
       eventType: "System Crash",
@@ -765,7 +765,7 @@ const jsonFile = {
       endpointUniqueClients: 20,
     },
     {
-      eventId: "ISSUE-2728",
+      eventId: "EVT-2728",
       host: "analytics.service.company.com",
       endpoint: "/v3/data",
       eventType: "Query Failure",
@@ -786,7 +786,7 @@ const jsonFile = {
       endpointUniqueClients: 55,
     },
     {
-      eventId: "ISSUE-1920",
+      eventId: "EVT-1920",
       host: "file.upload.company.com",
       endpoint: "/v2/upload",
       eventType: "Timeout",
@@ -807,7 +807,7 @@ const jsonFile = {
       endpointUniqueClients: 35,
     },
     {
-      eventId: "ISSUE-2122",
+      eventId: "EVT-2122",
       host: "streaming.media.company.com",
       endpoint: "/v3/stream",
       eventType: "High Latency",
@@ -828,7 +828,7 @@ const jsonFile = {
       endpointUniqueClients: 80,
     },
     {
-      eventId: "ISSUE-2324",
+      eventId: "EVT-2324",
       host: "reporting.service.company.com",
       endpoint: "/v1/reports",
       eventType: "Data Inconsistency",
@@ -849,7 +849,7 @@ const jsonFile = {
       endpointUniqueClients: 45,
     },
     {
-      eventId: "ISSUE-2526",
+      eventId: "EVT-2526",
       host: "inventory.management.company.com",
       endpoint: "/v2/items",
       eventType: "System Crash",
@@ -870,7 +870,7 @@ const jsonFile = {
       endpointUniqueClients: 20,
     },
     {
-      eventId: "ISSUE-2728",
+      eventId: "EVT-2728",
       host: "analytics.service.company.com",
       endpoint: "/v3/data",
       eventType: "Query Failure",
@@ -891,7 +891,7 @@ const jsonFile = {
       endpointUniqueClients: 55,
     },
     {
-      eventId: "ISSUE-1920",
+      eventId: "EVT-1920",
       host: "file.upload.company.com",
       endpoint: "/v2/upload",
       eventType: "Timeout",
@@ -912,7 +912,7 @@ const jsonFile = {
       endpointUniqueClients: 35,
     },
     {
-      eventId: "ISSUE-2122",
+      eventId: "EVT-2122",
       host: "streaming.media.company.com",
       endpoint: "/v3/stream",
       eventType: "High Latency",
@@ -933,7 +933,7 @@ const jsonFile = {
       endpointUniqueClients: 80,
     },
     {
-      eventId: "ISSUE-2324",
+      eventId: "EVT-2324",
       host: "reporting.service.company.com",
       endpoint: "/v1/reports",
       eventType: "Data Inconsistency",
@@ -954,7 +954,7 @@ const jsonFile = {
       endpointUniqueClients: 45,
     },
     {
-      eventId: "ISSUE-2526",
+      eventId: "EVT-2526",
       host: "inventory.management.company.com",
       endpoint: "/v2/items",
       eventType: "System Crash",
@@ -975,7 +975,7 @@ const jsonFile = {
       endpointUniqueClients: 20,
     },
     {
-      eventId: "ISSUE-2728",
+      eventId: "EVT-2728",
       host: "analytics.service.company.com",
       endpoint: "/v3/data",
       eventType: "Query Failure",
@@ -996,7 +996,7 @@ const jsonFile = {
       endpointUniqueClients: 55,
     },
     {
-      eventId: "ISSUE-1920",
+      eventId: "EVT-1920",
       host: "file.upload.company.com",
       endpoint: "/v2/upload",
       eventType: "Timeout",
@@ -1017,7 +1017,7 @@ const jsonFile = {
       endpointUniqueClients: 35,
     },
     {
-      eventId: "ISSUE-2122",
+      eventId: "EVT-2122",
       host: "streaming.media.company.com",
       endpoint: "/v3/stream",
       eventType: "High Latency",
@@ -1038,7 +1038,7 @@ const jsonFile = {
       endpointUniqueClients: 80,
     },
     {
-      eventId: "ISSUE-2324",
+      eventId: "EVT-2324",
       host: "reporting.service.company.com",
       endpoint: "/v1/reports",
       eventType: "Data Inconsistency",
@@ -1059,7 +1059,7 @@ const jsonFile = {
       endpointUniqueClients: 45,
     },
     {
-      eventId: "ISSUE-2526",
+      eventId: "EVT-2526",
       host: "inventory.management.company.com",
       endpoint: "/v2/items",
       eventType: "System Crash",
@@ -1080,7 +1080,7 @@ const jsonFile = {
       endpointUniqueClients: 20,
     },
     {
-      eventId: "ISSUE-2728",
+      eventId: "EVT-2728",
       host: "analytics.service.company.com",
       endpoint: "/v3/data",
       eventType: "Query Failure",
@@ -1101,7 +1101,7 @@ const jsonFile = {
       endpointUniqueClients: 55,
     },
     {
-      eventId: "ISSUE-1920",
+      eventId: "EVT-1920",
       host: "file.upload.company.com",
       endpoint: "/v2/upload",
       eventType: "Timeout",
@@ -1122,7 +1122,7 @@ const jsonFile = {
       endpointUniqueClients: 35,
     },
     {
-      eventId: "ISSUE-2122",
+      eventId: "EVT-2122",
       host: "streaming.media.company.com",
       endpoint: "/v3/stream",
       eventType: "High Latency",
@@ -1143,7 +1143,7 @@ const jsonFile = {
       endpointUniqueClients: 80,
     },
     {
-      eventId: "ISSUE-2324",
+      eventId: "EVT-2324",
       host: "reporting.service.company.com",
       endpoint: "/v1/reports",
       eventType: "Data Inconsistency",
@@ -1164,7 +1164,7 @@ const jsonFile = {
       endpointUniqueClients: 45,
     },
     {
-      eventId: "ISSUE-2526",
+      eventId: "EVT-2526",
       host: "inventory.management.company.com",
       endpoint: "/v2/items",
       eventType: "System Crash",
@@ -1185,7 +1185,7 @@ const jsonFile = {
       endpointUniqueClients: 20,
     },
     {
-      eventId: "ISSUE-2728",
+      eventId: "EVT-2728",
       host: "analytics.service.company.com",
       endpoint: "/v3/data",
       eventType: "Query Failure",
@@ -1206,7 +1206,7 @@ const jsonFile = {
       endpointUniqueClients: 55,
     },
     {
-      eventId: "ISSUE-1920",
+      eventId: "EVT-1920",
       host: "file.upload.company.com",
       endpoint: "/v2/upload",
       eventType: "Timeout",
@@ -1227,7 +1227,7 @@ const jsonFile = {
       endpointUniqueClients: 35,
     },
     {
-      eventId: "ISSUE-2122",
+      eventId: "EVT-2122",
       host: "streaming.media.company.com",
       endpoint: "/v3/stream",
       eventType: "High Latency",
@@ -1248,7 +1248,7 @@ const jsonFile = {
       endpointUniqueClients: 80,
     },
     {
-      eventId: "ISSUE-2324",
+      eventId: "EVT-2324",
       host: "reporting.service.company.com",
       endpoint: "/v1/reports",
       eventType: "Data Inconsistency",
@@ -1269,7 +1269,7 @@ const jsonFile = {
       endpointUniqueClients: 45,
     },
     {
-      eventId: "ISSUE-2526",
+      eventId: "EVT-2526",
       host: "inventory.management.company.com",
       endpoint: "/v2/items",
       eventType: "System Crash",
@@ -1290,7 +1290,7 @@ const jsonFile = {
       endpointUniqueClients: 20,
     },
     {
-      eventId: "ISSUE-2728",
+      eventId: "EVT-2728",
       host: "analytics.service.company.com",
       endpoint: "/v3/data",
       eventType: "Query Failure",
@@ -1311,7 +1311,7 @@ const jsonFile = {
       endpointUniqueClients: 55,
     },
     {
-      eventId: "ISSUE-1920",
+      eventId: "EVT-1920",
       host: "file.upload.company.com",
       endpoint: "/v2/upload",
       eventType: "Timeout",
@@ -1332,7 +1332,7 @@ const jsonFile = {
       endpointUniqueClients: 35,
     },
     {
-      eventId: "ISSUE-2122",
+      eventId: "EVT-2122",
       host: "streaming.media.company.com",
       endpoint: "/v3/stream",
       eventType: "High Latency",
@@ -1353,7 +1353,7 @@ const jsonFile = {
       endpointUniqueClients: 80,
     },
     {
-      eventId: "ISSUE-2324",
+      eventId: "EVT-2324",
       host: "reporting.service.company.com",
       endpoint: "/v1/reports",
       eventType: "Data Inconsistency",
@@ -1374,7 +1374,7 @@ const jsonFile = {
       endpointUniqueClients: 45,
     },
     {
-      eventId: "ISSUE-2526",
+      eventId: "EVT-2526",
       host: "inventory.management.company.com",
       endpoint: "/v2/items",
       eventType: "System Crash",
@@ -1395,7 +1395,7 @@ const jsonFile = {
       endpointUniqueClients: 20,
     },
     {
-      eventId: "ISSUE-2728",
+      eventId: "EVT-2728",
       host: "analytics.service.company.com",
       endpoint: "/v3/data",
       eventType: "Query Failure",
@@ -1786,4 +1786,31 @@ const jsonFile = {
       100, 100, 75, 96, 100, 100, 100, 0, 100, 100, 100,
     ],
   },
+  workbookInventory: [
+    {
+      name: "Default Sera Workbook",
+      type: "Sera Event",
+      trigger: "Automatic",
+      lastUpdated: "2023-11-23T11:45:00Z",
+      active: true,
+    },{
+      name: "Default Custom Workbook",
+      type: "Custom Event",
+      trigger: "Automatic",
+      lastUpdated: "2023-11-23T11:45:00Z",
+      active: true,
+    },{
+      name: "Default Builder Workbook",
+      type: "Builder Event",
+      trigger: "Automatic",
+      lastUpdated: "2023-11-23T11:45:00Z",
+      active: true,
+    },{
+      name: "Default Trigger Workbook",
+      type: "Trigger Event",
+      trigger: "Automatic",
+      lastUpdated: "2023-11-23T11:45:00Z",
+      active: true,
+    },
+  ],
 };

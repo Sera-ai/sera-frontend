@@ -1,15 +1,15 @@
 import { defineConfig } from "vite";
 import postcss from "./postcss.config.js";
 import react from "@vitejs/plugin-react";
-import path from 'path'; // Import the path module
-import fs from 'fs'
+import path from "path"; // Import the path module
+import fs from "fs";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   define: {
     __BE_ROUTER_PORT__: JSON.stringify(process.env.BE_ROUTER_PORT),
     global: {},
-    process: {env: {TEST_SSR: false}}
+    process: { env: { TEST_SSR: false } },
   },
   css: {
     postcss,
@@ -31,6 +31,10 @@ export default defineConfig({
         find: "@sea",
         replacement: path.resolve(__dirname, "./addons/fe_Sea/src"),
       },
+      {
+        find: "@timeline",
+        replacement: path.resolve(__dirname, "./addons/fe_Timeline/src"),
+      },
     ],
   },
   build: {
@@ -41,9 +45,9 @@ export default defineConfig({
   server: {
     port: process.env.FE_CATALOG_PORT,
     https: {
-      key: fs.readFileSync(path.resolve(__dirname, './certs/localhost.key')),
-      cert: fs.readFileSync(path.resolve(__dirname, './certs/localhost.crt'))
-    }
+      key: fs.readFileSync(path.resolve(__dirname, "./certs/localhost.key")),
+      cert: fs.readFileSync(path.resolve(__dirname, "./certs/localhost.crt")),
+    },
   },
   optimizeDeps: {
     include: [
@@ -52,6 +56,6 @@ export default defineConfig({
       // '@builder/App',
       // '@sea/App',
       // You might need to add actual package names as used within those projects
-    ]
-  }
+    ],
+  },
 });

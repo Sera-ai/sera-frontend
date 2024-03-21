@@ -5,30 +5,27 @@ import Header from "../../../components/custom/Custom.Header.Title";
 import Table from "../../../components/standard/Standard.Table";
 import Timeline from "@timeline/App";
 
-function Inventory() {
+function Workbooks() {
   const [filter, setFilter] = useState("");
   const [columns, setColumns] = useState([]);
-  const { eventInventory } = useContext(AppContext);
+  const { workbookInventory } = useContext(AppContext);
 
   const existingColumns =
-    eventInventory[0].length > 0 ? Object.keys(eventInventory[0][0]) : [];
+    workbookInventory.length > 0 ? Object.keys(workbookInventory[0][0]) : [];
+
+  console.log(existingColumns);
+  console.log(workbookInventory[0]);
 
   const [selectedItems, setSelectedItems] = useState({});
   const selectAllRef = useRef(null);
 
   const linkClasses = [
-    "host",
-    "endpoint",
-    "userIp",
-    "seraHost",
-    "seraEndpoint",
-    "builderId",
-    "eventId",
+    "name",
   ];
 
   return (
     <Header
-      title={"Event Inventory"}
+      title={"Event Workbooks"}
       subtitle={
         "Below is an inventory list of any events that have not been resolved"
       }
@@ -39,14 +36,13 @@ function Inventory() {
       columns={columns}
       tier={2}
     >
-      <div className={"w-full"} style={{ height: 600}}>
-        <Timeline filter={filter} />
-      </div>
       <Table
+        padded={true}
+        allowSelect={false}
         filter={filter}
         setFilter={setFilter}
         columns={columns}
-        data={eventInventory[0]}
+        data={workbookInventory[0]}
         linkClasses={linkClasses}
         selectedItems={selectedItems}
         setSelectedItems={setSelectedItems}
@@ -56,4 +52,4 @@ function Inventory() {
   );
 }
 
-export default Inventory;
+export default Workbooks;

@@ -21,6 +21,7 @@ export const AppStateProvider = ({ children }) => {
     console: false,
     apiInventory: [],
     uptimeDetails: {},
+    workbookInventory: []
   };
 
   // Use custom hook to initialize all states with persistence
