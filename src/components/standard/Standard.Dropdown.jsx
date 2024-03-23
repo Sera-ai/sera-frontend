@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const Dropdown = ({ selector, children }) => {
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+const Dropdown = ({ selector, children, defaultOpen = false }) => {
+  const [isDropdownVisible, setIsDropdownVisible] = useState(defaultOpen);
 
   const toggleDropdown = () => {
     setIsDropdownVisible(!isDropdownVisible);

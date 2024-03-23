@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ToggleSwitch from "./Standard.Toggle";
 
 const Table = ({
   filter,
   columns,
   data,
+  raw = false,
   linkClasses,
   selectedItems,
   setSelectedItems,
@@ -13,6 +15,7 @@ const Table = ({
   padded = false,
 }) => {
   const navigate = useNavigate();
+  const [expandedGroups, setExpandedGroups] = useState({});
 
   useEffect(() => {
     if (selectAllRef.current) {
@@ -23,6 +26,81 @@ const Table = ({
         selectedIds.length > 0 && selectedIds.length < allIds.length;
     }
   }, [selectedItems, columns]);
+
+  // Method to handle expanding/collapsing groups
+  const toggleGroup = (groupName) => {
+    setExpandedGroups((prev) => ({
+      ...prev,
+      [groupName]: !prev[groupName],
+    }));
+  };
+
+  // Function to dynamically determine the key to group by
+  const getGroupingKey = (data) => {
+    if (!Array.isArray(data) || data.length === 0) {
+      return "";
+    }
+    // Assume the first key of the first object is the key we want to group by
+    const firstObjKeys = Object.keys(data[0]);
+    return firstObjKeys.length > 0 ? firstObjKeys[0] : "";
+  };
+
+  // Modified to dynamically group data based on the first key of the object
+  const getGroupedData = () => {
+    const groupingKey = getGroupingKey(data);
+    if (!groupingKey) {
+      return null; // or some fallback UI/behavior
+    }
+
+    const grouped = data.reduce((acc, item) => {
+      const groupName = item[groupingKey];
+      (acc[groupName] = acc[groupName] || []).push(item);
+      return acc;
+    }, {});
+
+    return Object.entries(grouped).map(
+      ([groupName, groupItems], groupIndex) => {
+        // Check if the group has more than one item to decide whether to enable toggle functionality
+        const isGroupToggleEnabled = groupItems.length > 1;
+
+        return (
+          <React.Fragment key={groupName}>
+            {isGroupToggleEnabled && (
+              <tr
+                onClick={() => isGroupToggleEnabled && toggleGroup(groupName)}
+                style={{ cursor: isGroupToggleEnabled ? "pointer" : "default" }}
+              >
+                <td
+                  colSpan={columns.length + (allowSelect ? 1 : 0)}
+                  className="group-header pl-4"
+                >
+                  {groupName} ({groupItems.length})
+                </td>
+              </tr>
+            )}
+            {expandedGroups[groupName] || !isGroupToggleEnabled
+              ? groupItems.map((item, index) => (
+                  <tr key={`${groupName}-${index}`}>
+                    {/* Your existing row rendering logic here, using getRows(item) */}
+                    {allowSelect && (
+                      <td className="pl-8">
+                        <input
+                          type="checkbox"
+                          className="checkbox"
+                          checked={!!selectedItems[index]}
+                          onChange={() => handleSelectItem(index)}
+                        />
+                      </td>
+                    )}
+                    {getRows(item)}
+                  </tr>
+                ))
+              : null}
+          </React.Fragment>
+        );
+      }
+    );
+  };
 
   const handleSelectAll = (event) => {
     const newSelectedItems = event.target.checked
@@ -79,7 +157,9 @@ const Table = ({
     return Object.keys(item).map((key, int) => {
       const cellContent = parseType(item[key]);
       const directCell =
-        typeof item[key] == "boolean" || typeof item[key] == "object";
+        typeof item[key] == "boolean" ||
+        typeof item[key] == "object" ||
+        typeof cellContent != "string";
       const highlightedContent = highlightMatch(directCell ? "" : cellContent);
       return (
         <td
@@ -88,7 +168,7 @@ const Table = ({
         >
           {directCell ? (
             // Render the content directly as text when directCell is true.
-            <span className="hi">{cellContent}</span>
+            <span>{cellContent}</span>
           ) : (
             // Use dangerouslySetInnerHTML when directCell is false, but ensure it is used wisely.
             <span
@@ -103,7 +183,9 @@ const Table = ({
   const allItemsSelected = Object.keys(selectedItems).length === data.length;
 
   return (
-    <div className={`overflow-auto h-full ${!padded ? `mt-4` : "mt-1"}`}>
+    <div
+      className={`overflow-auto w-full h-full ${!padded ? `mt-4` : raw ? "" : "mt-1"}`}
+    >
       <table
         className={`eventsTable ${padded ? "largerPad" : "regularPad"} w-full`}
       >
@@ -124,23 +206,7 @@ const Table = ({
             {/* ... all other headers */}
           </tr>
         </thead>
-        <tbody>
-          {filteredData.map((item, index) => (
-            <tr key={index}>
-              {allowSelect && (
-                <td className="pl-8">
-                  <input
-                    type="checkbox"
-                    className="checkbox"
-                    checked={!!selectedItems[index]}
-                    onChange={() => handleSelectItem(index)}
-                  />
-                </td>
-              )}
-              {getRows(item)}
-            </tr>
-          ))}
-        </tbody>
+        <tbody>{getGroupedData()}</tbody>
       </table>
     </div>
   );
@@ -163,28 +229,18 @@ function camelCaseToTitle(camelCase) {
 function parseType(data) {
   switch (typeof data) {
     case "string":
-      return data;
+      const regex = /\[([^\]]+)\]\(([^)]+)\)/;
+
+      if (regex.test(data)) {
+        const matches = data.match(regex);
+        return <a href={matches[2]}>{matches[1]}</a>;
+      } else {
+        return data;
+      }
     case "number":
-      return data.toString();
+      return data.toLocaleString();
     case "boolean":
-      return (
-        <input
-          className="mr-2 mt-[0.3rem] h-3.5 w-8 appearance-none rounded-[0.4375rem] bg-neutral-300 before:pointer-events-none before:absolute before:h-3.5 before:w-3.5 before:rounded-full before:bg-transparent before:content-[''] 
-          after:absolute after:z-[2] after:-mt-[0.275rem] after:-ml-[0.275rem] after:h-5 after:w-5 after:rounded-full 
-          after:border-none after:bg-neutral-100 after:shadow-[0_0px_3px_0_rgb(0_0_0_/_7%),_0_2px_2px_0_rgb(0_0_0_/_4%)] 
-          after:transition-[background-color_0.2s,transform_0.2s] after:content-[''] checked:bg-primary checked:after:absolute checked:after:z-[2] 
-          checked:after:-mt-[0.275rem] checked:after:ml-[1.0625rem] checked:after:h-5 checked:after:w-5 checked:after:rounded-full checked:after:border-none 
-          checked:after:bg-primary checked:bg-primary dark:checked:bg-primary checked:after:shadow-[0_3px_1px_-2px_rgba(0,0,0,0.2),_0_2px_2px_0_rgba(0,0,0,0.14),_0_1px_5px_0_rgba(0,0,0,0.12)] checked:after:transition-[background-color_0.2s,transform_0.2s] 
-          checked:after:content-[''] hover:cursor-pointer focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[3px_-1px_0px_13px_rgba(0,0,0,0.6)] 
-          focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-5 focus:after:w-5 focus:after:rounded-full focus:after:content-[''] 
-          checked:focus:border-primary checked:focus:bg-primary checked:focus:before:ml-[1.0625rem] checked:focus:before:scale-100 checked:focus:before:shadow-[3px_-1px_0px_13px_#3b71ca] 
-          checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:bg-primary dark:after:bg-neutral-400 dark:checked:bg-primary 
-          dark:checked:after:bg-primary dark:focus:before:shadow-[3px_-1px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:before:shadow-[3px_-1px_0px_13px_#3b71ca]"
-          type="checkbox"
-          role="switch"
-          id="flexSwitchCheckDefault"
-        />
-      );
+      return <ToggleSwitch full={false} />;
     case "object":
       return isArray(data) ? "array" : "object";
   }

@@ -27,7 +27,6 @@ function Events() {
         <Route index element={<EventsEntry />} />
         <Route path="viewer/:eventId" element={<Viewer />} />
         <Route path="workbook/:workbookId" element={<Playbook />} />
-        <Route path=":eventId/*" element={<EventReportDetails />} />
       </Routes>
       <Outlet />
     </MainContent>

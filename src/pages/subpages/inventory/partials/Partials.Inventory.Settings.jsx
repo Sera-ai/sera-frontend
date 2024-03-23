@@ -4,7 +4,7 @@ import ToggleSwitch from "../../../../components/standard/Standard.Toggle";
 import Dropdown from "../../../../components/standard/Standard.Dropdown";
 import { SettingsIcon } from "../../../../components/standard/Standard.Icons";
 
-function InventoryHostSettings({ endpoint }) {
+function InventoryHostSettings({ mainDark = false }) {
   const [filter, setFilter] = useState("");
 
   const GeneralOptions = [
@@ -49,9 +49,9 @@ function InventoryHostSettings({ endpoint }) {
   ];
 
   return (
-    <div className="flex flex-col space-y-2">
-      <InventoryHeader paths={[]} method={"GET"} />
-      <div className="dash-card h-full w-full">
+      <div
+        className={`flex flex-col space-y-2 ${!mainDark && "dash-card"} h-full w-full`}
+      >
         <SearchSettings setFilter={setFilter} filter={filter} />
         <SettingsComponent
           filter={filter}
@@ -69,7 +69,6 @@ function InventoryHostSettings({ endpoint }) {
           icon={<SettingsIcon />}
         />
       </div>
-    </div>
   );
 }
 
@@ -113,7 +112,7 @@ const SettingsComponent = ({ filter, options, icon }) => {
   );
 
   return (
-    <Dropdown selector={selector}>
+    <Dropdown defaultOpen={true} selector={selector}>
       <MapOptions />
     </Dropdown>
   );
@@ -121,10 +120,10 @@ const SettingsComponent = ({ filter, options, icon }) => {
 
 const SearchSettings = ({ filter, setFilter }) => {
   return (
-    <form className="border-b border-slate-200 dark:border-slate-700 py-2 px-4">
+    <form className={`border-b border-slate-200 dark:border-slate-700 py-2 px-4`}>
       <div className="relative">
         <input
-          className="w-full text-sm px-1 dark:text-slate-300 secondaryDark border-0 focus:ring-transparent placeholder-slate-400 dark:placeholder-slate-500 appearance-none"
+          className="w-full text-sm px-1 dark:text-slate-300 mainDark border-0 focus:ring-transparent placeholder-slate-400 dark:placeholder-slate-500 appearance-none"
           type="search"
           placeholder="Filter Settings"
           value={filter}

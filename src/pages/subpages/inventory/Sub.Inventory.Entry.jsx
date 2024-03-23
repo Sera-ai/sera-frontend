@@ -32,7 +32,6 @@ function InventoryEntry({ oas, setOas, tier = 1 }) {
       setSelectedHost(paths[0]);
       if (paths.length > 1) {
         paths.shift();
-        console.log("hmm", paths.join("/"));
         setSelectedEndpoint(paths.join("/"));
       } else {
         setSelectedEndpoint("");
@@ -52,10 +51,6 @@ function InventoryEntry({ oas, setOas, tier = 1 }) {
       navigate(newUrl, { replace: true });
     }
   }, [selectedEndpoint]);
-
-  /*useEffect(() => {
-    setSelectedEndpoint("");
-  }, [selectedHost]);*/
 
   return (
     <BodyContent
@@ -93,6 +88,7 @@ function InventoryEntry({ oas, setOas, tier = 1 }) {
               setOas={setOas}
               setSelectedEndpoint={setSelectedEndpoint}
               host={selectedHost}
+              setAnalytics={setAnalytics}
             />
           ))}
         {selectedHost &&
@@ -106,8 +102,9 @@ function InventoryEntry({ oas, setOas, tier = 1 }) {
             <ApiDocumentation
               oas={oas}
               setOas={setOas}
-              host={selectedHost}
+              selectedHost={selectedHost}
               setSelectedEndpoint={setSelectedEndpoint}
+              setAnalytics={setAnalytics}
               endpoint={selectedEndpoint
                 .replace("%7B", "{")
                 .replace("%7D", "}")}

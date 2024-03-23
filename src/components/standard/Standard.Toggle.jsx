@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-const ToggleSwitch = () => {
+const ToggleSwitch = ({ full = true }) => {
   const [isOn, setIsOn] = useState(false);
 
   const toggleSwitch = () => setIsOn(!isOn);
 
   return (
-    <div className="flex items-center justify-center">
-      <label className="flex items-center cursor-pointer">
+    <div className={`${full && "flex"} items-center justify-center`}>
+      <label className={`${full && "flex"} items-center cursor-pointer`}>
         <div className="relative">
           <input
             type="checkbox"

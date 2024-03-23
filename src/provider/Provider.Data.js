@@ -52,6 +52,12 @@ export async function dummyOas() {
   return dummyOas;
 }
 
+export async function dummyOasMulti() {
+  const dummyOasMulti = await databaseQuery("exampleOas");
+  console.log(dummyOasMulti);
+  return [dummyOasMulti, dummyOasMulti];
+}
+
 export async function incidentDetails() {
   const incidentDetails = await getDataTemplate("incidentDetails");
   return incidentDetails;
@@ -70,4 +76,9 @@ export async function uptimeDetails() {
 export async function workbookInventory() {
   const workbookInventory = await getDataTemplate("workbookInventory");
   return workbookInventory;
+}
+
+export async function builderInventory() {
+  const builderInventory = await getDataTemplate("builderInventory");
+  return builderInventory;
 }

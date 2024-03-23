@@ -1,14 +1,18 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import MDEditor from "./Partials.Inventory.MDEditor";
 import OasEditor from "./Partials.Inventory.OasEditor";
 import Header from "../../../../components/custom/Custom.Header.Title";
+import BodyContent from "../../../../components/page/Components.Page.BodyContent";
+import ApiDetails from "./Partials.Inventory.Analytics";
+import CatalogDetailsData from "./Partials.Inventory.EndpointDetails";
+import InventoryHostSettings from "./Partials.Inventory.Settings";
 
 function ApiDocumentation({
   oas,
   setOas,
-  host,
+  selectedHost,
   setSelectedEndpoint,
   endpoint = null,
 }) {
@@ -17,6 +21,8 @@ function ApiDocumentation({
   const [manageOAS, setManageOAS] = useState(false);
   const [isError, setIsError] = useState(false);
   const [detailsPath, setDetails] = useState(null);
+  const [selectedTab, setSelectedTab] = useState(0); // default selected tab
+  const [tabs, setTabs] = useState(["Documentation", "Analytics", "Settings"]);
 
   const location = useLocation();
   const { pathname } = location;
@@ -43,9 +49,42 @@ function ApiDocumentation({
 
   const updateOas = () => {};
 
+  const SelectedPage = () => {
+    switch (selectedTab) {
+      case 0:
+        return (
+          <Documentation
+            manageOAS={manageOAS}
+            oas={oas}
+            editDocs={editDocs}
+            oasEditorRef={oasEditorRef}
+            setOas={setOas}
+            setIsError={setIsError}
+            updateOas={updateOas}
+            MDEditorRef={MDEditorRef}
+            setDetails={setDetails}
+            endpoint={endpoint}
+            method={method}
+            host={endpoint}
+            setSelectedEndpoint={setSelectedEndpoint}
+            detailsPath={detailsPath}
+          />
+        );
+      case 1:
+        return (
+          <CatalogDetailsData endpoint="inventory/api.sample.com/pets/__post" />
+        );
+      case 2:
+        return <InventoryHostSettings />;
+    }
+  };
+
   return (
-    <Header
-      title={"Inventory Documentation"}
+    <BodyContent
+      selectedTab={selectedTab}
+      setSelectedTab={setSelectedTab}
+      tabs={tabs}
+      mainDark
       tier={2}
       buttons={
         <Header2
@@ -62,67 +101,8 @@ function ApiDocumentation({
         />
       }
     >
-      {/* Table */}
-      <div className="overflow-x-auto flex h-full w-full">
-        {/* Action Div */}
-        {manageOAS ? <OasSide oas={oas} /> : null}
-
-        {/* Data Div */}
-        <div
-          className={`flex w-full h-full flex-row pt-1 ${
-            !editDocs && "hideToolbar"
-          }`}
-        >
-          {manageOAS ? (
-            <OasEditor
-              ref={oasEditorRef}
-              oas={oas}
-              setOas={setOas}
-              setIsError={setIsError}
-              darker
-            />
-          ) : (
-            <div className="flex flex-col w-full h-full overflow-y-scroll no-scrollbar p-6 gap-14">
-              {!endpoint && (
-                <div className="gap-2 flex flex-col">
-                  <span className={"docHeading"}>
-                    {oas.info?.title || host}
-                  </span>
-                  <div className={"divider"} />
-                  <MDEditor
-                    initialMarkdown={
-                      oas.info?.description ||
-                      `No description set for this OAS.`
-                    }
-                    saveMarkdown={updateOas}
-                    ref={MDEditorRef}
-                    edit={false}
-                    mini
-                  />
-                </div>
-              )}
-              {grabOasParts({
-                oas,
-                setDetails,
-                endpoint,
-                endpointMethod: method,
-              })}
-            </div>
-          )}
-
-          {detailsPath ? (
-            <GetDetails
-              oas={oas}
-              host={host}
-              details={detailsPath}
-              endpoint={endpoint}
-              setDetails={setDetails}
-              setSelectedEndpoint={setSelectedEndpoint}
-            />
-          ) : null}
-        </div>
-      </div>
-    </Header>
+      {<SelectedPage />}
+    </BodyContent>
   );
 }
 
@@ -187,6 +167,84 @@ function OasSide({ oas }) {
     </div>
   );
 }
+
+const Documentation = ({
+  manageOAS,
+  oas,
+  editDocs,
+  oasEditorRef,
+  setOas,
+  setIsError,
+  updateOas,
+  MDEditorRef,
+  setDetails,
+  endpoint,
+  method,
+  host,
+  setSelectedEndpoint,
+  detailsPath,
+}) => {
+  return (
+    <div className="overflow-x-auto flex h-full w-full">
+      {/* Action Div */}
+      {manageOAS ? <OasSide oas={oas} /> : null}
+
+      {/* Data Div */}
+      <div
+        className={`flex w-full h-full flex-row pt-1 ${
+          !editDocs && "hideToolbar"
+        }`}
+      >
+        {manageOAS ? (
+          <OasEditor
+            ref={oasEditorRef}
+            oas={oas}
+            setOas={setOas}
+            setIsError={setIsError}
+            darker
+          />
+        ) : (
+          <div className="flex flex-col w-full h-full overflow-y-scroll no-scrollbar p-6 gap-14">
+            {!endpoint && (
+              <div className="gap-2 flex flex-col">
+                <span className={"docHeading"}>
+                  {oas.info?.title || selectedHost}
+                </span>
+                <div className={"divider"} />
+                <MDEditor
+                  initialMarkdown={
+                    oas.info?.description || `No description set for this OAS.`
+                  }
+                  saveMarkdown={updateOas}
+                  ref={MDEditorRef}
+                  edit={false}
+                  mini
+                />
+              </div>
+            )}
+            {grabOasParts({
+              oas,
+              setDetails,
+              endpoint,
+              endpointMethod: method,
+            })}
+          </div>
+        )}
+
+        {detailsPath ? (
+          <GetDetails
+            oas={oas}
+            host={host}
+            details={detailsPath}
+            endpoint={endpoint}
+            setDetails={setDetails}
+            setSelectedEndpoint={setSelectedEndpoint}
+          />
+        ) : null}
+      </div>
+    </div>
+  );
+};
 
 function Header2({
   paths,

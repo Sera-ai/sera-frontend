@@ -14,6 +14,7 @@ function Header({
   children,
   buttons = null,
   tier = 2,
+  horizontal = false,
 }) {
   return (
     <div className="col-span-full border-slate-200 dark:border-slate-700 h-full w-full flex flex-col flex-1 overflow-hidden">
@@ -51,7 +52,7 @@ function Header({
         </header>
       )}
       <div
-        className={`flex flex-col flex-grow overflow-hidden w-full ${
+        className={`flex flex-${horizontal ? "row space-x-1" : "col"} flex-grow overflow-hidden w-full ${
           subBar ? "" : "mainDark"
         }`}
       >
