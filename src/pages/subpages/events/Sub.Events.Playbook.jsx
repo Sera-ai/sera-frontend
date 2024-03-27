@@ -121,9 +121,9 @@ const LeftIcon = ({ flip = false }) => (
     <path
       d="M4.66663 7.99733H14M8.66663 12L4.66663 8L8.66663 4M1.66663 12V4"
       stroke="white"
-      stroke-width="1.33333"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.33333"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );

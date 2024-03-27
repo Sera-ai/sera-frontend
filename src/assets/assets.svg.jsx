@@ -10,9 +10,9 @@ export const LeftIcon = ({ size = "16", color = "#ffffff", flip = false }) => (
     <path
       d="M4.66663 7.99733H14M8.66663 12L4.66663 8L8.66663 4M1.66663 12V4"
       stroke={color}
-      stroke-width="1.33333"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.33333"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -409,15 +409,15 @@ export const EventIcon = ({size = "16"}) => (
     <path
       d="M10.3333 7L8.33333 9L7 7.66667L5 9.66667"
       stroke="white"
-      stroke-width="1.33333"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.33333"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M9.33329 3.33325H4.79996C4.05329 3.33325 3.67996 3.33325 3.39463 3.47859C3.14375 3.60641 2.93979 3.81038 2.81196 4.06125C2.66663 4.34659 2.66663 4.71992 2.66663 5.46659V11.1999C2.66663 11.9466 2.66663 12.3199 2.81196 12.6053C2.93979 12.8561 3.14375 13.0601 3.39463 13.1879C3.67996 13.3333 4.05329 13.3333 4.79996 13.3333H10.5333C11.28 13.3333 11.6533 13.3333 11.9386 13.1879C12.1895 13.0601 12.3935 12.8561 12.5213 12.6053C12.6666 12.3199 12.6666 11.9466 12.6666 11.1999V6.66659"
       stroke="white"
-      stroke-width="1.33333"
-      stroke-linecap="round"
+      strokeWidth="1.33333"
+      strokeLinecap="round"
     />
     <path
       d="M12.6666 4.66667C13.403 4.66667 13.9999 4.06971 13.9999 3.33333C13.9999 2.59695 13.403 2 12.6666 2C11.9302 2 11.3333 2.59695 11.3333 3.33333C11.3333 4.06971 11.9302 4.66667 12.6666 4.66667Z"
