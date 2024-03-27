@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Editor, { useMonaco } from "@monaco-editor/react";
+import { useRef } from "react";
 
 const JsonViewerFull = ({
   oas = "",
-  lines = [1],
   main = false,
   updateField = () => {},
   editable = true,
@@ -11,39 +11,42 @@ const JsonViewerFull = ({
 }) => {
   const monaco = useMonaco();
   const [editor, setEditor] = useState(null);
-  const [readOnlyLines, setReadOnlyLines] = useState(lines);
-  const externalDataRef = React.useRef(oas);
+
+  const isProgrammaticChangeRef = useRef(false);
 
   useEffect(() => {
-    externalDataRef.current = oas; // Update the ref to the new external data
+    isProgrammaticChangeRef.current = true; // Mark the upcoming change as programmatic
     if (editor) {
-      // Check if the current editor content is different from the new external data to avoid unnecessary updates
       const currentContent = editor.getValue();
       if (currentContent !== oas) {
-        const position = editor.getPosition(); // Save the current cursor position
-        editor.setValue(oas); // Update the editor's content
-        editor.setPosition(position); // Restore the cursor position
+        const position = editor.getPosition();
+        editor.setValue(oas);
+        editor.setPosition(position);
       }
     }
+    isProgrammaticChangeRef.current = false; // Reset after the change is done
   }, [oas, editor]);
-
+  
+  
   useEffect(() => {
     if (monaco && editor) {
       const handleModelContentChange = (event) => {
-        // Since we're directly manipulating the editor instance, we rely on its internal state and events
-        const newValue = editor.getValue();
-        if (newValue !== externalDataRef.current) {
-          updateField(newValue); // Call updateField only if the change is user-initiated
+        if (isProgrammaticChangeRef.current) {
+          // Ignore programmatic changes
+          return;
         }
+        const newValue = editor.getValue();
+        updateField(newValue); // This is called only for user-initiated changes
       };
-
-      editor.onDidChangeModelContent(handleModelContentChange);
-
-      return () => {
-        editor.onDidChangeModelContent(() => {});
-      };
+  
+      // Add the event listener and receive the disposable object
+      const disposable = editor.onDidChangeModelContent(handleModelContentChange);
+  
+      // Return a cleanup function that disposes of the event listener
+      return () => disposable.dispose();
     }
   }, [monaco, editor, updateField]);
+  
 
   return (
     <div style={{ height, maxHeight: 500 }}>
