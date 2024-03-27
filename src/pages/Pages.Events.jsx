@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
 
-import EventReportDetails from "./subpages/events/Sub.Events.Details";
-import Viewer from "./subpages/events/Sub.Events.Viewer";
-import EventsEntry from "./subpages/events/Sub.Events.Entry";
 import MainContent from "../components/page/Components.Page.MainContent";
-import Playbook from "./subpages/events/Sub.Events.Playbook";
+
+const Playbook = React.lazy(
+  () => import("./subpages/events/Sub.Events.Playbook")
+);
+const Viewer = React.lazy(() => import("./subpages/events/Sub.Events.Viewer"));
+const EventsEntry = React.lazy(
+  () => import("./subpages/events/Sub.Events.Entry")
+);
 
 function Events() {
   const [sidebarOpen, setSidebarOpen] = useState(false);

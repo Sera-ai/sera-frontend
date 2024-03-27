@@ -2,30 +2,66 @@ import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from "../../../provider/Provider.State";
 import BodyContent from "../../../components/page/Components.Page.BodyContent";
 import { ListSidebar } from "../../../components/custom/Custom.ListSidebar";
-import Builder from "@builder/App";
+import BuilderMap from "@builder/App";
+import { EventBar } from "../../../components/standard/Standard.EventBar";
+import { backendEvents } from "../../../events/events.backend";
+import {
+  CameraIcon,
+  LightningIcon,
+  PlayIcon,
+} from "../../../assets/assets.svg";
 
 function Playbook({ tier = 1 }) {
-  const { inventoryInventory, nestedVisible } = useContext(AppContext);
+  const { dummyOas, nestedVisible } = useContext(AppContext);
   const [selectedTab, setSelectedTab] = useState(0); // default selected tab
-  const [selectedHost, setSelectedHost] = useState(""); // default selected tab
   const [leftbarVisible, setLeftbar] = useState(false); // default selected tab
   const [rightbarVisible, setRightbar] = useState(true); // default selected tab
+
   const [tabs, setTabs] = useState(["Sera Events"]);
 
+  const [builderData, setBuilderData] = useState({});
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          `/manage/endpoint/?event=${"sera-default"}`,
+          {
+            headers: { "x-sera-service": "be_builder" },
+          }
+        );
+        const jsonData = await response.json();
+        if (!jsonData.issue) {
+          setBuilderData({
+            nodes: jsonData.builder.nodes,
+            edges: jsonData.builder.edges,
+            builderId: jsonData.builderId,
+          });
+
+          setLoaded(true);
+        } else {
+          console.log(jsonData.issue);
+        }
+        return jsonData;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
   const LeftButton = () => (
-    <SeraButton
-      icon={<LeftIcon />}
-      isSelected={leftbarVisible}
-      onPress={setLeftbar}
-    />
+    <SeraButton icon={<CameraIcon />} isSelected={true} onPress={setLeftbar} />
   );
   const RightButton = () => (
     <SeraButton
-      icon={<LeftIcon flip />}
+      icon={<LightningIcon toggle={rightbarVisible} />}
       isSelected={rightbarVisible}
       onPress={setRightbar}
     />
   );
+
 
   return (
     <BodyContent
@@ -41,14 +77,16 @@ function Playbook({ tier = 1 }) {
       }
     >
       <div className={"flex flex-row mainDark gap-1 h-full"}>
-        {nestedVisible <= tier && (
-          <ListSidebar
-            inventory={inventoryInventory[0]}
-            selectedHost={selectedHost}
-            setSelectedHost={setSelectedHost}
+        {loaded && (
+          <BuilderMap
+            nodes={builderData.nodes}
+            edges={builderData.edges}
+            builderId={builderData.builderId}
+            oas={dummyOas}
+            getNodeStruc={backendEvents().getNodeStruc}
+            type={"event"}
           />
         )}
-        <Builder leftBar={leftbarVisible} rightBar={rightbarVisible} />
       </div>
     </BodyContent>
   );

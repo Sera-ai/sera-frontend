@@ -8,6 +8,7 @@ import Starfield from "react-starfield";
 
 import FilterButton from "../components/Components.DropdownFilter";
 import { AppContext } from "../provider/Provider.State";
+import { EpsilonIcon, SearchIcon } from "../assets/assets.svg";
 
 const StarfieldWrapper = memo(function StarfieldWrapper(props) {
   return <Starfield {...props} />;
@@ -242,14 +243,7 @@ function Ecosystem() {
                   onChange={(e) => setFilter(e.target.value)}
                 />
                 <div className="absolute top-2.5 right-0" aria-label="Search">
-                  <svg
-                    className="w-4 h-4 shrink-0 fill-current text-slate-400 dark:text-slate-500 group-hover:text-slate-500 dark:group-hover:text-slate-400 ml-4 mr-2"
-                    viewBox="0 0 16 16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M7 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zM7 2C4.243 2 2 4.243 2 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z" />
-                    <path d="M15.707 14.293L13.314 11.9a8.019 8.019 0 01-1.414 1.414l2.393 2.393a.997.997 0 001.414 0 .999.999 0 000-1.414z" />
-                  </svg>
+                  <SearchIcon className="shrink-0 fill-current text-slate-400 dark:text-slate-500 group-hover:text-slate-500 dark:group-hover:text-slate-400 ml-4 mr-2" />
                 </div>
               </div>
             </form>
@@ -312,14 +306,7 @@ function Ecosystem() {
                           className="absolute top-2.5 right-0"
                           aria-label="Search"
                         >
-                          <svg
-                            className="w-4 h-4 shrink-0 fill-current text-slate-400 dark:text-slate-500 group-hover:text-slate-500 dark:group-hover:text-slate-400 ml-4 mr-2"
-                            viewBox="0 0 16 16"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path d="M7 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zM7 2C4.243 2 2 4.243 2 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z" />
-                            <path d="M15.707 14.293L13.314 11.9a8.019 8.019 0 01-1.414 1.414l2.393 2.393a.997.997 0 001.414 0 .999.999 0 000-1.414z" />
-                          </svg>
+                          <SearchIcon className="shrink-0 fill-current text-slate-400 dark:text-slate-500 group-hover:text-slate-500 dark:group-hover:text-slate-400 ml-4 mr-2" />
                         </div>
                       </div>
                     </form>
@@ -362,20 +349,7 @@ function Ecosystem() {
                             >
                               {node.label}
                               <div className="cursor-pointer">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="18"
-                                  height="18"
-                                  viewBox="0 0 16 16"
-                                  fill="none"
-                                >
-                                  <g>
-                                    <path
-                                      d="M8.00008 5.33341C8.73341 5.33341 9.33341 4.73341 9.33341 4.00008C9.33341 3.26675 8.73341 2.66675 8.00008 2.66675C7.26675 2.66675 6.66675 3.26675 6.66675 4.00008C6.66675 4.73341 7.26675 5.33341 8.00008 5.33341ZM8.00008 6.66675C7.26675 6.66675 6.66675 7.26675 6.66675 8.00008C6.66675 8.73341 7.26675 9.33341 8.00008 9.33341C8.73341 9.33341 9.33341 8.73341 9.33341 8.00008C9.33341 7.26675 8.73341 6.66675 8.00008 6.66675ZM8.00008 10.6667C7.26675 10.6667 6.66675 11.2667 6.66675 12.0001C6.66675 12.7334 7.26675 13.3334 8.00008 13.3334C8.73341 13.3334 9.33341 12.7334 9.33341 12.0001C9.33341 11.2667 8.73341 10.6667 8.00008 10.6667Z"
-                                      fill="white"
-                                    />
-                                  </g>
-                                </svg>
+                                <EpsilonIcon />
                               </div>
                             </div>
                           </li>

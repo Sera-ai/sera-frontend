@@ -15,6 +15,31 @@ const Ecosystem = React.lazy(() => import("./pages/Pages.Ecosystem"));
 const Editor = React.lazy(() => import("./pages/Pages.Editor"));
 const Builder = React.lazy(() => import("./pages/Pages.Builder"));
 
+
+const StarField = () => {
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        zIndex: 0,
+      }}
+    >
+      <Starfield
+        starCount={3000}
+        starColor={[255, 255, 255]}
+        speedFactor={0.01}
+        backgroundColor="#23232E"
+      />
+    </div>
+  );
+};
+//Stop refreshing!
+const MemoizedStarField = React.memo(StarField);
+
 function App() {
   const { console } = useContext(AppContext);
 
@@ -27,7 +52,7 @@ function App() {
   return (
     <div className="flex flex-col h-screen p-1 mainDark">
       <div className="flex-grow overflow-y-auto">
-        <Suspense fallback={<StarField />}>
+        <Suspense fallback={<MemoizedStarField />}>
           <Routes>
             <Route exact path="/" element={<Inventory />} />
             <Route path="inventory/*" element={<Inventory />} />
@@ -52,24 +77,4 @@ function App() {
 
 export default App;
 
-const StarField = () => {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        zIndex: 0,
-      }}
-    >
-      <Starfield
-        starCount={3000}
-        starColor={[255, 255, 255]}
-        speedFactor={0.01}
-        backgroundColor="#23232E"
-      />
-    </div>
-  );
-};
+

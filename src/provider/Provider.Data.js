@@ -54,8 +54,9 @@ export async function dummyOas() {
 
 export async function dummyOasMulti() {
   const dummyOasMulti = await databaseQuery("exampleOas");
-  console.log(dummyOasMulti);
-  return [dummyOasMulti, dummyOasMulti];
+  let boop = JSON.parse(JSON.stringify(dummyOasMulti));
+  boop.servers[0].url = "https://api.example.com";
+  return [dummyOasMulti, boop];
 }
 
 export async function incidentDetails() {

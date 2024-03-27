@@ -55,7 +55,7 @@ function Builders() {
         "Below is an inventory list of any events that have not been resolved"
       }
       filter={filter}
-      setFilter={setFilter}
+      setFilter={selectedTab == 0 ? setFilter : null}
       setColumns={setColumns}
       existingColumns={existingColumns}
       columns={columns}
