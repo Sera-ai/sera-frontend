@@ -4,15 +4,15 @@ import { Link, useLocation } from "react-router-dom";
 import BodyContent from "../../../../components/page/Components.Page.BodyContent";
 import InventoryHostSettings from "./Partials.Inventory.Settings";
 
-function EndpointOverview({ endpoint }) {
+function EndpointOverview({ selectedHostData, endpoint }) {
   const [selectedTab, setSelectedTab] = useState(0); // default selected tab
   const tabs = ["Overview", "Settings"];
   const SelectedPage = () => {
     switch (selectedTab) {
       case 0:
-        return <InventoryDetailsData endpoint={endpoint} />;
+        return ;
       case 1:
-        return <InventoryHostSettings endpoint={endpoint} />;
+        return ;
     }
   };
 
@@ -34,4 +34,3 @@ function EndpointOverview({ endpoint }) {
 }
 
 export default EndpointOverview;
-

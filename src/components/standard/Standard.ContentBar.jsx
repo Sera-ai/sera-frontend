@@ -10,6 +10,7 @@ export function ContentBar({
   selectedEndpoint,
   showHost = false,
   children = null,
+  builder = false,
 }) {
   const { endpointDetails, dummyOas, dummyOasMulti } = useContext(AppContext);
   const [openPaths, setOpenPaths] = useState({}); // State to track open paths
@@ -34,7 +35,7 @@ export function ContentBar({
   const GetOasData = ({ oas }) => {
     const setEndpoint = (ep) => {
       console.log("set selected endpoint", ep);
-      setSelectedEndpoint(ep);
+      setSelectedEndpoint(builder ? `${oas.servers[0].url}/${ep}` : ep);
     };
     return Object.entries(oas.paths).map(([path, methods]) => {
       const isOpen = openPaths[oas.servers[0].url + path];

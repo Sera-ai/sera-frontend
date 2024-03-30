@@ -786,57 +786,6 @@ const jsonFile = {
       endpointUniqueClients: 55,
     },
   ],
-  inventoryInventory: [
-    {
-      endpoint: { host: "api.example.com", endpoint: "/api/getStatus" },
-      health: 0.9,
-      requests: 11111,
-      status: "active",
-      tags: ["Test", "Test1"],
-    },
-    {
-      endpoint: { host: "api.example.com", endpoint: "/api/getStatus1" },
-      health: 0.9,
-      requests: 11111,
-      status: "active",
-      tags: ["Test", "Test1"],
-    },
-    {
-      endpoint: { host: "api.example.com", endpoint: "/api/getStatus222" },
-      health: 0.9,
-      requests: 11111,
-      status: "active",
-      tags: ["Test", "Test1"],
-    },
-    {
-      endpoint: { host: "api.service.com", endpoint: "/api/getUsers" },
-      health: 0.85,
-      requests: 12001,
-      status: "active",
-      tags: ["Test", "Test1"],
-    },
-    {
-      endpoint: { host: "api.platform.net", endpoint: "/api/updateProfile" },
-      health: 0.95,
-      requests: 9500,
-      status: "inactive",
-      tags: ["Test", "Test1"],
-    },
-    {
-      endpoint: { host: "api.webtool.org", endpoint: "/api/YYY" },
-      health: 0.78,
-      requests: 8000,
-      status: "active",
-      tags: ["Test", "Test1"],
-    },
-    {
-      endpoint: { host: "api.application.io", endpoint: "/api/createPost" },
-      health: 0.92,
-      requests: 10500,
-      status: "inactive",
-      tags: ["ABCD", "Test1", "Test1", "Test1"],
-    },
-  ],
   apiInventory: [
     {
       host: "api.example.com",

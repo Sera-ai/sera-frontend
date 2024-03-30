@@ -6,7 +6,7 @@ export const backendEvents = (builderContext = {}) => {
 
   const getNodeStruc = async (event, type) => {
     if (!event || !type) return;
-    console.log(type)
+    console.log(type);
     try {
       const response = await fetch(
         `/manage/getNodeStruc?event=${event}&type=${type}`,
@@ -27,10 +27,9 @@ export const backendEvents = (builderContext = {}) => {
       const created = await createEndpoint(builder_id);
 
       if (created) {
-        setIssue(null);
-        fetchData(window.location.pathname);
+        return "success";
       } else {
-        alert("something went wrong2");
+        alert("Failed to create endpoint");
       }
     }
 
@@ -38,10 +37,9 @@ export const backendEvents = (builderContext = {}) => {
       const builder_id = await createBuilder(data);
       const created = await updateEndpoint(builder_id);
       if (created) {
-        setIssue(null);
-        fetchData();
+        return "success";
       } else {
-        alert("something went wrong1");
+        alert("Failed to create builder");
       }
     }
   };

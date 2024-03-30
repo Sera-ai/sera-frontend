@@ -5,9 +5,11 @@ export function ListSidebar({ inventory = [], selectedHost, setSelectedHost }) {
 
   const [filter, setFilter] = useState("");
 
+  console.log(inventory)
+
   inventory.forEach((item) => {
-    if (item.endpoint && item.endpoint.host) {
-      const host = item.endpoint.host;
+    if (item.hostname) {
+      const host = item.hostname;
       if (eps[host]) {
         eps[host] += 1;
       } else {

@@ -43,6 +43,9 @@ const MemoizedStarField = React.memo(StarField);
 function App() {
   const { console } = useContext(AppContext);
 
+  const location = useLocation();
+
+
   useEffect(() => {
     document.querySelector("html").style.scrollBehavior = "auto";
     window.scroll({ top: 0 });

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 
 import { AppContext } from "../../../provider/Provider.State";
 import Header from "../../../components/custom/Custom.Header.Title";
@@ -6,17 +6,39 @@ import Table from "../../../components/standard/Standard.Table";
 import { ContentBar } from "../../../components/standard/Standard.ContentBar";
 import BodyContent from "../../../components/page/Components.Page.BodyContent";
 import InventoryHostSettings from "../inventory/partials/Partials.Inventory.Settings";
+import { useNavigate } from "react-router-dom";
 
 function Builders() {
   const [filter, setFilter] = useState("");
   const [columns, setColumns] = useState([]);
-  const { builderInventory } = useContext(AppContext);
+  const [builderInventory, setBuilderInventory] = useState([]);
+  const { loadStateData } = useContext(AppContext);
 
-  const existingColumns =
-    builderInventory.length > 0 ? Object.keys(builderInventory[0][0]) : [];
+  useEffect(() => {
+    const getBuilderInventory = async () => {
+      const builderInventory = await loadStateData({
+        key: "getBuilderInventory",
+      });
+      const inventoryArray = [];
+      builderInventory.map((inv) => {
+        inventoryArray.push({
+          host: inv.host_id.hostname,
+          path: inv.endpoint,
+          method: inv.method,
 
-  console.log(existingColumns);
-  console.log(builderInventory[0]);
+          builder: `[/builder/${inv.host_id.hostname}${inv.endpoint} - ${inv.method}](/builder/${inv.host_id.hostname}${inv.endpoint}/${inv.method.toLowerCase()})`,
+          builderEnabled: inv.builder_id.enabled,
+        });
+      });
+      console.log(inventoryArray);
+
+      setBuilderInventory(inventoryArray);
+    };
+    getBuilderInventory();
+  }, []);
+
+  const existingColumns = [];
+  // builderInventory.length > 0 ? Object.keys(builderInventory[0]) : [];
 
   const [selectedItems, setSelectedItems] = useState({});
   const selectAllRef = useRef(null);
@@ -36,7 +58,7 @@ function Builders() {
             filter={filter}
             setFilter={setFilter}
             columns={columns}
-            data={builderInventory[0]}
+            data={builderInventory}
             linkClasses={linkClasses}
             selectedItems={selectedItems}
             setSelectedItems={setSelectedItems}
@@ -46,6 +68,19 @@ function Builders() {
       case 1:
         return <InventoryHostSettings mainDark />;
     }
+  };
+
+  const navigate = useNavigate();
+
+  const navigateBuilder = (data) => {
+    const newUrl = `/builder/${data
+      .replace("__", "")
+      .replace("https://", "")
+      .replace("http://", "")}`;
+
+    console.log(data);
+
+    navigate(newUrl);
   };
 
   return (
@@ -62,15 +97,16 @@ function Builders() {
       horizontal={true}
       tier={2}
     >
-      <ContentBar
-        showHost
-        endpoint="inventory/api.sample.com/pets/__post"
-        host={"http://sample.com"}
-        selectedEndpoint={"selectedEndpoint"}
-        showBlock={false}
-        setSelectedEndpoint={() => {}}
-      />
-      <div className="flex pt-1 w-full h-full">
+      <div className="flex pt-1 w-full h-full space-x-1">
+        <ContentBar
+          builder
+          showHost
+          endpoint="inventory/api.sample.com/pets/__post"
+          host={"http://sample.com"}
+          selectedEndpoint={"selectedEndpoint"}
+          showBlock={false}
+          setSelectedEndpoint={navigateBuilder}
+        />
         <BodyContent
           selectedTab={selectedTab}
           setSelectedTab={setSelectedTab}

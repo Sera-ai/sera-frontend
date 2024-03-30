@@ -57,7 +57,7 @@ function CatalogDetailsData({ endpoint }) {
   };
 
   return (
-    <div className="p-4 h-full w-full">
+    <div className="p-4 flex flex-col h-full w-full">
       <div className="flex flex-column space-x-3 items-center">
         <h2
           style={{ color: "#ffffff99" }}
@@ -200,10 +200,13 @@ function CatalogDetailsData({ endpoint }) {
       </div>
 
       <div className="flex flex-column space-x-10 w-full">
-        <BarGraph bare={true} />
+        {/*<BarGraph bare={true} />*/}
       </div>
     </div>
   );
 }
 
+
 export default CatalogDetailsData;
+
+

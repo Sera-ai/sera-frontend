@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from "../../../provider/Provider.State";
 import BodyContent from "../../../components/page/Components.Page.BodyContent";
-import { ListSidebar } from "../../../components/custom/Custom.ListSidebar";
 import BuilderMap from "@builder/App";
 import { EventBar } from "../../../components/standard/Standard.EventBar";
 import { backendEvents } from "../../../events/events.backend";
@@ -9,6 +8,7 @@ import {
   CameraIcon,
   LightningIcon,
   PlayIcon,
+  PowerIcon,
 } from "../../../assets/assets.svg";
 
 function Playbook({ tier = 1 }) {
@@ -26,7 +26,7 @@ function Playbook({ tier = 1 }) {
     async function fetchData() {
       try {
         const response = await fetch(
-          `/manage/endpoint/?event=${"sera-default"}`,
+          `/manage/endpoint/builder?event=${"sera-default"}`,
           {
             headers: { "x-sera-service": "be_builder" },
           }
@@ -56,7 +56,7 @@ function Playbook({ tier = 1 }) {
   );
   const RightButton = () => (
     <SeraButton
-      icon={<LightningIcon toggle={rightbarVisible} />}
+      icon={<PowerIcon size={18} toggle={rightbarVisible} />}
       isSelected={rightbarVisible}
       onPress={setRightbar}
     />

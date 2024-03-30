@@ -9,13 +9,12 @@ import ApiDetails from "./Partials.Inventory.Analytics";
 import CatalogDetailsData from "./Partials.Inventory.EndpointDetails";
 import InventoryHostSettings from "./Partials.Inventory.Settings";
 
-function ApiDocumentation({
+const ApiDocumentation = ({
   oas,
   setOas,
-  selectedHost,
   setSelectedEndpoint,
   endpoint = null,
-}) {
+}) => {
   const matchMethod = ["__post", "__get", "__delete", "__put", "__patch"];
   const [editDocs, setEditDocs] = useState(false);
   const [manageOAS, setManageOAS] = useState(false);
@@ -49,62 +48,25 @@ function ApiDocumentation({
 
   const updateOas = () => {};
 
-  const SelectedPage = () => {
-    switch (selectedTab) {
-      case 0:
-        return (
-          <Documentation
-            manageOAS={manageOAS}
-            oas={oas}
-            editDocs={editDocs}
-            oasEditorRef={oasEditorRef}
-            setOas={setOas}
-            setIsError={setIsError}
-            updateOas={updateOas}
-            MDEditorRef={MDEditorRef}
-            setDetails={setDetails}
-            endpoint={endpoint}
-            method={method}
-            host={endpoint}
-            setSelectedEndpoint={setSelectedEndpoint}
-            detailsPath={detailsPath}
-          />
-        );
-      case 1:
-        return (
-          <CatalogDetailsData endpoint="inventory/api.sample.com/pets/__post" />
-        );
-      case 2:
-        return <InventoryHostSettings />;
-    }
-  };
-
   return (
-    <BodyContent
-      selectedTab={selectedTab}
-      setSelectedTab={setSelectedTab}
-      tabs={tabs}
-      mainDark
-      tier={2}
-      buttons={
-        <Header2
-          paths={paths}
-          method={method}
-          setEditDocs={setEditDocs}
-          editDocs={editDocs}
-          manageOAS={manageOAS}
-          setManageOAS={setManageOAS}
-          isError={isError}
-          oas={oas}
-          updateMarkdown={updateMarkdown}
-          updateChildState={updateChildState}
-        />
-      }
-    >
-      {<SelectedPage />}
-    </BodyContent>
+    <Documentation
+      manageOAS={manageOAS}
+      oas={oas}
+      editDocs={editDocs}
+      oasEditorRef={oasEditorRef}
+      setOas={setOas}
+      setIsError={setIsError}
+      updateOas={updateOas}
+      MDEditorRef={MDEditorRef}
+      setDetails={setDetails}
+      endpoint={endpoint}
+      method={method}
+      host={endpoint}
+      setSelectedEndpoint={setSelectedEndpoint}
+      detailsPath={detailsPath}
+    />
   );
-}
+};
 
 export default ApiDocumentation;
 
@@ -245,122 +207,6 @@ const Documentation = ({
     </div>
   );
 };
-
-function Header2({
-  paths,
-  method,
-  setEditDocs,
-  editDocs,
-  manageOAS,
-  setManageOAS,
-  oas,
-  isError,
-  updateChildState,
-  updateMarkdown,
-}) {
-  return (
-    <div className="flex justify-between items-center">
-      <div className="gap-2 flex justify-center">
-        <button
-          onClick={() => setEditDocs(!editDocs)}
-          className={`${
-            editDocs
-              ? "headerButton  text-white"
-              : "headerButton  rounded-md border border-slate-200 dark:border-slate-700 text-white"
-          }${manageOAS ? " hidden" : ""}`}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 15 16"
-            fill="none"
-          >
-            <path
-              d="M3.125 12.375H4L9.39062 6.98438L8.51562 6.10938L3.125 11.5V12.375ZM12.0625 6.07812L9.40625 3.45312L10.2812 2.57813C10.5208 2.33854 10.8152 2.21875 11.1644 2.21875C11.5131 2.21875 11.8073 2.33854 12.0469 2.57813L12.9219 3.45312C13.1615 3.69271 13.2865 3.98187 13.2969 4.32062C13.3073 4.65896 13.1927 4.94792 12.9531 5.1875L12.0625 6.07812ZM2.5 13.625C2.32292 13.625 2.17458 13.565 2.055 13.445C1.935 13.3254 1.875 13.1771 1.875 13V11.2344C1.875 11.151 1.89063 11.0704 1.92188 10.9925C1.95313 10.9142 2 10.8438 2.0625 10.7812L8.5 4.34375L11.1562 7L4.71875 13.4375C4.65625 13.5 4.58604 13.5469 4.50812 13.5781C4.42979 13.6094 4.34896 13.625 4.26562 13.625H2.5ZM8.95312 6.54688L8.51562 6.10938L9.39062 6.98438L8.95312 6.54688Z"
-              fill="white"
-              fillOpacity="0.7"
-            />
-          </svg>
-        </button>
-
-        <button
-          onClick={() => {
-            if (!isError) updateChildState();
-          }}
-          className={
-            !isError
-              ? `headerButton  dark:text-slate-100 "${
-                  manageOAS ? "" : " hidden"
-                }`
-              : `headerButton  rounded-md border border-slate-200 dark:border-slate-700 dark:text-slate-600 "${
-                  manageOAS ? "" : " hidden"
-                }`
-          }
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 16 16"
-            fill="none"
-          >
-            <path
-              d="M13.9578 4.58281L11.4172 2.04219C11.3 1.925 11.1562 1.83906 11 1.79219V1.75H2.25C1.97344 1.75 1.75 1.97344 1.75 2.25V13.75C1.75 14.0266 1.97344 14.25 2.25 14.25H13.75C14.0266 14.25 14.25 14.0266 14.25 13.75V5.28906C14.25 5.02344 14.1453 4.77031 13.9578 4.58281ZM6 2.875H10V4.5H6V2.875ZM13.125 13.125H2.875V2.875H5V5C5 5.27656 5.22344 5.5 5.5 5.5H10.5C10.7766 5.5 11 5.27656 11 5V3.21563L13.125 5.34062V13.125ZM8 6.90625C6.75781 6.90625 5.75 7.91406 5.75 9.15625C5.75 10.3984 6.75781 11.4062 8 11.4062C9.24219 11.4062 10.25 10.3984 10.25 9.15625C10.25 7.91406 9.24219 6.90625 8 6.90625ZM8 10.4062C7.30937 10.4062 6.75 9.84688 6.75 9.15625C6.75 8.46562 7.30937 7.90625 8 7.90625C8.69063 7.90625 9.25 8.46562 9.25 9.15625C9.25 9.84688 8.69063 10.4062 8 10.4062Z"
-              fill="white"
-            />
-          </svg>
-        </button>
-
-        <button
-          onClick={() => {
-            updateMarkdown();
-          }}
-          className={`headerButton  dark:text-slate-100 rounded-md border border-slate-200 dark:border-slate-700 dark:text-slate-600 "${
-            !manageOAS ? "" : " hidden"
-          }`}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 16 16"
-            fill="none"
-          >
-            <path
-              d="M13.9578 4.58281L11.4172 2.04219C11.3 1.925 11.1562 1.83906 11 1.79219V1.75H2.25C1.97344 1.75 1.75 1.97344 1.75 2.25V13.75C1.75 14.0266 1.97344 14.25 2.25 14.25H13.75C14.0266 14.25 14.25 14.0266 14.25 13.75V5.28906C14.25 5.02344 14.1453 4.77031 13.9578 4.58281ZM6 2.875H10V4.5H6V2.875ZM13.125 13.125H2.875V2.875H5V5C5 5.27656 5.22344 5.5 5.5 5.5H10.5C10.7766 5.5 11 5.27656 11 5V3.21563L13.125 5.34062V13.125ZM8 6.90625C6.75781 6.90625 5.75 7.91406 5.75 9.15625C5.75 10.3984 6.75781 11.4062 8 11.4062C9.24219 11.4062 10.25 10.3984 10.25 9.15625C10.25 7.91406 9.24219 6.90625 8 6.90625ZM8 10.4062C7.30937 10.4062 6.75 9.84688 6.75 9.15625C6.75 8.46562 7.30937 7.90625 8 7.90625C8.69063 7.90625 9.25 8.46562 9.25 9.15625C9.25 9.84688 8.69063 10.4062 8 10.4062Z"
-              fill="white"
-            />
-          </svg>
-        </button>
-        <button
-          onClick={() => setManageOAS(!manageOAS)}
-          className={
-            manageOAS
-              ? "headerButton bg-indigo-500  text-white"
-              : "headerButton  rounded-md border border-slate-200 dark:border-slate-700 text-white"
-          }
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 20 20"
-            fill="none"
-          >
-            <path
-              d="M13 11H15M9 8H15M11 5H15M1 3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1H17C17.5304 1 18.0391 1.21071 18.4142 1.58579C18.7893 1.96086 19 2.46957 19 3V17C19 17.5304 18.7893 18.0391 18.4142 18.4142C18.0391 18.7893 17.5304 19 17 19H3C2.46957 19 1.96086 18.7893 1.58579 18.4142C1.21071 18.0391 1 17.5304 1 17V3Z"
-              stroke="white"
-              strokeOpacity="1"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-      </div>
-    </div>
-  );
-}
 
 function grabOasParts({ oas, setDetails, setOas, endpoint, endpointMethod }) {
   return Object.keys(oas.paths).map((path) => {

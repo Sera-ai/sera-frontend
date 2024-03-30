@@ -22,8 +22,8 @@ export async function eventInventory() {
 }
 
 export async function inventoryInventory() {
-  const inventoryInventory = await getDataTemplate("inventoryInventory");
-  return inventoryInventory;
+  const hostInventory = await databaseQuery({ query: "hosts" });
+  return hostInventory;
 }
 
 export async function availablePlugins() {
@@ -47,13 +47,31 @@ export async function endpointDetails() {
 }
 
 export async function dummyOas() {
-  const dummyOas = await databaseQuery("exampleOas");
+  const dummyOas = await databaseQuery({ query: "exampleOas" });
   console.log(dummyOas);
   return dummyOas;
 }
 
+export async function getOasFromHost(params) {
+  console.log(params);
+  const oas = await databaseQuery({ query: "oasFromHost", params });
+  return oas;
+}
+
+export async function getDnsFromHost(params) {
+  console.log(params);
+  const dns = await databaseQuery({ query: "dnsFromHost", params });
+  return dns;
+}
+
+export async function getBuilderInventory(params) {
+  console.log(params);
+  const dns = await databaseQuery({ query: "allBuilders", params });
+  return dns;
+}
+
 export async function dummyOasMulti() {
-  const dummyOasMulti = await databaseQuery("exampleOas");
+  const dummyOasMulti = await databaseQuery({ query: "exampleOas" });
   let boop = JSON.parse(JSON.stringify(dummyOasMulti));
   boop.servers[0].url = "https://api.example.com";
   return [dummyOasMulti, boop];
