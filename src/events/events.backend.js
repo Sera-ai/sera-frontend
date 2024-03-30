@@ -24,6 +24,7 @@ export const backendEvents = (builderContext = {}) => {
   const createData = async (data) => {
     if (data.error == "NoEndpoint") {
       const builder_id = await createBuilder(data);
+      if (!builder_id) return "failure";
       const created = await createEndpoint(builder_id);
 
       if (created) {
@@ -35,6 +36,8 @@ export const backendEvents = (builderContext = {}) => {
 
     if (data.error == "NoBuilder") {
       const builder_id = await createBuilder(data);
+      if (!builder_id) return "failure";
+
       const created = await updateEndpoint(builder_id);
       if (created) {
         return "success";
@@ -45,6 +48,7 @@ export const backendEvents = (builderContext = {}) => {
   };
 
   function createEndpoint(builder_id) {
+    console.log(builder_id);
     const urli = "https:/" + window.location.pathname.replace("builder/", "");
     const parsed = new URL(urli);
 
@@ -54,12 +58,12 @@ export const backendEvents = (builderContext = {}) => {
 
     const data2 = {
       hostname: parsed.host.split(":")[0],
-      endpoint: path,
+      endpoint: decodeURIComponent(path),
       method: method,
       builder_id,
     };
 
-    const url = `/manage/endpoint/create`;
+    const url = `/manage/endpoint`;
     console.log(JSON.stringify(data2));
     return fetch(url, {
       method: "POST",
@@ -71,6 +75,7 @@ export const backendEvents = (builderContext = {}) => {
     })
       .then((response) => response.json()) // assuming server responds with json
       .then((data) => {
+        console.log(data);
         return true;
       })
       .catch((error) => {
@@ -124,7 +129,7 @@ export const backendEvents = (builderContext = {}) => {
 
     const data2 = {
       hostname: parsed.host.split(":")[0],
-      path: path,
+      path: decodeURIComponent(path),
       method: method,
     };
 

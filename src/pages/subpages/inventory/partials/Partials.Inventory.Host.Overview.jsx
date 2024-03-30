@@ -1,17 +1,21 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import BodyContent from "../../../../components/page/Components.Page.BodyContent";
 import InventoryHostSettings from "./Partials.Inventory.Settings";
 import CatalogDetailsData from "./Partials.Inventory.EndpointDetails";
 import {
+  BuilderIcon,
   CancelGlobeIcon,
   EditIcon,
+  EventsIcon,
   GlobeIcon,
+  PostmanIcon,
   SaveIcon,
 } from "../../../../assets/assets.svg";
 import ApiDocumentation from "./Partials.Inventory.Documentation";
 import { AppContext } from "../../../../provider/Provider.State";
+import { SeraButton } from "../../editor/Sub.Editor.Visual";
 
 const InventoryHostOverview = ({
   tier = 2,
@@ -118,10 +122,44 @@ const Header2 = ({
   isError,
   updateChildState,
   updateMarkdown,
-  endpoint
+  endpoint,
 }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const goToInventory = () => {
+    const newUrl = location.pathname
+      .replace("/inventory", "/builder")
+      .replace("__", "");
+    navigate(newUrl);
+  };
+
+  const goToEvents = () => {
+    navigate("/events");
+  };
+
+  const LeftButton = () => (
+    <SeraButton
+      icon={<BuilderIcon size="18" color="#fff" />}
+      isSelected={true}
+      border={true}
+      onPress={() => {
+        goToInventory();
+      }}
+    />
+  );
+  const RightButton = () => (
+    <SeraButton
+      icon={<EventsIcon size="18" secondaryColor="#2B84EC" color="#fff" />}
+      isSelected={true}
+      border={true}
+      onPress={() => {
+        goToEvents();
+      }}
+    />
+  );
+
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center space-x-4">
       <div className="gap-2 flex justify-center">
         <button
           onClick={() => setEditDocs(!editDocs)}
@@ -197,6 +235,13 @@ const Header2 = ({
           </svg>
         </button>
       </div>
+
+      {endpoint && (
+        <div className="flex pr-2 gap-2">
+          <LeftButton />
+          <RightButton />
+        </div>
+      )}
     </div>
   );
 };
@@ -210,6 +255,32 @@ const EndpointSettings = ({ hostDns }) => {
           Below are this Host's Forwarding URL(s)
         </h2>
         <ProxySettings hostDns={hostDns} />
+        <div className="pt-4 rounded-md">
+          <div
+            className={`flex items-center py-2 px-3 border rounded-lg border-slate-200 dark:border-slate-700 cursor-pointer`}
+            onClick={() => {}}
+          >
+            <div
+              style={{
+                backgroundColor: "#FF6C37",
+              }}
+              className={`mr-4 rounded-md`}
+            >
+              <PostmanIcon />
+            </div>
+            <div className="flex-1">
+              <p className="font-medium text-xs">Download Postman Collection</p>
+              <p className="text-gray-300  text-xs">
+                {hostDns?.sera_config.sub_domain
+                  ? `https://${hostDns?.sera_config.sub_domain}.sera`
+                  : "Click to generate"}
+              </p>
+            </div>
+            <div>
+              <div className="secondaryDark w-5 h-5 rounded-full"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -271,6 +342,8 @@ function ProxySettings({ hostDns }) {
           </div>
         </div>
       </div>
+
+      <div className="divider" />
     </div>
   );
 }

@@ -13,6 +13,7 @@ import {
 } from "../../../assets/assets.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 import { backendEvents } from "../../../events/events.backend";
+import Starfield from "react-starfield";
 
 function BuilderFlow() {
   const location = useLocation();
@@ -24,6 +25,7 @@ function BuilderFlow() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    setLoaded(false);
     const path = location.pathname;
     async function fetchData() {
       try {
@@ -40,6 +42,7 @@ function BuilderFlow() {
           setBuilderId(jsonData.builderId);
 
           console.log(jsonData);
+          setIssue(null)
           setLoaded(true);
         } else {
           console.log(jsonData.issue);
@@ -222,7 +225,7 @@ const IssuePrompt = ({ issue, path }) => {
   };
 
   return (
-    <div className="flex w-full h-full items-center justify-center">
+    <div className="flex w-full h-full items-center justify-center overflow-hidden">
       <div
         className="secondaryDark space-y-2"
         style={{
@@ -261,6 +264,33 @@ const IssuePrompt = ({ issue, path }) => {
           </div>
         </div>
       </div>
+      <Starfield
+        starCount={3000}
+        starColor={[255, 255, 255]}
+        speedFactor={0.01}
+        backgroundColor="#000"
+      />
+    </div>
+  );
+};
+
+const StarField = () => {
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+      }}
+    >
+      <Starfield
+        starCount={3000}
+        starColor={[255, 255, 255]}
+        speedFactor={0.01}
+        backgroundColor="#23232E"
+      />
     </div>
   );
 };

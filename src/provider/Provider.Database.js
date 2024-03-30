@@ -46,6 +46,7 @@ async function getHosts() {
     const response = await fetch(`/manage/host`, {
       headers: { "x-sera-service": "be_builder" },
     });
+    console.log(response)
     const jsonData = await response.json();
     return jsonData;
   } catch (error) {

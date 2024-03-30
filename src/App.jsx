@@ -32,7 +32,7 @@ const StarField = () => {
         starCount={3000}
         starColor={[255, 255, 255]}
         speedFactor={0.01}
-        backgroundColor="#23232E"
+        backgroundColor="#191a21"
       />
     </div>
   );
