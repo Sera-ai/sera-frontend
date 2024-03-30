@@ -274,23 +274,4 @@ const IssuePrompt = ({ issue, path }) => {
   );
 };
 
-const StarField = () => {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-      }}
-    >
-      <Starfield
-        starCount={3000}
-        starColor={[255, 255, 255]}
-        speedFactor={0.01}
-        backgroundColor="#23232E"
-      />
-    </div>
-  );
-};
+

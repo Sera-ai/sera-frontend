@@ -209,7 +209,8 @@ const Documentation = ({
 };
 
 function grabOasParts({ oas, setDetails, setOas, endpoint, endpointMethod }) {
-  return Object.keys(oas.paths).map((path) => {
+  console.log(oas)
+  return Object.keys(oas?.paths || {}).map((path) => {
     const endpointPath = "/" + endpoint?.split("/").slice(0, -1).join("/");
     const endpointMethod = endpoint
       ?.split("/")

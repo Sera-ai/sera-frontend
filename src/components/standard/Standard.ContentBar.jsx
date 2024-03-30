@@ -1,8 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AppContext } from "../../provider/Provider.State";
 
 export function ContentBar({
-  endpoint = "inventory/api.sample.com/pets/__post",
+  endpoint,
   inventory = [],
   host = "",
   showBlock = true,
@@ -12,12 +12,32 @@ export function ContentBar({
   children = null,
   builder = false,
 }) {
-  const { endpointDetails, dummyOas, dummyOasMulti } = useContext(AppContext);
-  const [openPaths, setOpenPaths] = useState({}); // State to track open paths
+  const { endpointDetails, dummyOasMulti } = useContext(AppContext);
+  const [openPaths, setOpenPaths] = useState({});
+  const [oas, setOas] = useState({});
 
-  if (!endpointDetails[0][endpoint]) {
-    return <div>No endpoint details available.</div>;
+  useEffect(() => {
+    if (!builder) {
+      const getHostData = inventory.filter((inv) => inv.hostname === host);
+      console.log(getHostData);
+      let ooas = {};
+      const realoas = getHostData[0].oas_spec;
+      if (!Object.keys(realoas).includes("paths")) {
+        ooas = { ...realoas, paths: {} };
+      } else {
+        ooas = realoas;
+      }
+
+      console.log(ooas);
+      setOas(ooas);
+    }
+  }, [host]);
+
+  if (!builder && !Object.keys(oas).length > 0) {
+    return <div>No endpoints available.</div>;
   }
+
+  console.log(oas);
 
   const togglePath = (path) => {
     setOpenPaths((prev) => ({ ...prev, [path]: !prev[path] }));
@@ -217,7 +237,7 @@ export function ContentBar({
           </span>
           <span className="text-xs uppercase">Method</span>
         </div>
-        {showHost ? <GetList /> : <GetOasData oas={dummyOas[0]} />}
+        {showHost ? <GetList /> : <GetOasData oas={oas} />}
       </div>
       {children && (
         <>

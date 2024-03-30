@@ -1,11 +1,17 @@
 import { useState } from "react";
 
-export function ListSidebar({ inventory = [], selectedHost, setSelectedHost }) {
+export function ListSidebar({
+  inventory = [],
+  selectedHost,
+  setSelectedHost,
+  addHost = false,
+  addHostSelect,
+}) {
   let eps = {};
 
   const [filter, setFilter] = useState("");
 
-  console.log(inventory)
+  console.log(inventory);
 
   inventory.forEach((item) => {
     if (item.hostname) {
@@ -22,11 +28,15 @@ export function ListSidebar({ inventory = [], selectedHost, setSelectedHost }) {
     if (!part) {
       return text;
     }
-    const parts = text.split(new RegExp(`(${part})`, 'gi'));
-    return parts.map((part, index) => 
-      part.toLowerCase() === filter.toLowerCase() ? 
-        <span key={index} className="bg-yellow-200">{part}</span> : 
+    const parts = text.split(new RegExp(`(${part})`, "gi"));
+    return parts.map((part, index) =>
+      part.toLowerCase() === filter.toLowerCase() ? (
+        <span key={index} className="bg-yellow-200">
+          {part}
+        </span>
+      ) : (
         part
+      )
     );
   };
 
@@ -43,7 +53,9 @@ export function ListSidebar({ inventory = [], selectedHost, setSelectedHost }) {
         onClick={() => setSelectedHost(endpoint)}
         key={endpoint}
       >
-        <span className={`text-xs ${selectedHost === endpoint && "blue-color"}`}>
+        <span
+          className={` ${selectedHost === endpoint && "blue-color"}`}
+        >
           {highlightMatch(endpoint, filter)}
         </span>
         <span className={`text-xs`}>{eps[endpoint]}</span>
@@ -73,6 +85,14 @@ export function ListSidebar({ inventory = [], selectedHost, setSelectedHost }) {
           <span className="text-xs uppercase">EP</span>
         </div>
         <GetList />
+        {addHost && (
+          <div
+            style={{ color: "#4799ff", cursor: "pointer", paddingLeft: 16, marginTop: 6 }}
+            onClick={addHostSelect}
+          >
+            + Add Host
+          </div>
+        )}
       </div>
     </div>
   );

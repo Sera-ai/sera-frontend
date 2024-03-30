@@ -47,6 +47,23 @@ export const backendEvents = (builderContext = {}) => {
     }
   };
 
+  const createHost = (hostname) => {
+    const url = `/manage/host`;
+
+    const data = { hostname: hostname };
+
+    return fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-sera-service": "be_builder",
+      },
+      body: JSON.stringify(data),
+    }).catch((error) => console.error("Error:", error));
+  };
+
+  function createHostFromOas(file) {}
+
   function createEndpoint(builder_id) {
     console.log(builder_id);
     const urli = "https:/" + window.location.pathname.replace("builder/", "");
@@ -229,5 +246,6 @@ export const backendEvents = (builderContext = {}) => {
     removeEdge,
     updateEdge,
     getNodeStruc,
+    createHost
   };
 };
