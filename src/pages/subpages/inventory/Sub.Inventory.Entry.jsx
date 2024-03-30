@@ -165,21 +165,51 @@ const IssuePrompt = ({ setAddHost }) => {
   };
 
   const handleFileSelect = (event) => {
-    const file = event.target.files[0]; // Get the selected file
-    if (file) {
-      // You can now read the file or upload it
-      console.log(file.name); // Just logging the file name for now
-      // Implement your logic to handle the file here
-    }
+    const createIt2 = async () => {
+      const file = event.target.files[0]; // Get the selected file
+      if (file) {
+        // Use FileReader to read the file content
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+          const content = e.target.result; // This is the file content as a string
+
+          // Assuming the content is JSON and needs to be parsed into an object
+          // For YAML, you might need a YAML parser like js-yaml
+          let parsedContent;
+          if (file.type === "application/json") {
+            parsedContent = JSON.parse(content);
+          } else if (
+            file.name.endsWith(".yaml") ||
+            file.name.endsWith(".yml")
+          ) {
+            // For YAML, you'd typically use a library like js-yaml to parse
+            // parsedContent = yaml.load(content);
+            console.error("YAML parsing is not implemented");
+            return;
+          }
+
+          // Send the parsed content (assuming it's an object) to the backend
+          const res = await backendEvents().createHost({ oas: parsedContent });
+
+          // Additional logic to handle the response
+          console.log(res); // Logging the file name
+          window.location.reload()
+        };
+
+        // Read the file content
+        reader.readAsText(file);
+      }
+    };
+    createIt2();
   };
 
   const createHost = () => {
     const createIt = async () => {
       const hostname = hostnameRef.current.value;
-      if (!isValidHostname(hostname)) alert("incorrect hostname");
+      if (!isValidHostname(hostname)) alert("incorrect hostname2");
       if (!isValidHostname(hostname)) return;
 
-      const res = await backendEvents().createHost(hostname);
+      const res = await backendEvents().createHost({ hostname });
       console.log(res);
       setAddHost(false);
     };

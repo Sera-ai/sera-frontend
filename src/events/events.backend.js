@@ -47,10 +47,12 @@ export const backendEvents = (builderContext = {}) => {
     }
   };
 
-  const createHost = (hostname) => {
+  const createHost = ({ hostname = "", oas = null }) => {
     const url = `/manage/host`;
+    let data = {};
 
-    const data = { hostname: hostname };
+    if (hostname) data.hostname = hostname;
+    if (oas) data.oas = oas;
 
     return fetch(url, {
       method: "POST",
@@ -246,6 +248,6 @@ export const backendEvents = (builderContext = {}) => {
     removeEdge,
     updateEdge,
     getNodeStruc,
-    createHost
+    createHost,
   };
 };
