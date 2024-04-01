@@ -10,6 +10,7 @@ import {
   EditIcon,
   EventsIcon,
   GlobeIcon,
+  NetworkIcon,
   PostmanIcon,
   SaveIcon,
 } from "../../../../assets/assets.svg";
@@ -33,6 +34,7 @@ const InventoryHostOverview = ({
   const [method, setMethod] = useState("");
   const [manageOAS, setManageOAS] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [showSettings, setShowSettings] = useState(true);
 
   const location = useLocation();
   const { pathname } = location;
@@ -98,12 +100,16 @@ const InventoryHostOverview = ({
           oas={oas}
           updateMarkdown={updateMarkdown}
           updateChildState={updateChildState}
+          showSettings={showSettings}
+          setShowSettings={setShowSettings}
         />
       }
     >
       <div className={"flex flex-row mainDark gap-1 h-full"}>
         <SelectedPage />
-        <EndpointSettings endpoint={endpoint} hostDns={hostDns} />
+        {showSettings && (
+          <EndpointSettings endpoint={endpoint} hostDns={hostDns} />
+        )}
       </div>
     </BodyContent>
   );
@@ -122,6 +128,8 @@ const Header2 = ({
   isError,
   updateChildState,
   updateMarkdown,
+  showSettings,
+  setShowSettings,
   endpoint,
 }) => {
   const location = useLocation();
@@ -234,6 +242,16 @@ const Header2 = ({
             />
           </svg>
         </button>
+        <button
+          onClick={() => setShowSettings(!showSettings)}
+          className={
+            showSettings
+              ? "headerButton rounded-md mainDark text-white"
+              : "headerButton  rounded-md border border-slate-200 dark:border-slate-700 text-white"
+          }
+        >
+          <NetworkIcon size="16" color="#fff" />
+        </button>
       </div>
 
       {endpoint && (
@@ -306,7 +324,7 @@ function ProxySettings({ hostDns }) {
             <p className="font-medium text-xs">Sera Endpoint</p>
             <p className="text-gray-300  text-xs">
               {hostDns?.sera_config.sub_domain
-                ? `https://${hostDns?.sera_config.sub_domain}.sera`
+                ? `https://${hostDns?.sera_config.sub_domain}.sera/12000`
                 : "Click to generate"}
             </p>
           </div>

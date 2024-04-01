@@ -25,7 +25,7 @@ export const backendEvents = (builderContext = {}) => {
     if (data.error == "NoEndpoint") {
       const builder_id = await createBuilder(data);
       if (!builder_id) return "failure";
-      const created = await createEndpoint(builder_id);
+      const created = await createEndpoint({ builder_id, ...data });
 
       if (created) {
         return "success";
@@ -64,11 +64,26 @@ export const backendEvents = (builderContext = {}) => {
     }).catch((error) => console.error("Error:", error));
   };
 
+  const updateHost = ({ host_id, field, key }) => {
+    const url = `/manage/host`;
+
+    return fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "x-sera-service": "be_builder",
+      },
+      body: JSON.stringify({ host_id: host_id, field, key }),
+    }).catch((error) => console.error("Error:", error));
+  };
+
   function createHostFromOas(file) {}
 
-  function createEndpoint(builder_id) {
+  function createEndpoint({ builder_id, host }) {
     console.log(builder_id);
-    const urli = "https:/" + window.location.pathname.replace("builder/", "");
+    const urli =
+      "https:/" +
+      decodeURIComponent(window.location.pathname.replace("builder/", ""));
     const parsed = new URL(urli);
 
     const lastSlashIndex = parsed.pathname.lastIndexOf("/");
@@ -76,6 +91,7 @@ export const backendEvents = (builderContext = {}) => {
     const method = parsed.pathname.substring(lastSlashIndex + 1).toUpperCase(); // "boop"
 
     const data2 = {
+      host_id: host,
       hostname: parsed.host.split(":")[0],
       endpoint: decodeURIComponent(path),
       method: method,
@@ -138,8 +154,11 @@ export const backendEvents = (builderContext = {}) => {
       });
   }
 
-  function createBuilder() {
-    const urli = "https:/" + window.location.pathname.replace("builder/", "");
+  function createBuilder(data) {
+    console.log(data);
+    const urli =
+      "https:/" +
+      decodeURIComponent(window.location.pathname.replace("builder/", ""));
     const parsed = new URL(urli);
 
     const lastSlashIndex = parsed.pathname.lastIndexOf("/");
@@ -147,6 +166,7 @@ export const backendEvents = (builderContext = {}) => {
     const method = parsed.pathname.substring(lastSlashIndex + 1).toUpperCase(); // "boop"
 
     const data2 = {
+      host_id: data.host,
       hostname: parsed.host.split(":")[0],
       path: decodeURIComponent(path),
       method: method,
@@ -249,5 +269,6 @@ export const backendEvents = (builderContext = {}) => {
     updateEdge,
     getNodeStruc,
     createHost,
+    updateHost,
   };
 };

@@ -26,7 +26,7 @@ function BuilderFlow() {
 
   useEffect(() => {
     setLoaded(false);
-    const path = location.pathname;
+    const path = decodeURIComponent(location.pathname);
     async function fetchData() {
       try {
         const response = await fetch(
@@ -102,7 +102,7 @@ function BuilderFlow() {
   return (
     <Header
       title={"Builder"}
-      subtitle={location.pathname.replace("/builder/", "")}
+      subtitle={decodeURIComponent(location.pathname.replace("/builder/", ""))}
       horizontal={true}
       buttons={
         <div className="flex pr-2 gap-2">
@@ -178,7 +178,7 @@ const IssuePrompt = ({ issue, path }) => {
         return (
           <div className="space-y-1">
             <div>
-              <span>Would you like create a builder for:</span>
+              <span>Would you like to create a builder for:</span>
             </div>
             <div>
               <span>
@@ -199,7 +199,7 @@ const IssuePrompt = ({ issue, path }) => {
                     padding: "4px 6px",
                   }}
                 >
-                  {managedPath[0]}
+                  {decodeURIComponent(managedPath[0])}
                 </span>
               </span>
             </div>

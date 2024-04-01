@@ -50,7 +50,7 @@ export function ListSidebar({
         className={`flex flex-row justify-between items-center py-1.5 px-4 listItemLink ${
           selectedHost === endpoint && "mainDark"
         }`}
-        onClick={() => setSelectedHost(endpoint)}
+        onClick={() => setSelectedHost(encodeURIComponent(endpoint))}
         key={endpoint}
       >
         <span

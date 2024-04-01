@@ -14,6 +14,7 @@ export const AppStateProvider = ({ children }) => {
     apiInventory: [],
     workbookInventory: [],
     builderInventory: [],
+    dummyOasMulti: [],
   };
 
   const [nestedVisible, setNestedVisible] = useState(0);

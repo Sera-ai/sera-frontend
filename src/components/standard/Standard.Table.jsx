@@ -240,7 +240,9 @@ function parseType(data) {
     case "number":
       return data.toLocaleString();
     case "boolean":
-      return <ToggleSwitch initialValue={data} full={false} />;
+      return (
+        <ToggleSwitch initialValue={data} onToggle={() => {}} full={false} />
+      );
     case "object":
       return Array.isArray(data) ? "array" : "object";
   }

@@ -3,6 +3,7 @@ import InventoryHeader from "../../../../components/page/Components.Page.Invento
 import ToggleSwitch from "../../../../components/standard/Standard.Toggle";
 import Dropdown from "../../../../components/standard/Standard.Dropdown";
 import { SettingsIcon } from "../../../../components/standard/Standard.Icons";
+import { backendEvents } from "../../../../events/events.backend";
 
 const InventoryHostSettings = ({ selectedHostData, mainDark = false }) => {
   const [filter, setFilter] = useState("");
@@ -26,18 +27,27 @@ const InventoryHostSettings = ({ selectedHostData, mainDark = false }) => {
         subtitle: `General Settings for the host: ${selectedHostData?.hostname || "example.com"}`,
       },
       {
-        title: "Secure Connections",
-        subtitle: "Force HTTPS usage (Recommended for public endpoints",
+        title: "Enforce HTTPS",
+        subtitle: "Forces all connections to use HTTPS, enhancing security. Recommended for public-facing services",
+        id: "https",
         value: selectedHostData?.sera_config?.https,
       },
       {
-        title: "Strict Proxying",
-        subtitle: "Only route requests defined in the OAS",
+        title: "Strict API Routing",
+        subtitle: "Routes requests strictly according to the available OpenAPI Specification (OAS)",
+        id: "strict",
         value: selectedHostData?.sera_config?.strict,
       },
       {
-        title: "Learning Mode",
-        subtitle: "Build OAS based on new calls with new data",
+        title: "Flexible API Matching",
+        subtitle: "Permits variations in parameters and headers from the specified OAS, allowing for flexibility in API requests",
+        id: "drift",
+        value: selectedHostData?.sera_config?.drift,
+      },
+      {
+        title: "Auto-Update OAS",
+        subtitle: "Automatically updates the OAS with new endpoints and data from incoming requests, facilitating API evolution",
+        id: "learn",
         value: selectedHostData?.sera_config?.learn,
       },
     ]);
@@ -50,6 +60,7 @@ const InventoryHostSettings = ({ selectedHostData, mainDark = false }) => {
         filter={filter}
         options={generalOptions}
         icon={<SettingsIcon />}
+        selectedHostData={selectedHostData}
       />
     </div>
   );
@@ -57,7 +68,7 @@ const InventoryHostSettings = ({ selectedHostData, mainDark = false }) => {
 
 export default InventoryHostSettings;
 
-const SettingsComponent = ({ filter, options, icon }) => {
+const SettingsComponent = ({ filter, options, icon, selectedHostData }) => {
   const TitleComponent = ({ icon = null, title, subtitle }) => (
     <div className="flex flex-row  items-center space-x-4 py-2">
       {icon}
@@ -70,6 +81,18 @@ const SettingsComponent = ({ filter, options, icon }) => {
 
   const MapOptions = () => {
     return options.map((option, int) => {
+      const [checked, setChecked] = useState(option.value);
+      const updateChecked = (value) => {
+        if (value != checked) {
+          backendEvents().updateHost({
+            host_id: selectedHostData._id,
+            field: option.id,
+            key: value,
+          });
+
+          setChecked(value);
+        }
+      };
       if (int == 0) return;
       return (
         <div
@@ -80,7 +103,10 @@ const SettingsComponent = ({ filter, options, icon }) => {
           }`}
         >
           <TitleComponent title={option.title} subtitle={option.subtitle} />
-          <ToggleSwitch initialValue={option.value} />
+          <ToggleSwitch
+            initialValue={checked}
+            onToggle={(value) => updateChecked(value)}
+          />
         </div>
       );
     });

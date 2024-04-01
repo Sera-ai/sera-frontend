@@ -61,7 +61,7 @@ const ApiDocumentation = ({
       setDetails={setDetails}
       endpoint={endpoint}
       method={method}
-      host={endpoint}
+      host={paths[0]}
       setSelectedEndpoint={setSelectedEndpoint}
       detailsPath={detailsPath}
     />
@@ -153,7 +153,7 @@ const Documentation = ({
 
       {/* Data Div */}
       <div
-        className={`flex w-full h-full flex-row pt-1 ${
+        className={`flex w-full h-full flex-row ${
           !editDocs && "hideToolbar"
         }`}
       >
@@ -275,6 +275,7 @@ function GetDetails({
   endpoint,
   setSelectedEndpoint,
 }) {
+  console.log(host)
   return (
     <div
       style={{ width: "50%", maxWidth: "600px", borderRadius: "3px" }}

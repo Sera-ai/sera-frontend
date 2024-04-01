@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const ToggleSwitch = ({initialValue = false, full = true }) => {
+const ToggleSwitch = ({ initialValue = false, full = true, onToggle }) => {
   const [isOn, setIsOn] = useState(initialValue);
 
   const toggleSwitch = () => setIsOn(!isOn);
+
+  useEffect(() => {
+    onToggle(isOn);
+  }, [isOn]);
 
   return (
     <div className={`${full && "flex"} items-center justify-center`}>

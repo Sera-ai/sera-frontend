@@ -71,10 +71,8 @@ export async function getBuilderInventory(params) {
 }
 
 export async function dummyOasMulti() {
-  const dummyOasMulti = await databaseQuery({ query: "exampleOas" });
-  let boop = JSON.parse(JSON.stringify(dummyOasMulti));
-  boop.servers[0].url = "https://api.example.com";
-  return [dummyOasMulti, boop];
+  const dummyOasMulti = await databaseQuery({ query: "getOas" });
+  return dummyOasMulti;
 }
 
 export async function incidentDetails() {

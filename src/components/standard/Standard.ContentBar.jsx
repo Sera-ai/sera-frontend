@@ -18,7 +18,12 @@ export function ContentBar({
 
   useEffect(() => {
     if (!builder) {
-      const getHostData = inventory.filter((inv) => inv.hostname === host);
+      const getHostData = inventory.filter(
+        (inv) => inv.hostname === decodeURIComponent(host)
+      );
+      console.log(inventory)
+      console.log(host)
+      console.log(decodeURIComponent(host))
       console.log(getHostData);
       let ooas = {};
       const realoas = getHostData[0].oas_spec;
@@ -204,7 +209,7 @@ export function ContentBar({
               setSelectedEndpoint("");
             }}
           >
-            <span className="text-xs uppercase">{host}</span>
+            <span className="text-xs uppercase">{decodeURIComponent(host)}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

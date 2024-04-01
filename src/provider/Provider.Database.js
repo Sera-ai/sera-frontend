@@ -4,6 +4,10 @@ async function databaseQuery({ query, params }) {
       const res = await getExmapleOas();
       return res;
     }
+    case "getOas": {
+      const res = await getOas();
+      return res;
+    }
     case "hosts": {
       const res = await getHosts();
       return res;
@@ -41,12 +45,25 @@ async function getExmapleOas() {
   }
 }
 
+async function getOas() {
+  try {
+    const response = await fetch(`/manage/host/oas`, {
+      headers: { "x-sera-service": "be_builder" },
+    });
+    const jsonData = await response.json();
+    return jsonData;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {};
+  }
+}
+
 async function getHosts() {
   try {
     const response = await fetch(`/manage/host`, {
       headers: { "x-sera-service": "be_builder" },
     });
-    console.log(response)
+    console.log(response);
     const jsonData = await response.json();
     return jsonData;
   } catch (error) {

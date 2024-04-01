@@ -206,11 +206,11 @@ const IssuePrompt = ({ setAddHost }) => {
   const createHost = () => {
     const createIt = async () => {
       const hostname = hostnameRef.current.value;
-      if (!isValidHostname(hostname)) alert("incorrect hostname2");
+      if (!isValidHostname(hostname)) alert("incorrect hostname");
       if (!isValidHostname(hostname)) return;
 
       const res = await backendEvents().createHost({ hostname });
-      console.log(res);
+      window.location.reload()
       setAddHost(false);
     };
     createIt();
