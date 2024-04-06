@@ -61,7 +61,7 @@ const OasEditor = forwardRef(({ oas, setOas, setIsError, darker = false }, ref) 
         <div style={{ width: "100%" }}>
             {/* {state} */}
             <Editor
-                height="70vh"
+                height="100%"
                 defaultLanguage="json"
                 defaultValue={state}
                 onChange={handleEditorChange}

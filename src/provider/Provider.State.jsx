@@ -83,7 +83,7 @@ function useMultiplePersistedStatesWithLazyLoad() {
     dummyOasMulti: [],
     getOasFromHost: {},
     getDnsFromHost: {},
-    getBuilderInventory: []
+    getBuilderInventory: [],
   };
 
   const states = {};
@@ -91,7 +91,7 @@ function useMultiplePersistedStatesWithLazyLoad() {
     try {
       if (typeof DataProvider[key] === "function") {
         const data = await DataProvider[key](params);
-        return data
+        return data;
       }
     } catch (error) {
       console.error("Error loading data for key:", key, error);
@@ -99,7 +99,7 @@ function useMultiplePersistedStatesWithLazyLoad() {
   };
 
   Object.entries(stateKeysDefaults).forEach(([key, defaultValue]) => {
-    const [state, setState] = usePersistedState(key, defaultValue);
+    const [state, setState] = usePersistedState(key, loadStateData({ key }));
     states[key] = [state, setState];
   });
 

@@ -11,7 +11,7 @@ export function EventBar({
   showHost = false,
   children = null,
 }) {
-  const { endpointDetails, dummyOas, dummyOasMulti } = useContext(AppContext);
+  const { endpointDetails } = useContext(AppContext);
   const [openPaths, setOpenPaths] = useState({}); // State to track open paths
 
   if (!endpointDetails[0][endpoint]) {

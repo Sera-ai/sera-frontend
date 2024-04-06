@@ -21,14 +21,16 @@ function Builders() {
       });
       const inventoryArray = [];
       builderInventory.map((inv) => {
-        inventoryArray.push({
-          host: inv.host_id.hostname,
-          path: inv.endpoint,
-          method: inv.method,
+        if (inv.host_id) {
+          inventoryArray.push({
+            host: inv.host_id.hostname,
+            path: inv.endpoint,
+            method: inv.method,
 
-          builder: `[/builder/${inv.host_id.hostname}${inv.endpoint} - ${inv.method}](/builder/${inv.host_id.hostname}${inv.endpoint}/${inv.method.toLowerCase()})`,
-          builderEnabled: inv.builder_id.enabled,
-        });
+            builder: `[/builder/${inv.host_id.hostname}${inv.endpoint}](/builder/${inv.host_id.hostname}${inv.endpoint}/${inv.method.toLowerCase()})`,
+            builderEnabled: inv.builder_id.enabled,
+          });
+        }
       });
       console.log(inventoryArray);
 

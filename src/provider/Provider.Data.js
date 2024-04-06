@@ -47,19 +47,23 @@ export async function endpointDetails() {
 }
 
 export async function dummyOas() {
-  const dummyOas = await databaseQuery({ query: "exampleOas" });
+  const dummyOas = await getDataTemplate("dummyOas")
   console.log(dummyOas);
   return dummyOas;
 }
 
 export async function getOasFromHost(params) {
   console.log(params);
+  if (!params?.host) return {};
+
   const oas = await databaseQuery({ query: "oasFromHost", params });
   return oas;
 }
 
 export async function getDnsFromHost(params) {
   console.log(params);
+  if (!params?.host) return {};
+
   const dns = await databaseQuery({ query: "dnsFromHost", params });
   return dns;
 }

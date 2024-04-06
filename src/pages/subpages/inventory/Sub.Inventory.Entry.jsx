@@ -3,18 +3,14 @@ import { AppContext } from "../../../provider/Provider.State";
 import BodyContent from "../../../components/page/Components.Page.BodyContent";
 import { ListSidebar } from "../../../components/custom/Custom.ListSidebar";
 import { ContentBar } from "../../../components/standard/Standard.ContentBar";
-import ApiDetails from "./partials/Partials.Inventory.Analytics";
 import { useLocation, useNavigate } from "react-router-dom";
 import { backendEvents } from "../../../events/events.backend";
-import InventoryOverview from "./partials/Partials.Inventory.Overview";
-import EndpointOverview from "./partials/Partials.Inventory.Endpoint.Overview";
-import ApiDocumentation from "./partials/Partials.Inventory.Documentation";
 import InventoryHostOverview from "./partials/Partials.Inventory.Host.Overview";
 import InventoryDetailsData from "./Sub.Inventory.DetailsData";
 import Starfield from "react-starfield";
 
 function InventoryEntry({ tier = 1 }) {
-  const { inventoryInventory, nestedVisible, dummyOas, loadStateData } =
+  const { inventoryInventory, nestedVisible, loadStateData } =
     useContext(AppContext);
   const [selectedTab, setSelectedTab] = useState(0); // default selected tab
   const [selectedHost, setSelectedHost] = useState(""); // default selected tab
@@ -24,8 +20,20 @@ function InventoryEntry({ tier = 1 }) {
   const [hostDns, setDns] = useState(null);
   const [isAnalytics, setAnalytics] = useState(false);
   const [tabs, setTabs] = useState(["Inventory"]);
+  const [oas, setOas] = useState(selectedHostData?.oas_spec || {});
 
-  const [oas, setOas] = useState(dummyOas[0]);
+  useEffect(() => {
+    if (
+      selectedHostData?.oas_spec &&
+      selectedHostData?.oas_spec._id != oas?._id
+    ) {
+      setOas(selectedHostData?.oas_spec);
+    }
+  }, [selectedHostData]);
+
+  console.log(selectedHostData);
+
+  console.log(oas);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -193,7 +201,7 @@ const IssuePrompt = ({ setAddHost }) => {
 
           // Additional logic to handle the response
           console.log(res); // Logging the file name
-          window.location.reload()
+          window.location.reload();
         };
 
         // Read the file content
@@ -210,7 +218,7 @@ const IssuePrompt = ({ setAddHost }) => {
       if (!isValidHostname(hostname)) return;
 
       const res = await backendEvents().createHost({ hostname });
-      window.location.reload()
+      window.location.reload();
       setAddHost(false);
     };
     createIt();

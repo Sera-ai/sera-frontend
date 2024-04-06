@@ -1,7 +1,7 @@
 async function databaseQuery({ query, params }) {
   switch (query) {
     case "exampleOas": {
-      const res = await getExmapleOas();
+      const res = await getExampleOas();
       return res;
     }
     case "getOas": {
@@ -31,7 +31,7 @@ async function databaseQuery({ query, params }) {
 
 export default databaseQuery;
 
-async function getExmapleOas() {
+async function getExampleOas() {
   try {
     const response = await fetch(
       `/manage/endpoint/builder?path=%2Freqres.in%2Fitems%2Fpost`,

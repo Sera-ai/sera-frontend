@@ -11,13 +11,13 @@ import InventoryHostSettings from "./Partials.Inventory.Settings";
 
 const ApiDocumentation = ({
   oas,
+  editDocs,
+  manageOAS,
   setOas,
   setSelectedEndpoint,
   endpoint = null,
 }) => {
   const matchMethod = ["__post", "__get", "__delete", "__put", "__patch"];
-  const [editDocs, setEditDocs] = useState(false);
-  const [manageOAS, setManageOAS] = useState(false);
   const [isError, setIsError] = useState(false);
   const [detailsPath, setDetails] = useState(null);
   const [selectedTab, setSelectedTab] = useState(0); // default selected tab
@@ -70,66 +70,6 @@ const ApiDocumentation = ({
 
 export default ApiDocumentation;
 
-function OasSide({ oas }) {
-  const paths = oas.paths;
-
-  const EndpointItem = ({ method, path }) => (
-    <div className={`flex justify-between items-center`}>
-      <span className={`text-sm uppercase  ${method.toUpperCase()}-color`}>
-        {method}
-      </span>
-      <span className="text-xs">{path}</span>
-    </div>
-  );
-
-  const PathDropdown = ({ path, methods }) => {
-    const [isOpen, setIsOpen] = useState(true);
-
-    const toggleDropdown = () => setIsOpen(!isOpen);
-
-    return (
-      <div className="">
-        <button
-          onClick={toggleDropdown}
-          className="flex text-left items-center"
-        >
-          <span className="font-medium text-sm">{path.replace("/", "")}</span>
-          <span className="material-icons ml-1" style={{ fontSize: 17 }}>
-            {isOpen ? "expand_less" : "expand_more"}
-          </span>
-        </button>
-        {isOpen && (
-          <div className="mt-2 space-y-2">
-            {Object.keys(methods).map((method) => (
-              <EndpointItem
-                key={`${path}-${method}`}
-                method={method}
-                path={path}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  };
-
-  const OASEndpoints = () => {
-    return (
-      <div className="space-y-3">
-        {Object.entries(paths).map(([path, methods]) => (
-          <PathDropdown key={path} path={path} methods={methods} />
-        ))}
-      </div>
-    );
-  };
-
-  return (
-    <div className="mainDark rounded-lg pr-4 space-y-4 detailsActionContainer2">
-      <OASEndpoints />
-    </div>
-  );
-}
-
 const Documentation = ({
   manageOAS,
   oas,
@@ -148,8 +88,6 @@ const Documentation = ({
 }) => {
   return (
     <div className="overflow-x-auto flex h-full w-full">
-      {/* Action Div */}
-      {manageOAS ? <OasSide oas={oas} /> : null}
 
       {/* Data Div */}
       <div
@@ -170,7 +108,7 @@ const Documentation = ({
             {!endpoint && (
               <div className="gap-2 flex flex-col">
                 <span className={"docHeading"}>
-                  {oas.info?.title || selectedHost}
+                  {oas.info?.title}
                 </span>
                 <div className={"divider"} />
                 <MDEditor
@@ -179,7 +117,7 @@ const Documentation = ({
                   }
                   saveMarkdown={updateOas}
                   ref={MDEditorRef}
-                  edit={false}
+                  edit={editDocs}
                   mini
                 />
               </div>
@@ -378,7 +316,7 @@ function GetDetails({
         <div className="divider"></div>
       </div>
       <div className="flex flex-col overflow-y-scroll">
-        <APIDocumentation
+        <APIDocumentation2
           oas={oas}
           path={details.path}
           method={details.method}
@@ -389,7 +327,7 @@ function GetDetails({
 }
 
 // Main Component to display all tables
-const APIDocumentation = ({ oas, path, method }) => {
+const APIDocumentation2 = ({ oas, path, method }) => {
   const endpoint = oas.paths[path][method.toLocaleLowerCase()];
 
   const reqParams = getRequestParameters(endpoint, oas);

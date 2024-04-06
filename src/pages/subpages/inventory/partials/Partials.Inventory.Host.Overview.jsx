@@ -66,6 +66,8 @@ const InventoryHostOverview = ({
         return (
           <ApiDocumentation
             oas={oas}
+            editDocs={editDocs}
+            manageOAS={manageOAS}
             setOas={setOas}
             endpoint={endpoint}
             setSelectedEndpoint={setSelectedEndpoint}
@@ -289,8 +291,8 @@ const EndpointSettings = ({ hostDns }) => {
             <div className="flex-1">
               <p className="font-medium text-xs">Download Postman Collection</p>
               <p className="text-gray-300  text-xs">
-                {hostDns?.sera_config.sub_domain
-                  ? `https://${hostDns?.sera_config.sub_domain}.sera`
+                {hostDns?.sera_config?.sub_domain
+                  ? `https://${hostDns?.sera_config?.sub_domain}.sera`
                   : "Click to generate"}
               </p>
             </div>
@@ -323,8 +325,8 @@ function ProxySettings({ hostDns }) {
           <div className="flex-1">
             <p className="font-medium text-xs">Sera Endpoint</p>
             <p className="text-gray-300  text-xs">
-              {hostDns?.sera_config.sub_domain
-                ? `https://${hostDns?.sera_config.sub_domain}.sera/12000`
+              {hostDns?.sera_config?.sub_domain
+                ? `https://${hostDns?.sera_config?.sub_domain}.sera:12000`
                 : "Click to generate"}
             </p>
           </div>
@@ -350,8 +352,8 @@ function ProxySettings({ hostDns }) {
           <div className="flex-1">
             <p className="font-medium text-xs">Obfuscated Endpoint</p>
             <p className="text-gray-300  text-xs">
-              {hostDns?.sera_config.obfuscated
-                ? `https://${hostDns?.sera_config.obfuscated}`
+              {hostDns?.sera_config?.obfuscated
+                ? `https://${hostDns?.sera_config?.obfuscated}`
                 : "Click to generate"}
             </p>
           </div>

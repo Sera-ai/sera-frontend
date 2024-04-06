@@ -85,7 +85,7 @@ const SettingsComponent = ({ filter, options, icon, selectedHostData }) => {
       const updateChecked = (value) => {
         if (value != checked) {
           backendEvents().updateHost({
-            host_id: selectedHostData._id,
+            host_id: selectedHostData?._id,
             field: option.id,
             key: value,
           });

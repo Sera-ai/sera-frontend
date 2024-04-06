@@ -21,11 +21,12 @@ export function ContentBar({
       const getHostData = inventory.filter(
         (inv) => inv.hostname === decodeURIComponent(host)
       );
-      console.log(inventory)
-      console.log(host)
-      console.log(decodeURIComponent(host))
+      console.log(inventory);
+      console.log(host);
+      console.log(decodeURIComponent(host));
       console.log(getHostData);
       let ooas = {};
+      if (!getHostData || getHostData.length == 0) return;
       const realoas = getHostData[0].oas_spec;
       if (!Object.keys(realoas).includes("paths")) {
         ooas = { ...realoas, paths: {} };
@@ -209,7 +210,9 @@ export function ContentBar({
               setSelectedEndpoint("");
             }}
           >
-            <span className="text-xs uppercase">{decodeURIComponent(host)}</span>
+            <span className="text-xs uppercase">
+              {decodeURIComponent(host)}
+            </span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
