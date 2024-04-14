@@ -64,7 +64,7 @@ export function ListSidebar({
   };
 
   return (
-    <div className="dash-card w-[250px] min-w-[250px] text-sm text-white">
+    <div className="dash-card w-[250px] min-w-[250px] text-xs text-white">
       <div className="px-4 flex flex-row items-center h-[56px]">
         <form className="border-b border-slate-200 dark:border-slate-700">
           <div className="relative">
@@ -79,7 +79,7 @@ export function ListSidebar({
         </form>
       </div>
       <hr className="w-full h-1 bg-slate-200 mainDark border-none " />
-      <div className="text-sm text-white py-4">
+      <div className="text-xs text-white py-4">
         <div className="flex flex-row justify-between pb-2 px-4">
           <span className="text-xs uppercase">Hosts</span>
           <span className="text-xs uppercase">EP</span>

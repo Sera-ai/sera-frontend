@@ -289,7 +289,7 @@ const EndpointSettings = ({ hostDns }) => {
               <PostmanIcon />
             </div>
             <div className="flex-1">
-              <p className="font-medium text-xs">Download Postman Collection</p>
+              <p className="font-medium text-xs">Postman Collection</p>
               <p className="text-gray-300  text-xs">
                 {hostDns?.sera_config?.sub_domain
                   ? `https://${hostDns?.sera_config?.sub_domain}.sera`
