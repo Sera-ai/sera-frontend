@@ -21,7 +21,8 @@ function Builders() {
       });
       const inventoryArray = [];
       builderInventory.map((inv) => {
-        if (inv.host_id) {
+        console.log(inv)
+        if (inv.host_id && inv.builder_id) {
           inventoryArray.push({
             host: inv.host_id.hostname,
             path: inv.endpoint,

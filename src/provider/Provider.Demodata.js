@@ -1105,34 +1105,34 @@ const jsonFile = {
       100, 100, 75, 96, 100, 100, 100, 0, 100, 100, 100,
     ],
   },
-  workbookInventory: [
+  playbookInventory: [
     {
-      name: "[Default Sera Workbook](/events/workbook/sera)",
+      name: "[Default Sera Playbook](/events/playbook/sera)",
       type: "Sera Event",
       trigger: "Automatic",
       lastUpdated: "2023-11-23T11:45:00Z",
-      active: true,
+      enabled: true,
     },
     {
-      name: "[Default Custom Workbook](/events/workbook/custom)",
+      name: "[Default Custom Playbook](/events/playbook/custom)",
       type: "Custom Event",
       trigger: "Automatic",
       lastUpdated: "2023-11-23T11:45:00Z",
-      active: true,
+      enabled: true,
     },
     {
-      name: "[Default Builder Workbook](/events/workbook/builder)",
+      name: "[Default Builder Playbook](/events/playbook/builder)",
       type: "Builder Event",
       trigger: "Automatic",
       lastUpdated: "2023-11-23T11:45:00Z",
-      active: true,
+      enabled: true,
     },
     {
-      name: "[Default Trigger Workbook](/events/workbook/trigger)",
+      name: "[Default Trigger Playbook](/events/playbook/trigger)",
       type: "Trigger Event",
       trigger: "Automatic",
       lastUpdated: "2023-11-23T11:45:00Z",
-      active: true,
+      enabled: true,
     },
   ],
   builderInventory: [

@@ -4,7 +4,7 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import MainContent from "../components/page/Components.Page.MainContent";
 
 const Playbook = React.lazy(
-  () => import("./subpages/events/Sub.Events.Playbook")
+  () => import("./subpages/events/Sub.Events.Playbook.Builder")
 );
 const Viewer = React.lazy(() => import("./subpages/events/Sub.Events.Viewer"));
 const EventsEntry = React.lazy(
@@ -30,7 +30,7 @@ function Events() {
       <Routes>
         <Route index element={<EventsEntry />} />
         <Route path="viewer/:eventId" element={<Viewer />} />
-        <Route path="workbook/:workbookId" element={<Playbook />} />
+        <Route path="playbook/:playbookId" element={<Playbook />} />
       </Routes>
       <Outlet />
     </MainContent>

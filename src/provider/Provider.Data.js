@@ -94,9 +94,9 @@ export async function uptimeDetails() {
   return uptimeDemoData;
 }
 
-export async function workbookInventory() {
-  const workbookInventory = await getDataTemplate("workbookInventory");
-  return workbookInventory;
+export async function playbookInventory() {
+  const playbookInventory = await databaseQuery({ query: "getPlaybooks" });
+  return playbookInventory;
 }
 
 export async function builderInventory() {

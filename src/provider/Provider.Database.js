@@ -24,6 +24,10 @@ async function databaseQuery({ query, params }) {
       const res = await allBuilders();
       return res;
     }
+    case "getPlaybooks": {
+      const res = await getPlaybooks();
+      return res;
+    }
     default:
       return {};
   }
@@ -103,6 +107,20 @@ async function dnsFromHost({ params }) {
 async function allBuilders() {
   try {
     const response = await fetch(`/manage/endpoint`, {
+      headers: { "x-sera-service": "be_builder" },
+    });
+    const jsonData = await response.json();
+    console.log(jsonData);
+    return jsonData;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {};
+  }
+}
+
+async function getPlaybooks() {
+  try {
+    const response = await fetch(`/manage/playbook`, {
       headers: { "x-sera-service": "be_builder" },
     });
     const jsonData = await response.json();

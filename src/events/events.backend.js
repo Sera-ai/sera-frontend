@@ -5,11 +5,13 @@ export const backendEvents = (builderContext = {}) => {
   const fetchData = async (path = window.location.pathname) => {};
 
   const getNodeStruc = async (event, type) => {
-    if (!event || !type) return;
-    console.log(type);
+    if (!event) return;
+    console.log(
+      `/manage/getNodeStruc?event=${event}${type ? `&type=${type}` : ""}`
+    );
     try {
       const response = await fetch(
-        `/manage/getNodeStruc?event=${event}&type=${type}`,
+        `/manage/getNodeStruc?event=${event}${type ? `&type=${type}` : ""}`,
         {
           headers: { "x-sera-service": "be_builder" },
         }
