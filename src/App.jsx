@@ -7,6 +7,11 @@ import "./components/charts/Charts.ChartjsConfig";
 import { AppContext } from "./provider/Provider.State";
 import Console from "./pages/subpages/console/sub.console";
 
+//Toast
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSocket } from "./events/events.socket";
+
 // Import pages
 //import Dashboard from "./pages/Pages.Dashboard";
 const Inventory = React.lazy(() => import("./pages/Pages.Inventory"));
@@ -14,7 +19,6 @@ const Events = React.lazy(() => import("./pages/Pages.Events"));
 const Ecosystem = React.lazy(() => import("./pages/Pages.Ecosystem"));
 const Editor = React.lazy(() => import("./pages/Pages.Editor"));
 const Builder = React.lazy(() => import("./pages/Pages.Builder"));
-
 
 const StarField = () => {
   return (
@@ -43,8 +47,11 @@ const MemoizedStarField = React.memo(StarField);
 function App() {
   const { console } = useContext(AppContext);
 
-  const location = useLocation();
+  useEffect(() => {
+    useSocket();
+  }, []);
 
+  const location = useLocation();
 
   useEffect(() => {
     document.querySelector("html").style.scrollBehavior = "auto";
@@ -74,10 +81,9 @@ function App() {
           <Console />
         </div>
       )}
+      <ToastContainer theme="dark" />
     </div>
   );
 }
 
 export default App;
-
-

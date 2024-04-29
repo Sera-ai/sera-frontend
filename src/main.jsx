@@ -6,7 +6,6 @@ import App from './App';
 import { AppStateProvider } from './provider/Provider.State';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
     <Router>
       <ThemeProvider>
         <AppStateProvider>
@@ -14,5 +13,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </AppStateProvider>
       </ThemeProvider>
     </Router>
-  </React.StrictMode>
 );

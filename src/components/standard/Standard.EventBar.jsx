@@ -26,14 +26,10 @@ export function EventBar({
     // Assuming dummyData is the name of your new data structure
     const dummyData = {
       Sera: [
-        "Default Playbook",
-        "Notification Test Playbook",
-        "Audit Log Playbook",
+        "Default Sera Playbook",
       ],
       Builder: [
-        "Default Playbook",
-        "sample.com Playbook",
-        "example.com Playbook",
+        "Default Builder Playbook",
       ],
     };
 

@@ -18,7 +18,7 @@ function Playbook({ tier = 1 }) {
   const [leftbarVisible, setLeftbar] = useState(false); // default selected tab
   const [rightbarVisible, setRightbar] = useState(true); // default selected tab
 
-  const [tabs, setTabs] = useState(["Sera Events"]);
+  const [tabs, setTabs] = useState(["Event Playbooks"]);
 
   const [builderData, setBuilderData] = useState({});
   const [loaded, setLoaded] = useState(false);

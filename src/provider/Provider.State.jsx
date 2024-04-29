@@ -6,6 +6,7 @@ export const AppContext = createContext();
 
 // Provider Component
 export const AppStateProvider = ({ children }) => {
+  console.log("IM BEING CALLED")
   // Use custom hook to initialize all states with persistence
   //const states = useMultiplePersistedStates(stateKeysDefaults);
   const stateKeysDefaults = {
@@ -14,23 +15,17 @@ export const AppStateProvider = ({ children }) => {
     apiInventory: [],
     playbookInventory: [],
     builderInventory: [],
-    dummyOasMulti: [],
     eventListChart: {},
     eventInventory: [],
     anamalyListData: [],
     eventActions: [],
-    inventoryInventory: [],
     availablePlugins: {},
     monthlyAnalytics: {},
     endpointProxy: {},
     endpointDetails: {},
     dummyOas: {},
     incidentDetails: {},
-    console: false,
-    apiInventory: [],
     uptimeDetails: {},
-    playbookInventory: [],
-    builderInventory: [],
     dummyOasMulti: [],
     getOasFromHost: {},
     getDnsFromHost: {},
@@ -64,7 +59,7 @@ export const AppStateProvider = ({ children }) => {
       }
     };
 
-    loadData();
+    //loadData();
   }, []);
 
   return (
