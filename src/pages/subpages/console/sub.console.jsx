@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Terminal from "react-console-emulator";
 import { toast } from "react-toastify";
+import { EventDesign } from "../../../events/events.socket";
 
 const commands = {
   echo: {
@@ -10,11 +11,9 @@ const commands = {
   },
   toast: {
     description: "toast",
-    usage: "toast <string>",
-    fn: function (...args) {
-      const data2 = args.join(" ");
-      console.log(data2);
-      const notify = () => toast(data2);
+    usage: "toast",
+    fn: function () {
+      const notify = () => toast(<EventDesign event={{event: "sera", type: "seraTestEvent"}} />);
       notify();
       return "sent";
     },

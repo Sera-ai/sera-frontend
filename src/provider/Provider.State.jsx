@@ -59,7 +59,7 @@ export const AppStateProvider = ({ children }) => {
       }
     };
 
-    //loadData();
+    loadData();
   }, []);
 
   return (

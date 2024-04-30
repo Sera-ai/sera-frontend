@@ -18,7 +18,7 @@ export const useSocket = () => {
   });
 };
 
-const EventDesign = ({ event }) => {
+export const EventDesign = ({ event }) => {
   const eventText = (event) => {
     switch (event) {
       case "sera":

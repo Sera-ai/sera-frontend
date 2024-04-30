@@ -1,7 +1,4 @@
-.sidebarList li {
-  margin: 14px;
-  border-radius: 5px;
-}
+
 
 .secondaryDarkPadded {
   background-color: #191a21 !important;
@@ -24,10 +21,7 @@
 
 .sidebarLogo {
   aspect-ratio: 1 !important;
-  margin: 12px;
   padding-top: 0px;
-  border-radius: 8px !important;
-  background-color: #262c39;
 }
 
 .sidebarEndItem {
