@@ -1,12 +1,12 @@
 [submodule "src/builder"]
 	path = addons/fe_Builder
-	url = https://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@github.com/Sera-ai/fe_Builder.git
+	url = https://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@github.com/Sera-ai/fe_Builder.git
 	branch = main
 [submodule "src/Sea"]
 	path = addons/fe_Sea
-	url = https://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@github.com/Sera-ai/fe_Sea.git
+	url = https://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@github.com/Sera-ai/fe_Sea.git
 	branch = main
 [submodule "addons/fe_Timeline"]
 	path = addons/fe_Timeline
-	url = https://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@github.com/Sera-ai/fe_Timeline.git
+	url = https://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@github.com/Sera-ai/fe_Timeline.git
 	branch = main
