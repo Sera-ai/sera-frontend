@@ -17,7 +17,7 @@ function ImportData() {
 
     const getSelectedTab = () => {
         switch (selectedTab) {
-            case 0: return (<EditorUpload setOas={setOas} dummyOas={dummyOas[0]} />)
+            case 0: return (<EditorUpload setOas={setOas} dummyOas={dummyOas} />)
             case 1: return (<EditorHeader setOas={setOas} oas={oas} />)
             case 2: return (<EditorServer setOas={setOas} oas={oas} />)
         }

@@ -62,18 +62,16 @@ function App() {
   return (
     <div className="flex flex-col h-screen p-1 mainDark">
       <div className="flex-grow overflow-y-auto">
-        <Suspense fallback={<MemoizedStarField />}>
           <Routes>
-            <Route exact path="/" element={<Inventory />} />
-            <Route path="inventory/*" element={<Inventory />} />
-            <Route path="/events/*" element={<Events />} />
-            <Route path="/editor/*" element={<Editor />} />
-            <Route path="/ecosystem/*" element={<Ecosystem />} />
-            <Route path="/builder/*" element={<Builder />} />
+            <Route exact path="/*" element={<React.Suspense fallback={<MemoizedStarField />}><Inventory /></React.Suspense>} />
+            <Route path="inventory/*" element={<React.Suspense fallback={<MemoizedStarField />}><Inventory /></React.Suspense>} />
+            <Route path="/events/*" element={<React.Suspense fallback={<MemoizedStarField />}><Events /></React.Suspense>} />
+            <Route path="/editor/*" element={<React.Suspense fallback={<MemoizedStarField />}><Editor /></React.Suspense>} />
+            <Route path="/ecosystem/*" element={<React.Suspense fallback={<MemoizedStarField />}><Ecosystem /></React.Suspense>} />
+            <Route path="/builder/*" element={<React.Suspense fallback={<MemoizedStarField />}><Builder /></React.Suspense>} />
           </Routes>
-        </Suspense>
       </div>
-      {console[0] && (
+      {console && (
         <div
           className="overflow-y-scroll console-scroll"
           style={{ minHeight: 250 }}

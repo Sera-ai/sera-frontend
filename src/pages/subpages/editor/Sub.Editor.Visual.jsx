@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from "../../../provider/Provider.State";
 import BodyContent from "../../../components/page/Components.Page.BodyContent";
 import { ListSidebar } from "../../../components/custom/Custom.ListSidebar";
-import SeaMap from "@sea/App";
+//import SeaMap from "@sea/App";
 import { LeftIcon } from "../../../assets/assets.svg";
 
 function EditorVisual({ oas, setOas, tier = 1 }) {
@@ -44,12 +44,12 @@ function EditorVisual({ oas, setOas, tier = 1 }) {
       <div className={"flex flex-row mainDark gap-1 h-full"}>
         {nestedVisible <= tier && (
           <ListSidebar
-            inventory={inventoryInventory[0]}
+            inventory={inventoryInventory}
             selectedHost={selectedHost}
             setSelectedHost={setSelectedHost}
           />
         )}
-        <SeaMap leftBar={leftbarVisible} rightBar={rightbarVisible} oas={oas} />
+        {/* <SeaMap leftBar={leftbarVisible} rightBar={rightbarVisible} oas={oas} /> */}
       </div>
     </BodyContent>
   );

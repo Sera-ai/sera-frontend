@@ -161,7 +161,7 @@ export function ContentBar({
   const GetList = () => {
     console.log(dummyOasMulti);
 
-    return dummyOasMulti[0].map((oas) => {
+    return dummyOasMulti.map((oas) => {
       const isOpenHost = openPaths[oas.servers[0].url];
 
       return (

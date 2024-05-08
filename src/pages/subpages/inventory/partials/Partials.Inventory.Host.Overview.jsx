@@ -49,12 +49,11 @@ const InventoryHostOverview = ({
   }, [location]);
 
   const oasEditorRef = useRef();
+  const MDEditorRef = useRef();
 
   const updateChildState = () => {
     oasEditorRef.current.settingState();
   };
-
-  const MDEditorRef = useRef();
 
   const updateMarkdown = () => {
     MDEditorRef.current.saveOasItem();

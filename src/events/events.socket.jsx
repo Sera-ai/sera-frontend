@@ -1,11 +1,12 @@
 import { io } from "socket.io-client";
-export const socket = io(`wss://${window.location.hostname}`);
+export const socket = io(`wss://${window.location.hostname}:${__BE_ROUTER_PORT__}`);
 import { toast } from "react-toastify";
 
 export const useSocket = () => {
   const notify = (str) => toast(str);
 
   function onConnectSocket() {
+    notify("Socket Connected");
     console.log("socket connected");
   }
 
@@ -17,6 +18,9 @@ export const useSocket = () => {
     });
   });
 };
+
+
+
 
 export const EventDesign = ({ event }) => {
   const eventText = (event) => {

@@ -17,7 +17,7 @@ function EditorViewer() {
   ]);
 
   const { dummyOas, apiInventory } = useContext(AppContext);
-  const [oas, setOas] = useState(dummyOas[0]);
+  const [oas, setOas] = useState(dummyOas);
 
   const SelectedPage = () => {
     switch (selectedTab) {
@@ -26,7 +26,7 @@ function EditorViewer() {
           <HostFullList
             setFilter={setFilter}
             filter={filter}
-            apiInventory={apiInventory[0]}
+            apiInventory={apiInventory}
           />
         );
       case 1:

@@ -11,7 +11,7 @@ function Inventory() {
   const { eventInventory } = useContext(AppContext);
 
   const existingColumns =
-    eventInventory[0].length > 0 ? Object.keys(eventInventory[0][0]) : [];
+    eventInventory.length > 0 ? Object.keys(eventInventory[0]) : [];
 
   const [selectedItems, setSelectedItems] = useState({});
   const selectAllRef = useRef(null);
@@ -46,7 +46,7 @@ function Inventory() {
         filter={filter}
         setFilter={setFilter}
         columns={columns}
-        data={eventInventory[0]}
+        data={eventInventory}
         linkClasses={linkClasses}
         selectedItems={selectedItems}
         setSelectedItems={setSelectedItems}
