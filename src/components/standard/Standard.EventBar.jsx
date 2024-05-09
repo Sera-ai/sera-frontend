@@ -14,7 +14,7 @@ export function EventBar({
   const { endpointDetails } = useContext(AppContext);
   const [openPaths, setOpenPaths] = useState({}); // State to track open paths
 
-  if (!endpointDetails[0][endpoint]) {
+  if (!endpointDetails[endpoint]) {
     return <div>No endpoint details available.</div>;
   }
 
@@ -126,8 +126,8 @@ export function EventBar({
       )}
       <div className="text-sm text-white py-4">
         <div className="flex flex-row justify-between pb-2 px-4">
-          <span className="text-xs uppercase">Event</span>
-          <span className="text-xs uppercase">Active</span>
+          <span className="text-xs">Event</span>
+          <span className="text-xs">Active</span>
         </div>
         <GetList />
       </div>

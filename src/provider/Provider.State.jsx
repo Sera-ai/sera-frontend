@@ -4,134 +4,82 @@ import * as DataProvider from "./Provider.Data";
 // Create Context
 export const AppContext = createContext();
 
-// Provider Component
-export const AppStateProvider = ({ children }) => {
-  console.log("IM BEING CALLED")
-  // Use custom hook to initialize all states with persistence
-  //const states = useMultiplePersistedStates(stateKeysDefaults);
-  const stateKeysDefaults = {
-    inventoryInventory: [],
-    console: false,
-    apiInventory: [],
-    playbookInventory: [],
-    builderInventory: [],
-    eventListChart: {},
-    eventInventory: [],
-    anamalyListData: [],
-    eventActions: [],
-    availablePlugins: {},
-    monthlyAnalytics: {},
-    endpointProxy: {},
-    endpointDetails: {},
-    dummyOas: {},
-    incidentDetails: {},
-    uptimeDetails: {},
-    dummyOasMulti: [],
-    getOasFromHost: {},
-    getDnsFromHost: {},
-    getBuilderInventory: [],
-  };
+// Define initial state defaults
+const initialStateDefaults = {
+  inventoryInventory: [],
+  console: false,
+  apiInventory: [],
+  playbookInventory: [],
+  builderInventory: [],
+  eventListChart: {},
+  eventInventory: [],
+  anamalyListData: [],
+  eventActions: [],
+  availablePlugins: {},
+  monthlyAnalytics: {},
+  endpointProxy: {},
+  endpointDetails: {},
+  dummyOas: {},
+  incidentDetails: {},
+  uptimeDetails: {},
+  dummyOasMulti: [],
+  getOasFromHost: {},
+  getDnsFromHost: {},
+  getBuilderInventory: [],
+};
 
+// Initialize state hooks
+function useInitialState() {
+  const [state, setState] = useState(initialStateDefaults);
   const [nestedVisible, setNestedVisible] = useState(0);
   const [error, setError] = useState(null);
-  const { states, loadStateData } = useMultiplePersistedStatesWithLazyLoad();
 
-  // Data fetching and setting dynamically
+  // Load data from DataProvider functions
+  const loadData = async () => {
+    try {
+      // Retrieve data for each key in initial state defaults
+      const fetchPromises = Object.keys(initialStateDefaults).map(async (key) => {
+        const fetchFunction = DataProvider[key];
+        if (typeof fetchFunction === "function") {
+          const data = await fetchFunction();
+          setState((prevState) => ({
+            ...prevState,
+            [key]: data,
+          }));
+        }
+      });
+
+      // Await all data fetching promises
+      await Promise.all(fetchPromises);
+      setError(null);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  // Fetch data when the component mounts
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        // Iterate over each key in your state definitions
-        const fetchPromises = Object.keys(stateKeysDefaults).map(
-          async (key) => {
-            const functionName = key; // Assumes the function name matches the key
-            if (typeof DataProvider[functionName] === "function") {
-              const data = await DataProvider[functionName]();
-              states[key][1](data); // Dynamically call setState for each
-            }
-          }
-        );
-
-        await Promise.all(fetchPromises);
-        console.log(fetchPromises);
-        setError(null);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-
     loadData();
   }, []);
+
+  return { state, nestedVisible, setNestedVisible, error, loadData };
+}
+
+// Provider Component
+export const AppStateProvider = ({ children }) => {
+  const { state, nestedVisible, setNestedVisible, error, loadData } = useInitialState();
 
   return (
     <AppContext.Provider
       value={{
-        ...states,
-        error,
-        loadStateData,
+        ...state,
         nestedVisible,
         setNestedVisible,
+        error,
+        loadData,
       }}
     >
       {children}
     </AppContext.Provider>
   );
 };
-
-function useMultiplePersistedStatesWithLazyLoad() {
-  const stateKeysDefaults = {
-    eventListChart: {},
-    eventInventory: [],
-    anamalyListData: [],
-    eventActions: [],
-    inventoryInventory: [],
-    availablePlugins: {},
-    monthlyAnalytics: {},
-    endpointProxy: {},
-    endpointDetails: {},
-    dummyOas: {},
-    incidentDetails: {},
-    console: false,
-    apiInventory: [],
-    uptimeDetails: {},
-    playbookInventory: [],
-    builderInventory: [],
-    dummyOasMulti: [],
-    getOasFromHost: {},
-    getDnsFromHost: {},
-    getBuilderInventory: [],
-  };
-
-  const states = {};
-  const loadStateData = async ({ key, params = {} }) => {
-    try {
-      if (typeof DataProvider[key] === "function") {
-        const data = await DataProvider[key](params);
-        return data;
-      }
-    } catch (error) {
-      console.error("Error loading data for key:", key, error);
-    }
-  };
-
-  Object.entries(stateKeysDefaults).forEach(([key, defaultValue]) => {
-    const [state, setState] = usePersistedState(key, loadStateData({ key }));
-    states[key] = [state, setState];
-  });
-
-  return { states, loadStateData };
-}
-
-function usePersistedState(key, defaultValue) {
-  const [state, setState] = useState(() => {
-    const persistedValue = localStorage.getItem(key);
-    return persistedValue && persistedValue !== "undefined"
-      ? JSON.parse(persistedValue)
-      : defaultValue;
-  });
-
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(state));
-  }, [key, state]);
-
-  return [state, setState];
-}

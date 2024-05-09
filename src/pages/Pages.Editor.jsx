@@ -13,7 +13,7 @@ function Editor() {
   const [isPopup, setIsPopup] = useState(false);
   const [title, setTitle] = useState("Editor");
 
-  const [oas, setOas] = useState(dummyOas[0]);
+  const [oas, setOas] = useState(dummyOas);
 
   useEffect(() => {
     setIsPopup(window.opener != null);

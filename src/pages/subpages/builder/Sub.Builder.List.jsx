@@ -7,18 +7,17 @@ import { ContentBar } from "../../../components/standard/Standard.ContentBar";
 import BodyContent from "../../../components/page/Components.Page.BodyContent";
 import InventoryHostSettings from "../inventory/partials/Partials.Inventory.Settings";
 import { useNavigate } from "react-router-dom";
+import * as DataProvider from "../../../provider/Provider.Data"
 
 function Builders() {
   const [filter, setFilter] = useState("");
   const [columns, setColumns] = useState([]);
   const [builderInventory, setBuilderInventory] = useState([]);
-  const { loadStateData } = useContext(AppContext);
 
   useEffect(() => {
     const getBuilderInventory = async () => {
-      const builderInventory = await loadStateData({
-        key: "getBuilderInventory",
-      });
+      const builderInventory = await DataProvider.getBuilderInventory()
+    
       const inventoryArray = [];
       builderInventory.map((inv) => {
         console.log(inv)

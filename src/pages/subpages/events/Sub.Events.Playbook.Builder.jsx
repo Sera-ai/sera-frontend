@@ -28,7 +28,7 @@ function Playbook({ tier = 1 }) {
     async function fetchData() {
       try {
         const response = await fetch(
-          `/manage/endpoint/builder?event=${params.playbookId}`,
+          `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/endpoint/builder?event=${params.playbookId}`,
           {
             headers: { "x-sera-service": "be_builder" },
           }

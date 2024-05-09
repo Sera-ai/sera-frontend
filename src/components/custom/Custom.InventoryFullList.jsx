@@ -46,7 +46,7 @@ function InventoryFullList({ filter, inventoryInventory }) {
               <tr>
                 <th className="p-2"></th>
                 {inventoryInventory.length > 0 &&
-                  Object.keys(inventoryInventory[0]).map((key, index) => {
+                  Object.keys(inventoryInventory).map((key, index) => {
                     return (
                       <th className="p-2">
                         <div

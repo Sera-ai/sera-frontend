@@ -53,10 +53,10 @@ function Header({ sidebarOpen, setSidebarOpen, transparent, title }) {
         <div
           style={{
             borderRadius: 50,
-            backgroundColor: console[0] ? "#191A21" : "#23232E",
+            backgroundColor: console ? "#191A21" : "#23232E",
             padding: 10,
           }}
-          onClick={() => console[1](!console[0])}
+          onClick={() => console[1](!console)}
         >
           <ConsoleIcon size={20}/>
         </div>

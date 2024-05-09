@@ -4,6 +4,8 @@ const CardDetails = ({
   endpoint = "inventory/api.sample.com/pets/__post",
   endpointDetails,
 }) => {
+
+  console.log(endpointDetails)
   if (!endpointDetails[endpoint]) {
     return;
   }

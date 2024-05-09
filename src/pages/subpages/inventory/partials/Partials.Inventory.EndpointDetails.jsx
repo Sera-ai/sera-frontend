@@ -6,7 +6,7 @@ function CatalogDetailsData({ endpoint }) {
   const { endpointDetails } = useContext(AppContext);
 
   console.log(endpoint);
-  if (!endpointDetails[0][endpoint]) {
+  if (!endpointDetails[endpoint]) {
     return;
   }
 
@@ -106,7 +106,7 @@ function CatalogDetailsData({ endpoint }) {
             </thead>
             {/* Table body */}
             <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
-              {Object.keys(endpointDetails[0][endpoint]["details"]).map(
+              {Object.keys(endpointDetails[endpoint]["details"]).map(
                 (obj, index) => (
                   <React.Fragment key={index}>
                     {/* Rows related to each endpoint under the host */}
@@ -126,10 +126,10 @@ function CatalogDetailsData({ endpoint }) {
                         <div className="flex flex-wrap gap-2">
                           <div className="text-slate-800 text-xs dark:text-slate-100 flex flex-wrap">
                             {tableData(
-                              endpointDetails[0][endpoint]["details"][obj],
+                              endpointDetails[endpoint]["details"][obj],
                               index,
                               Object.keys(
-                                endpointDetails[0][endpoint]["details"]
+                                endpointDetails[endpoint]["details"]
                               ).length
                             )}
                           </div>
@@ -171,7 +171,7 @@ function CatalogDetailsData({ endpoint }) {
             </thead>
             {/* Table body */}
             <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
-              {Object.keys(endpointDetails[0][endpoint]["statistics"]).map(
+              {Object.keys(endpointDetails[endpoint]["statistics"]).map(
                 (obj, index) => (
                   <tr key={index} className="mainDark rowItem noborder">
                     <td className="pr-3">
@@ -187,7 +187,7 @@ function CatalogDetailsData({ endpoint }) {
                     <td className="p-1">
                       <div className="flex flex-wrap gap-2">
                         <div className="text-slate-800 text-xs dark:text-slate-100 flex flex-wrap">
-                          {endpointDetails[0][endpoint]["statistics"][obj]}
+                          {endpointDetails[endpoint]["statistics"][obj]}
                         </div>
                       </div>
                     </td>

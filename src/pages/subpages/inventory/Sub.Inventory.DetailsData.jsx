@@ -11,16 +11,18 @@ import InventoryHeader from "../../../components/page/Components.Page.Inventory.
 function InventoryDetailsData({ endpoint, overview = false }) {
   const { endpointDetails, uptimeDetails } = useContext(AppContext);
 
+  console.log(endpointDetails)
+
   return (
       <div className="grid grid-cols-3 gap-7 w-full p-4">
         {/* <BarGraph bare={true} /> */}
-        <CardUptime data={uptimeDetails[0]} />
-        <CardDetails endpointDetails={endpointDetails[0]} />
+        <CardUptime data={uptimeDetails} />
+        <CardDetails endpointDetails={endpointDetails} />
 
-        <CardUptime data={uptimeDetails[0]} />
+        <CardUptime data={uptimeDetails} />
         <CardStacked />
 
-        <CardUptime data={uptimeDetails[0]} />
+        <CardUptime data={uptimeDetails} />
         <CardTraffic />
         {/* <BarGraph bare={false} />
           <InventoryFullList filter={""} /> */}

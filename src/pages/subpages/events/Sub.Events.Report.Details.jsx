@@ -8,12 +8,12 @@ const ReportDetails = ({ incidentId = "test" }) => {
 
   return (
     <div className="flex flex-col flex-grow overflow-x-auto">
-      <EventItem incidentDetails={incidentDetails[0]} incidentId={incidentId} />
-      <EventItem incidentDetails={incidentDetails[0]} incidentId={incidentId} />
-      <EventItem incidentDetails={incidentDetails[0]} incidentId={incidentId} />
-      <EventItem incidentDetails={incidentDetails[0]} incidentId={incidentId} />
-      <EventItem incidentDetails={incidentDetails[0]} incidentId={incidentId} />
-      <EventItem incidentDetails={incidentDetails[0]} incidentId={incidentId} />
+      <EventItem incidentDetails={incidentDetails} incidentId={incidentId} />
+      <EventItem incidentDetails={incidentDetails} incidentId={incidentId} />
+      <EventItem incidentDetails={incidentDetails} incidentId={incidentId} />
+      <EventItem incidentDetails={incidentDetails} incidentId={incidentId} />
+      <EventItem incidentDetails={incidentDetails} incidentId={incidentId} />
+      <EventItem incidentDetails={incidentDetails} incidentId={incidentId} />
     </div>
   );
 };

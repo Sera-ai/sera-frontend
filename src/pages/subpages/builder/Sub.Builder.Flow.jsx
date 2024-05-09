@@ -30,7 +30,7 @@ function BuilderFlow() {
     async function fetchData() {
       try {
         const response = await fetch(
-          `/manage/endpoint/builder?path=${encodeURIComponent(
+          `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/endpoint/builder?path=${encodeURIComponent(
             path.replace("/builder", "")
           )}`,
           { headers: { "x-sera-service": "be_builder" } }

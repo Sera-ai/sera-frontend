@@ -1,6 +1,8 @@
 import { defineConfig } from "vite";
 import postcss from "./postcss.config.js";
 import react from "@vitejs/plugin-react";
+import visualizer from "rollup-plugin-visualizer";
+
 import path from "path"; // Import the path module
 import fs from "fs";
 
@@ -14,7 +16,14 @@ export default defineConfig({
   css: {
     postcss,
   },
-  plugins: [react()],
+  plugins: [
+    react(),
+    visualizer({
+      open: true, // This automatically opens the report in your browser after build
+      gzipSize: true,
+      brotliSize: true,
+    }),
+  ],
   resolve: {
     alias: [
       {
@@ -50,12 +59,6 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: [
-      // Add specific dependencies from your addons here
-      // For example, if "@builder/utils" and "@sea/core" are dependencies within your projects, you'd list them like so:
-      // '@builder/App',
-      // '@sea/App',
-      // You might need to add actual package names as used within those projects
-    ],
+    include: ["@builder/App", "@timeline/App", "@sea/App"],
   },
 });

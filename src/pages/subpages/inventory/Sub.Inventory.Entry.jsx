@@ -8,9 +8,10 @@ import { backendEvents } from "../../../events/events.backend";
 import InventoryHostOverview from "./partials/Partials.Inventory.Host.Overview";
 import InventoryDetailsData from "./Sub.Inventory.DetailsData";
 import Starfield from "react-starfield";
+import { getDnsFromHost, getOasFromHost } from "../../../provider/Provider.Data";
 
 function InventoryEntry({ tier = 1 }) {
-  const { inventoryInventory, nestedVisible, loadStateData } =
+  const { inventoryInventory, nestedVisible } =
     useContext(AppContext);
   const [selectedTab, setSelectedTab] = useState(0); // default selected tab
   const [selectedHost, setSelectedHost] = useState(""); // default selected tab
@@ -20,18 +21,18 @@ function InventoryEntry({ tier = 1 }) {
   const [hostDns, setDns] = useState(null);
   const [isAnalytics, setAnalytics] = useState(false);
   const [tabs, setTabs] = useState(["Inventory"]);
-  const [oas, setOas] = useState(selectedHostData?.oas_spec || {});
+  const [oas, setOas] = useState(selectedHostData[0]?.oas_spec || {});
 
   useEffect(() => {
     if (
-      selectedHostData?.oas_spec &&
-      selectedHostData?.oas_spec._id != oas?._id
+      selectedHostData[0]?.oas_spec &&
+      selectedHostData[0]?.oas_spec._id != oas?._id
     ) {
-      setOas(selectedHostData?.oas_spec);
+      setOas(selectedHostData[0]?.oas_spec);
     }
   }, [selectedHostData]);
 
-  console.log(selectedHostData);
+  console.log("selectedHostData",selectedHostData);
 
   console.log(oas);
 
@@ -66,25 +67,18 @@ function InventoryEntry({ tier = 1 }) {
           console.log("set selected host", selectedHost);
           const newUrl = `/inventory/${selectedHost}`;
 
-          const hostOas = await loadStateData({
-            key: "getOasFromHost",
-            params: { hostname: selectedHost },
-          });
+          const hostOas = await getOasFromHost({ hostname: selectedHost })
+          const hostDns = await getDnsFromHost({ hostname: selectedHost })
 
-          const hostDns = await loadStateData({
-            key: "getDnsFromHost",
-            params: { hostname: selectedHost },
-          });
-
-          const hostData = inventoryInventory[0].filter(
+          const hostData = inventoryInventory.filter(
             (host) => host.hostname === selectedHost
           );
 
-          console.log(inventoryInventory[0]);
+          console.log(inventoryInventory);
           console.log(hostData);
           setOas(hostOas);
           setDns(hostDns);
-          setSelectedHostData(hostData[0]);
+          setSelectedHostData(hostData);
           setSelectedEndpoint("");
           console.log(newUrl);
 
@@ -119,7 +113,7 @@ function InventoryEntry({ tier = 1 }) {
         {/* Hosts List Bar */}
         {nestedVisible <= tier && (
           <ListSidebar
-            inventory={inventoryInventory[0]}
+            inventory={inventoryInventory}
             selectedHost={selectedHost}
             setSelectedHost={setSelectedHost}
             setSelectedHostData={setSelectedHostData}
@@ -134,7 +128,7 @@ function InventoryEntry({ tier = 1 }) {
         {selectedHost && nestedVisible <= tier && (
           <ContentBar
             endpoint={selectedEndpoint}
-            inventory={inventoryInventory[0]}
+            inventory={inventoryInventory}
             host={selectedHost}
             selectedEndpoint={selectedEndpoint}
             setSelectedEndpoint={setSelectedEndpoint}

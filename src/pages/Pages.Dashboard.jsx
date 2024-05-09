@@ -23,9 +23,9 @@ function Dashboard() {
     >
       <div className="py-4 px-7 w-full h-full overflow-y-auto">
         <div className="grid grid-cols-3 gap-7">
-          <CardUptime data={uptimeDetails[0]} />
+          <CardUptime data={uptimeDetails} />
           <CardTraffic />
-          <AnamalyList bare={false} anamalyListData={anamalyListData[0]} />
+          <AnamalyList bare={false} anamalyListData={anamalyListData} />
           <CardLatency />
           <GitHubContributionsGraph />
           {/* <BarGraph bare={false} />

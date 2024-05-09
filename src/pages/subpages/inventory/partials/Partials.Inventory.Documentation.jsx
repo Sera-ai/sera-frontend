@@ -48,6 +48,7 @@ const ApiDocumentation = ({
 
   const updateOas = () => {};
 
+  console.log("manageOAS",oas)
   return (
     <Documentation
       manageOAS={manageOAS}

@@ -22,7 +22,7 @@ function EditorEntry() {
             setColumns={setColumns}
             columns={columns}
           >
-            <HostFullList setFilter={setFilter} filter={filter} apiInventory={apiInventory[0]} />
+            <HostFullList setFilter={setFilter} filter={filter} apiInventory={apiInventory} />
           </HeaderWrapper>
         );
       case 1:
