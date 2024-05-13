@@ -1,5 +1,8 @@
 import { io } from "socket.io-client";
-export const socket = io(`wss://${window.location.hostname}:${__BE_ROUTER_PORT__}`,{ path: '/sera-socket-io' });
+export const socket = io(
+  `wss://${window.location.hostname}:${__BE_ROUTER_PORT__}`,
+  { path: "/sera-socket-io" }
+);
 import { toast } from "react-toastify";
 
 export const useSocket = () => {
@@ -18,9 +21,6 @@ export const useSocket = () => {
     });
   });
 };
-
-
-
 
 export const EventDesign = ({ event }) => {
   const eventText = (event) => {
@@ -63,7 +63,14 @@ export const EventDesign = ({ event }) => {
           fontSize: 12,
         }}
       >
-        <span style={{ fontWeight: "bold", color: "#a589e7", textTransform: "uppercase", fontSize: 8 }}>
+        <span
+          style={{
+            fontWeight: "bold",
+            color: "#a589e7",
+            textTransform: "uppercase",
+            fontSize: 8,
+          }}
+        >
           {eventText(event.event)}
         </span>
         <span>On {camelCaseToCapitalizedSpace(event.type)}</span>

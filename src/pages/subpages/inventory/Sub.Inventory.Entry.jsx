@@ -311,14 +311,26 @@ const IssuePrompt = ({ setAddHost }) => {
   );
 };
 
+
 const StarField = () => {
   return (
-    <Starfield
-      starCount={3000}
-      starColor={[255, 255, 255]}
-      speedFactor={0.01}
-      backgroundColor="#000"
-    />
+    <div
+      style={{
+        position: "absolute",
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        zIndex: 0,
+      }}
+    >
+      <Starfield
+        starCount={3000}
+        starColor={[255, 255, 255]}
+        speedFactor={0.01}
+        backgroundColor="#191a21"
+      />
+    </div>
   );
 };
 //Stop refreshing!

@@ -4,15 +4,11 @@ import Graph from "react-graph-vis";
 
 import Sidebar from "./global/Global.Sidebar";
 import Header from "./global/Global.Header";
-import Starfield from "react-starfield";
 
 import FilterButton from "../components/Components.DropdownFilter";
 import { AppContext } from "../provider/Provider.State";
 import { EpsilonIcon, SearchIcon } from "../assets/assets.svg";
 
-const StarfieldWrapper = memo(function StarfieldWrapper(props) {
-  return <Starfield {...props} />;
-});
 
 function Ecosystem() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
