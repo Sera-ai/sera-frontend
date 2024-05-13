@@ -11,6 +11,9 @@ import {
   PowerIcon,
 } from "../../../assets/assets.svg";
 import { useParams } from "react-router-dom";
+import Starfield from "react-starfield";
+
+const MemoizedStarField = React.memo(StarField);
 
 function Playbook({ tier = 1 }) {
   const { dummyOas, nestedVisible } = useContext(AppContext);
@@ -78,7 +81,7 @@ function Playbook({ tier = 1 }) {
       }
     >
       <div className={"flex flex-row mainDark gap-1 h-full"}>
-        {loaded && (
+        {loaded ? (
           <BuilderMap
             nodes={builderData.nodes}
             edges={builderData.edges}
@@ -88,7 +91,7 @@ function Playbook({ tier = 1 }) {
             getNodeStruc={backendEvents().getNodeStruc}
             type={"event"}
           />
-        )}
+        ) : <MemoizedStarField/>}
       </div>
     </BodyContent>
   );

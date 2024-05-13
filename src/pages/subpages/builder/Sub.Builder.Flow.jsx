@@ -15,6 +15,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { backendEvents } from "../../../events/events.backend";
 import Starfield from "react-starfield";
 
+const MemoizedStarField = React.memo(StarField);
+
+
 function BuilderFlow() {
   const location = useLocation();
 
@@ -113,7 +116,7 @@ function BuilderFlow() {
       tier={2}
     >
       <div className="flex pt-1 w-full h-full">
-        {loaded && (
+        {loaded ? (
           <BuilderMap
             nodes={nodes}
             edges={edges}
@@ -121,7 +124,7 @@ function BuilderFlow() {
             builderId={builderId}
             type={"builder"}
           />
-        )}
+        ) : <MemoizedStarField /> }
         {issue && (
           <div className="flex w-full h-full space-x-1">
             <ContentBar
