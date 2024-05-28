@@ -7,6 +7,7 @@ import CardLatency from "../../../components/cards/Components.Card.Latency";
 import CardStacked from "../../../components/cards/Components.Card.Stacked";
 import CardDetails from "../../../components/cards/Components.Card.Details";
 import InventoryHeader from "../../../components/page/Components.Page.Inventory.Header";
+import Treemap from "../../../components/charts/Charts.Treemap";
 
 function InventoryDetailsData({ endpoint, overview = false }) {
   const { endpointDetails, uptimeDetails } = useContext(AppContext);
@@ -16,7 +17,7 @@ function InventoryDetailsData({ endpoint, overview = false }) {
   return (
       <div className="grid grid-cols-3 gap-7 w-full p-4">
         {/* <BarGraph bare={true} /> */}
-        <CardUptime data={uptimeDetails} />
+        <Treemap data={uptimeDetails} />
         <CardDetails endpointDetails={endpointDetails} />
 
         <CardUptime data={uptimeDetails} />

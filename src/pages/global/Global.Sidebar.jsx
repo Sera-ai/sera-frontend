@@ -55,26 +55,31 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
       ref={sidebar}
       className={` ${
         transparent ? "transBG " : "secondaryDark "
-      } h-full flex sidebar flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-full overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 shrink-0  transition-all duration-200 ease-in-out -translate-x-64`}
+      } h-full flex sidebar flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-full overflow-y-scroll lg:overflow-y-auto no-scrollbar w-56 lg:w-20 shrink-0  transition-all duration-200 ease-in-out -translate-x-56`}
     >
-      {/* Sidebar header */}
-      <li
-        className={`sidebarLogo rounded-sm last:mb-0 flex items-center justify-center`}
-      >
-        <NavLink
-          end
-          to="/"
-          className={`block text-slate-200 truncate transition duration-150  hover:text-white`}
-        >
-          <img src={"/src/assets/logo.png"} alt="Logo" width="24" height="24" />
-        </NavLink>
-      </li>
-
       {/* Links */}
       <div className="space-y-8">
         {/* Pages group */}
         <div>
           <ul className="sidebarList">
+            {/* Sidebar header */}
+            <li
+              className={`sidebarLogo sidebarItem rounded-sm last:mb-0 flex items-center justify-center`}
+            >
+              <NavLink
+                end
+                to="/"
+                className={`block text-slate-200 truncate transition duration-150  hover:text-white`}
+              >
+                <img
+                  src={"/src/assets/logo.png"}
+                  alt="Logo"
+                  width="24"
+                  height="24"
+                />
+              </NavLink>
+            </li>
+
             {/* Inbox 
             <li
               className={`sidebarItem rounded-sm mb-0.5 last:mb-0 flex items-center justify-center ${
@@ -133,7 +138,9 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
                 }`}
               >
                 <EventsIcon
-                  secondaryColor={pathname.includes("events") ? "#2B84EC" : "#FFFFFF50"}
+                  secondaryColor={
+                    pathname.includes("events") ? "#2B84EC" : "#FFFFFF50"
+                  }
                 />
               </NavLink>
             </li>

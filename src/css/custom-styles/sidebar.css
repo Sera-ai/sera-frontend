@@ -1,22 +1,22 @@
-
-
 .secondaryDarkPadded {
   background-color: #191a21 !important;
 }
 
 .sidebarButton {
-    background-color: #191a21 !important;
-    border-radius: 5px;
-  }
+  background-color: #191a21 !important;
+  border-radius: 5px;
+}
 
-  .sidebarButtonSelect {
-    border-radius: 5px;
-    border-width: 1px;
-    border-color: #ffffff90;
-  }
+.sidebarButtonSelect {
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: #ffffff90;
+}
 
 .sidebarItem {
   aspect-ratio: 1 !important;
+  background-color: #23232e;
+  cursor: pointer;
 }
 
 .sidebarLogo {
@@ -24,11 +24,17 @@
   padding-top: 0px;
 }
 
-.sidebarEndItem {
+.sidebarList {
+  background-color: #191a21 !important;
+  padding-bottom: 4px;
 }
 
 .sidebar {
-  width: 4em !important;
+  width: 56px !important;
+}
+
+li.sidebarItem:not(:last-child) {
+  margin-bottom: 4px;
 }
 
 .transBG {
