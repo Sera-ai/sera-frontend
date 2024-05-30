@@ -10,7 +10,7 @@ import { ConsoleIcon, SearchIcon } from "../../assets/assets.svg";
 
 function Header({ sidebarOpen, setSidebarOpen, transparent, title }) {
   const [searchModalOpen, setSearchModalOpen] = useState(false);
-  const { console } = useContext(AppContext);
+  const { console, setConsole } = useContext(AppContext);
 
   return (
     <header
@@ -56,9 +56,9 @@ function Header({ sidebarOpen, setSidebarOpen, transparent, title }) {
             backgroundColor: console ? "#191A21" : "#23232E",
             padding: 10,
           }}
-          onClick={() => console[1](!console)}
+          onClick={() => setConsole(!console)}
         >
-          <ConsoleIcon size={20}/>
+          <ConsoleIcon size={20} />
         </div>
         <Notifications align="right" />
         <Help align="right" />

@@ -4,6 +4,9 @@ export const socket = io(
   { path: "/sera-socket-io" }
 );
 import { toast } from "react-toastify";
+import {
+  EventsIcon,
+} from "../assets/assets.svg";
 
 export const useSocket = () => {
   const notify = (str) => toast(str);
@@ -55,44 +58,17 @@ export const EventDesign = ({ event }) => {
   };
 
   return (
-    <div className="flex flex-row w-full h-full">
+    <div className="dndnode">
       <div
-        className="flex flex-col h-full w-full"
-        style={{
-          color: "#fff",
-          fontSize: 12,
-        }}
+        className="dndnodeicon handleLeft scriptBorder"
+        style={{ height: 42 }}
       >
-        <span
-          style={{
-            fontWeight: "bold",
-            color: "#a589e7",
-            textTransform: "uppercase",
-            fontSize: 8,
-          }}
-        >
-          {eventText(event.event)}
-        </span>
-        <span>On {camelCaseToCapitalizedSpace(event.type)}</span>
+        <EventsIcon secondaryColor="#4799ff" size="24" />
       </div>
-      <div className="flex h-full items-center justify-center mt-2 pr-2">
-        <div
-          style={{
-            paddingLeft: 4,
-            paddingRight: 4,
-            paddingTop: 1,
-            paddingBottom: 1,
-            borderRadius: 3,
-            borderColor: "#dddddd70",
-            borderWidth: 1,
-            backgroundColor: "#00000060",
-            color: "#fff",
-            fontSize: 10,
-            whiteSpace: "nowrap",
-            cursor: "pointer",
-          }}
-        >
-          View Event
+      <div className=" space-y-1">
+        <div className="nodeTitle">{eventText(event.event)}</div>
+        <div className="nodeSubtitle">
+          On {camelCaseToCapitalizedSpace(event.type)}
         </div>
       </div>
     </div>

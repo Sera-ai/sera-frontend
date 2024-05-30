@@ -1,9 +1,13 @@
 .tabHeader {
+  text-transform: uppercase;
+  font-size: 0.75rem;
   border-bottom-width: 4px;
   border-bottom-color: #191a21;
 }
 
 .tabHeaderSelect {
+  text-transform: uppercase;
+  font-size: 0.75rem;
   border-bottom-width: 2px;
   border-bottom-color: #008cff;
 }

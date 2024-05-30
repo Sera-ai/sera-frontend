@@ -1,15 +1,18 @@
 .rowItem:hover {
-    background-color: #232933 !important;
-    cursor: pointer;
+  background-color: #232933 !important;
+  cursor: pointer;
 }
 
 .rowItemLight:hover {
-    background-color: #34344b !important;
-    cursor: pointer;
+  background-color: #34344b !important;
+  cursor: pointer;
 }
 
-
-
 .noborder {
-    border: 0px !important;
+  border: 0px !important;
+}
+
+.grid-test {
+  position: relative;
+  overflow: hidden; /* Ensure the rotated pseudo-element doesn't overflow */
 }

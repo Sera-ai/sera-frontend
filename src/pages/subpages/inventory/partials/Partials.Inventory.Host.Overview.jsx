@@ -267,14 +267,29 @@ const Header2 = ({
 
 const EndpointSettings = ({ hostDns }) => {
   return (
-    <div className="secondaryDark rounded-sm p-4 detailsActionContainer2">
-      <div className="space-y-1">
+    <div className="secondaryDark rounded-sm detailsActionContainer2">
+      <div
+        style={{ borderBottomWidth: 4, borderColor: "#191A21" }}
+        className="space-y-1  p-4"
+      >
         <h2 className="text-xs uppercase text-white">Sera Host Information</h2>
         <h2 className="font-regular text-xs listItemLink">
-          Below are this Host's Forwarding URL(s)
+          Endpoint URL(s)
         </h2>
-        <ProxySettings hostDns={hostDns} />
-        <div className="pt-4 rounded-md">
+        <div className="pt-4">
+          <ProxySettings hostDns={hostDns} />
+        </div>
+      </div>
+
+      <div
+        style={{ borderBottomWidth: 4, borderColor: "#191A21" }}
+        className="space-y-1  p-4"
+      >
+        <h2 className="text-xs uppercase text-white">Export Data</h2>
+        <h2 className="font-regular text-xs listItemLink">
+          Use with external tools
+        </h2>
+        <div className="pt-4">
           <div
             className={`flex items-center py-2 px-3 border rounded-lg border-slate-200 dark:border-slate-700 cursor-pointer`}
             onClick={() => {}}
@@ -307,7 +322,7 @@ const EndpointSettings = ({ hostDns }) => {
 
 function ProxySettings({ hostDns }) {
   return (
-    <div className="space-y-2 pt-4">
+    <div className="space-y-2">
       <div className=" rounded-md">
         <div
           className={`flex items-center py-2 px-3 border rounded-lg border-slate-200 dark:border-slate-700 cursor-pointer`}

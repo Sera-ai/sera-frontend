@@ -13,55 +13,77 @@ import { curveCardinal } from "d3-shape";
 
 const data = [
   {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
+    name: "Jan",
+    req: 4003,
+    error: 352,
     amt: 2400,
   },
   {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
+    name: "Feb",
+    req: 11300,
+    error: 142,
     amt: 2210,
   },
   {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
+    name: "Mar",
+    req: 7980,
+    error: 62,
     amt: 2290,
   },
   {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
+    name: "Apr",
+    req: 12700,
+    error: 724,
     amt: 2000,
   },
   {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
+    name: "May",
+    req: 14302,
+    error: 120,
+    amt: 2000,
   },
 ];
 
 const cardinal = curveCardinal.tension(0.5);
 
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    const tooltipData = payload[0].payload;
+
+    return (
+      <div
+        style={{
+          backgroundColor: "#1a1a1a",
+          padding: "10px",
+          borderRadius: "5px",
+          color: "#fff",
+          minWidth: "300px",
+        }}
+      >
+        <p
+          style={{
+            margin: 0,
+            paddingBottom: "5px",
+            fontSize: 12,
+            fontWeight: "bolder",
+          }}
+        >{`${label}`}</p>
+
+        <p style={{ margin: 0, paddingBottom: "5px", fontSize: 12 }}>
+          Requests: {`${tooltipData.req.toLocaleString()}`}
+        </p>
+        <p style={{ margin: 0, paddingBottom: "5px", fontSize: 12 }}>
+          Errors: {`${tooltipData.error.toLocaleString()}`}
+        </p>
+      </div>
+    );
+  }
+};
+
 export default class CardinalAreaChart extends PureComponent {
   state = {
-    uvOpacity: 1,
-    pvOpacity: 1,
+    errorOpacity: 1,
+    reqOpacity: 1,
   };
 
   handleLegendClick = (dataKey) => {
@@ -71,30 +93,30 @@ export default class CardinalAreaChart extends PureComponent {
   };
 
   render() {
-    const { uvOpacity, pvOpacity } = this.state;
+    const { errorOpacity, reqOpacity } = this.state;
 
     return (
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height={300}>
         <AreaChart
-          width={500}
-          height={400}
+          width={"100%"}
+          height={"100%"}
           data={data}
           margin={{
-            top: 10,
-            right: 30,
+            top: 50,
+            right: 0,
             left: 0,
             bottom: 0,
           }}
         >
           <defs>
-            <linearGradient id="colorUv" x1="0" y1="0" x2="1" y2="0">
+            <linearGradient id="colorerror" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#f43f5e00" stopOpacity={1} />
+              <stop offset="80%" stopColor="#f43f5e20" stopOpacity={1} />
+              <stop offset="100%" stopColor="#f43f5e00" stopOpacity={1} />
+            </linearGradient>
+            <linearGradient id="colorreq" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stopColor="#8884d800" stopOpacity={1} />
               <stop offset="80%" stopColor="#8884d820" stopOpacity={1} />
-              <stop offset="100%" stopColor="#8884d800" stopOpacity={1} />
-            </linearGradient>
-            <linearGradient id="colorPv" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#82ca9d00" stopOpacity={1} />
-              <stop offset="80%" stopColor="#82ca9d20" stopOpacity={1} />
               <stop offset="100%" stopColor="#8884d800" stopOpacity={1} />
             </linearGradient>
           </defs>
@@ -102,47 +124,45 @@ export default class CardinalAreaChart extends PureComponent {
             strokeDasharray="0"
             vertical={false}
             strokeOpacity={0.1}
+            width={400}
           />
           <XAxis
             height={1}
             tick={{ dy: -30 }}
-            padding={{ right: -50, left:20 }}
             axisLine={false}
             tickLine={false}
             dataKey="name"
             fontSize={12}
           />
           <YAxis
+            tickFormatter={(value) => value.toLocaleString()}
             width={1}
             tick={{ dx: 50 }}
             axisLine={false}
             tickLine={false}
             fontSize={12}
           />
-          <Tooltip />
+          <Tooltip content={<CustomTooltip />} />
           <Area
             type={cardinal}
-            dataKey="uv"
+            dataKey="error"
+            stroke="#f43f5e"
+            strokeWidth={2}
+            fill="url(#colorerror)"
+            strokeOpacity={errorOpacity}
+            fillOpacity={errorOpacity}
+          />
+          <Area
+            type={cardinal}
+            dataKey="req"
             stroke="#8884d8"
             strokeWidth={2}
-            fill="url(#colorUv)"
-            strokeOpacity={uvOpacity}
-            fillOpacity={uvOpacity}
-          />
-          <Area
-            type={cardinal}
-            dataKey="pv"
-            stroke="#82ca9d"
-            strokeWidth={2}
-            fill="url(#colorPv)"
-            strokeOpacity={pvOpacity}
-            fillOpacity={pvOpacity}
+            fill="url(#colorreq)"
+            strokeOpacity={reqOpacity}
+            fillOpacity={reqOpacity}
           />
           <Legend
-            align="right"
-            verticalAlign="top"
-            layout="vertical"
-            wrapperStyle={{ cursor: 'pointer' }}
+            wrapperStyle={{ cursor: "pointer", right: 0, top: 30 }}
             iconType="line"
             onClick={(e) => this.handleLegendClick(e.dataKey)}
           />

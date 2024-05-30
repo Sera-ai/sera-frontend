@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useContext, memo } from "react";
 import ReactDOM from "react-dom";
 import Graph from "react-graph-vis";
+import Starfield from "react-starfield";
 
 import Sidebar from "./global/Global.Sidebar";
 import Header from "./global/Global.Header";

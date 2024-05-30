@@ -1,36 +1,118 @@
-import React, { useState, useContext } from "react";
-import BarGraph from "../../../components/custom/Custom.MonthlyAnalytics";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { AppContext } from "../../../provider/Provider.State";
-import CardUptime from "../../../components/cards/Components.Card.Uptime";
-import CardTraffic from "../../../components/cards/Components.Card.Traffic";
-import CardLatency from "../../../components/cards/Components.Card.Latency";
-import CardStacked from "../../../components/cards/Components.Card.Stacked";
-import CardDetails from "../../../components/cards/Components.Card.Details";
-import InventoryHeader from "../../../components/page/Components.Page.Inventory.Header";
-import Treemap from "../../../components/charts/Charts.Treemap";
 import CardinalAreaChart from "../../../components/charts/Charts.CardinalAreaChart";
+import RadarChartComponent from "../../../components/charts/Charts.RadarChart";
+import {
+  BuilderIcon,
+  EventIcon,
+  EventsIcon,
+  InventoryIcon,
+  ScriptIcon,
+} from "../../../assets/assets.svg";
+import SankeyDress from "../../../components/Components.SankeyDress";
 
 function InventoryDetailsData({ endpoint, overview = false }) {
   const { endpointDetails, uptimeDetails } = useContext(AppContext);
 
-  console.log(endpointDetails);
+  const BadgeBar = ({ title, subtitle, icon }) => (
+    <div className="dndnode">
+      <div
+        className="dndnodeicon handleLeft scriptBorder"
+        style={{ height: 42 }}
+      >
+        {icon}
+      </div>
+      <div className=" space-y-1 pt-[2px]">
+        <div className="nodeTitle">{title}</div>
+        <div className="nodeSubtitle">{subtitle}</div>
+      </div>
+    </div>
+  );
 
   return (
-    <div className="grid grid-cols-3 gap-7 w-full p-4">
+    <div className="flex gap-4 w-full p-4">
       {/* <BarGraph bare={true} /> */}
 
-      <div className="col-span-3 row-span-3 h-[400px] flex flex-col">
+      {/* <div className="col-span-3 h-[300px] flex flex-col">
+        <h2 className="text-sm text-slate-800 dark:text-slate-100 pl-2 mb-10">
+          Request Metrics
+        </h2>
         <CardinalAreaChart data={uptimeDetails} />
+      </div> */}
+
+      <div className="w-[400px] flex flex-col py-4 dash-card overflow-y-scroll no-scrollbar">
+        <h2 className="text-slate-800 dark:text-slate-100 pl-4 pb-4 uppercase text-xs">
+          Ecosystem Overview - Global (Monthly)
+        </h2>
+
+        <div className="flex flex-col mainDark">
+          <CardinalAreaChart data={uptimeDetails} />
+
+          <div className="px-4 py-4 flex-row space-y-4">
+            <BadgeBar
+              title={"302 New Events"}
+              subtitle={"Click to view new events"}
+              icon={<EventsIcon secondaryColor="#4799ff" size="24" />}
+            />
+            <BadgeBar
+              title={"13 Inventory Changes"}
+              subtitle={"Click to view inventory changes"}
+              icon={<InventoryIcon color="#4799ff" size="24" />}
+            />
+          </div>
+        </div>
+
+        <div style={{ borderTopWidth: 4, borderTopColor: "#191A21" }}>
+          <h2 className="text-slate-800 dark:text-slate-100 p-4 uppercase text-xs">
+            Ecosystem Health (Monthly)
+          </h2>
+          <div className="py-4">
+            <RadarChartComponent data={uptimeDetails} />
+          </div>
+        </div>
+
+        <div style={{ borderTopWidth: 4, borderTopColor: "#191A21" }}>
+          <h2 className="text-slate-800 dark:text-slate-100 p-4 uppercase text-xs">
+            Updates and Information (Monthly)
+          </h2>
+          <div className="px-4 flex-row space-y-4">
+            <BadgeBar
+              title={"Average Latency: 32ms"}
+              subtitle={"Average Network RTT speed"}
+              icon={<BuilderIcon size="24" />}
+            />
+            <BadgeBar
+              title={"Active Builders: 201"}
+              subtitle={"85% of your endpoints have a builder"}
+              icon={<BuilderIcon size="24" />}
+            />
+            <BadgeBar
+              title={"Inventory Documentation: 70%"}
+              subtitle={"Documentation for APIs"}
+              icon={<BuilderIcon size="24" />}
+            />
+            <BadgeBar
+              title={"Success Response Rate: 96%"}
+              subtitle={"Network response returning Status Code 2XX"}
+              icon={<BuilderIcon size="24" />}
+            />
+            <BadgeBar
+              title={"Service Uptime: 90%"}
+              subtitle={"Uptime for endpoints in Sera"}
+              icon={<BuilderIcon size="24" />}
+            />
+          </div>
+        </div>
       </div>
-      <CardDetails endpointDetails={endpointDetails} />
 
-      <CardUptime data={uptimeDetails} />
-      <CardStacked />
+      <SankeyDress />
 
-      <CardUptime data={uptimeDetails} />
-      <CardTraffic />
-      {/* <BarGraph bare={false} />
-          <InventoryFullList filter={""} /> */}
+      {/* <div className="col-span-3  h-[400px] flex flex-col dash-card pt-4">
+        <h2 className="text-sm text-slate-800 dark:text-slate-100 pl-8">
+          Request Latency (ms)
+        </h2>
+        <NewBarChart data={uptimeDetails} />
+      </div> */}
     </div>
   );
 }
