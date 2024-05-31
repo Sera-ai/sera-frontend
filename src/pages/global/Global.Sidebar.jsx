@@ -49,6 +49,15 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
     return () => document.removeEventListener("keydown", keyHandler);
   });
 
+  const handleHelpClick = (event) => {
+    event.preventDefault();
+    const userConfirmed = window.confirm("You will be taken to the Sera documentation portal, continue?");
+    if (userConfirmed) {
+      window.location.href = '/'; // or use history.push('/') if you're using react-router's history
+    }
+  };
+  
+
   return (
     <div
       id="sidebar"
@@ -232,6 +241,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
                 end
                 to="/"
                 className={`block text-slate-200 truncate transition duration-150  hover:text-white`}
+                onClick={handleHelpClick}
               >
                 <HelpIcon />
               </NavLink>
@@ -242,7 +252,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
             >
               <NavLink
                 end
-                to="/"
+                to="/settings"
                 className={`block text-slate-200 truncate transition duration-150  hover:text-white`}
               >
                 <SettingsIcon />

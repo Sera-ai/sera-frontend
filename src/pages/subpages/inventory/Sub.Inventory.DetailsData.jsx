@@ -52,7 +52,13 @@ function InventoryDetailsData({ endpoint, overview = false }) {
             <BadgeBar
               title={"302 New Events"}
               subtitle={"Click to view new events"}
-              icon={<EventsIcon secondaryColor="#4799ff" size="24" />}
+              icon={
+                <EventsIcon
+                  color="#ffffff80"
+                  secondaryColor="#4799ff"
+                  size="24"
+                />
+              }
             />
             <BadgeBar
               title={"13 Inventory Changes"}
@@ -79,27 +85,27 @@ function InventoryDetailsData({ endpoint, overview = false }) {
             <BadgeBar
               title={"Average Latency: 32ms"}
               subtitle={"Average Network RTT speed"}
-              icon={<BuilderIcon size="24" />}
+              icon={<BuilderIcon color="#ffffff80" size="24" />}
             />
             <BadgeBar
               title={"Active Builders: 201"}
               subtitle={"85% of your endpoints have a builder"}
-              icon={<BuilderIcon size="24" />}
+              icon={<BuilderIcon color="#ffffff80" size="24" />}
             />
             <BadgeBar
-              title={"Inventory Documentation: 70%"}
-              subtitle={"Documentation for APIs"}
-              icon={<BuilderIcon size="24" />}
+              title={"Average RPS: 70%"}
+              subtitle={"The avg request per second"}
+              icon={<BuilderIcon color="#ffffff80" size="24" />}
             />
             <BadgeBar
               title={"Success Response Rate: 96%"}
               subtitle={"Network response returning Status Code 2XX"}
-              icon={<BuilderIcon size="24" />}
+              icon={<BuilderIcon color="#ffffff80" size="24" />}
             />
             <BadgeBar
               title={"Service Uptime: 90%"}
               subtitle={"Uptime for endpoints in Sera"}
-              icon={<BuilderIcon size="24" />}
+              icon={<BuilderIcon color="#ffffff80" size="24" />}
             />
           </div>
         </div>

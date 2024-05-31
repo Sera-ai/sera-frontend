@@ -9,6 +9,8 @@ function Header({
   setFilter = null,
   setColumns = null,
   existingColumns = [],
+  filterPlaceholder = "Filter Inventory Items",
+  overflow = false,
   columns = [],
   subBar = false,
   children,
@@ -32,18 +34,20 @@ function Header({
                     <input
                       className="w-full text-sm px-1 dark:text-slate-300 secondaryDark border-0 focus:ring-transparent placeholder-slate-400 dark:placeholder-slate-500 appearance-none"
                       type="search"
-                      placeholder="Filter Inventory Items"
+                      placeholder={filterPlaceholder}
                       value={filter}
                       onChange={(e) => setFilter(e.target.value)}
                     />
                   </div>
                 </form>
-                <DropdownFilter
-                  setColumns={setColumns}
-                  existingColumns={existingColumns}
-                  columns={columns}
-                  align={true}
-                />
+                {setColumns && (
+                  <DropdownFilter
+                    setColumns={setColumns}
+                    existingColumns={existingColumns}
+                    columns={columns}
+                    align={true}
+                  />
+                )}
               </div>
             )}
             {buttons}

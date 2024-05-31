@@ -19,6 +19,7 @@ const Events = React.lazy(() => import("./pages/Pages.Events"));
 const Ecosystem = React.lazy(() => import("./pages/Pages.Ecosystem"));
 const Editor = React.lazy(() => import("./pages/Pages.Editor"));
 const Builder = React.lazy(() => import("./pages/Pages.Builder"));
+const Settings = React.lazy(() => import("./pages/Pages.Settings"));
 
 const StarField = () => {
   return (
@@ -69,6 +70,7 @@ function App() {
             <Route path="/editor/*" element={<React.Suspense fallback={<MemoizedStarField />}><Editor /></React.Suspense>} />
             <Route path="/ecosystem/*" element={<React.Suspense fallback={<MemoizedStarField />}><Ecosystem /></React.Suspense>} />
             <Route path="/builder/*" element={<React.Suspense fallback={<MemoizedStarField />}><Builder /></React.Suspense>} />
+            <Route path="/settings/*" element={<React.Suspense fallback={<MemoizedStarField />}><Settings /></React.Suspense>} />
           </Routes>
       </div>
       {console && (
