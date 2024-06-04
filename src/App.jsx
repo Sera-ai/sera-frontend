@@ -16,8 +16,6 @@ import { useSocket } from "./events/events.socket";
 //import Dashboard from "./pages/Pages.Dashboard";
 const Inventory = React.lazy(() => import("./pages/Pages.Inventory"));
 const Events = React.lazy(() => import("./pages/Pages.Events"));
-const Ecosystem = React.lazy(() => import("./pages/Pages.Ecosystem"));
-const Editor = React.lazy(() => import("./pages/Pages.Editor"));
 const Builder = React.lazy(() => import("./pages/Pages.Builder"));
 const Settings = React.lazy(() => import("./pages/Pages.Settings"));
 
@@ -67,8 +65,6 @@ function App() {
             <Route exact path="/*" element={<React.Suspense fallback={<MemoizedStarField />}><Inventory /></React.Suspense>} />
             <Route path="inventory/*" element={<React.Suspense fallback={<MemoizedStarField />}><Inventory /></React.Suspense>} />
             <Route path="/events/*" element={<React.Suspense fallback={<MemoizedStarField />}><Events /></React.Suspense>} />
-            <Route path="/editor/*" element={<React.Suspense fallback={<MemoizedStarField />}><Editor /></React.Suspense>} />
-            <Route path="/ecosystem/*" element={<React.Suspense fallback={<MemoizedStarField />}><Ecosystem /></React.Suspense>} />
             <Route path="/builder/*" element={<React.Suspense fallback={<MemoizedStarField />}><Builder /></React.Suspense>} />
             <Route path="/settings/*" element={<React.Suspense fallback={<MemoizedStarField />}><Settings /></React.Suspense>} />
           </Routes>

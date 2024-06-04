@@ -1,17 +1,11 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 
-import { AppContext } from "../../../provider/Provider.State";
 import Header from "../../../components/custom/Custom.Header.Title";
 import ToggleSwitch from "../../../components/standard/Standard.Toggle";
-import { SeraButton } from "../events/Sub.Events.Playbook.Builder";
 import { StandardButton } from "../../../components/standard/Standard.Buttons";
 
 function SeraSettings() {
   const [filter, setFilter] = useState("");
-  const { eventInventory } = useContext(AppContext);
-
-  const existingColumns =
-    eventInventory.length > 0 ? Object.keys(eventInventory[0]) : [];
 
   const InputType = ({ type, value, onEvent }) => {
     switch (type) {

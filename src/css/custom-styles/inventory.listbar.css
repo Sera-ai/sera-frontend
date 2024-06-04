@@ -7,3 +7,14 @@
 .listItemLink {
   color: #94a3b8;
 }
+
+
+.settings input {
+  background-color: transparent;
+  border-radius: 3px;
+  font-size: 12px
+}
+
+.settings input:disabled {
+  background-color: #00000030;
+}

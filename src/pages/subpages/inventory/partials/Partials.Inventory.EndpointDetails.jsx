@@ -3,7 +3,7 @@ import BarGraph from "../../../../components/custom/Custom.MonthlyAnalytics";
 import { AppContext } from "../../../../provider/Provider.State";
 import SankeyDress from "../../../../components/Components.SankeyDress";
 
-function CatalogDetailsData({ endpoint }) {
+function CatalogDetailsData({ endpoint, isEndpoint }) {
   const { endpointDetails } = useContext(AppContext);
 
   console.log(endpoint);
@@ -59,29 +59,7 @@ function CatalogDetailsData({ endpoint }) {
 
   return (
     <div className="p-4 flex flex-col h-full w-full">
-      <SankeyDress>
-        <div className="flex flex-column space-x-3 items-center">
-          <h2
-            style={{ color: "#ffffff99" }}
-            className="text-xs text-slate-800 dark:text-slate-100"
-          >
-            Last call <span style={{ color: "#23A858" }}>39 seconds ago</span>
-          </h2>
-          <div
-            style={{
-              width: "0.5px",
-              height: "14px",
-              transformOrigin: "0 0",
-              border: "0.01em #ffffff40 solid",
-            }}
-          ></div>
-          <h2
-            style={{ color: "#2B84EC" }}
-            className="text-xs text-slate-800 dark:text-slate-100 underline cursor-pointer"
-          >
-            Retrieve Endpoint Report
-          </h2>
-        </div>
+      <SankeyDress isEndpoint={isEndpoint}>
         <div className="flex flex-column space-x-10 w-full py-2">
           <div className=" w-full">
             <h2 className="font-semibold text-sm text-slate-800 dark:text-slate-100">

@@ -1,36 +1,96 @@
-import React, { useState } from "react";
-import InventoryDetailsData from "../Sub.Inventory.DetailsData";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useRef, useEffect, useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
 import BodyContent from "../../../../components/page/Components.Page.BodyContent";
 import InventoryHostSettings from "./Partials.Inventory.Settings";
+import CatalogDetailsData from "./Partials.Inventory.EndpointDetails";
 
-function EndpointOverview({ selectedHostData, endpoint }) {
+import ApiDocumentation from "./Partials.Inventory.Documentation";
+import EndpointManager from "./Partials.Inventory.EndpointManager";
+
+const InventoryEndpointOverview = ({
+  tier = 2,
+  selectedHostData,
+  setSelectedEndpoint,
+  endpoint,
+  hostDns,
+  oas,
+  setOas,
+}) => {
   const [selectedTab, setSelectedTab] = useState(0); // default selected tab
-  const tabs = ["Overview", "Settings"];
+  const [tabs, setTabs] = useState(["Analytics", "Documentation"]);
+
+  const [editDocs, setEditDocs] = useState(false);
+  const [method, setMethod] = useState("");
+  const [manageOAS, setManageOAS] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [showSettings, setShowSettings] = useState(true);
+
+  const location = useLocation();
+  const { pathname } = location;
+  const paths = decodeURIComponent(pathname).split("/");
+  paths.shift(); //remove blank
+  paths.shift(); //remove inventory
+  useEffect(() => {
+    const matchMethod = ["__post", "__get", "__delete", "__put", "__patch"];
+    if (matchMethod.includes(paths[paths.length - 1])) {
+      setMethod(paths.pop().replace("__", "").toUpperCase());
+    }
+  }, [location]);
+
+  const oasEditorRef = useRef();
+  const MDEditorRef = useRef();
+
+  const updateChildState = () => {
+    oasEditorRef.current.settingState();
+  };
+
+  const updateMarkdown = () => {
+    MDEditorRef.current.saveOasItem();
+  };
+
   const SelectedPage = () => {
     switch (selectedTab) {
       case 0:
-        return ;
+        return (
+          <CatalogDetailsData endpoint="inventory/api.sample.com/pets/__post" isEndpoint />
+        );
       case 1:
-        return ;
+        return (
+          <ApiDocumentation
+            oas={oas}
+            setOas={setOas}
+            setSelectedEndpoint={setSelectedEndpoint}
+            method={method}
+            endpoint={endpoint}
+            setEditDocs={setEditDocs}
+            editDocs={editDocs}
+            manageOAS={manageOAS}
+            setManageOAS={setManageOAS}
+            isError={isError}
+            setIsError={setIsError}
+            updateMarkdown={updateMarkdown}
+            updateChildState={updateChildState}
+            showSettings={showSettings}
+            setShowSettings={setShowSettings}
+          />
+        );
     }
   };
 
   return (
-    <div className="col-span-full mainDark h-full overflow-y-auto w-full">
-      <BodyContent
-        selectedTab={selectedTab}
-        setSelectedTab={setSelectedTab}
-        tabs={tabs}
-        mainDark
-        tier={2}
-      >
-        <div className="overflow-x-auto flex flex-col w-full flex-grow p-2">
-          <SelectedPage />
-        </div>
-      </BodyContent>
-    </div>
+    <BodyContent
+      selectedTab={selectedTab}
+      setSelectedTab={setSelectedTab}
+      tabs={tabs}
+      tier={tier}
+      mainDark
+    >
+      <div className={"flex flex-row mainDark gap-1 h-full"}>
+        <SelectedPage />
+      </div>
+    </BodyContent>
   );
-}
+};
 
-export default EndpointOverview;
+export default InventoryEndpointOverview;

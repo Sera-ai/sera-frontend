@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AppContext } from "../../provider/Provider.State";
+import { LeftIcon } from "../../assets/assets.svg";
 
 export function ContentBar({
   endpoint,
@@ -11,6 +12,8 @@ export function ContentBar({
   showHost = false,
   children = null,
   builder = false,
+  setHostBarOpen = () => {},
+  hostBarOpen = null
 }) {
   const { endpointDetails, dummyOasMulti } = useContext(AppContext);
   const [openPaths, setOpenPaths] = useState({});
@@ -204,15 +207,23 @@ export function ContentBar({
     <div className="dash-card w-[250px] min-w-[250px] text-sm text-white">
       {showBlock && (
         <>
-          <div
-            className="px-4 flex flex-row items-center h-[56px] justify-between cursor-pointer"
-            onClick={() => {
-              setSelectedEndpoint("");
-            }}
-          >
-            <span className="text-xs uppercase">
-              {decodeURIComponent(host)}
-            </span>
+          <div className="px-4 flex flex-row items-center h-[56px] justify-between cursor-pointer">
+            <div className="flex items-center space-x-3">
+              <div onClick={() => setHostBarOpen(!hostBarOpen)}>
+                <LeftIcon flip={hostBarOpen}/>
+              </div>
+              <div
+                onClick={() => {
+                  setSelectedEndpoint("");
+                }}
+              >
+                {" "}
+                <span className="text-xs uppercase">
+                  {decodeURIComponent(host)}
+                </span>
+              </div>
+            </div>
+
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

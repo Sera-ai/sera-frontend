@@ -153,45 +153,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
                 />
               </NavLink>
             </li>
-            <li
-              className={`sidebarItem rounded-sm mb-0.5 last:mb-0 flex items-center justify-center ${
-                pathname.includes("editor") && "secondaryDarkPadded"
-              }`}
-            >
-              <NavLink
-                end
-                to="/editor"
-                className={`block text-slate-200 truncate transition duration-150 ${
-                  pathname.includes("editor")
-                    ? "hover:text-slate-200"
-                    : "hover:text-white"
-                }`}
-              >
-                <EditorIcon
-                  color={pathname.includes("editor") ? "#2B84EC" : "#FFFFFF50"}
-                />
-              </NavLink>
-            </li>
 
-            <li
-              className={`sidebarItem rounded-sm mb-0.5 last:mb-0 flex items-center justify-center`}
-            >
-              <NavLink
-                end
-                to="/ecosystem"
-                className={`block text-slate-200 truncate transition duration-150 ${
-                  pathname.includes("ecosystem")
-                    ? "hover:text-slate-200"
-                    : "hover:text-white"
-                }`}
-              >
-                <EcosystemIcon
-                  color={
-                    pathname.includes("ecosystem") ? "#2B84EC" : "#FFFFFF50"
-                  }
-                />
-              </NavLink>
-            </li>
             <li
               className={`sidebarItem sidebarEndItem rounded-sm mb-0.5 last:mb-0 flex items-center justify-center ${
                 pathname.includes("builder") && "secondaryDarkPadded"
@@ -207,23 +169,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
                 }`}
               >
                 <BuilderIcon />
-              </NavLink>
-            </li>
-            <li
-              className={`sidebarItem sidebarEndItem rounded-sm mb-0.5 last:mb-0 flex items-center justify-center ${
-                pathname.includes("market") && "secondaryDarkPadded"
-              }`}
-            >
-              <NavLink
-                end
-                to="/"
-                className={`block text-slate-200 truncate transition duration-150 ${
-                  pathname.includes("market")
-                    ? "hover:text-slate-200"
-                    : "hover:text-white"
-                }`}
-              >
-                <MarketIcon />
               </NavLink>
             </li>
           </ul>

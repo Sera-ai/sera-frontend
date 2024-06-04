@@ -8,16 +8,20 @@ import { backendEvents } from "../../../events/events.backend";
 import InventoryHostOverview from "./partials/Partials.Inventory.Host.Overview";
 import InventoryDetailsData from "./Sub.Inventory.DetailsData";
 import Starfield from "react-starfield";
-import { getDnsFromHost, getOasFromHost } from "../../../provider/Provider.Data";
+import {
+  getDnsFromHost,
+  getOasFromHost,
+} from "../../../provider/Provider.Data";
+import InventoryEndpointOverview from "./partials/Partials.Inventory.Endpoint.Overview";
 
 function InventoryEntry({ tier = 1 }) {
-  const { inventoryInventory, nestedVisible } =
-    useContext(AppContext);
+  const { inventoryInventory, nestedVisible } = useContext(AppContext);
   const [selectedTab, setSelectedTab] = useState(0); // default selected tab
   const [selectedHost, setSelectedHost] = useState(""); // default selected tab
   const [selectedHostData, setSelectedHostData] = useState({}); // default selected tab
   const [selectedEndpoint, setSelectedEndpoint] = useState("");
   const [addHost, setAddHost] = useState(false);
+  const [hostBarOpen, setHostBarOpen] = useState(false);
   const [hostDns, setDns] = useState(null);
   const [isAnalytics, setAnalytics] = useState(false);
   const [tabs, setTabs] = useState(["Inventory"]);
@@ -32,7 +36,7 @@ function InventoryEntry({ tier = 1 }) {
     }
   }, [selectedHostData]);
 
-  console.log("selectedHostData",selectedHostData);
+  console.log("selectedHostData", selectedHostData);
 
   console.log(oas);
 
@@ -67,8 +71,8 @@ function InventoryEntry({ tier = 1 }) {
           console.log("set selected host", selectedHost);
           const newUrl = `/inventory/${selectedHost}`;
 
-          const hostOas = await getOasFromHost({ hostname: selectedHost })
-          const hostDns = await getDnsFromHost({ hostname: selectedHost })
+          const hostOas = await getOasFromHost({ hostname: selectedHost });
+          const hostDns = await getDnsFromHost({ hostname: selectedHost });
 
           const hostData = inventoryInventory.filter(
             (host) => host.hostname === selectedHost
@@ -111,7 +115,7 @@ function InventoryEntry({ tier = 1 }) {
     >
       <div className={"flex flex-row mainDark gap-1 h-full"}>
         {/* Hosts List Bar */}
-        {nestedVisible <= tier && (
+        {nestedVisible <= tier && (hostBarOpen || !selectedHost) && (
           <ListSidebar
             inventory={inventoryInventory}
             selectedHost={selectedHost}
@@ -127,6 +131,8 @@ function InventoryEntry({ tier = 1 }) {
         {/* Endpoints List Bar */}
         {selectedHost && nestedVisible <= tier && (
           <ContentBar
+            hostBarOpen={hostBarOpen}
+            setHostBarOpen={setHostBarOpen}
             endpoint={selectedEndpoint}
             inventory={inventoryInventory}
             host={selectedHost}
@@ -138,16 +144,33 @@ function InventoryEntry({ tier = 1 }) {
         {addHost ? (
           <IssuePrompt setAddHost={setAddHost} />
         ) : selectedHost ? (
-          <InventoryHostOverview
-            selectedHostData={selectedHostData}
-            setSelectedEndpoint={setSelectedEndpoint}
-            selectedEndpoint={selectedEndpoint}
-            hostDns={hostDns}
-            selectedHost={selectedHost}
-            oas={oas}
-            endpoint={selectedEndpoint.replace("%7B", "{").replace("%7D", "}")}
-            setOas={setOas}
-          />
+          selectedEndpoint ? (
+            <InventoryEndpointOverview
+              selectedHostData={selectedHostData[0]}
+              setSelectedEndpoint={setSelectedEndpoint}
+              selectedEndpoint={selectedEndpoint}
+              hostDns={hostDns}
+              selectedHost={selectedHost}
+              oas={oas}
+              endpoint={selectedEndpoint
+                .replace("%7B", "{")
+                .replace("%7D", "}")}
+              setOas={setOas}
+            />
+          ) : (
+            <InventoryHostOverview
+              selectedHostData={selectedHostData[0]}
+              setSelectedEndpoint={setSelectedEndpoint}
+              selectedEndpoint={selectedEndpoint}
+              hostDns={hostDns}
+              selectedHost={selectedHost}
+              oas={oas}
+              endpoint={selectedEndpoint
+                .replace("%7B", "{")
+                .replace("%7D", "}")}
+              setOas={setOas}
+            />
+          )
         ) : (
           <InventoryDetailsData endpoint="inventory/api.sample.com/pets/__post" />
         )}
@@ -223,9 +246,9 @@ const IssuePrompt = ({ setAddHost }) => {
   };
 
   return (
-    <div className="flex w-full h-full items-center justify-center overflow-hidden">
+    <div className="flex w-full h-full items-center justify-center overflow-hidden absolute top-0">
       <div
-        className="secondaryDark space-y-2"
+        className="secondaryDark space-y-2 z-40"
         style={{
           width: 600,
           borderRadius: 3,
@@ -310,7 +333,6 @@ const IssuePrompt = ({ setAddHost }) => {
     </div>
   );
 };
-
 
 const StarField = () => {
   return (

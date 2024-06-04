@@ -4,8 +4,15 @@ import SankeyComponent from "./charts/Charts.Sankey";
 import Starfield from "react-starfield";
 import { AppContext } from "../provider/Provider.State";
 import Datepicker from "./Components.Datepicker";
+import CardinalAreaChart from "./charts/Charts.CardinalAreaChart";
+import CardinalAreaChartLarge from "./charts/Charts.CardinalAreaChart.Large";
 
-function SankeyDress({ endpoint, overview = false, children }) {
+function SankeyDress({
+  endpoint,
+  overview = false,
+  children,
+  isEndpoint = false,
+}) {
   const { endpointDetails, uptimeDetails } = useContext(AppContext);
   const [filter, setFilter] = useState("");
   const [starfieldRendered, setStarfieldRendered] = useState(false);
@@ -96,18 +103,6 @@ function SankeyDress({ endpoint, overview = false, children }) {
       </h2>
       <div className="flex flex-grow" />
       <div className="gap-2 flex justify-center">
-        <form className="border-b border-slate-200 dark:border-slate-700">
-          <div className="relative">
-            <input
-              className="w-full text-sm px-1 dark:text-slate-300 secondaryDark border-0 focus:ring-transparent placeholder-slate-400 dark:placeholder-slate-500 appearance-none"
-              type="search"
-              placeholder="Filter Network Items"
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-            />
-          </div>
-        </form>
-
         <Datepicker />
       </div>
     </div>
@@ -116,16 +111,24 @@ function SankeyDress({ endpoint, overview = false, children }) {
   return (
     <div className="flex-grow flex flex-col space-y-4 z-20">
       <NetworkAnalysisHeader />
-      {Array.isArray(children)
-        ? children.map((child, index) => (
-            <React.Fragment key={index}>{child}</React.Fragment>
-          ))
-        : children}
-      <div className="flex-grow flex-col space-y-4 flex p-4 dash-card grid-test z-10">
-        <SankeyComponent data={uptimeDetails} />
-        <LabelDesign />
-        {starfieldRendered && starfieldRef.current}
-      </div>
+      {children}
+      {isEndpoint ? (
+        <div className="flex-grow flex-col space-y-4 flex dash-card grid-test z-10">
+          <div className="p-4">
+            <h2 className=" uppercase text-xs text-slate-800 dark:text-slate-100 ">
+              Endpoint Requests (Monthly)
+            </h2>
+            <text className="text-xs">Requests in the past 12 hours</text>
+          </div>
+          <CardinalAreaChartLarge />
+        </div>
+      ) : (
+        <div className="flex-grow flex-col space-y-4 flex p-4 dash-card grid-test z-10">
+          <SankeyComponent data={uptimeDetails} />
+          <LabelDesign />
+          {starfieldRendered && starfieldRef.current}
+        </div>
+      )}
     </div>
   );
 }

@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
-import InventoryHeader from "../../../../components/page/Components.Page.Inventory.Header";
-import ToggleSwitch from "../../../../components/standard/Standard.Toggle";
-import Dropdown from "../../../../components/standard/Standard.Dropdown";
-import { SettingsIcon } from "../../../../components/standard/Standard.Icons";
+import React, { useState, useEffect, useRef, useContext } from "react";
+
 import { backendEvents } from "../../../../events/events.backend";
+import { AppContext } from "../../../../provider/Provider.State";
+import Header from "../../../../components/custom/Custom.Header.Title";
+import ToggleSwitch from "../../../../components/standard/Standard.Toggle";
+import { StandardButton } from "../../../../components/standard/Standard.Buttons";
 
 const InventoryHostSettings = ({ selectedHostData, mainDark = false }) => {
   const [filter, setFilter] = useState("");
+  const { eventInventory } = useContext(AppContext);
   const [generalOptions, setGeneralOptions] = useState([
     {
       title: "General Settings",
@@ -18,129 +20,166 @@ const InventoryHostSettings = ({ selectedHostData, mainDark = false }) => {
     { title: "Learning Mode", subtitle: "", value: false },
   ]);
 
-  // Update generalOptions when the host changes
-  useEffect(() => {
-    console.log(selectedHostData);
-    setGeneralOptions([
-      {
-        title: "General Settings",
-        subtitle: `General Settings for the host: ${selectedHostData?.hostname || "example.com"}`,
-      },
-      {
-        title: "Enforce HTTPS",
-        subtitle: "Forces all connections to use HTTPS, enhancing security. Recommended for public-facing services",
-        id: "https",
-        value: selectedHostData?.sera_config?.https,
-      },
-      {
-        title: "Strict API Routing",
-        subtitle: "Routes requests strictly according to the available OpenAPI Specification (OAS)",
-        id: "strict",
-        value: selectedHostData?.sera_config?.strict,
-      },
-      {
-        title: "Flexible API Matching",
-        subtitle: "Permits variations in parameters and headers from the specified OAS, allowing for flexibility in API requests",
-        id: "drift",
-        value: selectedHostData?.sera_config?.drift,
-      },
-      {
-        title: "Auto-Update OAS",
-        subtitle: "Automatically updates the OAS with new endpoints and data from incoming requests, facilitating API evolution",
-        id: "learn",
-        value: selectedHostData?.sera_config?.learn,
-      },
-    ]);
-  }, [selectedHostData]);
+  const InputType = ({ type, value, onEvent }) => {
+    switch (type) {
+      case "textbox":
+        return (
+          <input placeholder={value} className="w-full" onChange={onEvent} />
+        );
+      case "toggle":
+        return <ToggleSwitch initialValue={value} onToggle={onEvent} />;
+      case "button":
+        return <StandardButton text={value} />;
+    }
+  };
+
+  const SettingOption = ({
+    type,
+    id = "",
+    title = "",
+    subtitle = "",
+    value = "",
+  }) => {
+    const isVisible =
+      title.toLowerCase().includes(filter.toLowerCase()) ||
+      subtitle.toLowerCase().includes(filter.toLowerCase());
+
+    const updateChecked = (v) => {
+      if (v != checked) {
+        backendEvents().updateHost({
+          host_id: selectedHostData?._id,
+          field: id,
+          key: v,
+        });
+      }
+    };
+
+    return (
+      <div
+        style={{ display: isVisible ? "" : "none" }}
+        className={`w-full flex flex-row`}
+      >
+        <div className="flex flex-col flex-grow pr-4">
+          <text className="text-sm text-white">{title}</text>
+          <text className="text-xs">{subtitle}</text>
+        </div>
+        <div className="flex w-[200px] min-w-[200px] items-start pl-4">
+          <InputType
+            type={type}
+            value={value}
+            onEvent={() => {
+              (v) => updateChecked(v);
+            }}
+          />
+        </div>
+      </div>
+    );
+  };
+
+  const SettingBlock = ({ children, last = false }) => {
+    const blockRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(true);
+
+    useEffect(() => {
+      if (blockRef.current) {
+        const visibleChildren = Array.from(blockRef.current.childNodes).filter(
+          (child) => getComputedStyle(child).display !== "none"
+        );
+        setIsVisible(visibleChildren.length > 0);
+      }
+    }, [children]);
+
+    return isVisible ? (
+      <div
+        className={`w-full space-y-4 ${!last && "pb-4"}`}
+        style={{
+          borderBottomWidth: !last ? 1 : 0,
+          borderBottomColor: !last ? "#ffffff30" : null,
+        }}
+        ref={blockRef}
+      >
+        {children}
+      </div>
+    ) : null;
+  };
+
+  const ParentDiv = ({ children }) => {
+    return (
+      <div
+        className="w-full flex-col flex pt-4"
+        style={{ borderTopWidth: 16, borderColor: "#191A21" }}
+      >
+        {children}
+      </div>
+    );
+  };
+
+  console.log("selectedHostData", selectedHostData);
 
   return (
-    <div className={`flex flex-col space-y-1 h-full w-full`}>
-      <SearchSettings setFilter={setFilter} filter={filter} />
-      <SettingsComponent
-        filter={filter}
-        options={generalOptions}
-        icon={<SettingsIcon />}
-        selectedHostData={selectedHostData}
-      />
+    <div
+      className={"w-full h-full mainDark flex justify-center items-start py-20"}
+    >
+      <div className="dash-card inline-flex flex-grow max-h-full max-w-[1000px] overflow-y-scroll no-scrollbar w-full">
+        <Header
+          title={`${selectedHostData?.hostname} Settings`}
+          subtitle={"Host specific settings"}
+          filterPlaceholder="Filter Settings"
+          setFilter={setFilter}
+          subBar
+          overflow
+          tier={2}
+        >
+          <ParentDiv>
+            <h2
+              className="text-slate-800 dark:text-slate-100 pb-4 uppercase text-xs px-8"
+              style={{ borderBottomWidth: 2, borderColor: "#191A21" }}
+            >
+              {selectedHostData?.hostname} Host Settings
+            </h2>
+            <div className="w-full flex-row flex px-4">
+              <div className="flex flex-col flex-1 p-4 space-y-4">
+                <SettingBlock last={true}>
+                  <SettingOption
+                    type={"toggle"}
+                    title="Enforce HTTPS"
+                    subtitle="Forces all connections to use HTTPS, enhancing security. Recommended for public-facing services"
+                    id="https"
+                    value={selectedHostData?.sera_config?.https}
+                  />
+                  <SettingOption
+                    type={"toggle"}
+                    title="Strict API Routing"
+                    subtitle="Routes requests strictly according to the available OpenAPI Specification (OAS)"
+                    id="strict"
+                    value={selectedHostData?.sera_config?.strict}
+                  />
+                </SettingBlock>
+              </div>
+              <div className="flex flex-col flex-1 p-4 space-y-4">
+                <SettingBlock last>
+                  <SettingOption
+                    type={"toggle"}
+                    title="Flexible API Matching"
+                    subtitle="Permits variations in parameters and headers from the specified OAS, allowing for flexibility in API requests"
+                    id="drift"
+                    value={selectedHostData?.sera_config?.drift}
+                  />
+                  <SettingOption
+                    type={"toggle"}
+                    title="Auto-Update OAS"
+                    subtitle="Automatically updates the OAS with new endpoints and data from incoming requests, facilitating API evolution"
+                    id="learn"
+                    value={selectedHostData?.sera_config?.learn}
+                  />
+                </SettingBlock>
+              </div>
+            </div>
+          </ParentDiv>
+        </Header>
+      </div>
     </div>
   );
 };
 
 export default InventoryHostSettings;
-
-const SettingsComponent = ({ filter, options, icon, selectedHostData }) => {
-  const TitleComponent = ({ icon = null, title, subtitle }) => (
-    <div className="flex flex-row  items-center space-x-4 py-2">
-      {icon}
-      <div className="flex flex-col">
-        <span className="text-sm text-white">{title}</span>
-        <span className="text-xs">{subtitle}</span>
-      </div>
-    </div>
-  );
-
-  const MapOptions = () => {
-    return options.map((option, int) => {
-      const [checked, setChecked] = useState(option.value);
-      const updateChecked = (value) => {
-        if (value != checked) {
-          backendEvents().updateHost({
-            host_id: selectedHostData?._id,
-            field: option.id,
-            key: value,
-          });
-
-          setChecked(value);
-        }
-      };
-      if (int == 0) return;
-      return (
-        <div
-          className={`flex flex-row justify-between items-center ${int != options.length - 1 ? "dropdown-selector" : ""} ${
-            !option.title.toLowerCase().includes(filter.toLowerCase()) &&
-            !option.subtitle.toLowerCase().includes(filter.toLowerCase()) &&
-            "hidden"
-          }`}
-        >
-          <TitleComponent title={option.title} subtitle={option.subtitle} />
-          <ToggleSwitch
-            initialValue={checked}
-            onToggle={(value) => updateChecked(value)}
-          />
-        </div>
-      );
-    });
-  };
-
-  const selector = (
-    <TitleComponent
-      icon={icon}
-      title={options[0].title}
-      subtitle={options[0].subtitle}
-    />
-  );
-
-  return (
-    <div className="secondaryDark rounded-sm">
-      <Dropdown defaultOpen={true} selector={selector}>
-        <MapOptions />
-      </Dropdown>
-    </div>
-  );
-};
-
-const SearchSettings = ({ filter, setFilter }) => {
-  return (
-    <form className={`rounded-sm secondaryDark py-2 px-4`}>
-      <div className="relative">
-        <input
-          className="w-full text-sm px-1 dark:text-slate-300 secondaryDark border-0 focus:ring-transparent placeholder-slate-400 dark:placeholder-slate-500 appearance-none"
-          type="search"
-          placeholder="Filter Settings"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        />
-      </div>
-    </form>
-  );
-};
