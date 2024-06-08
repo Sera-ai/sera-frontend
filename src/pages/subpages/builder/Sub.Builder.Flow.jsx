@@ -24,7 +24,6 @@ const StarField = () => {
         right: 0,
         bottom: 0,
         left: 0,
-        zIndex: 0,
       }}
     >
       <Starfield
@@ -70,7 +69,7 @@ function BuilderFlow() {
           setIssue(null)
           setLoaded(true);
         } else {
-          console.log(jsonData.issue);
+          console.log("issue",jsonData.issue);
           setIssue(jsonData.issue);
         }
         return jsonData;
@@ -148,7 +147,7 @@ function BuilderFlow() {
           />
         ) : <MemoizedStarField /> }
         {issue && (
-          <div className="flex w-full h-full space-x-1">
+          <div className="flex w-full h-full space-x-1 z-20">
             <ContentBar
               builder
               showHost
