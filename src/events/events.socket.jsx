@@ -7,7 +7,9 @@ import { useContext, useEffect } from "react";
 // Create the socket instance outside of the component
 export const socket = io(
   `wss://${window.location.hostname}:${__BE_ROUTER_PORT__}`,
-  { path: "/sera-socket-io" }
+  { path: "/sera-socket-io",
+    transports: ["websocket"]
+   }
 );
 
 export const useSocket = () => {
