@@ -2,7 +2,7 @@
 
 export const backendEvents = (builderContext = {}) => {
   const { setOas, setIssue, setNodes, setEdges, builder } = builderContext;
-  const fetchData = async (path = window.location.pathname) => {};
+  const fetchData = async (path = window.location.pathname) => { };
 
   const getNodeStruc = async (event, type) => {
     if (!event) return;
@@ -76,7 +76,7 @@ export const backendEvents = (builderContext = {}) => {
     }).catch((error) => console.error("Error:", error));
   };
 
-  function createHostFromOas(file) {}
+  function createHostFromOas(file) { }
 
   function createEndpoint({ builder_id, host }) {
     console.log(builder_id);
@@ -89,17 +89,18 @@ export const backendEvents = (builderContext = {}) => {
     const path = parsed.pathname.substring(0, lastSlashIndex); // "boop/boop"
     const method = parsed.pathname.substring(lastSlashIndex + 1).toUpperCase(); // "boop"
 
+    console.log("path", path)
     const data2 = {
       host_id: host,
-      hostname: parsed.host.split(":")[0],
-      endpoint: decodeURIComponent(path),
+      hostname: parsed.host,
+      endpoint: path == "" ? "/" : decodeURIComponent(path),
       method: method,
       builder_id,
     };
 
     const url = `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/endpoint`;
     console.log(JSON.stringify(data2));
-    return fetch(url, {
+    if (true) return fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -166,7 +167,7 @@ export const backendEvents = (builderContext = {}) => {
 
     const data2 = {
       host_id: data.host,
-      hostname: parsed.host.split(":")[0],
+      hostname: parsed.host,
       path: decodeURIComponent(path),
       method: method,
     };

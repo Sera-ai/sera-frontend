@@ -6,7 +6,7 @@ export const AppContext = createContext();
 
 // Define initial state defaults
 const initialStateDefaults = {
-  inventoryInventory: [],
+  hostInventory: [],
   apiInventory: [],
   playbookInventory: [],
   builderInventory: [],
@@ -61,18 +61,19 @@ function useInitialState() {
     loadData();
   }, []);
 
-  return { state, nestedVisible, setNestedVisible, error, loadData };
+  return { state, setState, nestedVisible, setNestedVisible, error, loadData };
 }
 
 // Provider Component
 export const AppStateProvider = ({ children }) => {
-  const { state, nestedVisible, setNestedVisible, error, loadData } = useInitialState();
+  const { state, setState, nestedVisible, setNestedVisible, error, loadData } = useInitialState();
   const [console, setConsole] = useState(false);
 
   return (
     <AppContext.Provider
       value={{
         ...state,
+        setState,
         nestedVisible,
         setNestedVisible,
         error,

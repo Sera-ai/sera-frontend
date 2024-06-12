@@ -21,7 +21,7 @@ export async function eventInventory() {
   return eventInventory;
 }
 
-export async function inventoryInventory() {
+export async function hostInventory() {
   const hostInventory = await databaseQuery({ query: "hosts" });
   return hostInventory;
 }

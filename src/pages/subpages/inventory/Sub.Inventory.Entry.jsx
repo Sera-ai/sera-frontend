@@ -15,7 +15,7 @@ import {
 import InventoryEndpointOverview from "./partials/Partials.Inventory.Endpoint.Overview";
 
 function InventoryEntry({ tier = 1 }) {
-  const { inventoryInventory, nestedVisible } = useContext(AppContext);
+  const { hostInventory, nestedVisible } = useContext(AppContext);
   const [selectedTab, setSelectedTab] = useState(0); // default selected tab
   const [selectedHost, setSelectedHost] = useState(""); // default selected tab
   const [selectedHostData, setSelectedHostData] = useState({}); // default selected tab
@@ -52,7 +52,7 @@ function InventoryEntry({ tier = 1 }) {
     paths.shift(); //remove inventory
 
     if (paths.length > 0) {
-      setSelectedHost(paths[0]);
+      setSelectedHost(paths[0].replace("%3A", ":"));
       if (paths.length > 1) {
         paths.shift();
         setSelectedEndpoint(paths.join("/"));
@@ -74,11 +74,11 @@ function InventoryEntry({ tier = 1 }) {
           const hostOas = await getOasFromHost({ hostname: selectedHost });
           const hostDns = await getDnsFromHost({ hostname: selectedHost });
 
-          const hostData = inventoryInventory.filter(
+          const hostData = hostInventory.filter(
             (host) => host.hostname === selectedHost
           );
 
-          console.log(inventoryInventory);
+          console.log(hostInventory);
           console.log(hostData);
           setOas(hostOas);
           setDns(hostDns);
@@ -117,7 +117,7 @@ function InventoryEntry({ tier = 1 }) {
         {/* Hosts List Bar */}
         {nestedVisible <= tier && (hostBarOpen || !selectedHost) && (
           <ListSidebar
-            inventory={inventoryInventory}
+            inventory={hostInventory}
             selectedHost={selectedHost}
             setSelectedHost={setSelectedHost}
             setSelectedHostData={setSelectedHostData}
@@ -134,7 +134,7 @@ function InventoryEntry({ tier = 1 }) {
             hostBarOpen={hostBarOpen}
             setHostBarOpen={setHostBarOpen}
             endpoint={selectedEndpoint}
-            inventory={inventoryInventory}
+            inventory={hostInventory}
             host={selectedHost}
             selectedEndpoint={selectedEndpoint}
             setSelectedEndpoint={setSelectedEndpoint}

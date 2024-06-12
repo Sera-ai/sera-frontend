@@ -1,28 +1,48 @@
 import { io } from "socket.io-client";
+import { toast } from "react-toastify";
+import { EventsIcon } from "../assets/assets.svg";
+import { AppContext } from "../provider/Provider.State";
+import { useContext, useEffect } from "react";
+
+// Create the socket instance outside of the component
 export const socket = io(
   `wss://${window.location.hostname}:${__BE_ROUTER_PORT__}`,
   { path: "/sera-socket-io" }
 );
-import { toast } from "react-toastify";
-import {
-  EventsIcon,
-} from "../assets/assets.svg";
 
 export const useSocket = () => {
-  const notify = (str) => toast(str);
+  const { setState } = useContext(AppContext);
 
-  function onConnectSocket() {
-    notify("Socket Connected");
-    console.log("socket connected");
-  }
+  useEffect(() => {
+    const notify = (str) => toast(str);
 
-  socket.on("connectSuccessful", onConnectSocket);
-  socket.on("eventNotification", (event) => {
-    notify(<EventDesign event={event} />, {
-      onOpen: (props) => console.log(props),
-      onClick: () => alert("hi"),
+    function onConnectSocket() {
+      notify("Socket Connected");
+      console.log("socket connected");
+    }
+
+    socket.on("connectSuccessful", onConnectSocket);
+    socket.on("eventNotification", (event) => {
+      notify(<EventDesign event={event} />, {
+        onOpen: (props) => console.log(props),
+        onClick: () => alert("hi"),
+      });
     });
-  });
+
+    socket.on("onHostDataChanged", (data) => {
+      setState((prevState) => ({
+        ...prevState,
+        hostInventory: data,
+      }));
+      notify("New Host Added");
+    });
+
+    // Clean up the event listeners on unmount
+    return () => {
+      socket.off("connectSuccessful", onConnectSocket);
+      socket.off("eventNotification");
+    };
+  }, []);
 };
 
 export const EventDesign = ({ event }) => {
@@ -32,6 +52,8 @@ export const EventDesign = ({ event }) => {
         return "New Sera Event";
       case "builder":
         return "New Builder Event";
+      default:
+        return "New Event";
     }
   };
 
@@ -65,7 +87,7 @@ export const EventDesign = ({ event }) => {
       >
         <EventsIcon secondaryColor="#4799ff" size="24" />
       </div>
-      <div className=" space-y-1">
+      <div className="space-y-1">
         <div className="nodeTitle">{eventText(event.event)}</div>
         <div className="nodeSubtitle">
           On {camelCaseToCapitalizedSpace(event.type)}

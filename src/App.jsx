@@ -45,9 +45,9 @@ const MemoizedStarField = React.memo(StarField);
 
 function App() {
   const { console } = useContext(AppContext);
+  useSocket();
 
   useEffect(() => {
-    useSocket();
   }, []);
 
   const location = useLocation();

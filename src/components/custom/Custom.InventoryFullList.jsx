@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-function InventoryFullList({ filter, inventoryInventory }) {
-  const filteredData = inventoryInventory.filter((inventory) => {
+function InventoryFullList({ filter, hostInventory }) {
+  const filteredData = hostInventory.filter((inventory) => {
     return (
       inventory.endpoint.endpoint
         .toLowerCase()
@@ -45,8 +45,8 @@ function InventoryFullList({ filter, inventoryInventory }) {
             <thead className="text-xs uppercase text-slate-400 dark:text-slate-500 bg-slate-50 mainDark dark:bg-opacity-50 rounded-sm sticky top-0">
               <tr>
                 <th className="p-2"></th>
-                {inventoryInventory.length > 0 &&
-                  Object.keys(inventoryInventory).map((key, index) => {
+                {hostInventory.length > 0 &&
+                  Object.keys(hostInventory).map((key, index) => {
                     return (
                       <th className="p-2">
                         <div
