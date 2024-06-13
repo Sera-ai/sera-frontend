@@ -1,55 +1,89 @@
-import { io } from "socket.io-client";
+import { useContext, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import { EventsIcon } from "../assets/assets.svg";
 import { AppContext } from "../provider/Provider.State";
-import { useContext, useEffect } from "react";
 
-// Create the socket instance outside of the component
-export const socket = io(
-  `wss://${window.location.hostname}:${__BE_ROUTER_PORT__}`,
-  { path: "/sera-socket-io",
-    transports: ["websocket"]
-   }
-);
+const retryInterval = 1000; // 1 second
 
-export const useSocket = () => {
+const notify = (str) => toast(str);
+
+function onConnectSocket() {
+  notify("Socket Connected");
+  console.log("socket connected");
+}
+
+// WebSocket connection function
+const connectWebSocket = (setState, socketRef) => {
+  const socket = new WebSocket(`wss://${window.location.hostname}:${__BE_ROUTER_PORT__}/sera-socket-io`);
+
+  // Wrapper for the emit function to keep the existing API
+  socket.wsEmit = (event, data) => {
+    const message = JSON.stringify({ type: event, ...data });
+    socket.send(message);
+  };
+
+
+  socket.onmessage = (event) => {
+    const parsedMessage = JSON.parse(event.data);
+
+    switch (parsedMessage.type) {
+      case "connectSuccessful":
+        console.log(parsedMessage);
+        onConnectSocket();
+        break;
+      case "eventNotification":
+        notify(<EventDesign event={parsedMessage} />, {
+          onOpen: (props) => console.log(props),
+          onClick: () => alert("hi"),
+        });
+        break;
+      case "onHostDataChanged":
+        setState((prevState) => ({
+          ...prevState,
+          hostInventory: parsedMessage,
+        }));
+        notify("New Host Added");
+        break;
+      default:
+        console.log("Unknown message type:", parsedMessage.type);
+        break;
+    }
+  };
+
+  socket.onclose = () => {
+    console.log("WebSocket connection closed. Reconnecting...");
+    setTimeout(() => connectWebSocket(setState, socketRef), retryInterval); // Attempt to reconnect after 1 second
+  };
+
+  socket.onerror = (error) => {
+    console.log("WebSocket error:", error);
+  };
+
+  socketRef.current = socket;
+};
+
+const useSocket = () => {
   const { setState } = useContext(AppContext);
+  const socketRef = useRef(null);
 
   useEffect(() => {
-    const notify = (str) => toast(str);
+    connectWebSocket(setState, socketRef);
 
-    function onConnectSocket() {
-      notify("Socket Connected");
-      console.log("socket connected");
-    }
-
-    socket.on("connectSuccessful", onConnectSocket);
-    socket.on("eventNotification", (event) => {
-      notify(<EventDesign event={event} />, {
-        onOpen: (props) => console.log(props),
-        onClick: () => alert("hi"),
-      });
-    });
-
-    socket.on("onHostDataChanged", (data) => {
-      setState((prevState) => ({
-        ...prevState,
-        hostInventory: data,
-      }));
-      notify("New Host Added");
-    });
-
-    // Clean up the event listeners on unmount
     return () => {
-      socket.off("connectSuccessful", onConnectSocket);
-      socket.off("eventNotification");
+      if (socketRef.current) {
+        socketRef.current.close();
+      }
     };
-  }, []);
+  }, [setState]);
+
+  return null; // or any JSX you might need to render
 };
+
+export { useSocket };
 
 export const EventDesign = ({ event }) => {
   const eventText = (event) => {
-    switch (event) {
+    switch (event.event) {
       case "sera":
         return "New Sera Event";
       case "builder":
@@ -90,7 +124,7 @@ export const EventDesign = ({ event }) => {
         <EventsIcon secondaryColor="#4799ff" size="24" />
       </div>
       <div className="space-y-1">
-        <div className="nodeTitle">{eventText(event.event)}</div>
+        <div className="nodeTitle">{eventText(event)}</div>
         <div className="nodeSubtitle">
           On {camelCaseToCapitalizedSpace(event.type)}
         </div>
