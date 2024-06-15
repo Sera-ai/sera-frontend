@@ -7,10 +7,22 @@ import UserMenu from "../../components/Components.DropdownProfile";
 import Breadcrumbs from "../../components/custom/Custom.Breadcrumbs";
 import { AppContext } from "../../provider/Provider.State";
 import { ConsoleIcon, SearchIcon } from "../../assets/assets.svg";
+import { getGlobalSearch } from "../../provider/Provider.Data";
 
 function Header({ sidebarOpen, setSidebarOpen, transparent, title }) {
   const [searchModalOpen, setSearchModalOpen] = useState(false);
-  const { console, setConsole } = useContext(AppContext);
+  const { console: cnsl, setConsole } = useContext(AppContext);
+  const [globalSearch, setGlobalSearch] = useState([]);
+
+  const changeGlobalSearch = async (res) => {
+    try {
+      const searchResult = await getGlobalSearch({ searchTerm: res });
+      console.log(searchResult)
+      if(searchResult) setGlobalSearch(Array.isArray(searchResult) ? searchResult : []);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <header
@@ -44,6 +56,8 @@ function Header({ sidebarOpen, setSidebarOpen, transparent, title }) {
           searchId="search"
           modalOpen={searchModalOpen}
           setModalOpen={setSearchModalOpen}
+          onChangeInput={changeGlobalSearch}
+          searchResults={globalSearch}
         />
       </div>
 
@@ -53,10 +67,10 @@ function Header({ sidebarOpen, setSidebarOpen, transparent, title }) {
         <div
           style={{
             borderRadius: 50,
-            backgroundColor: console ? "#191A21" : "#23232E",
+            backgroundColor: cnsl ? "#191A21" : "#23232E",
             padding: 10,
           }}
-          onClick={() => setConsole(!console)}
+          onClick={() => setConsole(!cnsl)}
         >
           <ConsoleIcon size={20} />
         </div>

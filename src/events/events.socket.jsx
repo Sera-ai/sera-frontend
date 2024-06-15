@@ -14,14 +14,15 @@ function onConnectSocket() {
 
 // WebSocket connection function
 const connectWebSocket = (setState, socketRef) => {
-  const socket = new WebSocket(`wss://${window.location.hostname}:${__BE_ROUTER_PORT__}/sera-socket-io`);
+  const socket = new WebSocket(
+    `wss://${true ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/sera-socket-io`
+  );
 
   // Wrapper for the emit function to keep the existing API
   socket.wsEmit = (event, data) => {
     const message = JSON.stringify({ type: event, ...data });
     socket.send(message);
   };
-
 
   socket.onmessage = (event) => {
     const parsedMessage = JSON.parse(event.data);

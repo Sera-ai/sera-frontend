@@ -103,3 +103,8 @@ export async function builderInventory() {
   const builderInventory = await getDataTemplate("builderInventory");
   return builderInventory;
 }
+
+export async function getGlobalSearch(params) {
+  const globalSearch = await databaseQuery({ query: "globalSearch", params });
+  return globalSearch;
+}

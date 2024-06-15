@@ -54,7 +54,7 @@ function BuilderFlow() {
     async function fetchData() {
       try {
         const response = await fetch(
-          `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/endpoint/builder?path=${encodeURIComponent(
+          `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/endpoint/builder?path=${encodeURIComponent(
             path.replace("/builder", "")
           )}`,
           { headers: { "x-sera-service": "be_builder" } }

@@ -28,6 +28,10 @@ async function databaseQuery({ query, params }) {
       const res = await getPlaybooks();
       return res;
     }
+    case "globalSearch": {
+      const res = await globalSearch(params);
+      return res;
+    }
     default:
       return {};
   }
@@ -38,7 +42,7 @@ export default databaseQuery;
 async function getExampleOas() {
   try {
     const response = await fetch(
-      `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/endpoint/builder?path=%2Freqres.in%2Fitems%2Fpost`,
+      `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/endpoint/builder?path=%2Freqres.in%2Fitems%2Fpost`,
       { headers: { "x-sera-service": "be_builder" } }
     );
     const jsonData = await response.json();
@@ -52,7 +56,7 @@ async function getExampleOas() {
 async function getOas() {
   try {
     const response = await fetch(
-      `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/host/oas`,
+      `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/host/oas`,
       {
         headers: { "x-sera-service": "be_builder" },
       }
@@ -68,11 +72,13 @@ async function getOas() {
 async function getHosts() {
   try {
     const response = await fetch(
-      `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/host`,
+      `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/host`,
       {
         headers: { "x-sera-service": "be_builder" },
       }
     );
+    console.log(await response)
+
     const jsonData = await response.json();
     return jsonData;
   } catch (error) {
@@ -84,7 +90,7 @@ async function getHosts() {
 async function oasFromHost({ params }) {
   try {
     const response = await fetch(
-      `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/host/oas?host=${params.hostname}`,
+      `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/host/oas?host=${params.hostname}`,
       {
         headers: { "x-sera-service": "be_builder" },
       }
@@ -101,7 +107,7 @@ async function oasFromHost({ params }) {
 async function dnsFromHost({ params }) {
   try {
     const response = await fetch(
-      `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/host/dns?host=${params.hostname}`,
+      `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/host/dns?host=${params.hostname}`,
       {
         headers: { "x-sera-service": "be_builder" },
       }
@@ -118,7 +124,27 @@ async function dnsFromHost({ params }) {
 async function allBuilders() {
   try {
     const response = await fetch(
-      `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/endpoint`,
+      `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/endpoint`,
+      {
+        headers: { "x-sera-service": "be_builder" },
+      }
+    );
+    console.log(response)
+
+    const jsonData = await response.json();
+    console.log(jsonData);
+    return jsonData;
+  } catch (error) {
+    
+    console.error("Error fetching data:", error);
+    return {};
+  }
+}
+
+async function getPlaybooks() {
+  try {
+    const response = await fetch(
+      `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/playbook`,
       {
         headers: { "x-sera-service": "be_builder" },
       }
@@ -132,12 +158,18 @@ async function allBuilders() {
   }
 }
 
-async function getPlaybooks() {
+
+async function globalSearch(params) {
   try {
     const response = await fetch(
-      `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/playbook`,
+      `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/search`,
       {
-        headers: { "x-sera-service": "be_builder" },
+        method: 'POST',
+        headers: { 
+          "x-sera-service": "be_builder",
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(params)
       }
     );
     const jsonData = await response.json();
