@@ -11,40 +11,8 @@ import {
 } from "recharts";
 import { curveCardinal } from "d3-shape";
 
-const data = [
-  {
-    name: "Jan",
-    req: 4003,
-    error: 352,
-    amt: 2400,
-  },
-  {
-    name: "Feb",
-    req: 11300,
-    error: 142,
-    amt: 2210,
-  },
-  {
-    name: "Mar",
-    req: 7980,
-    error: 62,
-    amt: 2290,
-  },
-  {
-    name: "Apr",
-    req: 12700,
-    error: 724,
-    amt: 2000,
-  },
-  {
-    name: "May",
-    req: 14302,
-    error: 120,
-    amt: 2000,
-  },
-];
 
-const cardinal = curveCardinal.tension(0.5);
+const cardinal = curveCardinal.tension(1.0);
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -81,6 +49,11 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 export default class CardinalAreaChart extends PureComponent {
+
+  constructor(props) {
+    super(props);
+  }
+
   state = {
     errorOpacity: 1,
     reqOpacity: 1,
@@ -100,7 +73,7 @@ export default class CardinalAreaChart extends PureComponent {
         <AreaChart
           width={"100%"}
           height={"100%"}
-          data={data}
+          data={this.props.data}
           margin={{
             top: 50,
             right: 0,

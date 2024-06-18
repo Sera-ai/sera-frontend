@@ -326,7 +326,7 @@ const MyCustomLink = ({
   );
 };
 
-const SankeyComponent = () => {
+const SankeyComponent = ({ chartData }) => {
   const [containerWidth, setContainerWidth] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
   const containerRef = useRef(null);
@@ -350,21 +350,26 @@ const SankeyComponent = () => {
       style={{ width: "100%", height: "100%", zIndex: 20 }}
     >
       <ResponsiveContainer width="100%" height="100%">
-        <Sankey
-          data={data}
-          nodePadding={containerHeight < 700 ? 5 : 10}
-          nodeWidth={4}
-          iterations={1}
-          linkCurvature={0.4}
-          nameKey="name"
-          sort
-          node={(props) => (
-            <MyCustomNode {...props} containerWidth={containerWidth} />
-          )}
-          link={(props) => <MyCustomLink {...props} />}
-        >
-          <Tooltip content={<CustomTooltip />} cursor={{ fill: "#00000020" }} />
-        </Sankey>
+        {chartData && (
+          <Sankey
+            data={chartData}
+            nodePadding={containerHeight < 700 ? 5 : 10}
+            nodeWidth={4}
+            iterations={1}
+            linkCurvature={0.4}
+            nameKey="name"
+            sort
+            node={(props) => (
+              <MyCustomNode {...props} containerWidth={containerWidth} />
+            )}
+            link={(props) => <MyCustomLink {...props} />}
+          >
+            <Tooltip
+              content={<CustomTooltip />}
+              cursor={{ fill: "#00000020" }}
+            />
+          </Sankey>
+        )}
       </ResponsiveContainer>
     </div>
   );

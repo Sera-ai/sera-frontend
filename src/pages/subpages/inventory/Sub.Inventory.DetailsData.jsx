@@ -10,6 +10,7 @@ import {
   ScriptIcon,
 } from "../../../assets/assets.svg";
 import SankeyDress from "../../../components/Components.SankeyDress";
+import { getAnalytics } from "../../../provider/Provider.Data";
 
 function InventoryDetailsData({ endpoint, overview = false }) {
   const { endpointDetails, uptimeDetails } = useContext(AppContext);
@@ -29,6 +30,32 @@ function InventoryDetailsData({ endpoint, overview = false }) {
     </div>
   );
 
+  const [periodSelection, setPeriodSelection] = useState("monthly");
+
+  const [endpointAreaChart, setEndpointAreaChart] = useState([]);
+  const [endpointSankeyChart, setEndpointSankeyChart] = useState(null);
+  const [endpointRadialChart, setEndpointRadialChart] = useState([]);
+  const [endpointStatistics, setEndpointStatistics] = useState([]);
+
+  useEffect(() => {
+    async function getAnalyticsData() {
+      try {
+        const searchResult = await getAnalytics({ period: periodSelection });
+        console.log(searchResult);
+        if (searchResult) {
+          setEndpointAreaChart(searchResult.endpointAreaChart);
+          setEndpointSankeyChart(searchResult.endpointSankeyChart);
+          setEndpointRadialChart(searchResult.endpointRadialChart);
+          setEndpointStatistics(searchResult.endpointStatistics);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    getAnalyticsData();
+  }, [periodSelection]);
+
   return (
     <div className="flex gap-4 w-full p-4">
       {/* <BarGraph bare={true} /> */}
@@ -41,14 +68,14 @@ function InventoryDetailsData({ endpoint, overview = false }) {
       </div> */}
 
       <div className="w-[400px] flex flex-col py-4 dash-card overflow-y-scroll no-scrollbar">
-        <h2 className="text-slate-800 dark:text-slate-100 pl-4 pb-4 uppercase text-xs">
-          Ecosystem Overview - Global (Monthly)
+        <h2 className="text-slate-800 dark:text-slate-100 pl-4 pb-4 uppercase text-xs py-[4px]">
+          Ecosystem Overview - Global ({periodSelection})
         </h2>
 
         <div className="flex flex-col mainDark">
-          <CardinalAreaChart data={uptimeDetails} />
+          <CardinalAreaChart data={endpointAreaChart} />
 
-          <div className="px-4 py-4 flex-row space-y-4">
+          <div className="py-4 flex-row space-y-4">
             <BadgeBar
               title={"302 New Events"}
               subtitle={"Click to view new events"}
@@ -70,7 +97,7 @@ function InventoryDetailsData({ endpoint, overview = false }) {
 
         <div style={{ borderTopWidth: 4, borderTopColor: "#191A21" }}>
           <h2 className="text-slate-800 dark:text-slate-100 p-4 uppercase text-xs">
-            Ecosystem Health (Monthly)
+            Ecosystem Health ({periodSelection})
           </h2>
           <div className="py-4">
             <RadarChartComponent data={uptimeDetails} />
@@ -79,7 +106,7 @@ function InventoryDetailsData({ endpoint, overview = false }) {
 
         <div style={{ borderTopWidth: 4, borderTopColor: "#191A21" }}>
           <h2 className="text-slate-800 dark:text-slate-100 p-4 uppercase text-xs">
-            Updates and Information (Monthly)
+            Updates and Information ({periodSelection})
           </h2>
           <div className="px-4 flex-row space-y-4">
             <BadgeBar
@@ -111,7 +138,11 @@ function InventoryDetailsData({ endpoint, overview = false }) {
         </div>
       </div>
 
-      <SankeyDress />
+      <SankeyDress
+        periodSelection={periodSelection}
+        onPeriodSelection={setPeriodSelection}
+        chartData={endpointSankeyChart}
+      />
 
       {/* <div className="col-span-3  h-[400px] flex flex-col dash-card pt-4">
         <h2 className="text-sm text-slate-800 dark:text-slate-100 pl-8">

@@ -7,6 +7,8 @@ import CatalogDetailsData from "./Partials.Inventory.EndpointDetails";
 
 import ApiDocumentation from "./Partials.Inventory.Documentation";
 import EndpointManager from "./Partials.Inventory.EndpointManager";
+import { BuilderIcon, EventIcon, EventsIcon } from "../../../../assets/assets.svg";
+import { SeraButton } from "../../events/Sub.Events.Playbook.Builder";
 
 const InventoryEndpointOverview = ({
   tier = 2,
@@ -27,6 +29,8 @@ const InventoryEndpointOverview = ({
   const [showSettings, setShowSettings] = useState(true);
 
   const location = useLocation();
+  const navigate = useNavigate();
+
   const { pathname } = location;
   const paths = decodeURIComponent(pathname).split("/");
   paths.shift(); //remove blank
@@ -37,6 +41,38 @@ const InventoryEndpointOverview = ({
       setMethod(paths.pop().replace("__", "").toUpperCase());
     }
   }, [location]);
+
+  const goToInventory = () => {
+    const newUrl = location.pathname
+      .replace("/inventory", "/builder")
+      .replace("__", "");
+    navigate(newUrl);
+  };
+
+  const goToEvents = () => {
+    navigate("/events");
+  };
+
+  const LeftButton = () => (
+    <SeraButton
+      icon={<BuilderIcon size="18" color="#fff" />}
+      isSelected={false}
+      border={true}
+      onPress={() => {
+        goToInventory();
+      }}
+    />
+  );
+  const RightButton = () => (
+    <SeraButton
+      icon={<EventsIcon size="18" secondaryColor="#2B84EC" color="#fff" />}
+      isSelected={false}
+      border={true}
+      onPress={() => {
+        goToEvents();
+      }}
+    />
+  );
 
   const oasEditorRef = useRef();
   const MDEditorRef = useRef();
@@ -53,7 +89,10 @@ const InventoryEndpointOverview = ({
     switch (selectedTab) {
       case 0:
         return (
-          <CatalogDetailsData endpoint="inventory/api.sample.com/pets/__post" isEndpoint />
+          <CatalogDetailsData
+            endpoint="inventory/api.sample.com/pets/__post"
+            isEndpoint
+          />
         );
       case 1:
         return (
@@ -84,6 +123,12 @@ const InventoryEndpointOverview = ({
       setSelectedTab={setSelectedTab}
       tabs={tabs}
       tier={tier}
+      buttons={
+        <div className="flex pr-2 gap-2">
+          <LeftButton />
+          <RightButton />
+        </div>
+      }
       mainDark
     >
       <div className={"flex flex-row mainDark gap-1 h-full"}>

@@ -56,3 +56,12 @@
     border-bottom-width: 1px;
     border-bottom-color: #334155;
 }
+
+.dropdownDate li {
+    padding: 4px 10px;
+}
+
+.dropdownDate li:hover {
+    background-color: #262c39;
+    cursor: pointer;
+}

@@ -143,10 +143,16 @@ function SeraSettings() {
             <div className="w-full flex-row flex px-4">
               <div className="flex flex-col flex-1 p-4 space-y-4">
                 <SettingBlock>
+                <SettingOption
+                    type={"toggle"}
+                    title="Log Successful Requests"
+                    subtitle="Keep a log of successful requests in the database"
+                    value="Placeholder value"
+                  />
                   <SettingOption
                     type={"toggle"}
-                    title="Log All Requests"
-                    subtitle="Keep a log of all requests in the database"
+                    title="Log Erroneous Requests"
+                    subtitle="Keep a log of error requests"
                     value="Placeholder value"
                   />
                   <SettingOption

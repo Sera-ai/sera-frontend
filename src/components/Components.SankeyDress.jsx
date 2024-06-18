@@ -6,12 +6,16 @@ import { AppContext } from "../provider/Provider.State";
 import Datepicker from "./Components.Datepicker";
 import CardinalAreaChart from "./charts/Charts.CardinalAreaChart";
 import CardinalAreaChartLarge from "./charts/Charts.CardinalAreaChart.Large";
+import DropdownDate from "./Components.DropdownDate";
 
 function SankeyDress({
   endpoint,
   overview = false,
   children,
   isEndpoint = false,
+  periodSelection = "monthly",
+  chartData,
+  onPeriodSelection = () => {},
 }) {
   const { endpointDetails, uptimeDetails } = useContext(AppContext);
   const [filter, setFilter] = useState("");
@@ -99,11 +103,12 @@ function SankeyDress({
   const NetworkAnalysisHeader = () => (
     <div className="flex flex-row w-full p-2 pr-4 items-center dash-card z-20">
       <h2 className="pl-2 uppercase text-xs text-slate-800 dark:text-slate-100 ">
-        Network Analysis (Monthly)
+        Network Analysis ({periodSelection})
       </h2>
       <div className="flex flex-grow" />
       <div className="gap-2 flex justify-center">
-        <Datepicker />
+        <DropdownDate selection={periodSelection} onSelect={onPeriodSelection}/>
+        {periodSelection === "custom" && <Datepicker />}
       </div>
     </div>
   );
@@ -116,7 +121,7 @@ function SankeyDress({
         <div className="flex-grow flex-col space-y-4 flex dash-card grid-test z-10">
           <div className="p-4">
             <h2 className=" uppercase text-xs text-slate-800 dark:text-slate-100 ">
-              Endpoint Requests (Monthly)
+              Endpoint Requests ({periodSelection})
             </h2>
             <text className="text-xs">Requests in the past 12 hours</text>
           </div>
@@ -124,7 +129,7 @@ function SankeyDress({
         </div>
       ) : (
         <div className="flex-grow flex-col space-y-4 flex p-4 dash-card grid-test z-10">
-          <SankeyComponent data={uptimeDetails} />
+          <SankeyComponent chartData={chartData} />
           <LabelDesign />
           {starfieldRendered && starfieldRef.current}
         </div>

@@ -97,39 +97,7 @@ const Header2 = ({
   setShowSettings,
   endpoint,
 }) => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const goToInventory = () => {
-    const newUrl = location.pathname
-      .replace("/inventory", "/builder")
-      .replace("__", "");
-    navigate(newUrl);
-  };
 
-  const goToEvents = () => {
-    navigate("/events");
-  };
-
-  const LeftButton = () => (
-    <SeraButton
-      icon={<BuilderIcon size="18" color="#fff" />}
-      isSelected={true}
-      border={true}
-      onPress={() => {
-        goToInventory();
-      }}
-    />
-  );
-  const RightButton = () => (
-    <SeraButton
-      icon={<EventsIcon size="18" secondaryColor="#2B84EC" color="#fff" />}
-      isSelected={true}
-      border={true}
-      onPress={() => {
-        goToEvents();
-      }}
-    />
-  );
 
   return (
     <div className="flex w-full dash-card min-h-[56px] pr-4 justify-end items-center space-x-4 mb-2">
@@ -209,13 +177,6 @@ const Header2 = ({
         </button>
 
       </div>
-
-      {endpoint && (
-        <div className="flex pr-2 gap-2">
-          <LeftButton />
-          <RightButton />
-        </div>
-      )}
     </div>
   );
 };

@@ -108,3 +108,8 @@ export async function getGlobalSearch(params) {
   const globalSearch = await databaseQuery({ query: "globalSearch", params });
   return globalSearch;
 }
+
+export async function getAnalytics(params) {
+  const usageAnalytics = await databaseQuery({ query: "usageAnalytics", params });
+  return usageAnalytics;
+}
