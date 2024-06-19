@@ -3,7 +3,13 @@ import BarGraph from "../../../../components/custom/Custom.MonthlyAnalytics";
 import { AppContext } from "../../../../provider/Provider.State";
 import SankeyDress from "../../../../components/Components.SankeyDress";
 
-function CatalogDetailsData({ endpoint, isEndpoint }) {
+function CatalogDetailsData({
+  endpoint,
+  isEndpoint,
+  setPeriodSelection,
+  periodSelection,
+  endpointSankeyChart,
+}) {
   const { endpointDetails } = useContext(AppContext);
 
   console.log(endpoint);
@@ -59,7 +65,12 @@ function CatalogDetailsData({ endpoint, isEndpoint }) {
 
   return (
     <div className="p-4 flex flex-col h-full w-full">
-      <SankeyDress isEndpoint={isEndpoint}>
+      <SankeyDress
+        isEndpoint={isEndpoint}
+        onPeriodSelection={setPeriodSelection}
+        periodSelection={periodSelection}
+        chartData={endpointSankeyChart}
+      >
         <div className="flex flex-column space-x-10 w-full py-2">
           <div className=" w-full">
             <h2 className="font-semibold text-sm text-slate-800 dark:text-slate-100">

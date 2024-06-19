@@ -187,6 +187,7 @@ async function globalSearch(params) {
 
 
 async function getAnalytics(params) {
+  console.log(params)
   try {
     const response = await fetch(
       `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/analytics?period=${params.period}${params.host ? `&host=${params.host}${params.endpoint ? `&endpoint=${params.endpoint}` : ""}` : ""}`,

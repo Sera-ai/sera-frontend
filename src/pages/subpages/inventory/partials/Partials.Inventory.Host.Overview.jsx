@@ -7,6 +7,7 @@ import CatalogDetailsData from "./Partials.Inventory.EndpointDetails";
 
 import ApiDocumentation from "./Partials.Inventory.Documentation";
 import EndpointManager from "./Partials.Inventory.EndpointManager";
+import { getAnalytics } from "../../../../provider/Provider.Data";
 
 const InventoryHostOverview = ({
   tier = 2,
@@ -31,17 +32,49 @@ const InventoryHostOverview = ({
   const [isError, setIsError] = useState(false);
   const [showSettings, setShowSettings] = useState(true);
 
+  const [endpointSankeyChart, setEndpointSankeyChart] = useState(null);
+  const [periodSelection, setPeriodSelection] = useState("monthly");
+
   const location = useLocation();
   const { pathname } = location;
   const paths = decodeURIComponent(pathname).split("/");
   paths.shift(); //remove blank
   paths.shift(); //remove inventory
+
   useEffect(() => {
+    async function getAnalyticsData() {
+      setEndpointSankeyChart(null)
+      try {
+
+        const { pathname } = location;
+        const paths2 = decodeURIComponent(pathname).split("/");
+        paths2.shift(); //remove blank
+        paths2.shift(); //remove inventory
+
+        if (paths2[0] != "" && paths2[0] != undefined) {
+          console.log(paths2[0]);
+          const searchResult = await getAnalytics({
+            period: periodSelection,
+            host: paths2[0],
+          });
+          console.log(searchResult);
+          if (searchResult) {
+            if (searchResult.endpointSankeyChart?.nodes.length > 0)
+              setEndpointSankeyChart(searchResult.endpointSankeyChart);
+          }
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
     const matchMethod = ["__post", "__get", "__delete", "__put", "__patch"];
     if (matchMethod.includes(paths[paths.length - 1])) {
       setMethod(paths.pop().replace("__", "").toUpperCase());
     }
-  }, [location]);
+
+    getAnalyticsData();
+  }, [periodSelection, location]);
 
   const oasEditorRef = useRef();
   const MDEditorRef = useRef();
@@ -58,7 +91,12 @@ const InventoryHostOverview = ({
     switch (selectedTab) {
       case 0:
         return (
-          <CatalogDetailsData endpoint="inventory/api.sample.com/pets/__post" />
+          <CatalogDetailsData
+            endpoint="inventory/api.sample.com/pets/__post"
+            setPeriodSelection={setPeriodSelection}
+            periodSelection={periodSelection}
+            endpointSankeyChart={endpointSankeyChart}
+          />
         );
       case 1:
         return (

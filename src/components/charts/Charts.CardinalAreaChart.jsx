@@ -68,7 +68,7 @@ export default class CardinalAreaChart extends PureComponent {
   render() {
     const { errorOpacity, reqOpacity } = this.state;
 
-    return (
+    return this.props.data ? (
       <ResponsiveContainer width="100%" height={300}>
         <AreaChart
           width={"100%"}
@@ -141,6 +141,6 @@ export default class CardinalAreaChart extends PureComponent {
           />
         </AreaChart>
       </ResponsiveContainer>
-    );
+    ):<></>;
   }
 }

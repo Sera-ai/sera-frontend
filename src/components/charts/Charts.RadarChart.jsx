@@ -11,8 +11,8 @@ import {
 
 const data = [
   {
-    subject: "Traffic",
-    description: "Percent of overall traffic",
+    subject: "RPS",
+    description: "Percent of overall RPS",
     value: 100,
     cap: 100,
   },
@@ -74,19 +74,22 @@ const CustomTooltip = ({ active, payload, label }) => {
 
         <p
           style={{ margin: 0, paddingBottom: "5px", fontSize: 10, color:"#4799ff" }}
-        >{`Amount: ${tooltipData.value}%`}</p>
+        >{`Amount: ${tooltipData.actual}`}</p>
       </div>
     );
   }
 };
 
 export default class RadarChartComponent extends PureComponent {
-  static demoUrl = "https://codesandbox.io/p/sandbox/simple-radar-chart-2p5sxm";
+
+  constructor(props) {
+    super(props);
+  }
 
   render() {
     return (
       <ResponsiveContainer width="100%" height={200}>
-        <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
+        <RadarChart cx="50%" cy="50%" outerRadius="80%" data={this.props.data}>
           <PolarGrid opacity={0.3} />
           <PolarAngleAxis fontSize={12} dataKey="subject" />
           <PolarRadiusAxis

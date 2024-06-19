@@ -99,6 +99,12 @@ function DropdownDate({ align, selection = null, onSelect = () => {} }) {
             </li>
             <li
               className="border-b border-slate-200 dark:border-slate-700 last:border-0"
+              onClick={() => itemSelected("Hourly")}
+            >
+              Hourly
+            </li>
+            <li
+              className="border-b border-slate-200 dark:border-slate-700 last:border-0"
               onClick={() => itemSelected("Custom")}
             >
               Custom

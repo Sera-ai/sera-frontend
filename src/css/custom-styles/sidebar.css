@@ -71,9 +71,13 @@ li.sidebarItem:not(:last-child) {
   border: 1px solid #393e49;
   background-color: #191a21;
   overflow: hidden;
-  gap: 15px;
+  gap: 7.5px;
   align-self: stretch;
   cursor: grab;
+}
+
+.big-pointer {
+  cursor: pointer !important;
 }
 
 .dndnodeicon {

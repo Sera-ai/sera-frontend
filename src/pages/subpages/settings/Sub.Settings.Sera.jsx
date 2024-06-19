@@ -80,7 +80,7 @@ function SeraSettings() {
   };
 
   return (
-    <div className={"w-full h-full mainDark flex justify-center items-start py-20"}>
+    <div className={"w-full h-full mainDark flex justify-center items-start pt-20"}>
       <div className="dash-card inline-flex flex-grow max-h-full max-w-[1000px] overflow-y-scroll no-scrollbar w-full">
         <Header
           title={"System Settings"}
@@ -128,6 +128,12 @@ function SeraSettings() {
                     title="Check For Updates"
                     subtitle="Check for Sera updates online"
                     value="Update Sera"
+                  />
+                  <SettingOption
+                    type={"button"}
+                    title="Sera Health Metrics"
+                    subtitle="Manage Sera metrics and health checks"
+                    value="Manage Metrics"
                   />
                 </SettingBlock>
               </div>
