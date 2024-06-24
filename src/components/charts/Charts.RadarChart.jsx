@@ -9,47 +9,6 @@ import {
   Tooltip,
 } from "recharts";
 
-const data = [
-  {
-    subject: "RPS",
-    description: "Percent of overall RPS",
-    value: 100,
-    cap: 100,
-  },
-  {
-    subject: "Uptime",
-    description:
-      "Percent of time since last restart that this has been available",
-    value: 90,
-    cap: 100,
-  },
-  {
-    subject: "Success",
-    description: "Percent of responses that are 200 (Status Ok)",
-    value: 95,
-    cap: 100,
-  },
-  {
-    subject: "Inventory",
-    description: "Percent of OAS documentation that have descriptions",
-    value: 70,
-    cap: 100,
-  },
-  {
-    subject: "Builders",
-    description: "Percent of endpoints that have builders setup",
-    value: 85,
-    cap: 100,
-  },
-  {
-    subject: "Latency",
-    description:
-      "Percent of requests that are within expected response time (~100ms) depending on analytics",
-    value: 90,
-    cap: 100,
-  },
-];
-
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     const tooltipData = payload[0].payload;

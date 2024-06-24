@@ -8,15 +8,41 @@ import CardinalAreaChart from "./charts/Charts.CardinalAreaChart";
 import CardinalAreaChartLarge from "./charts/Charts.CardinalAreaChart.Large";
 import DropdownDate from "./Components.DropdownDate";
 import RadarChartComponent from "./charts/Charts.RadarChart";
-import { BuilderIcon } from "../assets/assets.svg";
+import {
+  BuilderIcon,
+  ClockIcon,
+  InventoryIcon,
+  RpsIcon,
+  SuccessIcon,
+  TimerIcon,
+} from "../assets/assets.svg";
 
 function RadarDress({ data, BadgeBar, periodSelection }) {
+  const BadgeIcon = ({ subject }) => {
+    switch (subject) {
+      case "RPS":
+        return <RpsIcon color="#fff" size="24" />;
+      case "Uptime":
+        return <TimerIcon color="#fff" size="24" />;
+      case "Success":
+        return <SuccessIcon color="#fff" size="24" />;
+      case "Inventory":
+        return <InventoryIcon color="#fff" size="24" />;
+      case "Builders":
+        return <BuilderIcon color="#fff" size="24" />;
+      case "Latency":
+        return <ClockIcon color="#fff" size="24" />;
+      default:
+        return <BuilderIcon color="#fff" size="24" />;
+    }
+  };
+
   const BarBuilder = () =>
     data.map((item, index) => (
       <BadgeBar
         title={`${item.subject}: ${item.actual}`}
         subtitle={item.description}
-        icon={<BuilderIcon color="#ffffff80" size="24" />}
+        icon={<BadgeIcon subject={item.subject} />}
       />
     ));
 
