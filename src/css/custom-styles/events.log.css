@@ -1,0 +1,38 @@
+.logTable {
+    width: 100%;
+    font-size: 12px;
+    overflow-x: auto; /* Ensures table is scrollable on smaller screens */
+}
+
+.logTable table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto; /* Ensures the table fills the container */
+}
+
+.logTable th, td {
+    border: 1px solid #ffffff30;
+    text-align: left;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top:6px;
+    padding-bottom: 6px;
+
+}
+
+.logTable th {
+    padding: 16px;
+    background-color: #ffffff00;
+    white-space: nowrap;
+    font-weight: 100;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+.logTable tr:nth-child(even) {
+    background-color: #ffffff05;
+}
+
+.logTable tr:hover {
+    background-color: #ffffff00;
+}

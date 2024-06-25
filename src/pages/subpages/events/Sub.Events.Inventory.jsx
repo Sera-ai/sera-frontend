@@ -4,6 +4,7 @@ import { AppContext } from "../../../provider/Provider.State";
 import Header from "../../../components/custom/Custom.Header.Title";
 import Table from "../../../components/standard/Standard.Table";
 import Timeline from "@timeline/App";
+import { NewBarChart } from "../../../components/charts/Charts.BarChartEvents";
 
 function Inventory() {
   const [filter, setFilter] = useState("");
@@ -39,8 +40,8 @@ function Inventory() {
       columns={columns}
       tier={2}
     >
-      <div className={"w-full"} style={{ height: 600}}>
-        <Timeline filter={filter} />
+      <div className="w-full">
+        <NewBarChart height={200} />
       </div>
       <Table
         filter={filter}

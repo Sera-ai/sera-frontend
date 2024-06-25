@@ -113,3 +113,8 @@ export async function getAnalytics(params) {
   const usageAnalytics = await databaseQuery({ query: "usageAnalytics", params });
   return usageAnalytics;
 }
+
+export async function getEventLogs(params) {
+  const usageAnalytics = await databaseQuery({ query: "getLogs", params });
+  return usageAnalytics;
+}

@@ -36,6 +36,10 @@ async function databaseQuery({ query, params }) {
       const res = await getAnalytics(params);
       return res;
     }
+    case "getLogs": {
+      const res = await getLogs(params);
+      return res;
+    }
     default:
       return {};
   }
@@ -191,6 +195,28 @@ async function getAnalytics(params) {
   try {
     const response = await fetch(
       `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/analytics?period=${params.period}${params.host ? `&host=${params.host}${params.endpoint ? `&endpoint=${params.endpoint}` : ""}` : ""}`,
+      {
+        method: 'GET',
+        headers: {
+          "x-sera-service": "be_builder",
+          'Content-Type': 'application/json'
+        },
+      }
+    );
+    const jsonData = await response.json();
+    console.log(jsonData);
+    return jsonData;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {};
+  }
+}
+
+async function getLogs(params) {
+  console.log(params)
+  try {
+    const response = await fetch(
+      `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/logs?period=${params.period}${params.type ? `&type=${params.type}` : ""}`,
       {
         method: 'GET',
         headers: {
