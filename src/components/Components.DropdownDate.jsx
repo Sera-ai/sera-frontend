@@ -61,7 +61,7 @@ function DropdownDate({ align, selection = null, onSelect = () => {} }) {
       </button>
 
       <Transition
-        className={`origin-top-right z-10 absolute top-full -mr-48 sm:mr-0 min-w-40  mainDark border border-slate-200 dark:border-slate-700 pt-1.5 rounded shadow-lg overflow-hidden mt-1 ${align === "right" ? "right-0" : "left-0"}`}
+        className={`origin-top-right z-10 absolute top-full -mr-48 sm:mr-0 min-w-40  mainDark border border-slate-200 dark:border-slate-700 pt-1.5 rounded shadow-lg overflow-hidden mt-1 ${align === "right" ? "right-0" : "right-0"}`}
         show={dropdownOpen}
         enter="transition ease-out duration-200 transform"
         enterStart="opacity-0 -translate-y-2"
