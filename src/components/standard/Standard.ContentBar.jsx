@@ -50,7 +50,7 @@ export function ContentBar({
   }, [host]);
 
   if (!builder && !Object.keys(oas).length > 0) {
-    return <div>No endpoints available.</div>;
+    return <div></div>;
   }
 
   console.log(oas);

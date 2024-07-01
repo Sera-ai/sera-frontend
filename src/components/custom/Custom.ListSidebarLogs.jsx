@@ -11,7 +11,7 @@ export function ListSideBarLogs({
   const [openPaths, setOpenPaths] = useState({});
 
   if (logSources.length < 0) {
-    return <div>No endpoints available.</div>;
+    return <div></div>;
   }
 
   const togglePath = (path) => {
