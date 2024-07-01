@@ -13,6 +13,8 @@ const InventoryHostOverview = ({
   tier = 2,
   selectedHostData,
   setSelectedEndpoint,
+  setPeriodSelection,
+  periodSelection,
   endpoint,
   hostDns,
   oas,
@@ -33,7 +35,6 @@ const InventoryHostOverview = ({
   const [showSettings, setShowSettings] = useState(true);
 
   const [endpointSankeyChart, setEndpointSankeyChart] = useState(null);
-  const [periodSelection, setPeriodSelection] = useState("monthly");
 
   const location = useLocation();
   const { pathname } = location;

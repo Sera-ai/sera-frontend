@@ -1,21 +1,75 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import BarGraph from "../../../../components/custom/Custom.MonthlyAnalytics";
 import { AppContext } from "../../../../provider/Provider.State";
 import SankeyDress from "../../../../components/Components.SankeyDress";
+import { useLocation } from "react-router-dom";
+import { getHostInfo, getUsageGraph } from "../../../../provider/Provider.Data";
 
 function CatalogDetailsData({
-  endpoint,
   isEndpoint,
   setPeriodSelection,
   periodSelection,
   endpointSankeyChart,
 }) {
-  const { endpointDetails } = useContext(AppContext);
+  const location = useLocation();
 
-  console.log(endpoint);
-  if (!endpointDetails[endpoint]) {
-    return;
-  }
+  const [usageGraph, setUsageGraph] = useState(null);
+  const [hostInfo, setHostInfo] = useState(null);
+  const [method, setMethod] = useState(null);
+
+  useEffect(() => {
+    const matchMethod = ["__post", "__get", "__delete", "__put", "__patch"];
+    const { pathname } = location;
+
+    async function getAnalyticsData() {
+      setUsageGraph(null);
+      try {
+        const paths2 = decodeURIComponent(pathname).split("/");
+        paths2.shift(); //remove blank
+        paths2.shift(); //remove inventory
+
+        if (matchMethod.includes(paths[paths.length - 1])) {
+          paths2.pop();
+        }
+
+        if (paths2[0] != "" && paths2[0] != undefined) {
+          console.log(paths2[0]);
+          const host = paths2[0];
+          paths2.shift();
+          paths2.pop();
+
+          let params = {
+            period: periodSelection,
+            host: host,
+            method: method,
+          };
+
+          if (paths2.length > 0) {
+            params.path = "/" + paths2.join("/");
+          }
+          const searchResult = await getUsageGraph(params);
+          const hostInfoResult = await getHostInfo(params);
+          if (searchResult && hostInfoResult) {
+            if (searchResult.usageGraph?.length > 0)
+              setUsageGraph(searchResult.usageGraph);
+
+            console.log(hostInfoResult);
+            if (hostInfoResult && Object.keys(hostInfoResult).length != 0)
+              setHostInfo(hostInfoResult.hostData);
+          }
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    const paths = decodeURIComponent(pathname).split("/");
+    if (matchMethod.includes(paths[paths.length - 1])) {
+      setMethod(paths.pop().replace("__", "").toUpperCase());
+    }
+
+    getAnalyticsData();
+  }, [periodSelection, location]);
 
   const tableData = (data, index, total) => {
     let returnData;
@@ -69,18 +123,18 @@ function CatalogDetailsData({
         isEndpoint={isEndpoint}
         onPeriodSelection={setPeriodSelection}
         periodSelection={periodSelection}
-        chartData={endpointSankeyChart}
+        chartData={isEndpoint ? usageGraph : endpointSankeyChart}
       >
         <div className="flex flex-column space-x-10 w-full py-2">
           <div className=" w-full">
             <h2 className="font-semibold text-sm text-slate-800 dark:text-slate-100">
-              Endpoint Details
+              {isEndpoint ? "Endpoint" : "Host"} Details
             </h2>
             <h2
               style={{ color: "#ffffff99" }}
               className="text-xs text-slate-800 dark:text-slate-100"
             >
-              Endpoint specific details
+              {isEndpoint ? "Endpoint" : "Host"} specific details
             </h2>
 
             <table className="table-auto w-full dark:text-slate-300">
@@ -97,8 +151,8 @@ function CatalogDetailsData({
               </thead>
               {/* Table body */}
               <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
-                {Object.keys(endpointDetails[endpoint]["details"]).map(
-                  (obj, index) => (
+                {hostInfo &&
+                  Object.keys(hostInfo?.["details"]).map((obj, index) => (
                     <React.Fragment key={index}>
                       {/* Rows related to each endpoint under the host */}
                       <tr className="mainDark rowItem noborder">
@@ -117,31 +171,28 @@ function CatalogDetailsData({
                           <div className="flex flex-wrap gap-2">
                             <div className="text-slate-800 text-xs dark:text-slate-100 flex flex-wrap">
                               {tableData(
-                                endpointDetails[endpoint]["details"][obj],
+                                hostInfo?.["details"][obj],
                                 index,
-                                Object.keys(
-                                  endpointDetails[endpoint]["details"]
-                                ).length
+                                Object.keys(hostInfo?.["details"]).length
                               )}
                             </div>
                           </div>
                         </td>
                       </tr>
                     </React.Fragment>
-                  )
-                )}
+                  ))}
               </tbody>
             </table>
           </div>
           <div className=" w-full">
             <h2 className="font-semibold text-sm text-slate-800 dark:text-slate-100">
-              Endpoint Statistics
+              {isEndpoint ? "Endpoint" : "Host"} Statistics
             </h2>
             <h2
               style={{ color: "#ffffff99" }}
               className="text-xs text-slate-800 dark:text-slate-100"
             >
-              Statistics available for this endpoint
+              Statistics available for this {isEndpoint ? "Endpoint" : "Host"}
             </h2>
 
             <table className="table-fixed w-full dark:text-slate-300">
@@ -162,8 +213,8 @@ function CatalogDetailsData({
               </thead>
               {/* Table body */}
               <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
-                {Object.keys(endpointDetails[endpoint]["statistics"]).map(
-                  (obj, index) => (
+                {hostInfo &&
+                  Object.keys(hostInfo?.["statistics"]).map((obj, index) => (
                     <tr key={index} className="mainDark rowItem noborder">
                       <td className="pr-3">
                         <div className="flex flex-col">
@@ -178,13 +229,12 @@ function CatalogDetailsData({
                       <td className="p-1">
                         <div className="flex flex-wrap gap-2">
                           <div className="text-slate-800 text-xs dark:text-slate-100 flex flex-wrap">
-                            {endpointDetails[endpoint]["statistics"][obj]}
+                            {hostInfo?.["statistics"][obj]}
                           </div>
                         </div>
                       </td>
                     </tr>
-                  )
-                )}
+                  ))}
               </tbody>
             </table>
           </div>

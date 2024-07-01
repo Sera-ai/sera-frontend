@@ -25,6 +25,8 @@ function InventoryEntry({ tier = 1 }) {
   const [hostDns, setDns] = useState(null);
   const [isAnalytics, setAnalytics] = useState(false);
   const [tabs, setTabs] = useState(["Inventory"]);
+  const [periodSelection, setPeriodSelection] = useState("monthly");
+
   const [oas, setOas] = useState(selectedHostData[0]?.oas_spec || {});
 
   useEffect(() => {
@@ -149,6 +151,8 @@ function InventoryEntry({ tier = 1 }) {
               selectedHostData={selectedHostData[0]}
               setSelectedEndpoint={setSelectedEndpoint}
               selectedEndpoint={selectedEndpoint}
+              setPeriodSelection={setPeriodSelection}
+              periodSelection={periodSelection}
               hostDns={hostDns}
               selectedHost={selectedHost}
               oas={oas}
@@ -162,6 +166,8 @@ function InventoryEntry({ tier = 1 }) {
               selectedHostData={selectedHostData[0]}
               setSelectedEndpoint={setSelectedEndpoint}
               selectedEndpoint={selectedEndpoint}
+              setPeriodSelection={setPeriodSelection}
+              periodSelection={periodSelection}
               hostDns={hostDns}
               selectedHost={selectedHost}
               oas={oas}

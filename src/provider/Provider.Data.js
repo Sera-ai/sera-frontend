@@ -53,8 +53,7 @@ export async function dummyOas() {
 }
 
 export async function getOasFromHost(params) {
-  console.log(params);
-  if (!params?.host) return {};
+  if (!params?.hostname) return {};
 
   const oas = await databaseQuery({ query: "oasFromHost", params });
   return oas;
@@ -115,6 +114,15 @@ export async function getAnalytics(params) {
 }
 
 export async function getEventLogs(params) {
-  const usageAnalytics = await databaseQuery({ query: "getLogs", params });
-  return usageAnalytics;
+  const eventLogs = await databaseQuery({ query: "getLogs", params });
+  return eventLogs;
+}
+export async function getUsageGraph(params) {
+  const usageGraph = await databaseQuery({ query: "getUsage", params });
+  return usageGraph;
+}
+
+export async function getHostInfo(params) {
+  const usageGraph = await databaseQuery({ query: "getHostInfo", params });
+  return usageGraph;
 }

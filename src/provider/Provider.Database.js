@@ -40,6 +40,14 @@ async function databaseQuery({ query, params }) {
       const res = await getLogs(params);
       return res;
     }
+    case "getUsage": {
+      const res = await getUsageGraph(params);
+      return res;
+    }
+    case "getHostInfo": {
+      const res = await getHostInfo(params);
+      return res;
+    }
     default:
       return {};
   }
@@ -217,6 +225,52 @@ async function getLogs(params) {
   try {
     const response = await fetch(
       `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/logs?period=${params.period}${params.type ? `&type=${params.type}` : ""}`,
+      {
+        method: 'GET',
+        headers: {
+          "x-sera-service": "be_builder",
+          'Content-Type': 'application/json'
+        },
+      }
+    );
+    const jsonData = await response.json();
+    console.log(jsonData);
+    return jsonData;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {};
+  }
+}
+
+
+async function getUsageGraph(params) {
+  console.log(params)
+  try {
+    const response = await fetch(
+      `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/usage?period=${params.period}${params.host ? `&host=${params.host}${params.path ? `&path=${params.path}${params.method ? `&method=${params.method}` : ""}` : ""}` : ""}`,
+      {
+        method: 'GET',
+        headers: {
+          "x-sera-service": "be_builder",
+          'Content-Type': 'application/json'
+        },
+      }
+    );
+    const jsonData = await response.json();
+    console.log(jsonData);
+    return jsonData;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {};
+  }
+}
+
+
+async function getHostInfo(params) {
+  console.log(params)
+  try {
+    const response = await fetch(
+      `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/hostdata?period=${params.period}${params.host ? `&host=${params.host}${params.path ? `&path=${params.path}${params.method ? `&method=${params.method}` : ""}` : ""}` : ""}`,
       {
         method: 'GET',
         headers: {

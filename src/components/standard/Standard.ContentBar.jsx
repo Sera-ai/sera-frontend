@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AppContext } from "../../provider/Provider.State";
 import { LeftIcon } from "../../assets/assets.svg";
+import { getOasFromHost } from "../../provider/Provider.Data";
 
 export function ContentBar({
   endpoint,
@@ -13,13 +14,18 @@ export function ContentBar({
   children = null,
   builder = false,
   setHostBarOpen = () => {},
-  hostBarOpen = null
+  hostBarOpen = null,
 }) {
   const { endpointDetails, dummyOasMulti } = useContext(AppContext);
   const [openPaths, setOpenPaths] = useState({});
   const [oas, setOas] = useState({});
 
   useEffect(() => {
+    async function getOas() {
+      const oas = await getOasFromHost({ hostname: host });
+      setOas(oas);
+    }
+
     if (!builder) {
       const getHostData = inventory.filter(
         (inv) => inv.hostname === decodeURIComponent(host)
@@ -29,16 +35,17 @@ export function ContentBar({
       console.log(decodeURIComponent(host));
       console.log(getHostData);
       let ooas = {};
-      if (!getHostData || getHostData.length == 0) return;
-      const realoas = getHostData[0].oas_spec;
-      if (!Object.keys(realoas).includes("paths")) {
-        ooas = { ...realoas, paths: {} };
+      if (!getHostData || getHostData.length == 0) {
+        getOas();
       } else {
-        ooas = realoas;
+        const realoas = getHostData[0].oas_spec;
+        if (!Object.keys(realoas).includes("paths")) {
+          ooas = { ...realoas, paths: {} };
+        } else {
+          ooas = realoas;
+        }
+        setOas(ooas);
       }
-
-      console.log(ooas);
-      setOas(ooas);
     }
   }, [host]);
 
@@ -210,7 +217,7 @@ export function ContentBar({
           <div className="px-4 flex flex-row items-center h-[56px] justify-between cursor-pointer">
             <div className="flex items-center space-x-3">
               <div onClick={() => setHostBarOpen(!hostBarOpen)}>
-                <LeftIcon flip={hostBarOpen}/>
+                <LeftIcon flip={hostBarOpen} />
               </div>
               <div
                 onClick={() => {

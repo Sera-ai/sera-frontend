@@ -17,8 +17,6 @@ function SankeyDress({
   chartData,
   onPeriodSelection = () => {},
 }) {
-  const { endpointDetails, uptimeDetails } = useContext(AppContext);
-  const [filter, setFilter] = useState("");
   const [starfieldRendered, setStarfieldRendered] = useState(false);
   const starfieldRef = useRef();
 
@@ -35,6 +33,32 @@ function SankeyDress({
       setStarfieldRendered(true);
     }
   }, [starfieldRendered]);
+
+  const divRef = useRef(null);
+  const [size, setSize] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        if (entry.target === divRef.current) {
+          setSize({
+            width: entry.contentRect.width,
+            height: entry.contentRect.height,
+          });
+        }
+      }
+    });
+
+    if (divRef.current) {
+      resizeObserver.observe(divRef.current);
+    }
+
+    return () => {
+      if (divRef.current) {
+        resizeObserver.unobserve(divRef.current);
+      }
+    };
+  }, []);
 
   const LabelDesign = () => (
     <>
@@ -107,14 +131,17 @@ function SankeyDress({
       </h2>
       <div className="flex flex-grow" />
       <div className="gap-2 flex justify-center">
-        <DropdownDate selection={periodSelection} onSelect={onPeriodSelection}/>
+        <DropdownDate
+          selection={periodSelection}
+          onSelect={onPeriodSelection}
+        />
         {periodSelection === "custom" && <Datepicker />}
       </div>
     </div>
   );
 
   return (
-    <div className="flex-grow flex flex-col space-y-4 z-20">
+    <div ref={divRef} className="flex-grow flex flex-col space-y-4 z-20">
       <NetworkAnalysisHeader />
       {children}
       {isEndpoint ? (
@@ -125,11 +152,11 @@ function SankeyDress({
             </h2>
             <text className="text-xs">Requests in the past 12 hours</text>
           </div>
-          <CardinalAreaChartLarge />
+          <CardinalAreaChartLarge chartData={chartData} parentSize={size} />
         </div>
       ) : (
         <div className="flex-grow flex-col space-y-4 flex p-4 dash-card grid-test z-10">
-          <SankeyComponent chartData={chartData} />
+          <SankeyComponent chartData={chartData} parentSize={size} />
           <LabelDesign />
           {starfieldRendered && starfieldRef.current}
         </div>

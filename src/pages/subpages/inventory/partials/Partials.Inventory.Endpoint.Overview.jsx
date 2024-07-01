@@ -7,13 +7,19 @@ import CatalogDetailsData from "./Partials.Inventory.EndpointDetails";
 
 import ApiDocumentation from "./Partials.Inventory.Documentation";
 import EndpointManager from "./Partials.Inventory.EndpointManager";
-import { BuilderIcon, EventIcon, EventsIcon } from "../../../../assets/assets.svg";
+import {
+  BuilderIcon,
+  EventIcon,
+  EventsIcon,
+} from "../../../../assets/assets.svg";
 import { SeraButton } from "../../events/Sub.Events.Playbook.Builder";
 
 const InventoryEndpointOverview = ({
   tier = 2,
   selectedHostData,
   setSelectedEndpoint,
+  setPeriodSelection,
+  periodSelection,
   endpoint,
   hostDns,
   oas,
@@ -90,7 +96,9 @@ const InventoryEndpointOverview = ({
       case 0:
         return (
           <CatalogDetailsData
-            endpoint="inventory/api.sample.com/pets/__post"
+            setPeriodSelection={setPeriodSelection}
+            periodSelection={periodSelection}
+            endpoint2={endpoint}
             isEndpoint
           />
         );

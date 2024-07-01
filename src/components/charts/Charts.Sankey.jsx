@@ -326,10 +326,11 @@ const MyCustomLink = ({
   );
 };
 
-const SankeyComponent = ({ chartData }) => {
+const SankeyComponent = ({ chartData, parentSize }) => {
   const [containerWidth, setContainerWidth] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
   const containerRef = useRef(null);
+  const [key, setKey] = useState(0); // State to force re-render
 
   useEffect(() => {
     const updateContainerWidth = () => {
@@ -338,14 +339,15 @@ const SankeyComponent = ({ chartData }) => {
         setContainerHeight(containerRef.current.offsetHeight);
       }
     };
-
+    setKey((prevKey) => prevKey + 1);
     updateContainerWidth();
     window.addEventListener("resize", updateContainerWidth);
     return () => window.removeEventListener("resize", updateContainerWidth);
-  }, []);
+  }, [parentSize]);
 
   return (
     <div
+      key={key}
       ref={containerRef}
       style={{ width: "100%", height: "100%", zIndex: 20 }}
     >

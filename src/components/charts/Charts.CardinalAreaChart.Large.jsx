@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AreaChart,
   Area,
@@ -14,10 +14,12 @@ import { curveCardinal } from "d3-shape";
 function generateRandomDataPoints() {
   const dataPoints = [];
   const now = Date.now();
-  const twelveHoursAgo = now - (12 * 60 * 60 * 1000);
+  const twelveHoursAgo = now - 12 * 60 * 60 * 1000;
 
   for (let i = 0; i < 100; i++) {
-    const timestamp = new Date(twelveHoursAgo + Math.random() * (now - twelveHoursAgo)).toISOString();
+    const timestamp = new Date(
+      twelveHoursAgo + Math.random() * (now - twelveHoursAgo)
+    ).toISOString();
     const req = Math.floor(Math.random() * 20000) + 1; // Random request count between 1 and 20000
     const error = Math.floor(Math.random() * 1000) + 1; // Random error count between 1 and 1000
 
@@ -70,27 +72,33 @@ const CustomTooltip = ({ active, payload, label }) => {
   }
 };
 
-export default class CardinalAreaChartLarge extends PureComponent {
-  state = {
-    errorOpacity: 1,
-    reqOpacity: 1,
+const CardinalAreaChartLarge = ({ chartData, parentSize }) => {
+  const [errorOpacity, setErrorOpacity] = useState(1);
+  const [reqOpacity, setReqOpacity] = useState(1);
+  const [key, setKey] = useState(0); // State to force re-render
+
+  const handleLegendClick = (dataKey) => {
+    if (dataKey === "error") {
+      setErrorOpacity((prev) => (prev === 1 ? 0.0 : 1));
+    } else if (dataKey === "req") {
+      setReqOpacity((prev) => (prev === 1 ? 0.0 : 1));
+    }
   };
 
-  handleLegendClick = (dataKey) => {
-    this.setState((prevState) => ({
-      [`${dataKey}Opacity`]: prevState[`${dataKey}Opacity`] === 1 ? 0.0 : 1,
-    }));
-  };
+  useEffect(() => {
+    setKey((prevKey) => prevKey + 1);
+  }, [parentSize]);
 
-  render() {
-    const { errorOpacity, reqOpacity } = this.state;
-
-    return (
+  return (
+    <div
+      key={key}
+      style={{ width: "100%", height: "100%" }}
+    >
       <ResponsiveContainer width="100%" height={"100%"}>
         <AreaChart
           width={"100%"}
           height={"100%"}
-          data={data}
+          data={chartData}
           margin={{
             top: 50,
             right: 0,
@@ -123,10 +131,18 @@ export default class CardinalAreaChartLarge extends PureComponent {
             fontSize={12}
             interval="preserveStartEnd"
             tick={{ dy: 10 }}
-            ticks={data.map((d, i) => i % Math.floor(data.length / 12) === 0 ? d.name : null).filter(Boolean)}
+            ticks={data
+              .map((d, i) =>
+                i % Math.floor(data.length / 12) === 0 ? d.name : null
+              )
+              .filter(Boolean)}
             tickFormatter={(timestamp) => {
               const date = new Date(timestamp);
-              return date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0');
+              return (
+                date.getHours().toString().padStart(2, "0") +
+                ":" +
+                date.getMinutes().toString().padStart(2, "0")
+              );
             }}
           />
           <YAxis
@@ -157,10 +173,12 @@ export default class CardinalAreaChartLarge extends PureComponent {
           <Legend
             wrapperStyle={{ cursor: "pointer", right: 0, top: 0 }}
             iconType="line"
-            onClick={(e) => this.handleLegendClick(e.dataKey)}
+            onClick={(e) => handleLegendClick(e.dataKey)}
           />
         </AreaChart>
       </ResponsiveContainer>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default CardinalAreaChartLarge;
