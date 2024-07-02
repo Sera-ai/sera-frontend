@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend_catalog
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend_catalog
+  template:
+    metadata:
+      labels:
+        app: frontend_catalog
+    spec:
+      volumes:
+        - name: node-modules
+          hostPath:
+            path: /workspace/node_modules
+      containers:
+      - name: frontend_catalog
+        image: frontend_catalog:latest
+        ports:
+        - containerPort: 12010
+        volumeMounts:
+        - name: node-modules
+          mountPath: /workspace/fe_Catalog/node_modules
