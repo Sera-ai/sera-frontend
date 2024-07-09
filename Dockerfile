@@ -12,12 +12,6 @@ WORKDIR /workspace
 # Copy the rest of your application code
 COPY . .
 
-WORKDIR /workspace/src/addons
-
-RUN git submodule update --init --recursive --remote
-
-WORKDIR /workspace
-
 RUN npm install
 
 # Expose the port the app runs on

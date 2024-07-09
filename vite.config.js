@@ -9,7 +9,7 @@ import fs from "fs";
 // https://vitejs.dev/config/
 export default defineConfig({
   define: {
-    __BE_ROUTER_PORT__: JSON.stringify(process.env.BE_ROUTER_PORT),
+    __BE_ROUTER_PORT__: "443",
     '__DEBUG__': false,
     global: {},
     process: { env: { TEST_SSR: false } },
