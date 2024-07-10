@@ -1,12 +1,4 @@
 [submodule "src/builder"]
 	path = addons/fe_Builder
-	url = https://github.com/Sera-ai/fe_Builder.git
-	branch = main
-[submodule "src/Sea"]
-	path = addons/fe_Sea
-	url = https://github.com/Sera-ai/fe_Sea.git
-	branch = main
-[submodule "addons/fe_Timeline"]
-	path = addons/fe_Timeline
-	url = https://github.com/Sera-ai/fe_Timeline.git
+	url = https://github.com/Sera-ai/sera-frontend-builder.git
 	branch = main
