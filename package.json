@@ -2,9 +2,7 @@
   "name": "sera-frontend",
   "version": "0.1.0",
   "workspaces": [
-    "./addons/fe_Builder",
-    "./addons/fe_Timeline",
-    "./addons/fe_Sea"
+    "./addons/fe_Builder"
   ],
   "scripts": {
     "start": "vite --host",

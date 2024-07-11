@@ -36,15 +36,7 @@ export default defineConfig({
       {
         find: "@builder",
         replacement: path.resolve(__dirname, "./addons/fe_Builder/src"),
-      },
-      {
-        find: "@sea",
-        replacement: path.resolve(__dirname, "./addons/fe_Sea/src"),
-      },
-      {
-        find: "@timeline",
-        replacement: path.resolve(__dirname, "./addons/fe_Timeline/src"),
-      },
+      }
     ],
   },
   build: {
@@ -53,13 +45,13 @@ export default defineConfig({
     },
   },
   server: {
-    port: process.env.FE_CATALOG_PORT,
+    port: 5173,
     https: {
       key: fs.readFileSync(path.resolve(__dirname, "./certs/localhost.key")),
       cert: fs.readFileSync(path.resolve(__dirname, "./certs/localhost.crt")),
     },
   },
   optimizeDeps: {
-    include: ["@builder/App", "@timeline/App", "@sea/App"],
+    include: ["@builder/App"],
   },
 });
