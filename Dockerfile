@@ -12,6 +12,9 @@ WORKDIR /workspace
 # Copy the rest of your application code
 COPY . .
 
+RUN git submodule update --init --recursive --remote
+
+
 RUN npm install
 
 # Expose the port the app runs on
