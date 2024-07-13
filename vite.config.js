@@ -46,10 +46,6 @@ export default defineConfig({
   },
   server: {
     port: 5173,
-    https: {
-      key: fs.readFileSync(path.resolve(__dirname, "./certs/localhost.key")),
-      cert: fs.readFileSync(path.resolve(__dirname, "./certs/localhost.crt")),
-    },
   },
   optimizeDeps: {
     include: ["@builder/App"],
