@@ -27,7 +27,7 @@ export function ListSideBarLogs({
     }
   });
 
-  const GetOasData = ({ logSources }) => {
+  const GetLogData = ({ logSources }) => {
     const setEndpoint = (ep) => {
       console.log("set selected endpoint", ep);
       setLogType(ep)
@@ -36,9 +36,9 @@ export function ListSideBarLogs({
       const name = key;
       const isOpen = openPaths[name];
       return (
-        <div key={name}>
+        <div className="flex flex-col w-full" key={name}>
           <div
-            className={`flex flex-row justify-between items-center py-1.5 px-4 listItemLink`}
+            className={`flex w-full flex-row justify-between items-center py-1.5 px-4 listItemLink`}
             onClick={() => togglePath(name)}
           >
             <span className={`text-xs`}>{name}</span>
@@ -89,12 +89,12 @@ export function ListSideBarLogs({
   };
 
   return (
-    <div className="dash-card w-[250px] min-w-[250px] text-sm text-white">
-      <div className="text-sm text-white py-4">
-        <div className="flex flex-row justify-between pb-2 px-4">
+    <div className="dash-card w-[250px] min-w-[250px] flex text-sm text-white">
+      <div className="flex w-full flex-col text-sm text-white py-4">
+        <div className="flex w-full flex-row justify-between pb-2 px-4">
           <span className="text-xs uppercase">Log Source</span>
         </div>
-        <GetOasData logSources={logSources} />
+        <GetLogData logSources={logSources} />
       </div>
       {children && (
         <>

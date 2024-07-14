@@ -22,11 +22,16 @@
 
 .logTable th {
     padding: 16px;
-    background-color: #ffffff00;
     white-space: nowrap;
     font-weight: 100;
     text-transform: uppercase;
     color: #ffffff;
+    position: sticky;
+    top: 0; /* This makes the header sticky */
+    z-index: 1; /* Ensures the header stays above the table content */
+    background-color: #191A2190;
+    border-width: 1;
+    border-color: #555;
 }
 
 .logTable tr:nth-child(even) {
@@ -35,4 +40,14 @@
 
 .logTable tr:hover {
     background-color: #ffffff00;
+}
+
+.logMenu li {
+    padding: 3px 6px 3px 6px;
+    color: #fff
+}
+
+.logMenu li:hover {
+    background-color: #ffffff20;
+    cursor: pointer;
 }

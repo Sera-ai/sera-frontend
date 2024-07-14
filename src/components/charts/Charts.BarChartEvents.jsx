@@ -136,7 +136,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
-export const NewBarChart = ({height}) => {
+export const NewBarChart = ({height, onSelectColumn = ()=>{}, selectedColumn}) => {
   return (
     <ResponsiveContainer width="100%" height={height}>
       <BarChart
@@ -165,6 +165,7 @@ export const NewBarChart = ({height}) => {
           width={1}
           maxBarSize={10}
           radius={[3, 3, 3, 3]}
+          onClick={(e) => onSelectColumn(e)}
         />
       </BarChart>
     </ResponsiveContainer>

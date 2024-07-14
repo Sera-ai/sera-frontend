@@ -31,6 +31,9 @@ export function EventBar({
       Builder: [
         "Default Builder Playbook",
       ],
+      Log: [
+        "Default Log Playbook",
+      ],
     };
 
     return Object.entries(dummyData).map(([category, paths]) => {
