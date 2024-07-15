@@ -16,11 +16,6 @@ export async function anamalyListData() {
   return anamalyListData;
 }
 
-export async function eventInventory() {
-  const eventInventory = await getDataTemplate("eventInventory");
-  return eventInventory;
-}
-
 export async function hostInventory() {
   const hostInventory = await databaseQuery({ query: "hosts" });
   return hostInventory;
@@ -96,6 +91,11 @@ export async function uptimeDetails() {
 export async function playbookInventory() {
   const playbookInventory = await databaseQuery({ query: "getPlaybooks" });
   return playbookInventory;
+}
+
+export async function eventInventory() {
+  const eventInventory = await databaseQuery({ query: "getEvents" });
+  return eventInventory;
 }
 
 export async function builderInventory() {

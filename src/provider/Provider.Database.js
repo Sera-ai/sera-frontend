@@ -24,6 +24,10 @@ async function databaseQuery({ query, params }) {
       const res = await allBuilders();
       return res;
     }
+    case "getEvents": {
+      const res = await getEvents();
+      return res;
+    }
     case "getPlaybooks": {
       const res = await getPlaybooks();
       return res;
@@ -157,10 +161,27 @@ async function allBuilders() {
   }
 }
 
+async function getEvents() {
+  try {
+    const response = await fetch(
+      `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/events`,
+      {
+        headers: { "x-sera-service": "be_builder" },
+      }
+    );
+    const jsonData = await response.json();
+    console.log(jsonData);
+    return jsonData;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {};
+  }
+}
+
 async function getPlaybooks() {
   try {
     const response = await fetch(
-      `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/playbook`,
+      `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/events/playbook`,
       {
         headers: { "x-sera-service": "be_builder" },
       }

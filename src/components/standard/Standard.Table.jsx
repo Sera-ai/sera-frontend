@@ -13,6 +13,7 @@ const Table = ({
   selectAllRef,
   allowSelect = true,
   padded = false,
+  isCollapsable = true,
 }) => {
   const navigate = useNavigate();
   const [expandedGroups, setExpandedGroups] = useState({});
@@ -61,7 +62,7 @@ const Table = ({
     return Object.entries(grouped).map(
       ([groupName, groupItems], groupIndex) => {
         // Check if the group has more than one item to decide whether to enable toggle functionality
-        const isGroupToggleEnabled = groupItems.length > 1;
+        const isGroupToggleEnabled = groupItems.length > 1 && isCollapsable;
 
         return (
           <React.Fragment key={groupName}>

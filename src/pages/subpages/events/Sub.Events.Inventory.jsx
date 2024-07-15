@@ -17,13 +17,8 @@ function Inventory() {
   const selectAllRef = useRef(null);
 
   const linkClasses = [
-    "host",
-    "endpoint",
-    "userIp",
-    "seraHost",
-    "seraEndpoint",
-    "builderId",
     "eventId",
+    "event"
   ];
 
   return (
@@ -47,6 +42,8 @@ function Inventory() {
         setFilter={setFilter}
         columns={columns}
         data={eventInventory}
+        isCollapsable={false}
+        allowSelect={false}
         linkClasses={linkClasses}
         selectedItems={selectedItems}
         setSelectedItems={setSelectedItems}

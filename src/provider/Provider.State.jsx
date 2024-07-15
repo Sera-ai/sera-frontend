@@ -41,6 +41,7 @@ function useInitialState() {
         const fetchFunction = DataProvider[key];
         if (typeof fetchFunction === "function") {
           const data = await fetchFunction();
+          console.log(key, data)
           setState((prevState) => ({
             ...prevState,
             [key]: data,
