@@ -7,6 +7,7 @@ const JsonViewerFull = ({
   updateField = () => {},
   editable = true,
   height = 270,
+  type= "javascript"
 }) => {
   const monaco = useMonaco();
   const [editor, setEditor] = useState(null);
@@ -139,7 +140,7 @@ const JsonViewerFull = ({
   return (
     <div style={{ height, maxHeight: 500 }}>
       <Editor
-        defaultLanguage="lua"
+        defaultLanguage={type}
         defaultValue={oas}
         options={{
           cursorStyle: "line",
