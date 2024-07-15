@@ -25,7 +25,7 @@ async function databaseQuery({ query, params }) {
       return res;
     }
     case "getEvents": {
-      const res = await getEvents();
+      const res = await getEvents({ params });
       return res;
     }
     case "getPlaybooks": {
@@ -161,10 +161,10 @@ async function allBuilders() {
   }
 }
 
-async function getEvents() {
+async function getEvents({ params }) {
   try {
     const response = await fetch(
-      `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/events`,
+      `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/events${params?.id ? `?id=${params.id}` : ""}`,
       {
         headers: { "x-sera-service": "be_builder" },
       }

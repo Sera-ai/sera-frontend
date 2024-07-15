@@ -1,81 +1,84 @@
-import React, { forwardRef, useImperativeHandle, useState, useEffect } from "react";
-import Editor, { useMonaco, loader } from "@monaco-editor/react";
+import React, { useState, useEffect, useRef } from "react";
+import Editor, { useMonaco } from "@monaco-editor/react";
 
-const JsonViewer = ({ oas }) => {
-    const monaco = useMonaco();
+const JsonViewerFull = ({
+  oas = "",
+  main = false,
+  updateField = () => {},
+  editable = true,
+  height = 270,
+}) => {
+  const monaco = useMonaco();
+  const [editor, setEditor] = useState(null);
 
-    const [state, setState] = React.useState(JSON.stringify(oas));
-    const [editor, setEditor] = useState(null);
+  const isProgrammaticChangeRef = useRef(false);
 
+  useEffect(() => {
+    isProgrammaticChangeRef.current = true; // Mark the upcoming change as programmatic
+    if (editor) {
+      const currentContent = editor.getValue();
+      if (currentContent !== oas) {
+        const position = editor.getPosition();
+        editor.setValue(oas);
+        editor.setPosition(position);
+      }
+    }
+    isProgrammaticChangeRef.current = false; // Reset after the change is done
+  }, [oas, editor]);
 
-
-    useEffect(() => {
-        if (monaco && editor) {
-            const model = editor.getModel();
-            const checkErrors = () => {
-                // Get all the markers (errors, warnings, etc.) for the current model
-                const markers = monaco.editor.getModelMarkers({ resource: model.uri });
-                // Check if there's any marker with severity of Error
-            };
-
-            // Check for errors initially
-            checkErrors();
-
-            // Listen for marker changes
-            monaco.editor.onDidChangeMarkers(uris => {
-                if (uris.some(uri => uri.toString() === model.uri.toString())) {
-                    checkErrors();
-                }
-            });
-
-            return () => {
-                // Dispose listener when the component unmounts or when the editor/model changes
-                monaco.editor.onDidChangeMarkers(() => { });
-            };
+  useEffect(() => {
+    if (monaco && editor) {
+      const handleModelContentChange = (event) => {
+        if (isProgrammaticChangeRef.current) {
+          // Ignore programmatic changes
+          return;
         }
-    }, [monaco, editor]);
+        const newValue = editor.getValue();
+        updateField(newValue); // This is called only for user-initiated changes
+      };
 
+      // Add the event listener and receive the disposable object
+      const disposable = editor.onDidChangeModelContent(handleModelContentChange);
 
+      // Return a cleanup function that disposes of the event listener
+      return () => disposable.dispose();
+    }
+  }, [monaco, editor, updateField]);
 
+  return (
+    <div style={{ height: "100%", width: "100%" }}>
+      <Editor
+        defaultLanguage="json"
+        defaultValue={oas}
+        options={{
+          cursorStyle: "line",
+          formatOnPaste: true,
+          formatOnType: true,
+          fontSize: 14,
+          wordWrap: "on",
+          readOnly: !editable,
+        }}
+        onMount={(editor, monaco) => {
+          setEditor(editor); // Storing the editor instance
+          monaco.editor.defineTheme("custom-dark", {
+            base: "vs-dark", // can also be vs-dark, vs-light, hc-black
+            inherit: true, // can also be false to completely replace the base
+            rules: [], // custom rules
+            colors: {
+              "editor.background": main ? "#333333" : "#333333", // your desired background color
+              // you can add other color overrides here if needed
+            },
+          });
 
-    return (
-        <div className={"w-full max-w-full overflow-hidden"}>
-            {/* {state} */}
-            <Editor
-                height="15vh"
-                width="100%"
-                defaultLanguage="json"
-                defaultValue={state}
-                options={{
-                    cursorStyle: "line",
-                    formatOnPaste: false,
-                    formatOnType: false,
-                    wordWrap: "on" // Ensure this is set to "on" instead of true
-                }}
-                onMount={(editor, monaco) => {
-                    setEditor(editor); // Storing the editor instance
-                    monaco.editor.defineTheme('custom-dark', {
-                        base: 'vs-dark', // can also be vs-dark, vs-light, hc-black
-                        inherit: true,   // can also be false to completely replace the base
-                        rules: [],       // custom rules
-                        colors: {
-                            'editor.background': '#23232E', // your desired background color
-                            // you can add other color overrides here if needed
-                        },
-                    });
+          // Set the custom theme you have just defined
+          monaco.editor.setTheme("custom-dark");
+          setTimeout(function () {
+            editor.getAction("editor.action.formatDocument").run();
+          }, 300);
+        }}
+      />
+    </div>
+  );
+};
 
-                    // Set the custom theme you have just defined
-                    monaco.editor.setTheme('custom-dark');
-                    setTimeout(function () {
-                        editor.getAction("editor.action.formatDocument").run();
-                        setTimeout(function () {
-                            editor.updateOptions({ readOnly: true });
-                        }, 300);
-                    }, 300);
-                }}
-            />
-        </div>
-    );
-}
-
-export default JsonViewer;
+export default JsonViewerFull;

@@ -227,15 +227,43 @@ function camelCaseToTitle(camelCase) {
   return titleCase;
 }
 
+function handlePopup(url) {
+  window.open(url, 'new', 'width=600,height=400');
+}
+
+const PopupLink = ({ href, text, inline = false }) => {
+  if (inline) {
+    return (
+      <a href={href}>
+        {text}
+      </a>
+    );
+  }else{
+    return (
+      <a href={href} target="popup" onClick={(e) => {
+        e.preventDefault();
+        handlePopup(href);
+      }}>
+        {text}
+      </a>
+    );
+  }
+  
+};
+
 function parseType(data) {
   switch (typeof data) {
     case "string":
       const regex = /\[([^\]]+)\]\(([^)]+)\)/;
+      const regex2 = /\[([^\]]+)\]\[([^\]]+)\]/;
 
       if (regex.test(data)) {
         const matches = data.match(regex);
-        return <a href={matches[2]}>{matches[1]}</a>;
-      } else {
+        return (<PopupLink href={matches[2]} text={matches[1]} />);
+      } else if(regex2.test(data)) {
+        const matches = data.match(regex2);
+        return (<PopupLink href={matches[2]} text={matches[1]} inline/>);
+      }else{
         return data;
       }
     case "number":

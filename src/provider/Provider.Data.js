@@ -93,8 +93,8 @@ export async function playbookInventory() {
   return playbookInventory;
 }
 
-export async function eventInventory() {
-  const eventInventory = await databaseQuery({ query: "getEvents" });
+export async function eventInventory(params) {
+  const eventInventory = await databaseQuery({ query: "getEvents", params });
   return eventInventory;
 }
 

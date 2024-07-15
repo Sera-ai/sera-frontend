@@ -6,16 +6,16 @@ import BodyContent from "../../../components/page/Components.Page.BodyContent";
 
 function EventsEntry() {
   const [selectedTab, setSelectedTab] = useState(0); // default selected tab
-  const [tabs, setTabs] = useState(["Events", "Playbooks", "Logs"]);
+  const [tabs, setTabs] = useState(["Events",  "Logs", "Playbooks"]);
 
   const SelectedPage = () => {
     switch (selectedTab) {
       case 0:
         return <Inventory />;
       case 1:
-        return <Playbook />;
-      case 2:
         return <Logs />;
+      case 2:
+        return <Playbook />;
     }
   };
 
