@@ -106,6 +106,7 @@ const InventoryHostOverview = ({
             setOas={setOas}
             setSelectedEndpoint={setSelectedEndpoint}
             method={method}
+            host={selectedHostData}
             endpoint={endpoint}
             setEditDocs={setEditDocs}
             editDocs={editDocs}

@@ -22,6 +22,7 @@ const ApiDocumentation = ({
   setSelectedEndpoint,
   paths,
   method,
+  host,
   endpoint = null,
   setEditDocs,
   editDocs,
@@ -72,7 +73,7 @@ const ApiDocumentation = ({
         setDetails={setDetails}
         endpoint={endpoint}
         method={method}
-        host={paths}
+        host={host}
         setSelectedEndpoint={setSelectedEndpoint}
         detailsPath={detailsPath}
       />
@@ -417,7 +418,7 @@ function GetDetails({
           >
             {details.method}
           </span>
-          <span className="codetext px-4 ">https://{host + details.path}</span>
+          <span className="codetext px-4 ">https://{host.hostname + details.path}</span>
         </div>
         <div className="divider"></div>
       </div>
