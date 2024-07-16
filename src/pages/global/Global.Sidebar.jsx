@@ -14,6 +14,7 @@ import {
 function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
   const location = useLocation();
   const { pathname } = location;
+  console.log("pathname",pathname)
 
   const trigger = useRef(null);
   const sidebar = useRef(null);
@@ -92,7 +93,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
             {/* Inbox 
             <li
               className={`sidebarItem rounded-sm mb-0.5 last:mb-0 flex items-center justify-center ${
-                (pathname === "/" || pathname.includes("dashboard")) &&
+                (pathname === "/" || pathname.startsWith("/dashboard")) &&
                 "secondaryDarkPadded"
               }`}
             >
@@ -100,7 +101,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
                 end
                 to="/"
                 className={`block text-slate-200 truncate transition duration-150 ${
-                  pathname === "/" || pathname.includes("dashboard")
+                  pathname === "/" || pathname.startsWith("/dashboard")
                     ? "hover:text-slate-200"
                     : "hover:text-white"
                 }`}
@@ -110,7 +111,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
             </li>*/}
             <li
               className={`sidebarItem sidebarEndItem rounded-sm mb-0.5 last:mb-0 flex items-center justify-center ${
-                (pathname === "/" || pathname.includes("inventory")) &&
+                (pathname === "/" || pathname.startsWith("/inventory")) &&
                 "secondaryDarkPadded"
               }`}
             >
@@ -118,14 +119,14 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
                 end
                 to="/inventory"
                 className={`block text-slate-200 truncate transition duration-150 ${
-                  pathname === "/" || pathname.includes("inventory")
+                  pathname === "/" || pathname.startsWith("/inventory")
                     ? "hover:text-slate-200"
                     : "hover:text-white"
                 }`}
               >
                 <InventoryIcon
                   color={
-                    pathname === "/" || pathname.includes("inventory")
+                    pathname === "/" || pathname.startsWith("/inventory")
                       ? "#2B84EC"
                       : "#FFFFFF50"
                   }
@@ -134,21 +135,21 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
             </li>
             <li
               className={`sidebarItem rounded-sm mb-0.5 last:mb-0 flex items-center justify-center ${
-                pathname.includes("events") && "secondaryDarkPadded"
+                pathname.startsWith("/events") && "secondaryDarkPadded"
               }`}
             >
               <NavLink
                 end
                 to="/events"
                 className={`block text-slate-200 truncate transition duration-150 ${
-                  pathname.includes("events")
+                  pathname.startsWith("/events")
                     ? "hover:text-slate-200"
                     : "hover:text-white"
                 }`}
               >
                 <EventsIcon
                   secondaryColor={
-                    pathname.includes("events") ? "#2B84EC" : "#FFFFFF50"
+                    pathname.startsWith("/events") ? "#2B84EC" : "#FFFFFF50"
                   }
                 />
               </NavLink>
@@ -156,14 +157,14 @@ function Sidebar({ sidebarOpen, setSidebarOpen, transparent = false }) {
 
             <li
               className={`sidebarItem sidebarEndItem rounded-sm mb-0.5 last:mb-0 flex items-center justify-center ${
-                pathname.includes("builder") && "secondaryDarkPadded"
+                pathname.startsWith("/builder") && "secondaryDarkPadded"
               }`}
             >
               <NavLink
                 end
                 to="/builder"
                 className={`block text-slate-200 truncate transition duration-150 ${
-                  pathname.includes("builder")
+                  pathname.startsWith("/builder")
                     ? "hover:text-slate-200"
                     : "hover:text-white"
                 }`}
