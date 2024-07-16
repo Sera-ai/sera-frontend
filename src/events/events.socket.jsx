@@ -41,7 +41,7 @@ const connectWebSocket = (setState, socketRef) => {
       case "onHostDataChanged":
         setState((prevState) => ({
           ...prevState,
-          hostInventory: parsedMessage,
+          hostInventory: parsedMessage.res,
         }));
         notify("New Host Added");
         break;
