@@ -1,6 +1,6 @@
 
 # Sera Frontend
-![React](https://img.shields.io/badge/React-vite-blue?logo=react) ![Vite](https://img.shields.io/badge/Vite-build-green?logo=vite) ![Git Submodule](https://img.shields.io/badge/Git-Submodule-blue?logo=git)
+![React](https://img.shields.io/badge/React-vite-blue?logo=react) ![Vite](https://img.shields.io/badge/Vite-build-green?logo=vite) ![Git Submodule](https://img.shields.io/badge/Git-Submodule-blue?logo=git) ![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)
 
 ## Overview
 
