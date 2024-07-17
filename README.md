@@ -1,80 +1,99 @@
-# Free Tailwind dashboard template
 
-![Mosaic TailwindCSS template preview](https://github.com/cruip/tailwind-dashboard-template/assets/2683512/d252e308-8869-4b70-bce8-bb44071f8b2e)
+# Sera Frontend
+![React](https://img.shields.io/badge/React-vite-blue?logo=react) ![Vite](https://img.shields.io/badge/Vite-build-green?logo=vite) ![Git Submodule](https://img.shields.io/badge/Git-Submodule-blue?logo=git)
 
-**Mosaic Lite** is a responsive dashboard template built on top of TailwindCSS and fully coded in React. It comes with several pre-coded charts (built with Chart.js 3) and widgets, and it's a great starting for anyone who wants to create a user interface for SaaS products, administrator dashboards, modern web apps, and more.
+## Overview
 
-Use it for whatever you want, and be sure to reach us out on [Twitter](https://twitter.com/Cruip_com) if you build anything cool/useful with it.
+Welcome to the **Sera Frontend** repository. This project is a React application built with Vite and includes a submodule located at `addons/fe_Builder` for extended frontend functionalities.
 
-Created and maintained with ❤️ by [Cruip.com](https://cruip.com/).
+## Table of Contents
 
-## Live demo
+- [Sera Frontend](#sera-frontend)
+  - [Overview](#overview)
+  - [Features](#features)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Setup](#setup)
+  - [Project Structure](#project-structure)
+  - [Contributing](#contributing)
+  - [License](#license)
 
-Check the live demo here 👉️ [https://mosaic.cruip.com/](https://mosaic.cruip.com/)
+## Features
 
-## Mosaic Pro
+- React application with Vite for fast build times.
+- Modular architecture with a submodule for extended functionalities.
+- Pre-configured workflows for CI/CD.
+- Organized component and asset structure.
 
-[![Mosaic Pro](https://user-images.githubusercontent.com/2683512/151177026-3d063355-976d-4fdb-a5ed-9c1501c58af2.png)](https://cruip.com/mosaic/)
+## Getting Started
 
-## Design files
+### Prerequisites
 
-If you need the design files, you can download them from Figma's Community 👉 https://bit.ly/3sigqHe
+Ensure you have the following installed:
 
-## Table of contents
+- [Node.js](https://nodejs.org/)
+- [Git](https://git-scm.com/)
 
-* [Usage](#usage)
-  * [Project setup](#project-setup)
-  * [Compiles and hot-reloads for development](#compiles-and-hot-reloads-for-development)
-  * [Compiles and minifies for production](#compiles-and-minifies-for-production)
-  * [Customize configuration](#customize-configuration)
-* [Support notes](#support-notes)            
-* [Credits](#credits)
-* [Terms and License](#terms-and-license)
-* [About Us](#about-us)
-* [Stay in the loop](#stay-in-the-loop)
+### Setup
 
-## Usage
+1. **Clone the repository**:
+    ```sh
+    git clone --recurse-submodules https://github.com/Sera-ai/sera-frontend.git
+    cd sera-frontend
+    ```
 
-This project was bootstrapped with [Vite](https://vitejs.dev/).
+2. **Initialize submodules**:
+    ```sh
+    git submodule update --init --recursive
+    ```
 
-### Project setup
-```
-npm install
-```
+3. **Install dependencies**:
+    ```sh
+    npm install
+    ```
 
-#### Compiles and hot-reloads for development
-```
-npm run dev
-```
+4. **Run the development server**:
+    ```sh
+    npm run dev
+    ```
 
-#### Compiles and minifies for production
-```
-npm run build
-```
+5. Open your browser and navigate to `http://localhost:3000` to see the application running.
 
-#### Customize configuration
-See [Configuration Reference](https://vitejs.dev/guide/).
+## Project Structure
 
-### Support notes
-We are shipping our templates with a very basic React configuration to let you quickly get into the development process, but we don't discourage you from using any other configuration or framework built on the top of React. So, please note that any request dealing with React (e.g. extra features, customisations, et cetera) is to be considered out of the support scope.
+    sera-frontend/
+    ├─── .github/
+    │ └─── workflows/
+    ├─── addons/
+    │ └─── fe_Builder/ # Submodule for extended frontend functionalities
+    ├─── certs/
+    ├─── public/
+    └─── src/
+    ├─── assets/
+    ├─── components/
+    ├─── css/
+    ├─── events/
+    ├─── images/
+    ├─── pages/
+    │ ├─── global/
+    │ └─── subpages/
+    │ ├─── builder/
+    │ ├─── events/
+    │ ├─── inventory/
+    │ └─── settings/
+    ├─── provider/
+    └─── utils/
 
-For more information about what support covers, please see our (FAQs)[https://cruip.com/faq/].
-
-## Credits
-
-- [Nucleo](https://nucleoapp.com/)
-
-## Terms and License
-
-- Released under the [GPL](https://www.gnu.org/licenses/gpl-3.0.html).
-- Copyright 2020 [Cruip](https://cruip.com/).
-- Use it for personal and commercial projects, but please don’t republish, redistribute, or resell the template.
-- Attribution is not required, although it is really appreciated.
-
-## About Us
-
-We're an Italian developer/designer duo creating high-quality design/code resources for developers, makers, and startups.
-
-## Stay in the loop
-
-If you would like to know when we release new resources, you can follow us on [Twitter](https://twitter.com/Cruip_com), or you can subscribe to our monthly [newsletter](https://cruip.com/#subscribe).
+- **.github/**: GitHub Actions workflows for CI/CD.
+- **addons/fe_Builder/**: Git submodule for extended frontend functionalities.
+- **certs/**: Certificates directory.
+- **public/**: Static assets.
+- **src/**: Main source code.
+  - **assets/**: Asset files.
+  - **components/**: React components organized by type.
+  - **css/**: CSS stylesheets.
+  - **events/**: Event handling.
+  - **images/**: Image assets.
+  - **pages/**: Page components organized by global and subpages.
+  - **provider/**: Context providers.
+  - **utils/**: Utility functions.
