@@ -6,12 +6,29 @@ import visualizer from "rollup-plugin-visualizer";
 import path from "path"; // Import the path module
 import fs from "fs";
 
+function getContainerId() {
+  try {
+    const cgroup = fs.readFileSync('/proc/self/cgroup', 'utf8');
+    const lines = cgroup.split('\n');
+    for (const line of lines) {
+      if (line.includes('docker')) {
+        return line.split('/').pop();
+      }
+    }
+  } catch (error) {
+    console.error('Error reading /proc/self/cgroup:', error);
+  }
+  return null;
+}
+
 // https://vitejs.dev/config/
 export default defineConfig({
   define: {
     __BE_ROUTER_PORT__: "443",
     '__DEBUG__': false,
     global: {},
+    SERA_HOSTNAME: JSON.stringify(require('os').hostname()),
+    SERA_CONTAINER_ID: JSON.stringify(getContainerId()),
     process: { env: { TEST_SSR: false } },
   },
   css: {
