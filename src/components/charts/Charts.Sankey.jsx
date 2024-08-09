@@ -162,7 +162,7 @@ const SankeyComponent = ({ chartData, parentSize }) => {
             node={(props) => (
               <MyCustomNode {...props} containerWidth={containerWidth} />
             )}
-            link={(props) => {console.log("props",props), <MyCustomLink {...props} />}}
+            link={(props) => <MyCustomLink {...props} />}
           >
             <Tooltip
               content={<CustomTooltip />}
