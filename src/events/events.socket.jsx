@@ -15,7 +15,7 @@ function onConnectSocket() {
 // WebSocket connection function
 const connectWebSocket = (setState, socketRef) => {
   const socket = new WebSocket(
-    `wss://${true ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/sera-socket-io`
+    `wss://${true ? `${window.location.hostname}:9876` : `backend.sera:9876`}/sera-socket-io`
   );
 
   // Wrapper for the emit function to keep the existing API

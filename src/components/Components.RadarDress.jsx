@@ -1,12 +1,4 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
-import SankeyComponent from "./charts/Charts.Sankey";
-
-import Starfield from "react-starfield";
-import { AppContext } from "../provider/Provider.State";
-import Datepicker from "./Components.Datepicker";
-import CardinalAreaChart from "./charts/Charts.CardinalAreaChart";
-import CardinalAreaChartLarge from "./charts/Charts.CardinalAreaChart.Large";
-import DropdownDate from "./Components.DropdownDate";
 import RadarChartComponent from "./charts/Charts.RadarChart";
 import {
   BuilderIcon,
@@ -18,6 +10,7 @@ import {
 } from "../assets/assets.svg";
 
 function RadarDress({ data, BadgeBar, periodSelection }) {
+  console.log("data", data)
   const BadgeIcon = ({ subject }) => {
     switch (subject) {
       case "RPS":
