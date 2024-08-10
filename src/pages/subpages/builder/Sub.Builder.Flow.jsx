@@ -54,10 +54,15 @@ function BuilderFlow() {
     async function fetchData() {
       try {
         const response = await fetch(
-          `https://${__DEBUG__ ? `${window.location.hostname}:${__BE_ROUTER_PORT__}` : `backend.sera`}/manage/endpoint/builder?path=${encodeURIComponent(
+          `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/endpoint/builder?path=${encodeURIComponent(
             path.replace("/builder", "")
           )}`,
-          { headers: { "x-sera-service": "be_builder" } }
+          { 
+            headers: { 
+             "x-sera-service": "be_builder",        
+             "X-Forwarded-For": "backend.sera"
+            } 
+          }
         );
         const jsonData = await response.json();
         if (!jsonData.issue) {
