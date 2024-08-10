@@ -84,7 +84,8 @@ async function getOas() {
         headers: { 
         "x-sera-service": "be_builder",
         "X-Forwarded-For": "backend.sera"
-       }
+       },
+       mode: 'cors'
       }
     );
     const jsonData = await response.json();
