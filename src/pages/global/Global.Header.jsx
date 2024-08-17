@@ -71,7 +71,7 @@ function Header({transparent }) {
         }}
         
         />):
-        (<Breadcrumbs />)
+        (<div className="pl-4"><Breadcrumbs /></div>)
         }
         
       </div>
