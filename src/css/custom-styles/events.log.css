@@ -11,13 +11,12 @@
 }
 
 .logTable th, td {
-    border: 1px solid #ffffff30;
+    border: 1px solid #191a21;
     text-align: left;
     padding-left: 16px;
     padding-right: 16px;
     padding-top:6px;
     padding-bottom: 6px;
-
 }
 
 .logTable th {
@@ -29,13 +28,10 @@
     position: sticky;
     top: 0; /* This makes the header sticky */
     z-index: 1; /* Ensures the header stays above the table content */
-    background-color: #191A2190;
-    border-width: 1;
-    border-color: #555;
 }
 
 .logTable tr:nth-child(even) {
-    background-color: #ffffff05;
+    background-color: #ffffff05 !important;
 }
 
 .logTable tr:hover {

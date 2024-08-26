@@ -97,7 +97,6 @@ const MyCustomLink = ({
 }) => {
   const { source, target } = payload;
   const gradientId = `gradient-${source.index}-${target.index}`;
-  console.log("sourceX", sourceX)
   return (
     <g>
       <defs>

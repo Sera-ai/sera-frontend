@@ -1,11 +1,8 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
 
-import { AppContext } from "../../../provider/Provider.State";
 import Header from "../../../components/custom/Custom.Header.Title";
 import Table from "../../../components/standard/Standard.Table";
 import { ContentBar } from "../../../components/standard/Standard.ContentBar";
-import BodyContent from "../../../components/page/Components.Page.BodyContent";
-import InventoryHostSettings from "../inventory/partials/Partials.Inventory.Settings";
 import { useNavigate } from "react-router-dom";
 import * as DataProvider from "../../../provider/Provider.Data"
 
@@ -13,6 +10,12 @@ function Builders() {
   const [filter, setFilter] = useState("");
   const [columns, setColumns] = useState([]);
   const [builderInventory, setBuilderInventory] = useState([]);
+  const [selectedItems, setSelectedItems] = useState({});
+  const selectAllRef = useRef(null);
+  const [selectedTab, setSelectedTab] = useState(0); // default selected tab
+  const linkClasses = ["builder"];
+  
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getBuilderInventory = async () => {
@@ -23,10 +26,9 @@ function Builders() {
         console.log(inv)
         if (inv.host_id && inv.builder_id) {
           inventoryArray.push({
-            host: inv.host_id.hostname,
+            host: `[${inv.host_id.hostname}](/builder/${inv.host_id.hostname}${inv.endpoint}/${inv.method.toLowerCase()})`,
             path: inv.endpoint,
             method: inv.method,
-
             builder: `[/builder/${inv.host_id.hostname}${inv.endpoint}](/builder/${inv.host_id.hostname}${inv.endpoint}/${inv.method.toLowerCase()})`,
             builderEnabled: inv.builder_id.enabled,
           });
@@ -42,37 +44,6 @@ function Builders() {
   const existingColumns = [];
   // builderInventory.length > 0 ? Object.keys(builderInventory[0]) : [];
 
-  const [selectedItems, setSelectedItems] = useState({});
-  const selectAllRef = useRef(null);
-  const [selectedTab, setSelectedTab] = useState(0); // default selected tab
-  const [tabs, setTabs] = useState(["Builders", "Settings"]);
-
-  const linkClasses = ["builder"];
-
-  const SelectedPage = () => {
-    switch (selectedTab) {
-      case 0:
-        return (
-          <Table
-            padded={true}
-            raw={true}
-            allowSelect={false}
-            filter={filter}
-            setFilter={setFilter}
-            columns={columns}
-            data={builderInventory}
-            linkClasses={linkClasses}
-            selectedItems={selectedItems}
-            setSelectedItems={setSelectedItems}
-            selectAllRef={selectAllRef}
-          />
-        );
-      case 1:
-        return <InventoryHostSettings mainDark />;
-    }
-  };
-
-  const navigate = useNavigate();
 
   const navigateBuilder = (data) => {
     const newUrl = `/builder/${data
@@ -109,14 +80,19 @@ function Builders() {
           showBlock={false}
           setSelectedEndpoint={navigateBuilder}
         />
-        <BodyContent
-          selectedTab={selectedTab}
-          setSelectedTab={setSelectedTab}
-          mainDark
-          tabs={tabs}
-        >
-          <SelectedPage />
-        </BodyContent>
+          <Table
+            padded={true}
+            raw={true}
+            allowSelect={false}
+            filter={filter}
+            setFilter={setFilter}
+            columns={columns}
+            data={builderInventory}
+            linkClasses={linkClasses}
+            selectedItems={selectedItems}
+            setSelectedItems={setSelectedItems}
+            selectAllRef={selectAllRef}
+          />
       </div>
     </Header>
   );

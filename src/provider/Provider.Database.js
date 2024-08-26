@@ -62,7 +62,7 @@ export default databaseQuery;
 async function getExampleOas() {
   try {
     const response = await fetch(
-      `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/endpoint/builder?path=%2Freqres.in%2Fitems%2Fpost`,
+      `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/builder?path=%2Freqres.in%2Fitems%2Fpost`,
       { headers: { 
         "x-sera-service": "be_builder",
         "X-Forwarded-For": "backend.sera"
@@ -159,7 +159,7 @@ async function dnsFromHost({ params }) {
 async function allBuilders() {
   try {
     const response = await fetch(
-      `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/endpoint`,
+      `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/builders`,
       {
         headers: { 
         "x-sera-service": "be_builder",

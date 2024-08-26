@@ -4,9 +4,10 @@
     font-weight: 600;
     padding-top: 5px;
     padding-bottom: 5px;
-    padding-right: 40px;
+    padding-left: 16px;
+    border-right-width: 4px;
+    border-right-color: #191a21;
     white-space: nowrap;
-
 }
 
 .eventsTable td {
@@ -15,17 +16,23 @@
     font-weight: 200;
     height: 30px;
     padding-right: 40px;
+    border-right-width: 4px;
     white-space: nowrap;
 }
 
 .eventsTable thead>tr {
-    border-bottom-width: 1px;
-    border-bottom-color: #2B84EC;
+    border-bottom-width: 4px;
+    border-bottom-color: #191a21;
 }
 
 .eventsTable tr {
-    border-bottom-width: 1px;
-    border-bottom-color: #ffffff30;
+    border-bottom-width: 3px;
+    border-bottom-color: #191a21;
+    background-color: #23232e;    
+}
+
+.eventsTable tbody>tr:hover {
+    background-color: #2d2d3a;
 }
 
 .regularPad td {

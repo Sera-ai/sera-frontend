@@ -37,13 +37,14 @@ const StarField = () => {
 
 const MemoizedStarField = React.memo(StarField);
 
-function Playbook({ tier = 1 }) {
+function IntegrationBuilder({ tier = 1 }) {
   const { dummyOas, nestedVisible } = useContext(AppContext);
+  console.log(dummyOas)
   const [selectedTab, setSelectedTab] = useState(0); // default selected tab
   const [leftbarVisible, setLeftbar] = useState(false); // default selected tab
   const [rightbarVisible, setRightbar] = useState(true); // default selected tab
 
-  const [tabs, setTabs] = useState(["Event Playbooks"]);
+  const [tabs, setTabs] = useState(["Integrations"]);
 
   const [builderData, setBuilderData] = useState({});
   const [loaded, setLoaded] = useState(false);
@@ -53,7 +54,7 @@ function Playbook({ tier = 1 }) {
     async function fetchData() {
       try {
         const response = await fetch(
-          `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/builder?event=${params.playbookId}`,
+          `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/builder/integration?slug=${params.builderId}`,
           {
             headers: { 
               "x-sera-service": "be_builder",
@@ -63,6 +64,7 @@ function Playbook({ tier = 1 }) {
         );
         const jsonData = await response.json();
         if (!jsonData.issue) {
+          console.log("JSONDATA", jsonData)
           setBuilderData({
             nodes: jsonData.builder.nodes,
             edges: jsonData.builder.edges,
@@ -111,10 +113,10 @@ function Playbook({ tier = 1 }) {
             nodes={builderData.nodes}
             edges={builderData.edges}
             builderId={builderData.builderId}
-            playbook={params.playbookId}
+            playbook={params.builderId}
             oas={dummyOas}
             getNodeStruc={backendEvents().getNodeStruc}
-            type={"event"}
+            type={"integration"}
           />
         ) : <MemoizedStarField/>}
       </div>
@@ -122,7 +124,7 @@ function Playbook({ tier = 1 }) {
   );
 }
 
-export default Playbook;
+export default IntegrationBuilder;
 
 export const SeraButton = ({ icon, isSelected, onPress }) => {
   return (

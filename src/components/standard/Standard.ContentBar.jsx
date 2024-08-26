@@ -69,6 +69,7 @@ export function ContentBar({
   });
 
   const GetOasData = ({ oas }) => {
+    if(!oas.paths) return;
     const setEndpoint = (ep) => {
       console.log("set selected endpoint", ep);
       setSelectedEndpoint(builder ? `${oas.servers[0].url}/${ep}` : ep);
