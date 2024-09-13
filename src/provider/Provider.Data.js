@@ -108,6 +108,11 @@ export async function getGlobalSearch(params) {
   return globalSearch;
 }
 
+export async function getSeraAISearch(params) {
+  const seraAISearch = await databaseQuery({ query: "seraAISearch", params });
+  return seraAISearch;
+}
+
 export async function getAnalytics(params) {
   const usageAnalytics = await databaseQuery({ query: "usageAnalytics", params });
   return usageAnalytics;

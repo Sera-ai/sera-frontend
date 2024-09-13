@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext, useRef} from "react";
-import { useLocation,Link } from "react-router-dom";
+import React, { useState, useEffect, useContext, useRef } from "react";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 
 import SearchModal from "../../components/Components.ModalSearch";
 import Notifications from "../../components/Components.DropdownNotifications";
@@ -8,24 +8,39 @@ import UserMenu from "../../components/Components.DropdownProfile";
 import Breadcrumbs from "../../components/custom/Custom.Breadcrumbs";
 import { AppContext } from "../../provider/Provider.State";
 import { ConsoleIcon, PlusIcon, SearchIcon } from "../../assets/assets.svg";
-import { getGlobalSearch } from "../../provider/Provider.Data";
+import { getGlobalSearch, getSeraAISearch } from "../../provider/Provider.Data";
 import AddInstance from "../../components/Components.AddInstance";
 import Transition from "../../utils/Transition";
 
-function Header({transparent }) {
+function Header({ transparent }) {
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [addInstanceModalOpen, setAddInstanceModalOpen] = useState(false);
   const [instanceDropdownOpen, setInstanceDropdownOpen] = useState(false);
   const { console: cnsl, setConsole } = useContext(AppContext);
   const [globalSearch, setGlobalSearch] = useState([]);
   const location = useLocation();
+  const navigate = useNavigate();
+
   const dropdown = useRef(null);
 
   const changeGlobalSearch = async (res) => {
     try {
       const searchResult = await getGlobalSearch({ searchTerm: res });
-      console.log(searchResult)
-      if(searchResult) setGlobalSearch(Array.isArray(searchResult) ? searchResult : []);
+      console.log(searchResult);
+      if (searchResult)
+        setGlobalSearch(Array.isArray(searchResult) ? searchResult : []);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const useSeraAISearch = async (res) => {
+    try {
+      const searchResult = await getSeraAISearch({ searchTerm: res });
+      console.log(searchResult);
+      navigate(`/inventory/${searchResult.data.hostname}`);
+      setSearchModalOpen(false);
+
     } catch (e) {
       console.log(e);
     }
@@ -37,8 +52,8 @@ function Header({transparent }) {
       if (!instanceDropdownOpen || dropdown.current.contains(target)) return;
       setInstanceDropdownOpen(false);
     };
-    document.addEventListener('click', clickHandler);
-    return () => document.removeEventListener('click', clickHandler);
+    document.addEventListener("click", clickHandler);
+    return () => document.removeEventListener("click", clickHandler);
   });
 
   // close if the esc key is pressed
@@ -47,8 +62,8 @@ function Header({transparent }) {
       if (!instanceDropdownOpen || keyCode !== 27) return;
       setInstanceDropdownOpen(false);
     };
-    document.addEventListener('keydown', keyHandler);
-    return () => document.removeEventListener('keydown', keyHandler);
+    document.addEventListener("keydown", keyHandler);
+    return () => document.removeEventListener("keydown", keyHandler);
   });
 
   return (
@@ -60,20 +75,22 @@ function Header({transparent }) {
     >
       {/* Header: Left side */}
       <div className="flex">
-        {location.pathname == "/" ? 
-        (<InstanceSelector onClick={(e) => {
-          e.stopPropagation();
-          setAddInstanceModalOpen(true);
-        }}
-        instanceDropdown={(e) => {
-          e.stopPropagation();
-          setInstanceDropdownOpen(true)
-        }}
-        
-        />):
-        (<div className="pl-4"><Breadcrumbs /></div>)
-        }
-        
+        {location.pathname == "/" ? (
+          <InstanceSelector
+            onClick={(e) => {
+              e.stopPropagation();
+              setAddInstanceModalOpen(true);
+            }}
+            instanceDropdown={(e) => {
+              e.stopPropagation();
+              setInstanceDropdownOpen(true);
+            }}
+          />
+        ) : (
+          <div className="pl-4">
+            <Breadcrumbs />
+          </div>
+        )}
       </div>
 
       <div className="flex items-center">
@@ -98,6 +115,7 @@ function Header({transparent }) {
           setModalOpen={setSearchModalOpen}
           onChangeInput={changeGlobalSearch}
           searchResults={globalSearch}
+          useSeraAISearch={useSeraAISearch}
         />
         <AddInstance
           searchId="search"
@@ -121,7 +139,9 @@ function Header({transparent }) {
           onFocus={() => setInstanceDropdownOpen(true)}
           onBlur={() => setInstanceDropdownOpen(false)}
         >
-          <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase pt-1.5 pb-2 px-4">Other Instances</div>
+          <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase pt-1.5 pb-2 px-4">
+            Other Instances
+          </div>
           <ul>
             <li className="border-b border-slate-200 dark:border-slate-700 last:border-0">
               <Link
@@ -159,23 +179,21 @@ function Header({transparent }) {
   );
 }
 
-const InstanceSelector = ({onClick, instanceDropdown}) => (
+const InstanceSelector = ({ onClick, instanceDropdown }) => (
   <button
     id="searchBar"
     className={`pl-3 flex items-center space-x-2 justify-center bg-slate-100 hover:bg-slate-200 secondaryDark dark:hover:bg-slate-600/80 rounded-md ml-3`}
     aria-controls="search-modal"
   >
-    <div className="flex space-x-2"
-    onClick={instanceDropdown}>
-    <UniqueGrid seedString={SERA_HOSTNAME} />
-    <span className="text-xs">{SERA_HOSTNAME}</span>
+    <div className="flex space-x-2" onClick={instanceDropdown}>
+      <UniqueGrid seedString={SERA_HOSTNAME} />
+      <span className="text-xs">{SERA_HOSTNAME}</span>
     </div>
     <div className={"v-divider p-1.5"} onClick={onClick}>
-    <PlusIcon />
+      <PlusIcon />
     </div>
   </button>
-)
-
+);
 
 const UniqueGrid = ({ seedString }) => {
   const gridSize = 16;
@@ -183,13 +201,13 @@ const UniqueGrid = ({ seedString }) => {
 
   // Generate a hash from the string to get a unique color
   const hashCode = (str) => {
-    return str.split('').reduce((acc, char) => {
+    return str.split("").reduce((acc, char) => {
       return char.charCodeAt(0) + ((acc << 5) - acc);
     }, 0);
   };
 
   const intTo8BitColor = (num) => {
-    return `rgb(${(num & 0xFF)}, ${(num >> 8) & 0xFF}, ${(num >> 16) & 0xFF})`;
+    return `rgb(${num & 0xff}, ${(num >> 8) & 0xff}, ${(num >> 16) & 0xff})`;
   };
 
   // Generate a grid of colors based on the seed string

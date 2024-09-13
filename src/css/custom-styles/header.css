@@ -17,3 +17,43 @@
 .tabHeaderNoSelect > span {
   color: #94a3b8;
 }
+
+.gradient-text {
+  background: linear-gradient(90deg, rgb(2, 152, 252), rgb(146, 99, 255));
+  -webkit-background-clip: text;
+  font-weight: 700;
+  -webkit-text-fill-color: transparent;
+}
+
+.rotating-glow-svg {
+  animation: rotate 5s linear infinite, glow 2s ease-in-out infinite alternate;
+}
+
+.searchRes {
+  border-color: transparent;
+  border-width: 1px;
+}
+
+.searchRes:hover {
+  border-color: #008cff;
+}
+
+/* Rotate the SVG */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Glow effect */
+@keyframes glow {
+  0% {
+    filter: drop-shadow(0 0 5px #2B84EC);
+  }
+  100% {
+    filter: drop-shadow(0 0 20px #652bec);
+  }
+}

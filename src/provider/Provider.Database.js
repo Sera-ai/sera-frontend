@@ -52,6 +52,10 @@ async function databaseQuery({ query, params }) {
       const res = await getHostInfo(params);
       return res;
     }
+    case "seraAISearch": {
+      const res = await seraAISearch(params)
+      return res;
+    }
     default:
       return {};
   }
@@ -63,10 +67,12 @@ async function getExampleOas() {
   try {
     const response = await fetch(
       `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/builder?path=%2Freqres.in%2Fitems%2Fpost`,
-      { headers: { 
-        "x-sera-service": "be_builder",
-        "X-Forwarded-For": "backend.sera"
-       } }
+      {
+        headers: {
+          "x-sera-service": "be_builder",
+          "X-Forwarded-For": "backend.sera"
+        }
+      }
     );
     const jsonData = await response.json();
     return jsonData.oas;
@@ -81,10 +87,10 @@ async function getOas() {
     const response = await fetch(
       `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/host/oas`,
       {
-        headers: { 
-        "x-sera-service": "be_builder",
-        "X-Forwarded-For": "backend.sera"
-       }
+        headers: {
+          "x-sera-service": "be_builder",
+          "X-Forwarded-For": "backend.sera"
+        }
       }
     );
     const jsonData = await response.json();
@@ -100,10 +106,10 @@ async function getHosts() {
     const response = await fetch(
       `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/host`,
       {
-        headers: { 
-        "x-sera-service": "be_builder",
-        "X-Forwarded-For": "backend.sera"
-       }
+        headers: {
+          "x-sera-service": "be_builder",
+          "X-Forwarded-For": "backend.sera"
+        }
       }
     );
     console.log(await response)
@@ -121,10 +127,10 @@ async function oasFromHost({ params }) {
     const response = await fetch(
       `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/host/oas?host=${params.hostname}`,
       {
-        headers: { 
-        "x-sera-service": "be_builder",
-        "X-Forwarded-For": "backend.sera"
-       }
+        headers: {
+          "x-sera-service": "be_builder",
+          "X-Forwarded-For": "backend.sera"
+        }
       }
     );
     const jsonData = await response.json();
@@ -141,10 +147,10 @@ async function dnsFromHost({ params }) {
     const response = await fetch(
       `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/host/dns?host=${params.hostname}`,
       {
-        headers: { 
-        "x-sera-service": "be_builder",
-        "X-Forwarded-For": "backend.sera"
-       }
+        headers: {
+          "x-sera-service": "be_builder",
+          "X-Forwarded-For": "backend.sera"
+        }
       }
     );
     const jsonData = await response.json();
@@ -161,10 +167,10 @@ async function allBuilders() {
     const response = await fetch(
       `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/builders`,
       {
-        headers: { 
-        "x-sera-service": "be_builder",
-        "X-Forwarded-For": "backend.sera"
-       }
+        headers: {
+          "x-sera-service": "be_builder",
+          "X-Forwarded-For": "backend.sera"
+        }
       }
     );
     console.log(response)
@@ -184,10 +190,10 @@ async function getEvents({ params }) {
     const response = await fetch(
       `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/events${params?.id ? `?id=${params.id}` : ""}`,
       {
-        headers: { 
-        "x-sera-service": "be_builder",
-        "X-Forwarded-For": "backend.sera"
-       }
+        headers: {
+          "x-sera-service": "be_builder",
+          "X-Forwarded-For": "backend.sera"
+        }
       }
     );
     const jsonData = await response.json();
@@ -204,10 +210,10 @@ async function getPlaybooks() {
     const response = await fetch(
       `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/events/playbook`,
       {
-        headers: { 
-        "x-sera-service": "be_builder",
-        "X-Forwarded-For": "backend.sera"
-       }
+        headers: {
+          "x-sera-service": "be_builder",
+          "X-Forwarded-For": "backend.sera"
+        }
       }
     );
     const jsonData = await response.json();
@@ -224,6 +230,29 @@ async function globalSearch(params) {
   try {
     const response = await fetch(
       `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/search`,
+      {
+        method: 'POST',
+        headers: {
+          "x-sera-service": "be_builder",
+          'Content-Type': 'application/json',
+          "X-Forwarded-For": "backend.sera"
+        },
+        body: JSON.stringify(params)
+      }
+    );
+    const jsonData = await response.json();
+    console.log(jsonData);
+    return jsonData;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {};
+  }
+}
+
+async function seraAISearch(params) {
+  try {
+    const response = await fetch(
+      `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/search/ai`,
       {
         method: 'POST',
         headers: {

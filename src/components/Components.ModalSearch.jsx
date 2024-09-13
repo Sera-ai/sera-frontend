@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import Transition from "../utils/Transition";
-import { BuilderIcon, InventoryIcon } from "../assets/assets.svg";
+import { BuilderIcon, ChatGPTIcon, InventoryIcon } from "../assets/assets.svg";
 
 function ModalSearch({
   id,
@@ -10,6 +10,7 @@ function ModalSearch({
   setModalOpen,
   onChangeInput,
   searchResults,
+  useSeraAISearch,
 }) {
   const modalContent = useRef(null);
   const searchInput = useRef(null);
@@ -43,11 +44,13 @@ function ModalSearch({
       <li>
         <NavLink
           end
-          className="flex items-center p-2 space-x-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-indigo-500 rounded group"
+          className="searchRes flex items-center p-2 space-x-2 text-slate-800 dark:text-slate-100 hover:text-white rounded group"
           to={
             result.hostname
               ? `/inventory/${result.hostname}`
-              : `/builder/${result.host_id.hostname}${result.endpoint}/${result.method.toLowerCase()}`
+              : `/builder/${result.host_id.hostname}${
+                  result.endpoint
+                }/${result.method.toLowerCase()}`
           }
           onClick={() => setModalOpen(!modalOpen)}
         >
@@ -131,6 +134,21 @@ function ModalSearch({
                 Search Results
               </div>
               <ul className="text-sm">
+                {searchInput?.current?.value && (
+                  <li>
+                    <NavLink
+                      end
+                      className="searchRes flex items-center p-2 space-x-2 text-slate-800 dark:text-slate-100 hover:text-white rounded group"
+                      onClick={() => useSeraAISearch(searchInput.current.value)}
+                    >
+                      <ChatGPTIcon />
+
+                      <span>
+                        Send Message to <span class="gradient-text">SeraAI</span>
+                      </span>
+                    </NavLink>
+                  </li>
+                )}
                 <GetResults />
               </ul>
             </div>
