@@ -6,11 +6,13 @@ function AddIntegration({
   id = "sera-add-integration",
   modalOpen,
   setModalOpen,
-  buttonId = "no-button"
+  buttonId = "no-button",
 }) {
   const modalContent = useRef(null);
-  const [integrationName, setIntegrationName] = useState("Backend Service Connector")
-  const [integrationHostname, setIntegrationHostname] = useState("")
+  const [integrationName, setIntegrationName] = useState(
+    "Backend Service Connector"
+  );
+  const [integrationHostname, setIntegrationHostname] = useState("");
   const navigate = useNavigate();
 
   // close on click outside
@@ -34,30 +36,53 @@ function AddIntegration({
     return () => document.removeEventListener("keydown", keyHandler);
   });
 
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+    console.log(event.target.files[0]);
+  };
+
+  const handleImageClick = () => {
+    const confirmRemove = window.confirm(
+      "Do you want to remove the selected file?"
+    );
+    if (confirmRemove) {
+      setSelectedFile(null);
+    }
+  };
   const createIntegration = async () => {
-        try {
-          const response = await fetch(
-            `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/builder/integration`,
-            {
-              method: "POST",
-              headers: { 
-                "Content-Type": "application/json",
-                "x-sera-service": "be_builder",
-                "X-Forwarded-For": "backend.sera"
-              },
-              body: JSON.stringify({
-                name: integrationName,
-                hostname: integrationHostname
-              })
-            }
-          );
-          const jsonData = await response.json()
-          if(jsonData.slug) navigate(`/builder/integration/${jsonData.slug}`);
-        } catch (error) {
-          console.error("Error fetching data:", error);
+    try {
+      // Create a new FormData object to hold the form fields and the file
+      const formData = new FormData();
+      formData.append("name", integrationName); // Append text fields
+      formData.append("hostname", integrationHostname);
+
+      if (selectedFile) {
+        formData.append("image", selectedFile); // Append the image file with key "image"
+      }
+
+      const response = await fetch(
+        `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/builder/integration`,
+        {
+          method: "POST",
+          headers: {
+            "x-sera-service": "be_builder", // Keep any necessary headers
+            "X-Forwarded-For": "backend.sera",
+          },
+          body: formData, // Use FormData as the request body
         }
-  }
-  
+      );
+
+      const jsonData = await response.json();
+      if (jsonData.slug) {
+        navigate(`/builder/integration/${jsonData.slug}`);
+      }
+    } catch (error) {
+      console.error("Error uploading data:", error);
+    }
+  };
+
   return (
     <>
       {/* Modal backdrop */}
@@ -93,65 +118,103 @@ function AddIntegration({
           <div className="p-4 w-full">
             {/* Recent searches */}
             <div className="mb-3 last:mb-0 w-full space-y-5">
-              <div className="text-sm">
-                Create a Sera Integration
-              </div>
-          
-                <div className="space-y-2">
-                  <div>
-                    <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase">
-                        Integration Name
+              <div className="text-sm">Create a Sera Integration</div>
+
+              <div className="space-y-2">
+                <div>
+                  <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase">
+                    Upload Integration Icon
+                  </div>
+                  <input
+                    type="file"
+                    id="imageUpload"
+                    accept="image/*"
+                    style={{ display: "none" }} // Hides the default input
+                    onChange={handleFileChange}
+                  />
+                  <label
+                    htmlFor="imageUpload"
+                    style={{
+                      padding: "5px 10px",
+                      backgroundColor: "#007bff",
+                      color: "white",
+                      borderRadius: "4px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Upload Image
+                  </label>
+
+                  {selectedFile && (
+                    <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase mt-2">
+                      <p>Selected File: {selectedFile.name}</p>
+                      <img
+                        src={URL.createObjectURL(selectedFile)}
+                        alt="Preview"
+                        style={{
+                          width: "100px",
+                          marginTop: "10px",
+                          cursor: "pointer",
+                        }}
+                        onClick={handleImageClick}
+                      />
                     </div>
-                    <input
+                  )}
+                </div>
+                <div>
+                  <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase">
+                    Integration Name
+                  </div>
+                  <input
                     id="searchBar"
                     className={`relative py-1 text-xs  w-full flex items-center space-x-3 bg-slate-100 hover:bg-slate-200 secondaryDark dark:hover:bg-slate-600/80 rounded-md`}
                     placeholder="Backend Service Connector"
                     aria-controls="search-modal"
-                    onChange={(e)=>{setIntegrationName(e.target.value)}}
-                    >
-                    </input>
+                    onChange={(e) => {
+                      setIntegrationName(e.target.value);
+                    }}
+                  ></input>
+                </div>
+                <div>
+                  <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase">
+                    Integration Type
                   </div>
-                  <div>
-                    <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase">
-                        Integration Type
-                    </div>
-                    <input
+                  <input
                     id="searchBar"
                     className={`relative py-1 text-xs  w-full flex items-center space-x-3 bg-slate-100 hover:bg-slate-200 secondaryDark dark:hover:bg-slate-600/80 rounded-md`}
                     aria-controls="search-modal"
                     value={"API Endpoint"}
                     disabled
-                    >
-                    </input>
+                  ></input>
+                </div>
+                <div>
+                  <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase">
+                    Hostname
                   </div>
-                  <div>
-                    <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase">
-                        Hostname
-                    </div>
-                    <input
+                  <input
                     id="searchBar"
                     className={`relative py-1 text-xs  w-full flex items-center space-x-3 bg-slate-100 hover:bg-slate-200 secondaryDark dark:hover:bg-slate-600/80 rounded-md`}
                     aria-controls="search-modal"
                     placeholder={"http://192.168.1.1:3000"}
-                    onChange={(e)=>{setIntegrationHostname(e.target.value)}}
-                    >
-                    </input>
-                  </div>
+                    onChange={(e) => {
+                      setIntegrationHostname(e.target.value);
+                    }}
+                  ></input>
                 </div>
-             
-                <div
-                  className={`cursor-pointer flex items-center justify-center text-sm`}
-                  style={{
+              </div>
+
+              <div
+                className={`cursor-pointer flex items-center justify-center text-sm`}
+                style={{
                   backgroundColor: "#2B84EC",
                   color: "#fff",
                   padding: "10px 15px",
                   borderRadius: 3,
-                  }}
-                  onClick={() => createIntegration()}
-                >
-                    Create Integration
-                </div>
-
+                }}
+                onClick={() => createIntegration()}
+              >
+                Create Integration
+              </div>
             </div>
           </div>
         </div>
