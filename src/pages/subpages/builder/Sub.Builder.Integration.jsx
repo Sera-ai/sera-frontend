@@ -4,7 +4,7 @@ import Header from "../../../components/custom/Custom.Header.Title";
 import Table from "../../../components/standard/Standard.Table";
 import { ContentBar } from "../../../components/standard/Standard.ContentBar";
 import { useNavigate } from "react-router-dom";
-import * as DataProvider from "../../../provider/Provider.Data"
+import * as DataProvider from "../../../provider/Provider.Data";
 import AddIntegration from "../../../components/Components.AddIntegration";
 
 function BuilderIntegrations() {
@@ -17,35 +17,90 @@ function BuilderIntegrations() {
 
   useEffect(() => {
     const getBuilderInventory = async () => {
-      const response = await fetch(
-        `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/builder/integrations`,
-        {
-          headers: { 
-            "x-sera-service": "be_builder",
-            "X-Forwarded-For": "backend.sera"
-          },
-        }
-      );
-      const builderInventory = await response.json();    
-      const inventoryArray = [];
-      builderInventory.map((inv) => {
+      try {
+        const response = await fetch(
+          `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/builder/integrations`,
+          {
+            headers: {
+              "x-sera-service": "be_builder",
+              "X-Forwarded-For": "backend.sera",
+            },
+          }
+        );
 
-          inventoryArray.push({
-            name: inv.name,
-            type: inv.type,
-            builder: `[${inv.slug}](/builder/ingtegration/${inv.slug})`,
-            enabled: inv.enabled,
-          });
-        
-      });
-      console.log(inventoryArray);
+        const builderInventoryData = await response.json();
+        const inventoryArray = await Promise.all(
+          builderInventoryData.map(async (inv) => {
+            // Fetch image if it exists, otherwise use default
+            let imageStuff = null;
+            if (inv.image) {
+              try {
+                const imageResponse = await fetch(
+                  `https://${window.location.hostname}:${__BE_ROUTER_PORT__}/manage/builder/integration/file/${inv.image}`,
+                  {
+                    headers: {
+                      "x-sera-service": "be_builder",
+                      "X-Forwarded-For": "backend.sera",
+                    },
+                  }
+                );
 
-      setBuilderInventory(inventoryArray);
+                if (imageResponse.ok) {
+                  const blob = await imageResponse.blob();
+                  const imageUrl = URL.createObjectURL(blob);
+                  console.log(imageUrl);
+                  console.log(blob);
+                  console.log(imageResponse);
+                  imageStuff = (
+                    <img
+                      src={imageUrl}
+                      style={{ height: 20 }}
+                      alt="Fetched Image"
+                    />
+                  );
+                } else {
+                  throw new Error("Failed to fetch image");
+                }
+              } catch (error) {
+                console.error("Error fetching image:", error);
+                imageStuff = (
+                  <img
+                    src={"/src/assets/logo.png"}
+                    style={{ height: 20 }}
+                    alt="Default Image"
+                  />
+                );
+              }
+            } else {
+              imageStuff = (
+                <img
+                  src={"/src/assets/logo.png"}
+                  style={{ height: 20 }}
+                  alt="Default Image"
+                />
+              );
+            }
+
+            return {
+              image: imageStuff,
+              name: inv.name,
+              type: inv.type,
+              builder: `[${inv.slug}](/builder/ingtegration/${inv.slug})`,
+              enabled: inv.enabled,
+            };
+          })
+        );
+
+        setBuilderInventory(inventoryArray);
+      } catch (error) {
+        console.error("Error fetching builder inventory:", error);
+      }
     };
+
     getBuilderInventory();
   }, []);
 
-  const existingColumns = [];  
+  const existingColumns = [];
   const linkClasses = ["builder"];
   const navigate = useNavigate();
   const navigateBuilder = (data) => {
@@ -61,15 +116,24 @@ function BuilderIntegrations() {
   return (
     <Header
       title={"Integration Inventory"}
-      subtitle={
-        "Below is a list of Integrations"
-      }
+      subtitle={"Below is a list of Integrations"}
       filter={filter}
       setFilter={null}
       setColumns={setColumns}
       existingColumns={existingColumns}
       columns={columns}
-      buttons={<div id="add-integration-button" onClick={()=>{setAddInstanceModalOpen(true)}} className="flex justify-center items-center text-sm h-[36px] w-[140px] rounded-sm cursor-pointer" style={{backgroundColor:"#2B84EC", color: "#fff"}}>Create Integration</div>}
+      buttons={
+        <div
+          id="add-integration-button"
+          onClick={() => {
+            setAddInstanceModalOpen(true);
+          }}
+          className="flex justify-center items-center text-sm h-[36px] w-[140px] rounded-sm cursor-pointer"
+          style={{ backgroundColor: "#2B84EC", color: "#fff" }}
+        >
+          Create Integration
+        </div>
+      }
       horizontal={true}
       tier={2}
     >
@@ -87,11 +151,11 @@ function BuilderIntegrations() {
           setSelectedItems={setSelectedItems}
           selectAllRef={selectAllRef}
         />
-        <AddIntegration 
-         modalOpen={addInstanceModalOpen}
-         setModalOpen={setAddInstanceModalOpen}
-         buttonId={"add-integration-button"}
-         />
+        <AddIntegration
+          modalOpen={addInstanceModalOpen}
+          setModalOpen={setAddInstanceModalOpen}
+          buttonId={"add-integration-button"}
+        />
       </div>
     </Header>
   );

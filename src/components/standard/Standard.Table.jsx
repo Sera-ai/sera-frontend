@@ -164,10 +164,14 @@ const Table = ({
       const highlightedContent = highlightMatch(directCell ? "" : cellContent);
       return (
         <td
-          className={`${isLinkClass(key)} pl-${int === 0 && !allowSelect ? "4" : "0"}`}
+          className={`${isLinkClass(key)} pl-${
+            int === 0 && !allowSelect ? "4" : "0"
+          }`}
           style={{ display: columns.includes(key) ? "none" : "" }}
         >
-          {directCell ? (
+          {key == "image" ? (
+            item[key]
+          ) : directCell ? (
             // Render the content directly as text when directCell is true.
             <span>{cellContent}</span>
           ) : (
@@ -185,7 +189,9 @@ const Table = ({
 
   return (
     <div
-      className={`overflow-auto w-full h-full ${!padded ? `mt-4` : raw ? "" : "mt-1"}`}
+      className={`overflow-auto w-full h-full ${
+        !padded ? `mt-4` : raw ? "" : "mt-1"
+      }`}
     >
       <table
         className={`eventsTable ${padded ? "largerPad" : "regularPad"} w-full`}
@@ -228,27 +234,26 @@ function camelCaseToTitle(camelCase) {
 }
 
 function handlePopup(url) {
-  window.open(url, 'new', 'width=600,height=400');
+  window.open(url, "new", "width=600,height=400");
 }
 
 const PopupLink = ({ href, text, inline = false }) => {
   if (inline) {
+    return <a href={href}>{text}</a>;
+  } else {
     return (
-      <a href={href}>
-        {text}
-      </a>
-    );
-  }else{
-    return (
-      <a href={href} target="popup" onClick={(e) => {
-        e.preventDefault();
-        handlePopup(href);
-      }}>
+      <a
+        href={href}
+        target="popup"
+        onClick={(e) => {
+          e.preventDefault();
+          handlePopup(href);
+        }}
+      >
         {text}
       </a>
     );
   }
-  
 };
 
 function parseType(data) {
@@ -259,11 +264,11 @@ function parseType(data) {
 
       if (regex.test(data)) {
         const matches = data.match(regex);
-        return (<PopupLink href={matches[2]} text={matches[1]} />);
-      } else if(regex2.test(data)) {
+        return <PopupLink href={matches[2]} text={matches[1]} />;
+      } else if (regex2.test(data)) {
         const matches = data.match(regex2);
-        return (<PopupLink href={matches[2]} text={matches[1]} inline/>);
-      }else{
+        return <PopupLink href={matches[2]} text={matches[1]} inline />;
+      } else {
         return data;
       }
     case "number":
